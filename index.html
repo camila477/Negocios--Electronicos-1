@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Perforaciónes Palacios </title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(
+                rgba(0, 0, 0, 0.45),
+                rgba(0, 0, 0, 0.45)
+            ),
+            url("img/fondo.jpg") center/cover no-repeat;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Barra de navegación */
+        nav {
+            width: 100%;
+            padding: 20px 60px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1769aa;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-login {
+            color: #1769aa;
+            border: 2px solid #1769aa;
+        }
+
+        .btn-login:hover {
+            background: #1769aa;
+            color: white;
+        }
+
+        .btn-register {
+            background: #1769aa;
+            color: white;
+        }
+
+        .btn-register:hover {
+            background: #0d4f82;
+        }
+
+        /* Contenido principal */
+        main {
+            flex: 1;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+            color: white;
+            padding: 30px;
+        }
+
+        .welcome {
+            max-width: 750px;
+        }
+
+        .welcome h1 {
+            font-size: 52px;
+            margin-bottom: 20px;
+        }
+
+        .welcome h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+
+        .welcome p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .main-button {
+            display: inline-block;
+            padding: 14px 30px;
+
+            background: #1769aa;
+            color: white;
+
+            text-decoration: none;
+            border-radius: 6px;
+
+            font-size: 17px;
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .main-button:hover {
+            background: #0d4f82;
+            transform: scale(1.03);
+        }
+
+        /* Pie de página */
+        footer {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        /* Adaptación para celulares */
+        @media (max-width: 600px) {
+
+            nav {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .welcome h1 {
+                font-size: 38px;
+            }
+
+            .welcome h2 {
+                font-size: 22px;
+            }
+
+            .welcome p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Barra de navegación -->
+    <nav>
+
+        <div class="logo">
+            Perforaciónes Palacios 
+        </div>
+
+        <div class="nav-buttons">
+            <a href="login.html" class="btn btn-login">
+                Iniciar sesión
+            </a>
+
+            <a href="registro.html" class="btn btn-register">
+                Registrarse
+            </a>
+        </div>
+
+    </nav>
+
+
+    <!-- Página principal -->
+    <main>
+
+        <div class="welcome">
+
+            <h1>Bienvenido</h1>
+
+            <h2>
+                Soluciones profesionales en perforación de agua
+            </h2>
+
+            <p>
+                Nos dedicamos a brindar soluciones confiables y profesionales
+                en la perforación de pozos de agua, trabajando con compromiso,
+                experiencia y calidad en cada proyecto.
+            </p>
+
+            <a href="registro.html" class="main-button">
+                Comenzar
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- Pie de página -->
+    <footer>
+        © 2026 Perforaciónes Palacios  | Todos los derechos reservados
+    </footer>
+
+</body>
+</html>
