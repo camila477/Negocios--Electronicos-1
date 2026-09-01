@@ -1,220 +1,498 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Perforaciónes Palacios </title>
+```
+<title>Perforaciones Palacios</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+<style>
+    /* =========================
+       CONFIGURACIÓN GENERAL
+    ========================= */
 
-        body {
-            min-height: 100vh;
-            background: linear-gradient(
-                rgba(0, 0, 0, 0.45),
-                rgba(0, 0, 0, 0.45)
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background: #f5f8fa;
+        color: #183b4e;
+    }
+
+
+    /* =========================
+       BARRA DE NAVEGACIÓN
+    ========================= */
+
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        padding: 20px 7%;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(10px);
+
+        border-bottom: 1px solid rgba(24, 59, 78, 0.08);
+
+        z-index: 1000;
+    }
+
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #155e75;
+        letter-spacing: 0.5px;
+    }
+
+    .nav-button {
+        text-decoration: none;
+        color: white;
+
+        background: #155e75;
+
+        padding: 10px 22px;
+        border-radius: 8px;
+
+        font-size: 14px;
+        font-weight: bold;
+
+        transition: 0.3s;
+    }
+
+    .nav-button:hover {
+        background: #0e7490;
+        transform: translateY(-2px);
+    }
+
+
+    /* =========================
+       SECCIÓN PRINCIPAL
+    ========================= */
+
+    .hero {
+        min-height: 100vh;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        text-align: center;
+
+        padding: 120px 20px 80px;
+
+        color: white;
+
+        background:
+            linear-gradient(
+                rgba(9, 48, 62, 0.68),
+                rgba(9, 48, 62, 0.68)
             ),
             url("img/fondo.jpg") center/cover no-repeat;
+    }
 
-            display: flex;
-            flex-direction: column;
-        }
+    .hero-content {
+        max-width: 850px;
+    }
 
-        /* Barra de navegación */
+    .hero h1 {
+        font-size: clamp(45px, 7vw, 72px);
+        margin-bottom: 20px;
+        letter-spacing: -1px;
+    }
+
+    .hero h2 {
+        font-size: clamp(22px, 3vw, 32px);
+        font-weight: normal;
+        margin-bottom: 25px;
+    }
+
+    .hero p {
+        max-width: 700px;
+        margin: 0 auto 35px;
+
+        font-size: 18px;
+        line-height: 1.7;
+
+        color: #e6f4f7;
+    }
+
+
+    /* =========================
+       BOTÓN COMENZAR
+    ========================= */
+
+    .main-button {
+        display: inline-block;
+
+        padding: 15px 34px;
+
+        background: #38bdf8;
+        color: #073b4c;
+
+        text-decoration: none;
+
+        border-radius: 10px;
+
+        font-size: 17px;
+        font-weight: bold;
+
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.20);
+
+        transition: 0.3s;
+    }
+
+    .main-button:hover {
+        background: #7dd3fc;
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    }
+
+
+    /* =========================
+       SECCIÓN CONTACTO
+    ========================= */
+
+    .contact-section {
+        min-height: 75vh;
+
+        padding: 100px 7%;
+
+        background: #f5f8fa;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .section-title {
+        text-align: center;
+        margin-bottom: 55px;
+    }
+
+    .section-title h2 {
+        font-size: 40px;
+        color: #155e75;
+        margin-bottom: 12px;
+    }
+
+    .section-title p {
+        color: #64748b;
+        font-size: 17px;
+    }
+
+
+    /* =========================
+       TARJETAS DE CONTACTO
+    ========================= */
+
+    .contact-container {
+        width: 100%;
+        max-width: 1000px;
+
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+
+        gap: 25px;
+    }
+
+    .contact-card {
+        background: white;
+
+        padding: 35px 25px;
+
+        text-align: center;
+
+        border-radius: 16px;
+
+        border: 1px solid #e2e8f0;
+
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+
+        transition: 0.3s;
+    }
+
+    .contact-card:hover {
+        transform: translateY(-6px);
+
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.10);
+    }
+
+    .contact-icon {
+        width: 60px;
+        height: 60px;
+
+        margin: 0 auto 20px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border-radius: 50%;
+
+        background: #e0f2fe;
+
+        color: #0369a1;
+
+        font-size: 25px;
+    }
+
+    .contact-card h3 {
+        margin-bottom: 10px;
+
+        font-size: 20px;
+
+        color: #183b4e;
+    }
+
+    .contact-card p {
+        color: #64748b;
+
+        font-size: 15px;
+
+        line-height: 1.6;
+    }
+
+    .contact-card a {
+        color: #0369a1;
+        text-decoration: none;
+    }
+
+    .contact-card a:hover {
+        text-decoration: underline;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+        background: #0f3444;
+
+        color: #dbeafe;
+
+        text-align: center;
+
+        padding: 25px 20px;
+
+        font-size: 14px;
+    }
+
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 800px) {
+
         nav {
-            width: 100%;
-            padding: 20px 60px;
-
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            background: rgba(255, 255, 255, 0.95);
+            padding: 18px 5%;
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #1769aa;
+            font-size: 20px;
         }
 
-        .nav-buttons {
-            display: flex;
-            gap: 15px;
+        .nav-button {
+            padding: 9px 15px;
         }
 
-        .btn {
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-weight: bold;
-            transition: 0.3s;
+        .contact-container {
+            grid-template-columns: 1fr;
+            max-width: 450px;
         }
 
-        .btn-login {
-            color: #1769aa;
-            border: 2px solid #1769aa;
+        .contact-section {
+            padding: 80px 6%;
         }
 
-        .btn-login:hover {
-            background: #1769aa;
-            color: white;
+        .section-title h2 {
+            font-size: 32px;
         }
+    }
 
-        .btn-register {
-            background: #1769aa;
-            color: white;
-        }
 
-        .btn-register:hover {
-            background: #0d4f82;
-        }
+    @media (max-width: 500px) {
 
-        /* Contenido principal */
-        main {
-            flex: 1;
-
-            display: flex;
+        nav {
             justify-content: center;
-            align-items: center;
-
-            text-align: center;
-            color: white;
-            padding: 30px;
         }
 
-        .welcome {
-            max-width: 750px;
+        .nav-button {
+            display: none;
         }
 
-        .welcome h1 {
-            font-size: 52px;
-            margin-bottom: 20px;
+        .hero {
+            padding: 100px 20px 60px;
         }
 
-        .welcome h2 {
-            font-size: 28px;
-            margin-bottom: 20px;
-            font-weight: normal;
+        .hero p {
+            font-size: 16px;
         }
+    }
 
-        .welcome p {
-            font-size: 18px;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
+</style>
+```
 
-        .main-button {
-            display: inline-block;
-            padding: 14px 30px;
-
-            background: #1769aa;
-            color: white;
-
-            text-decoration: none;
-            border-radius: 6px;
-
-            font-size: 17px;
-            font-weight: bold;
-
-            transition: 0.3s;
-        }
-
-        .main-button:hover {
-            background: #0d4f82;
-            transform: scale(1.03);
-        }
-
-        /* Pie de página */
-        footer {
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            text-align: center;
-            padding: 15px;
-        }
-
-        /* Adaptación para celulares */
-        @media (max-width: 600px) {
-
-            nav {
-                padding: 15px 20px;
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .welcome h1 {
-                font-size: 38px;
-            }
-
-            .welcome h2 {
-                font-size: 22px;
-            }
-
-            .welcome p {
-                font-size: 16px;
-            }
-        }
-    </style>
 </head>
 
 <body>
 
-    <!-- Barra de navegación -->
-    <nav>
+```
+<!-- =========================
+     NAVEGACIÓN
+========================== -->
 
-        <div class="logo">
-            Perforaciónes Palacios 
-        </div>
+<nav>
 
-        <div class="nav-buttons">
-            <a href="login.html" class="btn btn-login">
-                Iniciar sesión
-            </a>
+    <div class="logo">
+        Empresa imaginaria 
+    </div>
 
-            <a href="registro.html" class="btn btn-register">
-                Registrarse
-            </a>
-        </div>
+    <a href="#contacto" class="nav-button">
+        Contacto
+    </a>
 
-    </nav>
+</nav>
 
 
-    <!-- Página principal -->
-    <main>
+<!-- =========================
+     LANDING PAGE
+========================== -->
 
-        <div class="welcome">
+<section class="hero">
 
-            <h1>Bienvenido</h1>
+    <div class="hero-content">
 
-            <h2>
-                Soluciones profesionales en perforación de agua
-            </h2>
+        <h1>Bienvenido</h1>
+
+        <h2>
+            Soluciones profesionales en perforación de agua
+        </h2>
+
+        <p>
+            Nos dedicamos a brindar soluciones confiables y profesionales
+            en la perforación de pozos de agua, trabajando con compromiso,
+            experiencia y calidad en cada proyecto.
+        </p>
+
+        <a href="#contacto" class="main-button">
+            Comenzar
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CONTACTO
+========================== -->
+
+<section class="contact-section" id="contacto">
+
+    <div class="section-title">
+
+        <h2>Contáctanos</h2>
+
+        <p>
+            Estamos listos para ayudarte con tu próximo proyecto.
+        </p>
+
+    </div>
+
+
+    <div class="contact-container">
+
+
+        <!-- Teléfono -->
+
+        <div class="contact-card">
+
+            <div class="contact-icon">
+                ☎
+            </div>
+
+            <h3>Teléfono</h3>
 
             <p>
-                Nos dedicamos a brindar soluciones confiables y profesionales
-                en la perforación de pozos de agua, trabajando con compromiso,
-                experiencia y calidad en cada proyecto.
+                <a href="tel:+524490000000">
+                    449 000 0000
+                </a>
             </p>
-
-            <a href="registro.html" class="main-button">
-                Comenzar
-            </a>
 
         </div>
 
-    </main>
+
+        <!-- Correo -->
+
+        <div class="contact-card">
+
+            <div class="contact-icon">
+                ✉
+            </div>
+
+            <h3>Correo electrónico</h3>
+
+            <p>
+                <a href="mailto:contacto@perforacionespalacios.com">
+                    contacto@perforacionespalacios.com
+                </a>
+            </p>
+
+        </div>
 
 
-    <!-- Pie de página -->
-    <footer>
-        © 2026 Perforaciónes Palacios  | Todos los derechos reservados
-    </footer>
+        <!-- Ubicación -->
+
+        <div class="contact-card">
+
+            <div class="contact-icon">
+                📍
+            </div>
+
+            <h3>Ubicación</h3>
+
+            <p>
+                Aguascalientes, México
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================== -->
+
+<footer>
+
+    © 2026 Perforaciones Palacios
+    | Todos los derechos reservados
+
+</footer>
+```
 
 </body>
 </html>
