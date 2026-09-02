@@ -1,498 +1,1108 @@
+```html
 <!DOCTYPE html>
 
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
-<title>Perforaciones Palacios</title>
+    <title>Perforaciones Palacios</title>
 
-<style>
-    /* =========================
-       CONFIGURACIÓN GENERAL
-    ========================= */
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Arial, sans-serif;
-    }
+    <style>
 
-    html {
-        scroll-behavior: smooth;
-    }
+        /* =========================
+           CONFIGURACIÓN GENERAL
+        ========================= */
 
-    body {
-        background: #f5f8fa;
-        color: #183b4e;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
 
+        html {
+            scroll-behavior: smooth;
+        }
 
-    /* =========================
-       BARRA DE NAVEGACIÓN
-    ========================= */
+        body {
+            background: #f5f8fa;
+            color: #183b4e;
+        }
 
-    nav {
-        position: fixed;
-        top: 0;
-        left: 0;
 
-        width: 100%;
-        padding: 20px 7%;
-
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        background: rgba(255, 255, 255, 0.92);
-        backdrop-filter: blur(10px);
-
-        border-bottom: 1px solid rgba(24, 59, 78, 0.08);
-
-        z-index: 1000;
-    }
-
-    .logo {
-        font-size: 24px;
-        font-weight: bold;
-        color: #155e75;
-        letter-spacing: 0.5px;
-    }
-
-    .nav-button {
-        text-decoration: none;
-        color: white;
-
-        background: #155e75;
-
-        padding: 10px 22px;
-        border-radius: 8px;
-
-        font-size: 14px;
-        font-weight: bold;
-
-        transition: 0.3s;
-    }
-
-    .nav-button:hover {
-        background: #0e7490;
-        transform: translateY(-2px);
-    }
-
-
-    /* =========================
-       SECCIÓN PRINCIPAL
-    ========================= */
-
-    .hero {
-        min-height: 100vh;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        text-align: center;
-
-        padding: 120px 20px 80px;
-
-        color: white;
-
-        background:
-            linear-gradient(
-                rgba(9, 48, 62, 0.68),
-                rgba(9, 48, 62, 0.68)
-            ),
-            url("img/fondo.jpg") center/cover no-repeat;
-    }
-
-    .hero-content {
-        max-width: 850px;
-    }
-
-    .hero h1 {
-        font-size: clamp(45px, 7vw, 72px);
-        margin-bottom: 20px;
-        letter-spacing: -1px;
-    }
-
-    .hero h2 {
-        font-size: clamp(22px, 3vw, 32px);
-        font-weight: normal;
-        margin-bottom: 25px;
-    }
-
-    .hero p {
-        max-width: 700px;
-        margin: 0 auto 35px;
-
-        font-size: 18px;
-        line-height: 1.7;
-
-        color: #e6f4f7;
-    }
-
-
-    /* =========================
-       BOTÓN COMENZAR
-    ========================= */
-
-    .main-button {
-        display: inline-block;
-
-        padding: 15px 34px;
-
-        background: #38bdf8;
-        color: #073b4c;
-
-        text-decoration: none;
-
-        border-radius: 10px;
-
-        font-size: 17px;
-        font-weight: bold;
-
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.20);
-
-        transition: 0.3s;
-    }
-
-    .main-button:hover {
-        background: #7dd3fc;
-        transform: translateY(-3px);
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-    }
-
-
-    /* =========================
-       SECCIÓN CONTACTO
-    ========================= */
-
-    .contact-section {
-        min-height: 75vh;
-
-        padding: 100px 7%;
-
-        background: #f5f8fa;
-
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .section-title {
-        text-align: center;
-        margin-bottom: 55px;
-    }
-
-    .section-title h2 {
-        font-size: 40px;
-        color: #155e75;
-        margin-bottom: 12px;
-    }
-
-    .section-title p {
-        color: #64748b;
-        font-size: 17px;
-    }
-
-
-    /* =========================
-       TARJETAS DE CONTACTO
-    ========================= */
-
-    .contact-container {
-        width: 100%;
-        max-width: 1000px;
-
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-
-        gap: 25px;
-    }
-
-    .contact-card {
-        background: white;
-
-        padding: 35px 25px;
-
-        text-align: center;
-
-        border-radius: 16px;
-
-        border: 1px solid #e2e8f0;
-
-        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
-
-        transition: 0.3s;
-    }
-
-    .contact-card:hover {
-        transform: translateY(-6px);
-
-        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.10);
-    }
-
-    .contact-icon {
-        width: 60px;
-        height: 60px;
-
-        margin: 0 auto 20px;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        border-radius: 50%;
-
-        background: #e0f2fe;
-
-        color: #0369a1;
-
-        font-size: 25px;
-    }
-
-    .contact-card h3 {
-        margin-bottom: 10px;
-
-        font-size: 20px;
-
-        color: #183b4e;
-    }
-
-    .contact-card p {
-        color: #64748b;
-
-        font-size: 15px;
-
-        line-height: 1.6;
-    }
-
-    .contact-card a {
-        color: #0369a1;
-        text-decoration: none;
-    }
-
-    .contact-card a:hover {
-        text-decoration: underline;
-    }
-
-
-    /* =========================
-       FOOTER
-    ========================= */
-
-    footer {
-        background: #0f3444;
-
-        color: #dbeafe;
-
-        text-align: center;
-
-        padding: 25px 20px;
-
-        font-size: 14px;
-    }
-
-
-    /* =========================
-       RESPONSIVE
-    ========================= */
-
-    @media (max-width: 800px) {
+        /* =========================
+           BARRA DE NAVEGACIÓN
+        ========================= */
 
         nav {
-            padding: 18px 5%;
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+
+            padding: 20px 7%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            background: rgba(255, 255, 255, 0.92);
+
+            backdrop-filter: blur(10px);
+
+            border-bottom: 1px solid rgba(24, 59, 78, 0.08);
+
+            z-index: 1000;
         }
+
 
         .logo {
-            font-size: 20px;
+
+            font-size: 24px;
+
+            font-weight: bold;
+
+            color: #155e75;
+
+            letter-spacing: 0.5px;
         }
+
 
         .nav-button {
-            padding: 9px 15px;
+
+            text-decoration: none;
+
+            color: white;
+
+            background: #155e75;
+
+            padding: 10px 22px;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
         }
 
-        .contact-container {
-            grid-template-columns: 1fr;
-            max-width: 450px;
+
+        .nav-button:hover {
+
+            background: #0e7490;
+
+            transform: translateY(-2px);
         }
 
-        .contact-section {
-            padding: 80px 6%;
-        }
 
-        .section-title h2 {
-            font-size: 32px;
-        }
-    }
-
-
-    @media (max-width: 500px) {
-
-        nav {
-            justify-content: center;
-        }
-
-        .nav-button {
-            display: none;
-        }
+        /* =========================
+           LANDING PAGE
+        ========================= */
 
         .hero {
-            padding: 100px 20px 60px;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            text-align: center;
+
+            padding: 120px 20px 80px;
+
+            color: white;
+
+            background:
+
+                linear-gradient(
+
+                    rgba(9, 48, 62, 0.68),
+
+                    rgba(9, 48, 62, 0.68)
+
+                ),
+
+                url("imagenes/imagenaforo.jpg")
+
+                center/cover no-repeat;
         }
+
+
+        .hero-content {
+
+            max-width: 850px;
+        }
+
+
+        .hero h1 {
+
+            font-size: clamp(45px, 7vw, 72px);
+
+            margin-bottom: 20px;
+
+            letter-spacing: -1px;
+        }
+
+
+        .hero h2 {
+
+            font-size: clamp(22px, 3vw, 32px);
+
+            font-weight: normal;
+
+            margin-bottom: 25px;
+        }
+
 
         .hero p {
-            font-size: 16px;
-        }
-    }
 
-</style>
-```
+            max-width: 700px;
+
+            margin: 0 auto 35px;
+
+            font-size: 18px;
+
+            line-height: 1.7;
+
+            color: #e6f4f7;
+        }
+
+
+        /* =========================
+           BOTÓN COMENZAR
+        ========================= */
+
+        .main-button {
+
+            display: inline-block;
+
+            padding: 15px 34px;
+
+            background: #38bdf8;
+
+            color: #073b4c;
+
+            text-decoration: none;
+
+            border-radius: 10px;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.20);
+
+            transition: 0.3s;
+        }
+
+
+        .main-button:hover {
+
+            background: #7dd3fc;
+
+            transform: translateY(-3px);
+
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+        }
+
+
+        /* =========================
+           SECCIÓN CONTACTO
+        ========================= */
+
+        .contact-section {
+
+            min-height: 90vh;
+
+            padding: 100px 7%;
+
+            background: #f5f8fa;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+        }
+
+
+        .section-title {
+
+            text-align: center;
+
+            margin-bottom: 50px;
+        }
+
+
+        .section-title h2 {
+
+            font-size: 40px;
+
+            color: #155e75;
+
+            margin-bottom: 12px;
+        }
+
+
+        .section-title p {
+
+            color: #64748b;
+
+            font-size: 17px;
+        }
+
+
+        /* =========================
+           CONTENEDOR PRINCIPAL
+        ========================= */
+
+        .contact-main {
+
+            width: 100%;
+
+            max-width: 1100px;
+
+            display: grid;
+
+            grid-template-columns: 0.8fr 1.2fr;
+
+            gap: 50px;
+
+            align-items: center;
+        }
+
+
+        /* =========================
+           INFORMACIÓN EMPRESA
+        ========================= */
+
+        .company-info {
+
+            padding: 20px;
+        }
+
+
+        .company-info h3 {
+
+            font-size: 28px;
+
+            color: #183b4e;
+
+            margin-bottom: 18px;
+        }
+
+
+        .info-description {
+
+            color: #64748b;
+
+            line-height: 1.7;
+
+            margin-bottom: 35px;
+        }
+
+
+        /* =========================
+           DATOS DE CONTACTO
+        ========================= */
+
+        .info-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .info-icon {
+
+            width: 52px;
+
+            height: 52px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            border-radius: 50%;
+
+            background: #e0f2fe;
+
+            color: #0369a1;
+
+            font-size: 22px;
+        }
+
+
+        .info-item h4 {
+
+            color: #183b4e;
+
+            margin-bottom: 5px;
+        }
+
+
+        .info-item p,
+
+        .info-item a {
+
+            color: #64748b;
+
+            font-size: 15px;
+
+            line-height: 1.5;
+
+            text-decoration: none;
+        }
+
+
+        .info-item a:hover {
+
+            color: #0369a1;
+
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           FORMULARIO
+        ========================= */
+
+        .form-container {
+
+            width: 100%;
+
+            background: white;
+
+            padding: 40px;
+
+            border-radius: 20px;
+
+            border: 1px solid #e2e8f0;
+
+            box-shadow: 0 15px 40px rgba(15, 23, 42, 0.08);
+        }
+
+
+        .form-container h3 {
+
+            color: #183b4e;
+
+            font-size: 24px;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* =========================
+           FILAS DEL FORMULARIO
+        ========================= */
+
+        .form-row {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 20px;
+        }
+
+
+        .form-group {
+
+            margin-bottom: 20px;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #183b4e;
+
+            font-size: 15px;
+
+            font-weight: bold;
+        }
+
+
+        .form-group input,
+
+        .form-group select,
+
+        .form-group textarea {
+
+            width: 100%;
+
+            padding: 13px 15px;
+
+            border: 1px solid #cbd5e1;
+
+            border-radius: 10px;
+
+            background: #f8fafc;
+
+            color: #183b4e;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition: 0.3s;
+        }
+
+
+        .form-group input:focus,
+
+        .form-group select:focus,
+
+        .form-group textarea:focus {
+
+            border-color: #38bdf8;
+
+            background: white;
+
+            box-shadow:
+
+                0 0 0 3px
+
+                rgba(56, 189, 248, 0.15);
+        }
+
+
+        .form-group textarea {
+
+            min-height: 120px;
+
+            resize: vertical;
+        }
+
+
+        /* =========================
+           BOTÓN ENVIAR
+        ========================= */
+
+        .submit-button {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #155e75;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+
+        .submit-button:hover {
+
+            background: #0e7490;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+
+                0 8px 20px
+
+                rgba(15, 23, 42, 0.15);
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            background: #0f3444;
+
+            color: #dbeafe;
+
+            text-align: center;
+
+            padding: 25px 20px;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            .contact-main {
+
+                grid-template-columns: 1fr;
+
+                gap: 35px;
+
+                max-width: 600px;
+            }
+
+
+            .company-info {
+
+                text-align: center;
+            }
+
+
+            .info-item {
+
+                justify-content: center;
+
+                text-align: left;
+            }
+
+
+            .form-row {
+
+                grid-template-columns: 1fr;
+
+                gap: 0;
+            }
+        }
+
+
+        @media (max-width: 500px) {
+
+            nav {
+
+                justify-content: center;
+            }
+
+
+            .nav-button {
+
+                display: none;
+            }
+
+
+            .hero {
+
+                padding: 100px 20px 60px;
+            }
+
+
+            .hero p {
+
+                font-size: 16px;
+            }
+
+
+            .form-container {
+
+                padding: 25px 20px;
+            }
+
+
+            .section-title h2 {
+
+                font-size: 32px;
+            }
+        }
+
+    </style>
 
 </head>
 
+
 <body>
 
-```
-<!-- =========================
-     NAVEGACIÓN
-========================== -->
 
-<nav>
+    <!-- =========================
+         NAVEGACIÓN
+    ========================== -->
 
-    <div class="logo">
-        Empresa imaginaria 
-    </div>
+    <nav>
 
-    <a href="#contacto" class="nav-button">
-        Contacto
-    </a>
+        <div class="logo">
 
-</nav>
+            Perforaciones Palacios
+
+        </div>
 
 
-<!-- =========================
-     LANDING PAGE
-========================== -->
+        <a href="#contacto" class="nav-button">
 
-<section class="hero">
+            Contacto
 
-    <div class="hero-content">
-
-        <h1>Bienvenido</h1>
-
-        <h2>
-            Soluciones profesionales en perforación de agua
-        </h2>
-
-        <p>
-            Nos dedicamos a brindar soluciones confiables y profesionales
-            en la perforación de pozos de agua, trabajando con compromiso,
-            experiencia y calidad en cada proyecto.
-        </p>
-
-        <a href="#contacto" class="main-button">
-            Comenzar
         </a>
 
-    </div>
-
-</section>
+    </nav>
 
 
-<!-- =========================
-     CONTACTO
-========================== -->
 
-<section class="contact-section" id="contacto">
+    <!-- =========================
+         LANDING PAGE
+    ========================== -->
 
-    <div class="section-title">
+    <section class="hero">
 
-        <h2>Contáctanos</h2>
+        <div class="hero-content">
 
-        <p>
-            Estamos listos para ayudarte con tu próximo proyecto.
-        </p>
-
-    </div>
+            <h1>
+                Bienvenido
+            </h1>
 
 
-    <div class="contact-container">
+            <h2>
 
+                Soluciones profesionales en
+                perforación de agua
 
-        <!-- Teléfono -->
+            </h2>
 
-        <div class="contact-card">
-
-            <div class="contact-icon">
-                ☎
-            </div>
-
-            <h3>Teléfono</h3>
 
             <p>
-                <a href="tel:+524490000000">
-                    449 000 0000
-                </a>
+
+                Nos dedicamos a brindar soluciones confiables
+                y profesionales en la perforación de pozos de agua,
+                trabajando con compromiso, experiencia y calidad
+                en cada proyecto.
+
+            </p>
+
+
+            <a href="#contacto" class="main-button">
+
+                Comenzar
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         CONTACTO
+    ========================== -->
+
+    <section class="contact-section" id="contacto">
+
+
+        <div class="section-title">
+
+            <h2>
+                Contáctanos
+            </h2>
+
+
+            <p>
+
+                Estamos listos para ayudarte
+                con tu próximo proyecto.
+
             </p>
 
         </div>
 
 
-        <!-- Correo -->
 
-        <div class="contact-card">
+        <div class="contact-main">
 
-            <div class="contact-icon">
-                ✉
+
+            <!-- =========================
+                 INFORMACIÓN DE LA EMPRESA
+            ========================== -->
+
+            <div class="company-info">
+
+
+                <h3>
+                    Información de contacto
+                </h3>
+
+
+                <p class="info-description">
+
+                    Ponte en contacto con nosotros para obtener
+                    más información sobre nuestros servicios
+                    de perforación de agua.
+
+                </p>
+
+
+
+                <!-- TELÉFONO -->
+
+                <div class="info-item">
+
+                    <div class="info-icon">
+                        ☎
+                    </div>
+
+
+                    <div>
+
+                        <h4>
+                            Teléfono
+                        </h4>
+
+
+                        <a href="tel:+524490000000">
+
+                            449 000 0000
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CORREO -->
+
+                <div class="info-item">
+
+                    <div class="info-icon">
+                        ✉
+                    </div>
+
+
+                    <div>
+
+                        <h4>
+                            Correo electrónico
+                        </h4>
+
+
+                        <a href="mailto:contacto@perforacionespalacios.com">
+
+                            contacto@perforacionespalacios.com
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- UBICACIÓN -->
+
+                <div class="info-item">
+
+                    <div class="info-icon">
+                        📍
+                    </div>
+
+
+                    <div>
+
+                        <h4>
+                            Ubicación
+                        </h4>
+
+
+                        <p>
+
+                            Aguascalientes, México
+
+                        </p>
+
+                    </div>
+
+                </div>
+
             </div>
 
-            <h3>Correo electrónico</h3>
 
-            <p>
-                <a href="mailto:contacto@perforacionespalacios.com">
-                    contacto@perforacionespalacios.com
-                </a>
-            </p>
+
+            <!-- =========================
+                 FORMULARIO
+            ========================== -->
+
+            <div class="form-container">
+
+
+                <h3>
+                    Solicita información
+                </h3>
+
+
+                <form>
+
+
+                    <!-- NOMBRE Y TELÉFONO -->
+
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+                            <label for="nombre">
+                                Nombre completo
+                            </label>
+
+
+                            <input
+
+                                type="text"
+
+                                id="nombre"
+
+                                name="nombre"
+
+                                placeholder="Ingresa tu nombre completo"
+
+                                required
+
+                            >
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label for="telefono">
+                                Teléfono
+                            </label>
+
+
+                            <input
+
+                                type="tel"
+
+                                id="telefono"
+
+                                name="telefono"
+
+                                placeholder="449 000 0000"
+
+                                required
+
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CORREO Y UBICACIÓN -->
+
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+                            <label for="correo">
+                                Correo electrónico
+                            </label>
+
+
+                            <input
+
+                                type="email"
+
+                                id="correo"
+
+                                name="correo"
+
+                                placeholder="ejemplo@correo.com"
+
+                                required
+
+                            >
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label for="ubicacion">
+                                Ubicación del proyecto
+                            </label>
+
+
+                            <input
+
+                                type="text"
+
+                                id="ubicacion"
+
+                                name="ubicacion"
+
+                                placeholder="Ciudad o comunidad"
+
+                                required
+
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- SERVICIO -->
+
+                    <div class="form-group">
+
+
+                        <label for="servicio">
+
+                            Servicio que necesitas
+
+                        </label>
+
+
+                        <select
+
+                            id="servicio"
+
+                            name="servicio"
+
+                            required
+                        >
+
+                            <option value="">
+
+                                Selecciona una opción
+
+                            </option>
+
+
+                            <option value="perforacion">
+
+                                Perforación de pozo
+
+                            </option>
+
+
+                            <option value="mantenimiento">
+
+                                Mantenimiento de pozo
+
+                            </option>
+
+
+                            <option value="asesoria">
+
+                                Asesoría
+
+                            </option>
+
+
+                            <option value="otro">
+
+                                Otro
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- MENSAJE -->
+
+                    <div class="form-group">
+
+
+                        <label for="mensaje">
+
+                            Cuéntanos sobre tu proyecto
+
+                        </label>
+
+
+                        <textarea
+
+                            id="mensaje"
+
+                            name="mensaje"
+
+                            placeholder="Escribe aquí los detalles de lo que necesitas..."
+
+                            required
+
+                        ></textarea>
+
+                    </div>
+
+
+
+                    <!-- BOTÓN -->
+
+                    <button
+
+                        type="submit"
+
+                        class="submit-button"
+                    >
+
+                        Enviar solicitud
+
+                    </button>
+
+                </form>
+
+            </div>
 
         </div>
 
-
-        <!-- Ubicación -->
-
-        <div class="contact-card">
-
-            <div class="contact-icon">
-                📍
-            </div>
-
-            <h3>Ubicación</h3>
-
-            <p>
-                Aguascalientes, México
-            </p>
-
-        </div>
+    </section>
 
 
-    </div>
 
-</section>
+    <!-- =========================
+         FOOTER
+    ========================== -->
 
+    <footer>
 
-<!-- =========================
-     FOOTER
-========================== -->
+        © 2026 Perforaciones Papoi
+        | Todos los derechos reservados
 
-<footer>
+    </footer>
 
-    © 2026 Perforaciones Palacios
-    | Todos los derechos reservados
-
-</footer>
-```
 
 </body>
+
 </html>
+```
