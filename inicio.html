@@ -1,0 +1,841 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Inicio | Perforaciones Palacios</title>
+
+    <style>
+
+        /* =========================
+           CONFIGURACIÓN GENERAL
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f5f8fa;
+            color: #183b4e;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+
+            padding: 20px 7%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: rgba(255, 255, 255, 0.94);
+
+            backdrop-filter: blur(10px);
+
+            border-bottom: 1px solid rgba(24, 59, 78, 0.08);
+
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: bold;
+
+            color: #155e75;
+        }
+
+        .logo span {
+            color: #0ea5e9;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+
+            color: #183b4e;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #0ea5e9;
+        }
+
+        .contact-button {
+            background: #155e75;
+
+            color: white !important;
+
+            padding: 10px 20px;
+
+            border-radius: 7px;
+        }
+
+        .contact-button:hover {
+            background: #0e7490;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+
+            min-height: 90vh;
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 140px 7% 80px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(245,248,250,1) 0%,
+                    rgba(245,248,250,0.94) 45%,
+                    rgba(245,248,250,0.35) 100%
+                ),
+                url("imagenes/imagenaforo.jpg")
+                center/cover no-repeat;
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .tag {
+
+            display: inline-block;
+
+            padding: 8px 16px;
+
+            margin-bottom: 20px;
+
+            border-radius: 30px;
+
+            background: #e0f2fe;
+
+            color: #0369a1;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+
+            font-size: clamp(42px, 6vw, 70px);
+
+            line-height: 1.05;
+
+            margin-bottom: 22px;
+
+            color: #123b4d;
+        }
+
+        .hero h1 span {
+            color: #0ea5e9;
+        }
+
+        .hero p {
+
+            font-size: 18px;
+
+            line-height: 1.8;
+
+            color: #486575;
+
+            margin-bottom: 32px;
+        }
+
+        .hero-button {
+
+            display: inline-block;
+
+            padding: 14px 28px;
+
+            background: #155e75;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .hero-button:hover {
+
+            background: #0e7490;
+
+            transform: translateY(-3px);
+        }
+
+
+        /* =========================
+           SECCIÓN GENERAL
+        ========================= */
+
+        section {
+            padding: 90px 7%;
+        }
+
+        .section-title {
+
+            text-align: center;
+
+            max-width: 700px;
+
+            margin: 0 auto 50px;
+        }
+
+        .section-title h2 {
+
+            font-size: 38px;
+
+            margin-bottom: 15px;
+
+            color: #123b4d;
+        }
+
+        .section-title p {
+
+            color: #607d8b;
+
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           SERVICIOS
+        ========================= */
+
+        .services {
+            background: white;
+        }
+
+        .service-container {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 25px;
+
+            max-width: 1100px;
+
+            margin: auto;
+        }
+
+        .service-card {
+
+            padding: 35px 28px;
+
+            background: #f8fbfc;
+
+            border: 1px solid #e2edf1;
+
+            border-radius: 12px;
+
+            transition: 0.3s;
+        }
+
+        .service-card:hover {
+
+            transform: translateY(-6px);
+
+            box-shadow:
+                0 15px 35px rgba(24,59,78,0.10);
+        }
+
+        .service-icon {
+
+            width: 50px;
+            height: 50px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #e0f2fe;
+
+            color: #0284c7;
+
+            border-radius: 10px;
+
+            font-size: 24px;
+
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+
+            margin-bottom: 12px;
+
+            color: #155e75;
+        }
+
+        .service-card p {
+
+            color: #607d8b;
+
+            line-height: 1.6;
+
+            font-size: 15px;
+        }
+
+
+        /* =========================
+           NOSOTROS
+        ========================= */
+
+        .about {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 60px;
+
+            align-items: center;
+
+            max-width: 1150px;
+
+            margin: auto;
+        }
+
+        .about-image {
+
+            min-height: 350px;
+
+            border-radius: 15px;
+
+            background:
+                linear-gradient(
+                    rgba(9,48,62,0.20),
+                    rgba(9,48,62,0.20)
+                ),
+                url("imagenes/imagenaforo.jpg")
+                center/cover no-repeat;
+
+            box-shadow:
+                0 15px 40px rgba(24,59,78,0.15);
+        }
+
+        .about-text h2 {
+
+            font-size: 38px;
+
+            margin-bottom: 20px;
+
+            color: #123b4d;
+        }
+
+        .about-text p {
+
+            color: #607d8b;
+
+            line-height: 1.8;
+
+            margin-bottom: 18px;
+        }
+
+
+        /* =========================
+           VALORES
+        ========================= */
+
+        .values {
+
+            background: #eef7fa;
+        }
+
+        .values-container {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 25px;
+
+            max-width: 1000px;
+
+            margin: auto;
+        }
+
+        .value {
+
+            text-align: center;
+
+            padding: 30px;
+        }
+
+        .value h3 {
+
+            color: #155e75;
+
+            margin-bottom: 12px;
+        }
+
+        .value p {
+
+            color: #607d8b;
+
+            line-height: 1.6;
+
+            font-size: 15px;
+        }
+
+
+        /* =========================
+           CONTACTO
+        ========================= */
+
+        .contact {
+
+            background: #0f3444;
+
+            color: white;
+
+            text-align: center;
+        }
+
+        .contact h2 {
+
+            font-size: 38px;
+
+            margin-bottom: 15px;
+        }
+
+        .contact p {
+
+            max-width: 650px;
+
+            margin: 0 auto 30px;
+
+            color: #c9e5ed;
+
+            line-height: 1.7;
+        }
+
+        .contact-button-main {
+
+            display: inline-block;
+
+            padding: 14px 28px;
+
+            background: #38bdf8;
+
+            color: #073b4c;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .contact-button-main:hover {
+
+            background: #7dd3fc;
+
+            transform: translateY(-3px);
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            background: #092c3a;
+
+            color: #9fc2cc;
+
+            text-align: center;
+
+            padding: 22px;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .nav-links a:not(.contact-button) {
+                display: none;
+            }
+
+            .hero {
+                background:
+                    linear-gradient(
+                        rgba(245,248,250,0.90),
+                        rgba(245,248,250,0.90)
+                    ),
+                    url("imagenes/imagenaforo.jpg")
+                    center/cover no-repeat;
+            }
+
+            .service-container,
+            .values-container {
+
+                grid-template-columns: 1fr;
+            }
+
+            .about {
+
+                grid-template-columns: 1fr;
+
+                gap: 35px;
+            }
+
+            .about-image {
+                min-height: 280px;
+            }
+
+            section {
+                padding: 70px 6%;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav>
+
+        <div class="logo">
+            Perforaciones <span>Palacios</span>
+        </div>
+
+        <div class="nav-links">
+
+            <a href="inicio.html">
+                Inicio
+            </a>
+
+            <a href="#servicios">
+                Servicios
+            </a>
+
+            <a href="#nosotros">
+                Nosotros
+            </a>
+
+            <a href="#contacto" class="contact-button">
+                Contacto
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="tag">
+                PERFORACIÓN DE POZOS DE AGUA
+            </div>
+
+            <h1>
+                Soluciones que llevan
+                <span>agua a tu proyecto.</span>
+            </h1>
+
+            <p>
+                En Perforaciones Palacios ofrecemos soluciones profesionales
+                para la perforación de pozos de agua, trabajando con
+                experiencia, compromiso y calidad en cada proyecto.
+            </p>
+
+            <a href="#servicios" class="hero-button">
+                Conocer nuestros servicios →
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SERVICIOS
+    ========================= -->
+
+    <section class="services" id="servicios">
+
+        <div class="section-title">
+
+            <h2>
+                Nuestros servicios
+            </h2>
+
+            <p>
+                Soluciones enfocadas en las necesidades de cada proyecto,
+                utilizando experiencia y procesos profesionales.
+            </p>
+
+        </div>
+
+
+        <div class="service-container">
+
+
+            <div class="service-card">
+
+                <div class="service-icon">
+                    💧
+                </div>
+
+                <h3>
+                    Perforación de pozos
+                </h3>
+
+                <p>
+                    Realizamos trabajos de perforación de pozos de agua
+                    para diferentes tipos de proyectos y necesidades.
+                </p>
+
+            </div>
+
+
+            <div class="service-card">
+
+                <div class="service-icon">
+                    ⚙️
+                </div>
+
+                <h3>
+                    Equipamiento
+                </h3>
+
+                <p>
+                    Soluciones para el equipamiento y funcionamiento
+                    adecuado de los pozos de agua.
+                </p>
+
+            </div>
+
+
+            <div class="service-card">
+
+                <div class="service-icon">
+                    🔧
+                </div>
+
+                <h3>
+                    Mantenimiento
+                </h3>
+
+                <p>
+                    Trabajos de mantenimiento para conservar el
+                    funcionamiento adecuado de los sistemas.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         NOSOTROS
+    ========================= -->
+
+    <section id="nosotros">
+
+        <div class="about">
+
+            <div class="about-image"></div>
+
+            <div class="about-text">
+
+                <h2>
+                    Experiencia y compromiso
+                </h2>
+
+                <p>
+                    En Perforaciones Palacios nos enfocamos en ofrecer
+                    trabajos de calidad y soluciones confiables para
+                    nuestros clientes.
+                </p>
+
+                <p>
+                    Cada proyecto representa un compromiso con la
+                    eficiencia, la responsabilidad y la satisfacción
+                    de nuestros clientes.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         VALORES
+    ========================= -->
+
+    <section class="values">
+
+        <div class="section-title">
+
+            <h2>
+                ¿Por qué elegirnos?
+            </h2>
+
+        </div>
+
+
+        <div class="values-container">
+
+
+            <div class="value">
+
+                <h3>
+                    Experiencia
+                </h3>
+
+                <p>
+                    Conocimiento y experiencia aplicada
+                    en cada proyecto.
+                </p>
+
+            </div>
+
+
+            <div class="value">
+
+                <h3>
+                    Calidad
+                </h3>
+
+                <p>
+                    Buscamos realizar cada trabajo con
+                    responsabilidad y atención al detalle.
+                </p>
+
+            </div>
+
+
+            <div class="value">
+
+                <h3>
+                    Confianza
+                </h3>
+
+                <p>
+                    Construimos relaciones duraderas
+                    con nuestros clientes.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONTACTO
+    ========================= -->
+
+    <section class="contact" id="contacto">
+
+        <h2>
+            ¿Tienes un proyecto?
+        </h2>
+
+        <p>
+            Ponte en contacto con nosotros y conoce cómo podemos
+            ayudarte con tu proyecto de perforación de agua.
+        </p>
+
+        <a href="contacto.html" class="contact-button-main">
+            Contáctanos →
+        </a>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        © 2026 Perforaciones Palacios |
+        Todos los derechos reservados
+
+    </footer>
+
+
+</body>
+
+</html>
+```
