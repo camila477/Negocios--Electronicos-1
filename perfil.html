@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mi Perfil | Perforaciones Palacios</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+                url("imagenes/imagenaforo.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #333;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 75px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 0 8%;
+
+            background: rgba(255, 255, 255, 0.95);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: #123c69;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            color: #123c69;
+        }
+
+        .contact-button {
+            background: #123c69;
+            color: white !important;
+            padding: 10px 18px;
+            border-radius: 8px;
+        }
+
+        /* PERFIL */
+
+        .perfil-container {
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 120px 20px 50px;
+        }
+
+        .perfil-card {
+            width: 100%;
+            max-width: 600px;
+
+            background: white;
+            border-radius: 20px;
+
+            padding: 40px;
+
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+
+            text-align: center;
+        }
+
+        .perfil-icon {
+            width: 90px;
+            height: 90px;
+
+            margin: 0 auto 20px;
+
+            background: #123c69;
+            color: white;
+
+            border-radius: 50%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 40px;
+        }
+
+        .perfil-card h1 {
+            color: #123c69;
+            margin-bottom: 10px;
+        }
+
+        .bienvenida {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .datos {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .dato {
+            background: #f5f7fa;
+
+            padding: 15px 20px;
+
+            border-radius: 10px;
+
+            margin-bottom: 15px;
+        }
+
+        .dato strong {
+            display: block;
+            color: #123c69;
+            margin-bottom: 5px;
+        }
+
+        .dato span {
+            color: #555;
+        }
+
+        .botones {
+            margin-top: 30px;
+
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+
+            flex-wrap: wrap;
+        }
+
+        .boton {
+            text-decoration: none;
+
+            padding: 12px 22px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            border: none;
+        }
+
+        .inicio {
+            background: #123c69;
+            color: white;
+        }
+
+        .cerrar {
+            background: #ddd;
+            color: #333;
+        }
+
+        .boton:hover {
+            opacity: 0.85;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 0 5%;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+
+            .nav-links a {
+                font-size: 14px;
+            }
+
+            .perfil-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">
+            Perforaciones Palacios
+        </div>
+
+        <div class="nav-links">
+
+            <a href="inicio.html">
+                Inicio
+            </a>
+
+            <a href="catalogo.html">
+                Catálogo
+            </a>
+
+            <a href="inicio.html#nosotros">
+                Nosotros
+            </a>
+
+            <a href="contacto.html" class="contact-button">
+                Contacto
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- PERFIL -->
+
+    <main class="perfil-container">
+
+        <div class="perfil-card">
+
+            <div class="perfil-icon">
+                👤
+            </div>
+
+            <h1 id="nombreUsuario">
+                Mi Perfil
+            </h1>
+
+            <p class="bienvenida">
+                Bienvenido a Perforaciones Palacios
+            </p>
+
+
+            <div class="datos">
+
+                <div class="dato">
+
+                    <strong>Nombre completo</strong>
+
+                    <span id="nombre">
+                        Cargando...
+                    </span>
+
+                </div>
+
+
+                <div class="dato">
+
+                    <strong>Correo electrónico</strong>
+
+                    <span id="correo">
+                        Cargando...
+                    </span>
+
+                </div>
+
+
+                <div class="dato">
+
+                    <strong>Teléfono</strong>
+
+                    <span id="telefono">
+                        Cargando...
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="botones">
+
+                <a href="inicio.html" class="boton inicio">
+                    Volver al inicio
+                </a>
+
+                <button class="boton cerrar" onclick="cerrarSesion()">
+                    Cerrar sesión
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        // Obtener el usuario guardado durante el registro
+
+        const usuarioGuardado = localStorage.getItem("usuarioPalacios");
+
+        // Verificar si existe un usuario
+
+        if (!usuarioGuardado) {
+
+            alert("No hay ningún usuario registrado.");
+
+            window.location.href = "registro.html";
+
+        } else {
+
+            const usuario = JSON.parse(usuarioGuardado);
+
+            // Mostrar los datos del usuario
+
+            document.getElementById("nombre").textContent =
+                usuario.name;
+
+            document.getElementById("correo").textContent =
+                usuario.email;
+
+            document.getElementById("telefono").textContent =
+                usuario.phone;
+
+            // Mostrar el nombre arriba
+
+            document.getElementById("nombreUsuario").textContent =
+                "Hola, " + usuario.name;
+
+        }
+
+
+        // Cerrar sesión
+
+        function cerrarSesion() {
+
+            localStorage.removeItem("sesionPalacios");
+
+            alert("Sesión cerrada correctamente.");
+
+            window.location.href = "inicio.html";
+
+        }
+
+    </script>
+
+</body>
+
+</html>

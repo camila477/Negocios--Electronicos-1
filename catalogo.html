@@ -1,0 +1,662 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Catálogo | Perforaciones Palacios</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f5f8fa;
+            color: #183b4e;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+
+            padding: 20px 7%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: rgba(255, 255, 255, 0.96);
+
+            backdrop-filter: blur(10px);
+
+            border-bottom: 1px solid rgba(24, 59, 78, 0.08);
+
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: bold;
+            color: #155e75;
+        }
+
+        .logo span {
+            color: #0ea5e9;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #183b4e;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #0ea5e9;
+        }
+
+        .contact-button {
+            background: #155e75;
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 7px;
+        }
+
+        .contact-button:hover {
+            background: #0e7490;
+        }
+
+        /* =========================
+           ENCABEZADO
+        ========================= */
+
+        .header {
+            padding: 150px 7% 70px;
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    rgba(9,48,62,0.82),
+                    rgba(9,48,62,0.82)
+                ),
+                url("imagenes/imagenaforo.jpg")
+                center/cover no-repeat;
+
+            color: white;
+        }
+
+        .header h1 {
+            font-size: clamp(40px, 6vw, 60px);
+            margin-bottom: 15px;
+        }
+
+        .header h1 span {
+            color: #38bdf8;
+        }
+
+        .header p {
+            max-width: 650px;
+            margin: auto;
+            color: #dbeafe;
+            line-height: 1.7;
+            font-size: 17px;
+        }
+
+        /* =========================
+           CATÁLOGO
+        ========================= */
+
+        .catalog {
+            padding: 80px 7%;
+        }
+
+        .catalog-title {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 45px;
+        }
+
+        .catalog-title h2 {
+            font-size: 36px;
+            color: #123b4d;
+            margin-bottom: 12px;
+        }
+
+        .catalog-title p {
+            color: #607d8b;
+            line-height: 1.7;
+        }
+
+        .catalog-container {
+            max-width: 1100px;
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 25px;
+        }
+
+        /* =========================
+           TARJETAS
+        ========================= */
+
+        .product-card {
+            background: white;
+
+            border: 1px solid #e2edf1;
+
+            border-radius: 14px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 8px 25px rgba(24,59,78,0.07);
+
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-7px);
+
+            box-shadow:
+                0 18px 40px rgba(24,59,78,0.13);
+        }
+
+        .product-image {
+            height: 210px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #e0f2fe;
+
+            font-size: 70px;
+        }
+
+        .product-content {
+            padding: 28px;
+        }
+
+        .product-content h3 {
+            color: #155e75;
+            margin-bottom: 12px;
+            font-size: 21px;
+        }
+
+        .product-content p {
+            color: #607d8b;
+            line-height: 1.7;
+            font-size: 15px;
+            margin-bottom: 22px;
+        }
+
+        .product-button {
+            display: inline-block;
+
+            padding: 11px 20px;
+
+            background: #155e75;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 7px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .product-button:hover {
+            background: #0ea5e9;
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           AVISO
+        ========================= */
+
+        .notice {
+            max-width: 900px;
+
+            margin: 20px auto 0;
+
+            padding: 18px 25px;
+
+            text-align: center;
+
+            background: #eef7fa;
+
+            border-radius: 10px;
+
+            color: #486575;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+        /* =========================
+           CONTACTO
+        ========================= */
+
+        .contact {
+            background: #0f3444;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 80px 7%;
+        }
+
+        .contact h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .contact p {
+            max-width: 650px;
+            margin: 0 auto 30px;
+            color: #c9e5ed;
+            line-height: 1.7;
+        }
+
+        .contact-button-main {
+            display: inline-block;
+
+            padding: 14px 28px;
+
+            background: #38bdf8;
+
+            color: #073b4c;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .contact-button-main:hover {
+            background: #7dd3fc;
+            transform: translateY(-3px);
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #092c3a;
+            color: #9fc2cc;
+            text-align: center;
+            padding: 22px;
+            font-size: 13px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a:not(.contact-button) {
+                display: none;
+            }
+
+            .catalog-container {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+
+            .catalog {
+                padding: 65px 6%;
+            }
+
+            .header {
+                padding: 130px 6% 60px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav>
+
+        <div class="logo">
+            Perforaciones <span>Palacios</span>
+        </div>
+
+        <div class="nav-links">
+
+            <a href="inicio.html">
+                Inicio
+            </a>
+
+            <a href="catalogo.html">
+                Catálogo
+            </a>
+
+            <a href="inicio.html#nosotros">
+                Nosotros
+            </a>
+
+            <a href="contacto.html" class="contact-button">
+                Contacto
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         ENCABEZADO
+    ========================= -->
+
+    <header class="header">
+
+        <h1>
+            Nuestro <span>Catálogo</span>
+        </h1>
+
+        <p>
+            Conoce los principales servicios y soluciones que
+            Perforaciones Palacios ofrece para proyectos de
+            perforación y aprovechamiento de agua.
+        </p>
+
+    </header>
+
+
+    <!-- =========================
+         CATÁLOGO
+    ========================= -->
+
+    <section class="catalog">
+
+        <div class="catalog-title">
+
+            <h2>
+                Servicios disponibles
+            </h2>
+
+            <p>
+                Este catálogo presenta de manera visual algunos de
+                nuestros principales servicios.
+            </p>
+
+        </div>
+
+
+        <div class="catalog-container">
+
+
+            <!-- SERVICIO 1 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+                    💧
+                </div>
+
+                <div class="product-content">
+
+                    <h3>
+                        Perforación de pozos
+                    </h3>
+
+                    <p>
+                        Servicio especializado para la realización
+                        de perforaciones destinadas al aprovechamiento
+                        de agua.
+                    </p>
+
+                    <a href="contacto.html" class="product-button">
+                        Solicitar información
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- SERVICIO 2 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+                    ⚙️
+                </div>
+
+                <div class="product-content">
+
+                    <h3>
+                        Equipamiento de pozos
+                    </h3>
+
+                    <p>
+                        Soluciones para el equipamiento y funcionamiento
+                        adecuado de los pozos de agua.
+                    </p>
+
+                    <a href="contacto.html" class="product-button">
+                        Solicitar información
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- SERVICIO 3 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+                    🔧
+                </div>
+
+                <div class="product-content">
+
+                    <h3>
+                        Mantenimiento
+                    </h3>
+
+                    <p>
+                        Servicios de mantenimiento para conservar
+                        el funcionamiento adecuado de los sistemas.
+                    </p>
+
+                    <a href="contacto.html" class="product-button">
+                        Solicitar información
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- SERVICIO 4 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+                    🏗️
+                </div>
+
+                <div class="product-content">
+
+                    <h3>
+                        Preparación del proyecto
+                    </h3>
+
+                    <p>
+                        Planeación y preparación de los trabajos
+                        necesarios antes de comenzar una perforación.
+                    </p>
+
+                    <a href="contacto.html" class="product-button">
+                        Solicitar información
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- SERVICIO 5 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+                    📐
+                </div>
+
+                <div class="product-content">
+
+                    <h3>
+                        Evaluación del terreno
+                    </h3>
+
+                    <p>
+                        Análisis de las condiciones del terreno para
+                        determinar las características del proyecto.
+                    </p>
+
+                    <a href="contacto.html" class="product-button">
+                        Solicitar información
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- SERVICIO 6 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+                    🌊
+                </div>
+
+                <div class="product-content">
+
+                    <h3>
+                        Soluciones de agua
+                    </h3>
+
+                    <p>
+                        Alternativas orientadas a las necesidades
+                        específicas de cada proyecto de agua.
+                    </p>
+
+                    <a href="contacto.html" class="product-button">
+                        Solicitar información
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="notice">
+
+            <strong>Catálogo informativo:</strong>
+            este apartado es únicamente demostrativo.
+            No se realizan compras ni pagos en línea.
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONTACTO
+    ========================= -->
+
+    <section class="contact">
+
+        <h2>
+            ¿Necesitas información?
+        </h2>
+
+        <p>
+            Ponte en contacto con nosotros para conocer más
+            sobre nuestros servicios y las características
+            de tu proyecto.
+        </p>
+
+        <a href="contacto.html" class="contact-button-main">
+            Contáctanos →
+        </a>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        © 2026 Perforaciones Palacios |
+        Todos los derechos reservados
+
+    </footer>
+
+
+</body>
+
+</html>
+```
