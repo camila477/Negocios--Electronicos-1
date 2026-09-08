@@ -12,43 +12,49 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
+            background: #f5f8fa;
+            color: #183b4e;
             min-height: 100vh;
-            background-image:
-                linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
-                url("imagenes/imagenaforo.jpg");
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: #333;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* NAVBAR */
+        /* =========================
+           NAVBAR
+        ========================= */
 
         nav {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 75px;
-
+            padding: 20px 7%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-
-            padding: 0 8%;
-
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(24, 59, 78, 0.08);
             z-index: 1000;
         }
 
         .logo {
-            font-size: 22px;
+            font-size: 23px;
             font-weight: bold;
-            color: #123c69;
+            color: #155e75;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #0ea5e9;
         }
 
         .nav-links {
@@ -59,156 +65,285 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #333;
-            font-weight: bold;
+            color: #183b4e;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
         }
 
         .nav-links a:hover {
-            color: #123c69;
+            color: #0ea5e9;
         }
 
-        .contact-button {
-            background: #123c69;
+        .nav-links a.active {
+            color: #0ea5e9;
+            border-bottom: 2px solid #0ea5e9;
+            padding-bottom: 4px;
+        }
+
+        .btn-logout-nav {
+            background: #e11d48;
             color: white !important;
-            padding: 10px 18px;
-            border-radius: 8px;
+            padding: 9px 18px;
+            border-radius: 7px;
+            cursor: pointer;
         }
 
-        /* PERFIL */
-
-        .perfil-container {
-            min-height: 100vh;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            padding: 120px 20px 50px;
+        .btn-logout-nav:hover {
+            background: #be123c;
         }
 
-        .perfil-card {
-            width: 100%;
-            max-width: 600px;
+        /* =========================
+           HEADER / HERO
+        ========================= */
 
-            background: white;
-            border-radius: 20px;
-
-            padding: 40px;
-
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-
+        .header {
+            padding: 140px 7% 50px;
             text-align: center;
-        }
-
-        .perfil-icon {
-            width: 90px;
-            height: 90px;
-
-            margin: 0 auto 20px;
-
-            background: #123c69;
+            background:
+                linear-gradient(
+                    rgba(9,48,62,0.85),
+                    rgba(9,48,62,0.85)
+                ),
+                url("imagenes/imagenaforo.jpg")
+                center/cover no-repeat;
             color: white;
-
-            border-radius: 50%;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            font-size: 40px;
         }
 
-        .perfil-card h1 {
-            color: #123c69;
+        .header h1 {
+            font-size: clamp(32px, 5vw, 48px);
             margin-bottom: 10px;
         }
 
-        .bienvenida {
-            color: #666;
-            margin-bottom: 30px;
+        .header h1 span {
+            color: #38bdf8;
         }
 
-        .datos {
-            text-align: left;
-            margin-top: 20px;
+        .header p {
+            color: #dbeafe;
+            font-size: 16px;
         }
 
-        .dato {
-            background: #f5f7fa;
+        /* =========================
+           CONTENEDOR PRINCIPAL
+        ========================= */
 
-            padding: 15px 20px;
-
-            border-radius: 10px;
-
-            margin-bottom: 15px;
+        .profile-container {
+            padding: 50px 7% 80px;
+            max-width: 1200px;
+            margin: auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+            flex: 1;
         }
 
-        .dato strong {
-            display: block;
-            color: #123c69;
-            margin-bottom: 5px;
+        .card {
+            background: white;
+            border-radius: 14px;
+            padding: 35px;
+            border: 1px solid #e2edf1;
+            box-shadow: 0 8px 25px rgba(24,59,78,0.06);
+            height: fit-content;
         }
 
-        .dato span {
-            color: #555;
-        }
-
-        .botones {
-            margin-top: 30px;
-
+        .card-title {
+            font-size: 20px;
+            color: #155e75;
+            margin-bottom: 20px;
             display: flex;
-            justify-content: center;
-            gap: 15px;
-
-            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #eef7fa;
+            padding-bottom: 12px;
         }
 
-        .boton {
-            text-decoration: none;
+        /* =========================
+           FORMULARIO DE PERFIL
+        ========================= */
 
-            padding: 12px 22px;
+        .form-group {
+            margin-bottom: 18px;
+        }
 
-            border-radius: 8px;
-
+        .form-group label {
+            display: block;
+            font-size: 13px;
             font-weight: bold;
-
-            cursor: pointer;
-
-            border: none;
+            color: #123b4d;
+            margin-bottom: 6px;
         }
 
-        .inicio {
-            background: #123c69;
+        .form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #c9e5ed;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #183b4e;
+            background: #fafcfd;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #0ea5e9;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+        }
+
+        .btn-primary {
+            width: 100%;
+            background: #155e75;
             color: white;
+            border: none;
+            padding: 13px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
         }
 
-        .cerrar {
-            background: #ddd;
-            color: #333;
+        .btn-primary:hover {
+            background: #0ea5e9;
+            transform: translateY(-2px);
         }
 
-        .boton:hover {
-            opacity: 0.85;
+        .mensaje-alerta {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            background: #dcfce7;
+            color: #15803d;
+            font-size: 14px;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid #bbf7d0;
         }
 
-        /* RESPONSIVE */
+        /* =========================
+           CARRITO / COTIZACIONES
+        ========================= */
 
-        @media (max-width: 700px) {
+        .cart-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
 
-            nav {
-                padding: 0 5%;
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .cart-item-info h4 {
+            color: #155e75;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-info p {
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .cart-item-price {
+            font-weight: bold;
+            color: #0ea5e9;
+            font-size: 15px;
+        }
+
+        .btn-delete {
+            background: none;
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 12px;
+            transition: 0.2s;
+        }
+
+        .btn-delete:hover {
+            color: #991b1b;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 2px dashed #e2e8f0;
+            font-size: 16px;
+            font-weight: bold;
+            color: #123b4d;
+            margin-bottom: 20px;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 30px 10px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .actions-secondary {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .btn-secondary {
+            flex: 1;
+            display: text-align;
+            text-align: center;
+            text-decoration: none;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: #bae6fd;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #092c3a;
+            color: #9fc2cc;
+            text-align: center;
+            padding: 22px;
+            font-size: 13px;
+            margin-top: auto;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+            .profile-container {
+                grid-template-columns: 1fr;
             }
 
-            .nav-links {
-                gap: 10px;
-            }
-
-            .nav-links a {
-                font-size: 14px;
-            }
-
-            .perfil-card {
-                padding: 30px 20px;
+            .nav-links a:not(.btn-logout-nav) {
+                display: none;
             }
         }
     </style>
@@ -216,30 +351,26 @@
 
 <body>
 
-    <!-- NAVBAR -->
+    <!-- =========================
+         NAVBAR
+    ========================= -->
 
     <nav>
 
-        <div class="logo">
-            Perforaciones Palacios
-        </div>
+        <a href="inicio.html" class="logo">
+            Perforaciones <span>Palacios</span>
+        </a>
 
         <div class="nav-links">
 
-            <a href="inicio.html">
-                Inicio
-            </a>
+            <a href="inicio.html">Inicio</a>
+            <a href="catalogo.html">Catálogo</a>
+            <a href="inicio.html#nosotros">Nosotros</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="perfil.html" class="active">Mi Perfil</a>
 
-            <a href="catalogo.html">
-                Catálogo
-            </a>
-
-            <a href="inicio.html#nosotros">
-                Nosotros
-            </a>
-
-            <a href="contacto.html" class="contact-button">
-                Contacto
+            <a href="#" class="btn-logout-nav" onclick="cerrarSesion()">
+                Cerrar sesión
             </a>
 
         </div>
@@ -247,127 +378,240 @@
     </nav>
 
 
-    <!-- PERFIL -->
+    <!-- =========================
+         HEADER
+    ========================= -->
 
-    <main class="perfil-container">
+    <header class="header">
 
-        <div class="perfil-card">
+        <h1 id="saludoUsuario">
+            ¡Hola, <span>Cargando...</span>!
+        </h1>
 
-            <div class="perfil-icon">
-                👤
-            </div>
+        <p>
+            Gestiona tu información personal y revisa tus solicitudes de cotización guardadas.
+        </p>
 
-            <h1 id="nombreUsuario">
-                Mi Perfil
-            </h1>
-
-            <p class="bienvenida">
-                Bienvenido a Perforaciones Palacios
-            </p>
+    </header>
 
 
-            <div class="datos">
+    <!-- =========================
+         CONTENIDO PRINCIPAL
+    ========================= -->
 
-                <div class="dato">
+    <main class="profile-container">
 
-                    <strong>Nombre completo</strong>
+        <!-- TARJETA 1: EDICIÓN DE DATOS -->
 
-                    <span id="nombre">
-                        Cargando...
-                    </span>
+        <section class="card">
 
+            <h2 class="card-title">
+                👤 Mis Datos Personales
+            </h2>
+
+            <form id="profileForm">
+
+                <div class="form-group">
+                    <label for="name">Nombre completo</label>
+                    <input type="text" id="name" placeholder="Tu nombre">
                 </div>
 
-
-                <div class="dato">
-
-                    <strong>Correo electrónico</strong>
-
-                    <span id="correo">
-                        Cargando...
-                    </span>
-
+                <div class="form-group">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" placeholder="tu@correo.com">
                 </div>
 
-
-                <div class="dato">
-
-                    <strong>Teléfono</strong>
-
-                    <span id="telefono">
-                        Cargando...
-                    </span>
-
+                <div class="form-group">
+                    <label for="phone">Teléfono de contacto</label>
+                    <input type="tel" id="phone" placeholder="Tu teléfono">
                 </div>
 
-            </div>
-
-
-            <div class="botones">
-
-                <a href="inicio.html" class="boton inicio">
-                    Volver al inicio
-                </a>
-
-                <button class="boton cerrar" onclick="cerrarSesion()">
-                    Cerrar sesión
+                <button type="submit" class="btn-primary">
+                    💾 Guardar cambios
                 </button>
 
+            </form>
+
+            <div id="alertaExito" class="mensaje-alerta">
+                ✓ ¡Datos actualizados correctamente!
             </div>
 
-        </div>
+            <div class="actions-secondary">
+                <a href="inicio.html" class="btn-secondary">
+                    ← Ir al inicio
+                </a>
+            </div>
+
+        </section>
+
+
+        <!-- TARJETA 2: CARRITO DE COTIZACIONES / SERVICIOS GUARDADOS -->
+
+        <section class="card">
+
+            <h2 class="card-title">
+                🛒 Servicios Guardados / Cotizaciones
+            </h2>
+
+            <div id="cartList" class="cart-list">
+                <!-- Se llenará mediante JS -->
+            </div>
+
+            <div id="cartTotalContainer" class="cart-total" style="display: none;">
+                <span>Estimado total:</span>
+                <span id="cartTotal">$0.00 MXN</span>
+            </div>
+
+            <button id="btnSolicitar" class="btn-primary" style="display: none;" onclick="solicitarCotizacion()">
+                📩 Confirmar y solicitar cotización
+            </button>
+
+            <div id="emptyCartMessage" class="cart-empty">
+                No tienes elementos agregados a tu cotización.
+                <br><br>
+                <a href="catalogo.html" class="btn-secondary" style="display: inline-block;">
+                    Ver catálogo de servicios
+                </a>
+            </div>
+
+        </section>
 
     </main>
 
 
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        © 2026 Perforaciones Palacios |
+        Todos los derechos reservados
+
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
     <script>
 
-        // Obtener el usuario guardado durante el registro
+        // 1. CARGAR DATOS DEL USUARIO
+        const inputName = document.getElementById("name");
+        const inputEmail = document.getElementById("email");
+        const inputPhone = document.getElementById("phone");
+        const saludoUsuario = document.getElementById("saludoUsuario");
 
-        const usuarioGuardado = localStorage.getItem("usuarioPalacios");
+        // Datos por defecto o recuperados
+        let usuario = JSON.parse(localStorage.getItem("usuarioPalacios")) || {
+            name: "Usuario Registrado",
+            email: "usuario@ejemplo.com",
+            phone: "4490000000"
+        };
 
-        // Verificar si existe un usuario
-
-        if (!usuarioGuardado) {
-
-            alert("No hay ningún usuario registrado.");
-
-            window.location.href = "registro.html";
-
-        } else {
-
-            const usuario = JSON.parse(usuarioGuardado);
-
-            // Mostrar los datos del usuario
-
-            document.getElementById("nombre").textContent =
-                usuario.name;
-
-            document.getElementById("correo").textContent =
-                usuario.email;
-
-            document.getElementById("telefono").textContent =
-                usuario.phone;
-
-            // Mostrar el nombre arriba
-
-            document.getElementById("nombreUsuario").textContent =
-                "Hola, " + usuario.name;
-
+        function cargarPerfil() {
+            inputName.value = usuario.name || "";
+            inputEmail.value = usuario.email || "";
+            inputPhone.value = usuario.phone || "";
+            saludoUsuario.innerHTML = `¡Hola, <span>${usuario.name.split(" ")[0]}</span>!`;
         }
 
+        // 2. GUARDAR CAMBIOS DE PERFIL
+        document.getElementById("profileForm").addEventListener("submit", function(e) {
+            e.preventDefault();
 
-        // Cerrar sesión
+            usuario.name = inputName.value.trim() || "Usuario Registrado";
+            usuario.email = inputEmail.value.trim() || "usuario@ejemplo.com";
+            usuario.phone = inputPhone.value.trim() || "4490000000";
 
+            localStorage.setItem("usuarioPalacios", JSON.stringify(usuario));
+
+            // Actualizar saludo
+            saludoUsuario.innerHTML = `¡Hola, <span>${usuario.name.split(" ")[0]}</span>!`;
+
+            // Mostrar mensaje de confirmación
+            const alerta = document.getElementById("alertaExito");
+            alerta.style.display = "block";
+
+            setTimeout(() => {
+                alerta.style.display = "none";
+            }, 3000);
+        });
+
+        // 3. LOGICA DE CARRITO / ELEMENTOS GUARDADOS
+        // Se simula o recupera de localStorage
+        let carrito = JSON.parse(localStorage.getItem("carritoPalacios")) || [
+            { id: 1, servicio: "Perforación de Pozo Profundo (100m)", precio: 45000 },
+            { id: 2, servicio: "Mantenimiento y Limpieza de Pozo", precio: 12000 }
+        ];
+
+        function renderizarCarrito() {
+            const container = document.getElementById("cartList");
+            const totalContainer = document.getElementById("cartTotalContainer");
+            const btnSolicitar = document.getElementById("btnSolicitar");
+            const emptyMessage = document.getElementById("emptyCartMessage");
+            const cartTotal = document.getElementById("cartTotal");
+
+            if (carrito.length === 0) {
+                container.innerHTML = "";
+                totalContainer.style.display = "none";
+                btnSolicitar.style.display = "none";
+                emptyMessage.style.display = "block";
+                return;
+            }
+
+            emptyMessage.style.display = "none";
+            totalContainer.style.display = "flex";
+            btnSolicitar.style.display = "block";
+
+            let html = "";
+            let total = 0;
+
+            carrito.forEach((item, index) => {
+                total += item.precio;
+                html += `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <h4>${item.servicio}</h4>
+                            <p>Servicio especializado</p>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <span class="cart-item-price">$${item.precio.toLocaleString('es-MX')} MXN</span>
+                            <button class="btn-delete" onclick="eliminarItem(${index})" title="Eliminar">🗑️</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            cartTotal.textContent = `$${total.toLocaleString('es-MX')} MXN`;
+        }
+
+        function eliminarItem(index) {
+            carrito.splice(index, 1);
+            localStorage.setItem("carritoPalacios", JSON.stringify(carrito));
+            renderizarCarrito();
+        }
+
+        function solicitarCotizacion() {
+            alert("¡Muchas gracias! Tu solicitud de cotización ha sido enviada con éxito. Nos pondremos en contacto contigo pronto.");
+            carrito = [];
+            localStorage.setItem("carritoPalacios", JSON.stringify(carrito));
+            renderizarCarrito();
+        }
+
+        // 4. CERRAR SESIÓN
         function cerrarSesion() {
-
-            localStorage.removeItem("sesionPalacios");
-
-            alert("Sesión cerrada correctamente.");
-
-            window.location.href = "inicio.html";
-
+            if (confirm("¿Estás seguro de que deseas cerrar sesión?")) {
+                localStorage.removeItem("usuarioPalacios");
+                window.location.href = "inicio.html";
+            }
         }
+
+        // Inicializar vistas
+        cargarPerfil();
+        renderizarCarrito();
 
     </script>
 

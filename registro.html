@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 
@@ -172,28 +171,6 @@
         }
 
         /* =========================
-           MENSAJE
-        ========================= */
-
-        .message {
-            display: none;
-
-            margin-top: 18px;
-
-            padding: 13px;
-
-            border-radius: 7px;
-
-            text-align: center;
-
-            font-size: 14px;
-
-            background: #e0f2fe;
-
-            color: #0369a1;
-        }
-
-        /* =========================
            ENLACES
         ========================= */
 
@@ -282,7 +259,7 @@
              FORMULARIO DE REGISTRO
         ========================= -->
 
-        <form id="registerForm">
+        <form id="registerForm" novalidate>
 
 
             <div class="form-group">
@@ -295,7 +272,6 @@
                     type="text"
                     id="name"
                     placeholder="Ingresa tu nombre"
-                    required
                 >
 
             </div>
@@ -311,7 +287,6 @@
                     type="email"
                     id="email"
                     placeholder="ejemplo@correo.com"
-                    required
                 >
 
             </div>
@@ -327,7 +302,6 @@
                     type="tel"
                     id="phone"
                     placeholder="Ingresa tu teléfono"
-                    required
                 >
 
             </div>
@@ -343,7 +317,6 @@
                     type="password"
                     id="password"
                     placeholder="Crea una contraseña"
-                    required
                 >
 
             </div>
@@ -359,7 +332,6 @@
                     type="password"
                     id="confirmPassword"
                     placeholder="Repite tu contraseña"
-                    required
                 >
 
             </div>
@@ -374,13 +346,6 @@
 
 
         </form>
-
-
-        <div
-            id="message"
-            class="message"
-        >
-        </div>
 
 
         <div class="links">
@@ -407,94 +372,36 @@
 
     <!-- =========================
          JAVASCRIPT
-         REGISTRO SIMULADO
+         REDIRECCIÓN DIRECTA
     ========================= -->
 
     <script>
 
         const form = document.getElementById("registerForm");
 
-        const message = document.getElementById("message");
-
-
         form.addEventListener("submit", function(event) {
 
             event.preventDefault();
 
+            // Obtenemos valores ingresados o asignamos valores automáticos si está vacío
+            const name = document.getElementById("name").value.trim() || "Usuario Registrado";
+            const email = document.getElementById("email").value.trim() || "usuario@ejemplo.com";
+            const phone = document.getElementById("phone").value.trim() || "4490000000";
 
-            const name =
-                document.getElementById("name").value;
-
-            const email =
-                document.getElementById("email").value;
-
-            const phone =
-                document.getElementById("phone").value;
-
-            const password =
-                document.getElementById("password").value;
-
-            const confirmPassword =
-                document.getElementById("confirmPassword").value;
-
-
-            /* =========================
-               VALIDAR CONTRASEÑAS
-            ========================= */
-
-            if (password !== confirmPassword) {
-
-                message.style.display = "block";
-
-                message.innerText =
-                    "Las contraseñas no coinciden.";
-
-                return;
-            }
-
-
-            /* =========================
-               GUARDAR USUARIO SIMULADO
-            ========================= */
-
+            // Guardamos el perfil en LocalStorage
             const user = {
-
                 name: name,
-
                 email: email,
-
-                phone: phone,
-
-                password: password
-
+                phone: phone
             };
-
 
             localStorage.setItem(
                 "usuarioPalacios",
                 JSON.stringify(user)
             );
 
-
-            /* =========================
-               MENSAJE
-            ========================= */
-
-            message.style.display = "block";
-
-            message.innerText =
-                "¡Cuenta creada correctamente! Redirigiendo al inicio de sesión...";
-
-
-            /* =========================
-               REDIRECCIÓN
-            ========================= */
-
-            setTimeout(function() {
-
-                window.location.href = "login.html";
-
-            }, 1800);
+            // Redirección directa al perfil
+            window.location.href = "perfil.html";
 
         });
 
@@ -504,4 +411,3 @@
 </body>
 
 </html>
-```

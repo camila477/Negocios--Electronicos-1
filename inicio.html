@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 
@@ -6,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Inicio | Perforaciones Palacios</title>
+    <title>Inicio | Perforaciones Pa</title>
 
     <style>
 
@@ -39,29 +38,22 @@
             position: fixed;
             top: 0;
             left: 0;
-
             width: 100%;
-
             padding: 20px 7%;
-
             display: flex;
             justify-content: space-between;
             align-items: center;
-
             background: rgba(255, 255, 255, 0.94);
-
             backdrop-filter: blur(10px);
-
             border-bottom: 1px solid rgba(24, 59, 78, 0.08);
-
             z-index: 1000;
         }
 
         .logo {
             font-size: 23px;
             font-weight: bold;
-
             color: #155e75;
+            text-decoration: none;
         }
 
         .logo span {
@@ -76,12 +68,9 @@
 
         .nav-links a {
             text-decoration: none;
-
             color: #183b4e;
-
             font-size: 14px;
             font-weight: 600;
-
             transition: 0.3s;
         }
 
@@ -89,13 +78,17 @@
             color: #0ea5e9;
         }
 
+        /* Marcador para la sección activa */
+        .nav-links a.active {
+            color: #0ea5e9;
+            border-bottom: 2px solid #0ea5e9;
+            padding-bottom: 4px;
+        }
+
         .contact-button {
             background: #155e75;
-
             color: white !important;
-
             padding: 10px 20px;
-
             border-radius: 7px;
         }
 
@@ -109,15 +102,10 @@
         ========================= */
 
         .hero {
-
             min-height: 90vh;
-
             display: flex;
-
             align-items: center;
-
             padding: 140px 7% 80px;
-
             background:
                 linear-gradient(
                     90deg,
@@ -125,7 +113,7 @@
                     rgba(245,248,250,0.94) 45%,
                     rgba(245,248,250,0.35) 100%
                 ),
-                url("imagenes/imagenaforo.jpg")
+                url("imagenes/imagenagua.jpeg")
                 center/cover no-repeat;
         }
 
@@ -134,34 +122,21 @@
         }
 
         .tag {
-
             display: inline-block;
-
             padding: 8px 16px;
-
             margin-bottom: 20px;
-
             border-radius: 30px;
-
             background: #e0f2fe;
-
             color: #0369a1;
-
             font-size: 13px;
-
             font-weight: bold;
-
             letter-spacing: 1px;
         }
 
         .hero h1 {
-
             font-size: clamp(42px, 6vw, 70px);
-
             line-height: 1.05;
-
             margin-bottom: 22px;
-
             color: #123b4d;
         }
 
@@ -170,39 +145,25 @@
         }
 
         .hero p {
-
             font-size: 18px;
-
             line-height: 1.8;
-
             color: #486575;
-
             margin-bottom: 32px;
         }
 
         .hero-button {
-
             display: inline-block;
-
             padding: 14px 28px;
-
             background: #155e75;
-
             color: white;
-
             text-decoration: none;
-
             border-radius: 8px;
-
             font-weight: bold;
-
             transition: 0.3s;
         }
 
         .hero-button:hover {
-
             background: #0e7490;
-
             transform: translateY(-3px);
         }
 
@@ -216,27 +177,19 @@
         }
 
         .section-title {
-
             text-align: center;
-
             max-width: 700px;
-
             margin: 0 auto 50px;
         }
 
         .section-title h2 {
-
             font-size: 38px;
-
             margin-bottom: 15px;
-
             color: #123b4d;
         }
 
         .section-title p {
-
             color: #607d8b;
-
             line-height: 1.7;
         }
 
@@ -250,132 +203,101 @@
         }
 
         .service-container {
-
             display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
+            grid-template-columns: repeat(3, 1fr);
             gap: 25px;
-
             max-width: 1100px;
-
             margin: auto;
         }
 
         .service-card {
-
             padding: 35px 28px;
-
             background: #f8fbfc;
-
             border: 1px solid #e2edf1;
-
             border-radius: 12px;
-
             transition: 0.3s;
         }
 
         .service-card:hover {
-
             transform: translateY(-6px);
-
-            box-shadow:
-                0 15px 35px rgba(24,59,78,0.10);
+            box-shadow: 0 15px 35px rgba(24,59,78,0.10);
         }
 
         .service-icon {
-
             width: 50px;
             height: 50px;
-
             display: flex;
-
             align-items: center;
             justify-content: center;
-
             background: #e0f2fe;
-
             color: #0284c7;
-
             border-radius: 10px;
-
             font-size: 24px;
-
             margin-bottom: 20px;
         }
 
         .service-card h3 {
-
             margin-bottom: 12px;
-
             color: #155e75;
         }
 
         .service-card p {
-
             color: #607d8b;
-
             line-height: 1.6;
-
             font-size: 15px;
         }
 
 
         /* =========================
-           NOSOTROS
+           NOSOTROS Y HISTORIA
         ========================= */
 
         .about {
-
             display: grid;
-
-            grid-template-columns:
-                1fr 1fr;
-
+            grid-template-columns: 1fr 1fr;
             gap: 60px;
-
             align-items: center;
-
             max-width: 1150px;
-
             margin: auto;
         }
 
         .about-image {
-
-            min-height: 350px;
-
+            min-height: 420px;
             border-radius: 15px;
-
             background:
                 linear-gradient(
                     rgba(9,48,62,0.20),
                     rgba(9,48,62,0.20)
                 ),
-                url("imagenes/imagenaforo.jpg")
+                url("imagenes/imagen2.jpeg")
                 center/cover no-repeat;
-
-            box-shadow:
-                0 15px 40px rgba(24,59,78,0.15);
+            box-shadow: 0 15px 40px rgba(24,59,78,0.15);
         }
 
         .about-text h2 {
-
             font-size: 38px;
-
             margin-bottom: 20px;
-
             color: #123b4d;
         }
 
         .about-text p {
-
             color: #607d8b;
-
             line-height: 1.8;
-
             margin-bottom: 18px;
+            font-size: 15px;
+        }
+
+        .history-badge {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0284c7;
+            font-weight: bold;
+            font-size: 12px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
 
@@ -384,44 +306,30 @@
         ========================= */
 
         .values {
-
             background: #eef7fa;
         }
 
         .values-container {
-
             display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
+            grid-template-columns: repeat(3, 1fr);
             gap: 25px;
-
             max-width: 1000px;
-
             margin: auto;
         }
 
         .value {
-
             text-align: center;
-
             padding: 30px;
         }
 
         .value h3 {
-
             color: #155e75;
-
             margin-bottom: 12px;
         }
 
         .value p {
-
             color: #607d8b;
-
             line-height: 1.6;
-
             font-size: 15px;
         }
 
@@ -431,55 +339,36 @@
         ========================= */
 
         .contact {
-
             background: #0f3444;
-
             color: white;
-
             text-align: center;
         }
 
         .contact h2 {
-
             font-size: 38px;
-
             margin-bottom: 15px;
         }
 
         .contact p {
-
             max-width: 650px;
-
             margin: 0 auto 30px;
-
             color: #c9e5ed;
-
             line-height: 1.7;
         }
 
         .contact-button-main {
-
             display: inline-block;
-
             padding: 14px 28px;
-
             background: #38bdf8;
-
             color: #073b4c;
-
             text-decoration: none;
-
             border-radius: 8px;
-
             font-weight: bold;
-
             transition: 0.3s;
         }
 
         .contact-button-main:hover {
-
             background: #7dd3fc;
-
             transform: translateY(-3px);
         }
 
@@ -489,15 +378,10 @@
         ========================= */
 
         footer {
-
             background: #092c3a;
-
             color: #9fc2cc;
-
             text-align: center;
-
             padding: 22px;
-
             font-size: 13px;
         }
 
@@ -528,14 +412,11 @@
 
             .service-container,
             .values-container {
-
                 grid-template-columns: 1fr;
             }
 
             .about {
-
                 grid-template-columns: 1fr;
-
                 gap: 35px;
             }
 
@@ -561,17 +442,15 @@
     ========================= -->
 
     <nav>
-       <div class="nav-links">
-    <a href="inicio.html">Inicio</a>
-    <a href="catalogo.html">Catálogo</a>
-    <a href="#nosotros">Nosotros</a>
-    <a href="#contacto" class="contact-button">Contacto</a>
-    <a href="login.html">Iniciar sesión</a>
-</div>
-
-</div>
+        <a href="inicio.html" class="logo">Perforaciones <span>Palacios</span></a>
+        
+        <div class="nav-links">
+            <a href="#inicio" class="nav-item active">Inicio</a>
+            <a href="catalogo.html" class="nav-item">Catálogo</a>
+            <a href="#nosotros" class="nav-item">Nosotros</a>
+            <a href="#contacto" class="nav-item">Contacto</a>
+            <a href="login.html" class="contact-button">Iniciar sesión</a>
         </div>
-
     </nav>
 
 
@@ -579,7 +458,7 @@
          HERO
     ========================= -->
 
-    <section class="hero">
+    <section class="hero" id="inicio">
 
         <div class="hero-content">
 
@@ -598,7 +477,8 @@
                 experiencia, compromiso y calidad en cada proyecto.
             </p>
 
-            <a href="#servicios" class="hero-button">
+            <!-- Redirección directa al catálogo -->
+            <a href="catalogo.html" class="hero-button">
                 Conocer nuestros servicios →
             </a>
 
@@ -615,9 +495,7 @@
 
         <div class="section-title">
 
-            <h2>
-                Nuestros servicios
-            </h2>
+            <h2>Nuestros servicios</h2>
 
             <p>
                 Soluciones enfocadas en las necesidades de cada proyecto,
@@ -629,58 +507,22 @@
 
         <div class="service-container">
 
-
             <div class="service-card">
-
-                <div class="service-icon">
-                    💧
-                </div>
-
-                <h3>
-                    Perforación de pozos
-                </h3>
-
-                <p>
-                    Realizamos trabajos de perforación de pozos de agua
-                    para diferentes tipos de proyectos y necesidades.
-                </p>
-
+                <div class="service-icon">💧</div>
+                <h3>Perforación de pozos</h3>
+                <p>Realizamos trabajos de perforación de pozos de agua para diferentes tipos de proyectos y necesidades.</p>
             </div>
 
-
             <div class="service-card">
-
-                <div class="service-icon">
-                    ⚙️
-                </div>
-
-                <h3>
-                    Equipamiento
-                </h3>
-
-                <p>
-                    Soluciones para el equipamiento y funcionamiento
-                    adecuado de los pozos de agua.
-                </p>
-
+                <div class="service-icon">⚙️</div>
+                <h3>Equipamiento</h3>
+                <p>Soluciones para el equipamiento y funcionamiento adecuado de los pozos de agua.</p>
             </div>
 
-
             <div class="service-card">
-
-                <div class="service-icon">
-                    🔧
-                </div>
-
-                <h3>
-                    Mantenimiento
-                </h3>
-
-                <p>
-                    Trabajos de mantenimiento para conservar el
-                    funcionamiento adecuado de los sistemas.
-                </p>
-
+                <div class="service-icon">🔧</div>
+                <h3>Mantenimiento</h3>
+                <p>Trabajos de mantenimiento para conservar el funcionamiento adecuado de los sistemas.</p>
             </div>
 
         </div>
@@ -689,7 +531,7 @@
 
 
     <!-- =========================
-         NOSOTROS
+         NOSOTROS Y NUESTRA HISTORIA
     ========================= -->
 
     <section id="nosotros">
@@ -700,21 +542,18 @@
 
             <div class="about-text">
 
-                <h2>
-                    Experiencia y compromiso
-                </h2>
+                <span class="history-badge">Nuestra Historia</span>
+
+                <h2>Tradición, experiencia y compromiso</h2>
 
                 <p>
-                    En Perforaciones Palacios nos enfocamos en ofrecer
-                    trabajos de calidad y soluciones confiables para
-                    nuestros clientes.
+                    <strong>Perforaciones Papoi</strong> nació hace más de dos décadas como un emprendimiento familiar impulsado por la visión de abastecer del recurso más vital —el agua— a campos agrícolas, comunidades y desarrollos industriales.
                 </p>
 
                 <p>
-                    Cada proyecto representa un compromiso con la
-                    eficiencia, la responsabilidad y la satisfacción
-                    de nuestros clientes.
+                    A lo largo de los años, hemos evolucionado adaptando tecnología de perforación rotatoria y electromecánica de punta, pero manteniendo siempre los valores fundamentales con los que iniciamos: honestidad, precisión técnica y un compromiso absoluto con el cliente.
                 </p>
+
 
             </div>
 
@@ -730,56 +569,25 @@
     <section class="values">
 
         <div class="section-title">
-
-            <h2>
-                ¿Por qué elegirnos?
-            </h2>
-
+            <h2>¿Por qué elegirnos?</h2>
         </div>
 
 
         <div class="values-container">
 
-
             <div class="value">
-
-                <h3>
-                    Experiencia
-                </h3>
-
-                <p>
-                    Conocimiento y experiencia aplicada
-                    en cada proyecto.
-                </p>
-
+                <h3>Experiencia</h3>
+                <p>Más de 20 años de conocimiento geofísico y técnico aplicados en cada perforación.</p>
             </div>
 
-
             <div class="value">
-
-                <h3>
-                    Calidad
-                </h3>
-
-                <p>
-                    Buscamos realizar cada trabajo con
-                    responsabilidad y atención al detalle.
-                </p>
-
+                <h3>Calidad</h3>
+                <p>Materiales de primera calidad y maquinaria especializada para maximizar la vida útil del pozo.</p>
             </div>
 
-
             <div class="value">
-
-                <h3>
-                    Confianza
-                </h3>
-
-                <p>
-                    Construimos relaciones duraderas
-                    con nuestros clientes.
-                </p>
-
+                <h3>Confianza</h3>
+                <p>Atención transparente y asesoría constante durante todas las etapas del proyecto.</p>
             </div>
 
         </div>
@@ -793,9 +601,7 @@
 
     <section class="contact" id="contacto">
 
-        <h2>
-            ¿Tienes un proyecto?
-        </h2>
+        <h2>¿Tienes un proyecto?</h2>
 
         <p>
             Ponte en contacto con nosotros y conoce cómo podemos
@@ -814,14 +620,40 @@
     ========================= -->
 
     <footer>
-
-        © 2026 Perforaciones Palacios |
-        Todos los derechos reservados
-
+        © 2026 Perforaciones Palacios | Todos los derechos reservados
     </footer>
 
+
+    <!-- =========================
+         SCRIPT DE DETECCIÓN DE SECCIÓN (NAVBAR ACTIVO)
+    ========================= -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sections = document.querySelectorAll("section[id]");
+            const navLinks = document.querySelectorAll(".nav-links a.nav-item");
+
+            window.addEventListener("scroll", function () {
+                let current = "";
+
+                sections.forEach((section) => {
+                    const sectionTop = section.offsetTop - 150;
+                    const sectionHeight = section.offsetHeight;
+
+                    if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                        current = section.getAttribute("id");
+                    }
+                });
+
+                navLinks.forEach((link) => {
+                    link.classList.remove("active");
+                    if (link.getAttribute("href") === `#${current}`) {
+                        link.classList.add("active");
+                    }
+                });
+            });
+        });
+    </script>
 
 </body>
 
 </html>
-```

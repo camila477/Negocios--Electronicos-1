@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 
@@ -35,19 +34,13 @@
             top: 0;
             left: 0;
             width: 100%;
-
             padding: 20px 7%;
-
             display: flex;
             justify-content: space-between;
             align-items: center;
-
             background: rgba(255, 255, 255, 0.96);
-
             backdrop-filter: blur(10px);
-
             border-bottom: 1px solid rgba(24, 59, 78, 0.08);
-
             z-index: 1000;
         }
 
@@ -55,6 +48,7 @@
             font-size: 23px;
             font-weight: bold;
             color: #155e75;
+            text-decoration: none;
         }
 
         .logo span {
@@ -79,6 +73,12 @@
             color: #0ea5e9;
         }
 
+        .nav-links a.active {
+            color: #0ea5e9;
+            border-bottom: 2px solid #0ea5e9;
+            padding-bottom: 4px;
+        }
+
         .contact-button {
             background: #155e75;
             color: white !important;
@@ -97,7 +97,6 @@
         .header {
             padding: 150px 7% 70px;
             text-align: center;
-
             background:
                 linear-gradient(
                     rgba(9,48,62,0.82),
@@ -105,7 +104,6 @@
                 ),
                 url("imagenes/imagenaforo.jpg")
                 center/cover no-repeat;
-
             color: white;
         }
 
@@ -127,7 +125,7 @@
         }
 
         /* =========================
-           CATÁLOGO
+           CATÁLOGO Y TARJETAS
         ========================= */
 
         .catalog {
@@ -154,130 +152,236 @@
         .catalog-container {
             max-width: 1100px;
             margin: auto;
-
             display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
+            grid-template-columns: repeat(3, 1fr);
             gap: 25px;
         }
 
-        /* =========================
-           TARJETAS
-        ========================= */
-
         .product-card {
             background: white;
-
             border: 1px solid #e2edf1;
-
             border-radius: 14px;
-
             overflow: hidden;
-
-            box-shadow:
-                0 8px 25px rgba(24,59,78,0.07);
-
+            box-shadow: 0 8px 25px rgba(24,59,78,0.07);
             transition: 0.3s;
+            display: flex;
+            flex-direction: column;
         }
 
         .product-card:hover {
             transform: translateY(-7px);
-
-            box-shadow:
-                0 18px 40px rgba(24,59,78,0.13);
+            box-shadow: 0 18px 40px rgba(24,59,78,0.13);
         }
 
         .product-image {
-            height: 210px;
-
+            height: 200px;
             display: flex;
             align-items: center;
             justify-content: center;
-
             background: #e0f2fe;
-
             font-size: 70px;
         }
 
         .product-content {
-            padding: 28px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
         }
 
         .product-content h3 {
             color: #155e75;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             font-size: 21px;
         }
 
         .product-content p {
             color: #607d8b;
-            line-height: 1.7;
-            font-size: 15px;
-            margin-bottom: 22px;
+            line-height: 1.6;
+            font-size: 14px;
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        /* ESTILO DEL PRECIO EN MXN */
+
+        .price-box {
+            margin-bottom: 15px;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 10px 14px;
+            border-radius: 8px;
+        }
+
+        .price-label {
+            font-size: 12px;
+            color: #166534;
+            font-weight: bold;
+            display: block;
+            text-transform: uppercase;
+        }
+
+        .price-amount {
+            font-size: 20px;
+            color: #15803d;
+            font-weight: bold;
         }
 
         .product-button {
-            display: inline-block;
-
-            padding: 11px 20px;
-
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 12px 20px;
             background: #155e75;
-
             color: white;
-
-            text-decoration: none;
-
+            border: none;
             border-radius: 7px;
-
             font-size: 14px;
-
             font-weight: bold;
-
+            cursor: pointer;
             transition: 0.3s;
         }
 
         .product-button:hover {
             background: #0ea5e9;
-            transform: translateY(-2px);
         }
 
         /* =========================
-           AVISO
+           MODAL (DESPLIEGUE DE INFO)
+        ========================= */
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(9, 48, 62, 0.7);
+            backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 650px;
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            color: #607d8b;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .close-modal:hover {
+            color: #e11d48;
+        }
+
+        .modal-title {
+            color: #155e75;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .modal-price {
+            font-size: 22px;
+            color: #15803d;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* Galería de fotos del Modal */
+        .modal-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .modal-photo {
+            height: 90px;
+            background: #e0f2fe;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            border: 1px solid #bae6fd;
+        }
+
+        .modal-description {
+            color: #334155;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .modal-details-list {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .modal-details-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f5f9;
+            color: #475569;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-add-cart {
+            width: 100%;
+            background: #0ea5e9;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-add-cart:hover {
+            background: #0284c7;
+        }
+
+        /* =========================
+           AVISO Y CONTACTO
         ========================= */
 
         .notice {
             max-width: 900px;
-
-            margin: 20px auto 0;
-
+            margin: 40px auto 0;
             padding: 18px 25px;
-
             text-align: center;
-
             background: #eef7fa;
-
             border-radius: 10px;
-
             color: #486575;
-
             font-size: 14px;
-
-            line-height: 1.6;
         }
-
-        /* =========================
-           CONTACTO
-        ========================= */
 
         .contact {
             background: #0f3444;
-
             color: white;
-
             text-align: center;
-
             padding: 80px 7%;
         }
 
@@ -295,19 +399,12 @@
 
         .contact-button-main {
             display: inline-block;
-
             padding: 14px 28px;
-
             background: #38bdf8;
-
             color: #073b4c;
-
             text-decoration: none;
-
             border-radius: 8px;
-
             font-weight: bold;
-
             transition: 0.3s;
         }
 
@@ -315,10 +412,6 @@
             background: #7dd3fc;
             transform: translateY(-3px);
         }
-
-        /* =========================
-           FOOTER
-        ========================= */
 
         footer {
             background: #092c3a;
@@ -328,31 +421,13 @@
             font-size: 13px;
         }
 
-        /* =========================
-           RESPONSIVE
-        ========================= */
-
         @media (max-width: 800px) {
-
-            .nav-links {
-                gap: 12px;
-            }
-
-            .nav-links a:not(.contact-button) {
-                display: none;
-            }
-
             .catalog-container {
                 grid-template-columns: 1fr;
                 max-width: 500px;
             }
-
-            .catalog {
-                padding: 65px 6%;
-            }
-
-            .header {
-                padding: 130px 6% 60px;
+            .nav-links a:not(.contact-button) {
+                display: none;
             }
         }
 
@@ -360,9 +435,7 @@
 
 </head>
 
-
 <body>
-
 
     <!-- =========================
          NAVBAR
@@ -370,27 +443,17 @@
 
     <nav>
 
-        <div class="logo">
+        <a href="inicio.html" class="logo">
             Perforaciones <span>Palacios</span>
-        </div>
+        </a>
 
         <div class="nav-links">
 
-            <a href="inicio.html">
-                Inicio
-            </a>
-
-            <a href="catalogo.html">
-                Catálogo
-            </a>
-
-            <a href="inicio.html#nosotros">
-                Nosotros
-            </a>
-
-            <a href="contacto.html" class="contact-button">
-                Contacto
-            </a>
+            <a href="inicio.html">Inicio</a>
+            <a href="catalogo.html" class="active">Catálogo</a>
+            <a href="inicio.html#nosotros">Nosotros</a>
+            <a href="#contacto">Contacto</a>
+            <a href="perfil.html" class="contact-button">Mi Perfil</a>
 
         </div>
 
@@ -424,13 +487,10 @@
 
         <div class="catalog-title">
 
-            <h2>
-                Servicios disponibles
-            </h2>
+            <h2>Servicios disponibles</h2>
 
             <p>
-                Este catálogo presenta de manera visual algunos de
-                nuestros principales servicios.
+                Haz clic en cualquier servicio para ver detalles técnicos, fotos explicativas y agregarlo a tu solicitud de cotización.
             </p>
 
         </div>
@@ -440,201 +500,179 @@
 
 
             <!-- SERVICIO 1 -->
-
             <div class="product-card">
-
-                <div class="product-image">
-                    💧
-                </div>
-
+                <div class="product-image">💧</div>
                 <div class="product-content">
+                    <h3>Perforación de pozos</h3>
+                    <p>Servicio especializado para la realización de perforaciones destinadas al aprovechamiento de agua.</p>
+                    
+                    <div class="price-box">
+                        <span class="price-label">Precio Estimado</span>
+                        <span class="price-amount">$45,000 MXN</span>
+                    </div>
 
-                    <h3>
-                        Perforación de pozos
-                    </h3>
-
-                    <p>
-                        Servicio especializado para la realización
-                        de perforaciones destinadas al aprovechamiento
-                        de agua.
-                    </p>
-
-                    <a href="contacto.html" class="product-button">
-                        Solicitar información
-                    </a>
-
+                    <button class="product-button" onclick="abrirModal(0)">
+                        Ver detalles y fotos
+                    </button>
                 </div>
-
             </div>
 
 
             <!-- SERVICIO 2 -->
-
             <div class="product-card">
-
-                <div class="product-image">
-                    ⚙️
-                </div>
-
+                <div class="product-image">⚙️</div>
                 <div class="product-content">
+                    <h3>Equipamiento de pozos</h3>
+                    <p>Soluciones para el equipamiento y funcionamiento adecuado de los pozos de agua.</p>
+                    
+                    <div class="price-box">
+                        <span class="price-label">Precio Estimado</span>
+                        <span class="price-amount">$28,500 MXN</span>
+                    </div>
 
-                    <h3>
-                        Equipamiento de pozos
-                    </h3>
-
-                    <p>
-                        Soluciones para el equipamiento y funcionamiento
-                        adecuado de los pozos de agua.
-                    </p>
-
-                    <a href="contacto.html" class="product-button">
-                        Solicitar información
-                    </a>
-
+                    <button class="product-button" onclick="abrirModal(1)">
+                        Ver detalles y fotos
+                    </button>
                 </div>
-
             </div>
 
 
             <!-- SERVICIO 3 -->
-
             <div class="product-card">
-
-                <div class="product-image">
-                    🔧
-                </div>
-
+                <div class="product-image">🔧</div>
                 <div class="product-content">
+                    <h3>Mantenimiento</h3>
+                    <p>Servicios de mantenimiento para conservar el funcionamiento adecuado de los sistemas.</p>
+                    
+                    <div class="price-box">
+                        <span class="price-label">Precio Estimado</span>
+                        <span class="price-amount">$12,000 MXN</span>
+                    </div>
 
-                    <h3>
-                        Mantenimiento
-                    </h3>
-
-                    <p>
-                        Servicios de mantenimiento para conservar
-                        el funcionamiento adecuado de los sistemas.
-                    </p>
-
-                    <a href="contacto.html" class="product-button">
-                        Solicitar información
-                    </a>
-
+                    <button class="product-button" onclick="abrirModal(2)">
+                        Ver detalles y fotos
+                    </button>
                 </div>
-
             </div>
 
 
             <!-- SERVICIO 4 -->
-
             <div class="product-card">
-
-                <div class="product-image">
-                    🏗️
-                </div>
-
+                <div class="product-image">🏗️</div>
                 <div class="product-content">
+                    <h3>Preparación del proyecto</h3>
+                    <p>Planeación y preparación de los trabajos necesarios antes de comenzar una perforación.</p>
+                    
+                    <div class="price-box">
+                        <span class="price-label">Precio Estimado</span>
+                        <span class="price-amount">$18,000 MXN</span>
+                    </div>
 
-                    <h3>
-                        Preparación del proyecto
-                    </h3>
-
-                    <p>
-                        Planeación y preparación de los trabajos
-                        necesarios antes de comenzar una perforación.
-                    </p>
-
-                    <a href="contacto.html" class="product-button">
-                        Solicitar información
-                    </a>
-
+                    <button class="product-button" onclick="abrirModal(3)">
+                        Ver detalles y fotos
+                    </button>
                 </div>
-
             </div>
 
 
             <!-- SERVICIO 5 -->
-
             <div class="product-card">
-
-                <div class="product-image">
-                    📐
-                </div>
-
+                <div class="product-image">📐</div>
                 <div class="product-content">
+                    <h3>Evaluación del terreno</h3>
+                    <p>Análisis de las condiciones del terreno para determinar las características del proyecto.</p>
+                    
+                    <div class="price-box">
+                        <span class="price-label">Precio Estimado</span>
+                        <span class="price-amount">$8,500 MXN</span>
+                    </div>
 
-                    <h3>
-                        Evaluación del terreno
-                    </h3>
-
-                    <p>
-                        Análisis de las condiciones del terreno para
-                        determinar las características del proyecto.
-                    </p>
-
-                    <a href="contacto.html" class="product-button">
-                        Solicitar información
-                    </a>
-
+                    <button class="product-button" onclick="abrirModal(4)">
+                        Ver detalles y fotos
+                    </button>
                 </div>
-
             </div>
 
 
             <!-- SERVICIO 6 -->
-
             <div class="product-card">
-
-                <div class="product-image">
-                    🌊
-                </div>
-
+                <div class="product-image">🌊</div>
                 <div class="product-content">
+                    <h3>Soluciones de agua</h3>
+                    <p>Alternativas orientadas a las necesidades específicas de cada proyecto de agua.</p>
+                    
+                    <div class="price-box">
+                        <span class="price-label">Precio Estimado</span>
+                        <span class="price-amount">$32,000 MXN</span>
+                    </div>
 
-                    <h3>
-                        Soluciones de agua
-                    </h3>
-
-                    <p>
-                        Alternativas orientadas a las necesidades
-                        específicas de cada proyecto de agua.
-                    </p>
-
-                    <a href="contacto.html" class="product-button">
-                        Solicitar información
-                    </a>
-
+                    <button class="product-button" onclick="abrirModal(5)">
+                        Ver detalles y fotos
+                    </button>
                 </div>
-
             </div>
 
         </div>
 
 
         <div class="notice">
-
-            <strong>Catálogo informativo:</strong>
-            este apartado es únicamente demostrativo.
-            No se realizan compras ni pagos en línea.
-
+            <strong>Catálogo informativo:</strong> los precios mostrados son estimaciones sujetas a variaciones según las condiciones del terreno y requerimientos técnicos.
         </div>
 
     </section>
 
 
     <!-- =========================
+         MODAL DE DETALLES Y FOTOS
+    ========================= -->
+
+    <div id="modalDetalles" class="modal-overlay">
+
+        <div class="modal-content">
+
+            <button class="close-modal" onclick="cerrarModal()">&times;</button>
+
+            <h2 id="mTitulo" class="modal-title">Título del servicio</h2>
+
+            <div id="mPrecio" class="modal-price">$0 MXN</div>
+
+            <p style="font-weight: bold; margin-bottom: 8px; color: #155e75;">Galería de fotografías:</p>
+
+            <div class="modal-gallery">
+                <div class="modal-photo">📷</div>
+                <div class="modal-photo">🏗️</div>
+                <div class="modal-photo">💧</div>
+            </div>
+
+            <p id="mDescripcion" class="modal-description">
+                Descripción extendida...
+            </p>
+
+            <p style="font-weight: bold; margin-bottom: 8px; color: #155e75;">Incluye:</p>
+
+            <ul id="mLista" class="modal-details-list">
+                <!-- Se llena dinámicamente -->
+            </ul>
+
+            <button id="btnAgregar" class="btn-add-cart" onclick="agregarAlCarrito()">
+                🛒 Agregar a mis cotizaciones guardadas
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
          CONTACTO
     ========================= -->
 
-    <section class="contact">
+    <section class="contact" id="contacto">
 
-        <h2>
-            ¿Necesitas información?
-        </h2>
+        <h2>¿Necesitas información?</h2>
 
         <p>
-            Ponte en contacto con nosotros para conocer más
-            sobre nuestros servicios y las características
-            de tu proyecto.
+            Ponte en contacto con nosotros para conocer más sobre nuestros servicios y las características de tu proyecto.
         </p>
 
         <a href="contacto.html" class="contact-button-main">
@@ -649,14 +687,117 @@
     ========================= -->
 
     <footer>
-
-        © 2026 Perforaciones Palacios |
-        Todos los derechos reservados
-
+        © 2026 Perforaciones Palacios | Todos los derechos reservados
     </footer>
 
+
+    <!-- =========================
+         JAVASCRIPT DE INTERACCIÓN
+    ========================= -->
+
+    <script>
+
+        // BASE DE DATOS LOCAL DE SERVICIOS
+        const servicios = [
+            {
+                id: 1,
+                nombre: "Perforación de pozos",
+                precioNum: 45000,
+                precio: "$45,000 MXN",
+                descripcion: "Servicio completo de perforación profunda utilizando maquinaria rotatoria de última generación, ideal para uso agrícola, industrial o residencial.",
+                detalles: ["Estudio hidrogeológico previo", "Entubado con tubería de alta resistencia", "Aforo preliminar de caudal", "Garantía de profundidad según contrato"]
+            },
+            {
+                id: 2,
+                nombre: "Equipamiento de pozos",
+                precioNum: 28500,
+                precio: "$28,500 MXN",
+                descripcion: "Instalación completa de sistemas electromecánicos para la extracción eficiente del agua de pozos profundos.",
+                detalles: ["Suministro e instalación de bomba sumergible", "Arrancador y tablero de control eléctrico", "Cableado sumergible de uso rudo", "Instalación de línea de descarga"]
+            },
+            {
+                id: 3,
+                nombre: "Mantenimiento de pozos",
+                precioNum: 12000,
+                precio: "$12,000 MXN",
+                descripcion: "Mantenimiento preventivo y correctivo para recuperar el caudal original y alargar la vida útil del pozo.",
+                detalles: ["Limpieza y cepillado de ademe", "Desincrustación química no contaminante", "Videoinspección con cámara sumergible", "Revisión general de bombas y motores"]
+            },
+            {
+                id: 4,
+                nombre: "Preparación del proyecto",
+                precioNum: 18000,
+                precio: "$18,000 MXN",
+                descripcion: "Trabajos preparatorios en el predio para garantizar la maniobrabilidad de la maquinaria pesada.",
+                detalles: ["Nivelación y acondicionamiento del área", "Construcción de presas de lodo", "Instalaciones temporales de obra", "Tramitología básica e inspección"]
+            },
+            {
+                id: 5,
+                nombre: "Evaluación del terreno",
+                precioNum: 8500,
+                precio: "$8,500 MXN",
+                descripcion: "Estudios geofísicos y detección de acuíferos para determinar el punto óptimo de perforación.",
+                detalles: ["Sondeos eléctricos verticales (SEV)", "Identificación de estratos rocosos", "Estimación de profundidad y calidad del agua", "Entrega de reporte técnico firmado"]
+            },
+            {
+                id: 6,
+                nombre: "Soluciones de agua",
+                precioNum: 32000,
+                precio: "$32,000 MXN",
+                descripcion: "Diseño e implementación de redes de distribución, tanques de almacenamiento e hiper-filtración.",
+                detalles: ["Sistemas de purificación y filtrado", "Tanques elevados y cisternas", "Automatización de llenado", "Asesoría en uso eficiente del agua"]
+            }
+        ];
+
+        let servicioSeleccionado = null;
+
+        function abrirModal(index) {
+            const s = servicios[index];
+            servicioSeleccionado = s;
+
+            document.getElementById("mTitulo").textContent = s.nombre;
+            document.getElementById("mPrecio").textContent = s.precio;
+            document.getElementById("mDescripcion").textContent = s.descripcion;
+
+            const listaHTML = s.detalles.map(d => `<li>✓ ${d}</li>`).join("");
+            document.getElementById("mLista").innerHTML = listaHTML;
+
+            document.getElementById("modalDetalles").style.display = "flex";
+        }
+
+        function cerrarModal() {
+            document.getElementById("modalDetalles").style.display = "none";
+        }
+
+        // AGREGAR AL CARRITO / COTIZACIONES EN LOCALSTORAGE
+        function agregarAlCarrito() {
+            if (!servicioSeleccionado) return;
+
+            let carrito = JSON.parse(localStorage.getItem("carritoPalacios")) || [];
+
+            // Agregar el nuevo elemento
+            carrito.push({
+                id: servicioSeleccionado.id,
+                servicio: servicioSeleccionado.nombre,
+                precio: servicioSeleccionado.precioNum
+            });
+
+            localStorage.setItem("carritoPalacios", JSON.stringify(carrito));
+
+            alert(`✓ "${servicioSeleccionado.nombre}" se agregó correctamente a tus cotizaciones guardadas.`);
+            cerrarModal();
+        }
+
+        // CERRAR MODAL HACIENDO CLIC AFUERA
+        window.onclick = function(event) {
+            const modal = document.getElementById("modalDetalles");
+            if (event.target == modal) {
+                cerrarModal();
+            }
+        }
+
+    </script>
 
 </body>
 
 </html>
-```
