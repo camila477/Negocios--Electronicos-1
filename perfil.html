@@ -148,6 +148,10 @@
             height: fit-content;
         }
 
+        .card-full {
+            grid-column: 1 / -1;
+        }
+
         .card-title {
             font-size: 20px;
             color: #155e75;
@@ -304,7 +308,6 @@
 
         .btn-secondary {
             flex: 1;
-            display: text-align;
             text-align: center;
             text-decoration: none;
             background: #e0f2fe;
@@ -321,7 +324,185 @@
         }
 
         /* =========================
-           FOOTER
+           SECCIÓN DE PEDIDOS
+        ========================= */
+
+        .orders-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .order-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            transition: 0.3s;
+        }
+
+        .order-card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e2e8f0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .order-id {
+            font-weight: bold;
+            color: #155e75;
+            font-size: 16px;
+        }
+
+        .order-date {
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .order-badge {
+            background: #fef3c7;
+            color: #d97706;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .order-items-summary {
+            list-style: none;
+            margin-bottom: 15px;
+        }
+
+        .order-items-summary li {
+            font-size: 14px;
+            color: #334155;
+            padding: 4px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .order-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 15px;
+            color: #0f172a;
+            padding-top: 10px;
+            border-top: 1px dashed #cbd5e1;
+        }
+
+        .order-total-amount {
+            color: #059669;
+        }
+
+        /* =========================
+           TOAST NOTIFICATION
+        ========================= */
+
+        .toast-notification {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #059669;
+            color: white;
+            padding: 16px 24px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: bold;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 3000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .toast-notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================
+           MODAL CONFIRMAR SALIDA
+        ========================= */
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(9, 48, 62, 0.7);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 4000;
+        }
+
+        .modal-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .modal-box h3 {
+            color: #155e75;
+            margin-bottom: 10px;
+        }
+
+        .modal-box p {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-modal-cancel {
+            flex: 1;
+            padding: 10px;
+            background: #e2e8f0;
+            color: #334155;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-modal-confirm {
+            flex: 1;
+            padding: 10px;
+            background: #e11d48;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* =========================
+           FOOTER & RESPONSIVE
         ========================= */
 
         footer {
@@ -333,10 +514,6 @@
             margin-top: auto;
         }
 
-        /* =========================
-           RESPONSIVE
-        ========================= */
-
         @media (max-width: 900px) {
             .profile-container {
                 grid-template-columns: 1fr;
@@ -344,6 +521,14 @@
 
             .nav-links a:not(.btn-logout-nav) {
                 display: none;
+            }
+
+            .toast-notification {
+                bottom: 20px;
+                right: 20px;
+                left: 20px;
+                text-align: center;
+                justify-content: center;
             }
         }
     </style>
@@ -369,7 +554,7 @@
             <a href="contacto.html">Contacto</a>
             <a href="perfil.html" class="active">Mi Perfil</a>
 
-            <a href="#" class="btn-logout-nav" onclick="cerrarSesion()">
+            <a href="#" class="btn-logout-nav" onclick="abrirModalSalida()">
                 Cerrar sesión
             </a>
 
@@ -389,7 +574,7 @@
         </h1>
 
         <p>
-            Gestiona tu información personal y revisa tus solicitudes de cotización guardadas.
+            Gestiona tu información personal, consulta tu carrito de cotizaciones y dale seguimiento a tus pedidos.
         </p>
 
     </header>
@@ -450,11 +635,11 @@
         <section class="card">
 
             <h2 class="card-title">
-                🛒 Servicios Guardados / Cotizaciones
+                🛒 Servicios Guardados (Borrador)
             </h2>
 
             <div id="cartList" class="cart-list">
-                <!-- Se llenará mediante JS -->
+                <!-- Se llena dinámicamente con JS -->
             </div>
 
             <div id="cartTotalContainer" class="cart-total" style="display: none;">
@@ -467,7 +652,7 @@
             </button>
 
             <div id="emptyCartMessage" class="cart-empty">
-                No tienes elementos agregados a tu cotización.
+                No tienes elementos en tu carrito de cotizaciones.
                 <br><br>
                 <a href="catalogo.html" class="btn-secondary" style="display: inline-block;">
                     Ver catálogo de servicios
@@ -476,7 +661,51 @@
 
         </section>
 
+
+        <!-- TARJETA 3: MIS PEDIDOS / COTIZACIONES CONFIRMADAS -->
+
+        <section class="card card-full">
+
+            <h2 class="card-title">
+                📋 Mis Pedidos y Solicitudes Confirmadas
+            </h2>
+
+            <div id="ordersList" class="orders-list">
+                <!-- Se llena dinámicamente mediante JS -->
+            </div>
+
+            <div id="emptyOrdersMessage" class="cart-empty" style="display: none;">
+                Aún no has confirmado ninguna solicitud de cotización o pedido.
+            </div>
+
+        </section>
+
     </main>
+
+
+    <!-- =========================
+         NOTIFICACIÓN TOAST
+    ========================= -->
+
+    <div id="toast" class="toast-notification">
+        <span id="toast-message"></span>
+    </div>
+
+
+    <!-- =========================
+         MODAL CERRAR SESIÓN
+    ========================= -->
+
+    <div id="modalSalida" class="modal-overlay">
+        <div class="modal-box">
+            <h3>Cerrar Sesión</h3>
+            <p>¿Estás seguro de que deseas salir de tu cuenta?</p>
+            <div class="modal-buttons">
+                <button class="btn-modal-cancel" onclick="cerrarModalSalida()">Cancelar</button>
+                <button class="btn-modal-confirm" onclick="cerrarSesion()">Sí, salir</button>
+            </div>
+        </div>
+    </div>
 
 
     <!-- =========================
@@ -484,10 +713,7 @@
     ========================= -->
 
     <footer>
-
-        © 2026 Perforaciones Palacios |
-        Todos los derechos reservados
-
+        © 2026 Perforaciones Palacios | Todos los derechos reservados
     </footer>
 
 
@@ -503,7 +729,6 @@
         const inputPhone = document.getElementById("phone");
         const saludoUsuario = document.getElementById("saludoUsuario");
 
-        // Datos por defecto o recuperados
         let usuario = JSON.parse(localStorage.getItem("usuarioPalacios")) || {
             name: "Usuario Registrado",
             email: "usuario@ejemplo.com",
@@ -514,7 +739,7 @@
             inputName.value = usuario.name || "";
             inputEmail.value = usuario.email || "";
             inputPhone.value = usuario.phone || "";
-            saludoUsuario.innerHTML = `¡Hola, <span>${usuario.name.split(" ")[0]}</span>!`;
+            saludoUsuario.innerHTML = `¡Hola, <span>${(usuario.name || "Usuario").split(" ")[0]}</span>!`;
         }
 
         // 2. GUARDAR CAMBIOS DE PERFIL
@@ -527,24 +752,13 @@
 
             localStorage.setItem("usuarioPalacios", JSON.stringify(usuario));
 
-            // Actualizar saludo
             saludoUsuario.innerHTML = `¡Hola, <span>${usuario.name.split(" ")[0]}</span>!`;
 
-            // Mostrar mensaje de confirmación
-            const alerta = document.getElementById("alertaExito");
-            alerta.style.display = "block";
-
-            setTimeout(() => {
-                alerta.style.display = "none";
-            }, 3000);
+            mostrarToast("✓ ¡Tus datos personales se han guardado con éxito!");
         });
 
-        // 3. LOGICA DE CARRITO / ELEMENTOS GUARDADOS
-        // Se simula o recupera de localStorage
-        let carrito = JSON.parse(localStorage.getItem("carritoPalacios")) || [
-            { id: 1, servicio: "Perforación de Pozo Profundo (100m)", precio: 45000 },
-            { id: 2, servicio: "Mantenimiento y Limpieza de Pozo", precio: 12000 }
-        ];
+        // 3. LÓGICA DE CARRITO (SERVICIOS GUARDADOS)
+        let carrito = JSON.parse(localStorage.getItem("carritoPalacios")) || [];
 
         function renderizarCarrito() {
             const container = document.getElementById("cartList");
@@ -574,11 +788,11 @@
                     <div class="cart-item">
                         <div class="cart-item-info">
                             <h4>${item.servicio}</h4>
-                            <p>Servicio especializado</p>
+                            <p>Servicio en cotización</p>
                         </div>
                         <div style="display: flex; align-items: center;">
                             <span class="cart-item-price">$${item.precio.toLocaleString('es-MX')} MXN</span>
-                            <button class="btn-delete" onclick="eliminarItem(${index})" title="Eliminar">🗑️</button>
+                            <button class="btn-delete" onclick="eliminarItem(${index})" title="Eliminar del borrador">🗑️</button>
                         </div>
                     </div>
                 `;
@@ -589,29 +803,125 @@
         }
 
         function eliminarItem(index) {
+            const eliminado = carrito[index].servicio;
             carrito.splice(index, 1);
             localStorage.setItem("carritoPalacios", JSON.stringify(carrito));
             renderizarCarrito();
+            mostrarToast(`Servicio "${eliminado}" eliminado.`);
         }
 
-        function solicitarCotizacion() {
-            alert("¡Muchas gracias! Tu solicitud de cotización ha sido enviada con éxito. Nos pondremos en contacto contigo pronto.");
-            carrito = [];
-            localStorage.setItem("carritoPalacios", JSON.stringify(carrito));
-            renderizarCarrito();
-        }
+        // 4. LÓGICA DE MIS PEDIDOS / HISTORIAL
+        let pedidos = JSON.parse(localStorage.getItem("pedidosPalacios")) || [];
 
-        // 4. CERRAR SESIÓN
-        function cerrarSesion() {
-            if (confirm("¿Estás seguro de que deseas cerrar sesión?")) {
-                localStorage.removeItem("usuarioPalacios");
-                window.location.href = "inicio.html";
+        function renderizarPedidos() {
+            const container = document.getElementById("ordersList");
+            const emptyOrdersMessage = document.getElementById("emptyOrdersMessage");
+
+            if (pedidos.length === 0) {
+                container.innerHTML = "";
+                emptyOrdersMessage.style.display = "block";
+                return;
             }
+
+            emptyOrdersMessage.style.display = "none";
+            let html = "";
+
+            // Mostrar el más reciente primero
+            pedidos.slice().reverse().forEach(ped => {
+                let itemsList = ped.items.map(i => `
+                    <li>
+                        <span>• ${i.servicio}</span>
+                        <span>$${i.precio.toLocaleString('es-MX')} MXN</span>
+                    </li>
+                `).join("");
+
+                html += `
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div>
+                                <span class="order-id">Folio: #${ped.id}</span>
+                                <div class="order-date">Solicitado el ${ped.fecha}</div>
+                            </div>
+                            <span class="order-badge">⏱️ ${ped.estado}</span>
+                        </div>
+
+                        <ul class="order-items-summary">
+                            ${itemsList}
+                        </ul>
+
+                        <div class="order-footer">
+                            <span>Total Cotizado:</span>
+                            <span class="order-total-amount">$${ped.total.toLocaleString('es-MX')} MXN</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
         }
 
-        // Inicializar vistas
+        // CONFIRMAR Y CREAR PEDIDO
+        function solicitarCotizacion() {
+            if (carrito.length === 0) return;
+
+            let total = carrito.reduce((acc, curr) => acc + curr.precio, 0);
+            let fechaActual = new Date().toLocaleDateString('es-MX', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            let nuevoPedido = {
+                id: "COT-" + Math.floor(1000 + Math.random() * 9000),
+                fecha: fechaActual,
+                estado: "Pendiente de Revisión",
+                total: total,
+                items: [...carrito]
+            };
+
+            pedidos.push(nuevoPedido);
+            localStorage.setItem("pedidosPalacios", JSON.stringify(pedidos));
+
+            // Vaciar carrito
+            carrito = [];
+            localStorage.setItem("carritoPalacios", JSON.stringify([]));
+
+            renderizarCarrito();
+            renderizarPedidos();
+
+            mostrarToast("🎉 ¡Solicitud enviada! Se ha agregado a 'Mis Pedidos'.");
+        }
+
+        // 5. NOTIFICACIONES Y MODALES
+        function mostrarToast(mensaje) {
+            const toast = document.getElementById("toast");
+            const toastMessage = document.getElementById("toast-message");
+            
+            toastMessage.textContent = mensaje;
+            toast.classList.add("show");
+
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 3500);
+        }
+
+        function abrirModalSalida() {
+            document.getElementById("modalSalida").style.display = "flex";
+        }
+
+        function cerrarModalSalida() {
+            document.getElementById("modalSalida").style.display = "none";
+        }
+
+        function cerrarSesion() {
+            localStorage.removeItem("usuarioPalacios");
+            window.location.href = "inicio.html";
+        }
+
+        // INICIALIZACIÓN
         cargarPerfil();
         renderizarCarrito();
+        renderizarPedidos();
 
     </script>
 

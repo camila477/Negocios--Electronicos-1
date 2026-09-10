@@ -364,6 +364,36 @@
         }
 
         /* =========================
+           NOTIFICACIÓN TOAST EN PÁGINA
+        ========================= */
+
+        .toast-notification {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #059669;
+            color: white;
+            padding: 16px 24px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: bold;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 3000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .toast-notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================
            AVISO Y CONTACTO
         ========================= */
 
@@ -428,6 +458,13 @@
             }
             .nav-links a:not(.contact-button) {
                 display: none;
+            }
+            .toast-notification {
+                bottom: 20px;
+                right: 20px;
+                left: 20px;
+                text-align: center;
+                justify-content: center;
             }
         }
 
@@ -664,6 +701,15 @@
 
 
     <!-- =========================
+         NOTIFICACIÓN TOAST (MENSAJE FLOTANTE)
+    ========================= -->
+
+    <div id="toast" class="toast-notification">
+        <span id="toast-message"></span>
+    </div>
+
+
+    <!-- =========================
          CONTACTO
     ========================= -->
 
@@ -769,6 +815,19 @@
             document.getElementById("modalDetalles").style.display = "none";
         }
 
+        // MOSTRAR NOTIFICACIÓN FLOTANTE DENTRO DE LA PÁGINA
+        function mostrarToast(mensaje) {
+            const toast = document.getElementById("toast");
+            const toastMessage = document.getElementById("toast-message");
+            
+            toastMessage.textContent = mensaje;
+            toast.classList.add("show");
+
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 3500);
+        }
+
         // AGREGAR AL CARRITO / COTIZACIONES EN LOCALSTORAGE
         function agregarAlCarrito() {
             if (!servicioSeleccionado) return;
@@ -784,8 +843,9 @@
 
             localStorage.setItem("carritoPalacios", JSON.stringify(carrito));
 
-            alert(`✓ "${servicioSeleccionado.nombre}" se agregó correctamente a tus cotizaciones guardadas.`);
+            // Cerrar el modal y lanzar el aviso dinámico
             cerrarModal();
+            mostrarToast(`✓ "${servicioSeleccionado.nombre}" se agregó correctamente a tus cotizaciones guardadas.`);
         }
 
         // CERRAR MODAL HACIENDO CLIC AFUERA

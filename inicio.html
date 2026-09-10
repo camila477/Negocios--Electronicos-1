@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Inicio | Perforaciones Pa</title>
+    <title>Inicio | Perforaciones Palacios</title>
+
+    <!-- Font Awesome para los íconos de redes sociales -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
 
@@ -342,6 +345,7 @@
             background: #0f3444;
             color: white;
             text-align: center;
+            padding-bottom: 50px;
         }
 
         .contact h2 {
@@ -370,6 +374,76 @@
         .contact-button-main:hover {
             background: #7dd3fc;
             transform: translateY(-3px);
+        }
+
+
+        /* =========================
+           REDES SOCIALES
+        ========================= */
+
+        .social-section {
+            background: #0c2b38;
+            padding: 40px 7%;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .social-section h3 {
+            color: #ffffff;
+            font-size: 20px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 24px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .social-card i {
+            font-size: 20px;
+        }
+
+        /* Colores al pasar el mouse (Hover) */
+        .social-card.whatsapp:hover {
+            background: #25d366;
+            color: white;
+            border-color: #25d366;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .social-card.facebook:hover {
+            background: #1877f2;
+            color: white;
+            border-color: #1877f2;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(24, 119, 242, 0.3);
+        }
+
+        .social-card.instagram:hover {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(220, 39, 67, 0.3);
         }
 
 
@@ -426,6 +500,17 @@
 
             section {
                 padding: 70px 6%;
+            }
+
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .social-card {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
             }
         }
 
@@ -554,7 +639,6 @@
                     A lo largo de los años, hemos evolucionado adaptando tecnología de perforación rotatoria y electromecánica de punta, pero manteniendo siempre los valores fundamentales con los que iniciamos: honestidad, precisión técnica y un compromiso absoluto con el cliente.
                 </p>
 
-
             </div>
 
         </div>
@@ -613,6 +697,34 @@
         </a>
 
     </section>
+
+
+    <!-- =========================
+         REDES SOCIALES
+    ========================= -->
+
+    <div class="social-section">
+        <h3>Síguenos en nuestras redes</h3>
+        <div class="social-links">
+            <!-- Reemplaza el número de teléfono en href con el tuyo -->
+            <a href="https://wa.me/1234567890" target="_blank" class="social-card whatsapp">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>WhatsApp</span>
+            </a>
+
+            <!-- Reemplaza el enlace con tu página de Facebook -->
+            <a href="https://facebook.com/tu-pagina" target="_blank" class="social-card facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+                <span>Facebook</span>
+            </a>
+
+            <!-- Reemplaza el enlace con tu usuario de Instagram -->
+            <a href="https://instagram.com/tu-usuario" target="_blank" class="social-card instagram">
+                <i class="fa-brands fa-instagram"></i>
+                <span>Instagram</span>
+            </a>
+        </div>
+    </div>
 
 
     <!-- =========================
