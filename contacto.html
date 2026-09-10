@@ -441,16 +441,15 @@
             </div>
 
 
-            <!-- FORMULARIO DE CONTACTO -->
+            <!-- FORMULARIO DE CONTACTO (SIN VALIDACIÓN) -->
 
-            <form class="formulario" id="formContacto">
+            <form class="formulario" id="formContacto" novalidate>
 
                 <label for="nombre">Nombre completo</label>
                 <input
                     type="text"
                     id="nombre"
                     placeholder="Escribe tu nombre"
-                    required
                 >
 
                 <label for="correo">Correo electrónico</label>
@@ -458,14 +457,12 @@
                     type="email"
                     id="correo"
                     placeholder="ejemplo@correo.com"
-                    required
                 >
 
                 <label for="mensaje">Mensaje</label>
                 <textarea
                     id="mensaje"
                     placeholder="Describe en qué podemos ayudarte..."
-                    required
                 ></textarea>
 
                 <button type="submit" class="boton-enviar">
@@ -510,11 +507,12 @@
 
             event.preventDefault();
 
-            const nombre = document.getElementById("nombre").value;
+            const nombre = document.getElementById("nombre").value.trim();
+            const usuario = nombre !== "" ? nombre : "cliente";
 
             mensajeExito.style.display = "block";
             mensajeExito.textContent =
-                `¡Muchas gracias, ${nombre}! Hemos recibido tu mensaje correctamente. (Simulación demostrativa)`;
+                `¡Muchas gracias, ${usuario}! Hemos recibido tu mensaje correctamente. (Simulación demostrativa)`;
 
             formulario.reset();
 

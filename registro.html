@@ -30,20 +30,20 @@
             align-items: center;
             justify-content: center;
 
-            padding: 30px;
+            padding: 20px;
         }
 
         /* =========================
-           CONTENEDOR
+           CONTENEDOR (Aumentamos max-width a 550px para 2 columnas)
         ========================= */
 
         .register-container {
             width: 100%;
-            max-width: 480px;
+            max-width: 550px;
 
             background: white;
 
-            padding: 40px;
+            padding: 25px 30px;
 
             border-radius: 15px;
 
@@ -58,13 +58,13 @@
         .logo {
             text-align: center;
 
-            font-size: 25px;
+            font-size: 22px;
 
             font-weight: bold;
 
             color: #155e75;
 
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
 
         .logo span {
@@ -76,9 +76,9 @@
 
             color: #607d8b;
 
-            font-size: 14px;
+            font-size: 13px;
 
-            margin-bottom: 30px;
+            margin-bottom: 15px;
         }
 
         h1 {
@@ -86,27 +86,38 @@
 
             color: #123b4d;
 
-            font-size: 28px;
+            font-size: 22px;
 
-            margin-bottom: 25px;
+            margin-bottom: 15px;
         }
 
         /* =========================
-           FORMULARIO
+           FORMULARIO EN GRID (2 COLUMNAS)
         ========================= */
 
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 0;
+        }
+
+        /* Hace que el correo ocupe todo el ancho si es necesario */
+        .full-width {
+            grid-column: span 2;
         }
 
         label {
             display: block;
 
-            margin-bottom: 7px;
+            margin-bottom: 4px;
 
             color: #183b4e;
 
-            font-size: 14px;
+            font-size: 13px;
 
             font-weight: bold;
         }
@@ -114,7 +125,7 @@
         input {
             width: 100%;
 
-            padding: 13px 14px;
+            padding: 10px 12px;
 
             border: 1px solid #d6e4e9;
 
@@ -122,7 +133,7 @@
 
             outline: none;
 
-            font-size: 15px;
+            font-size: 14px;
 
             color: #183b4e;
 
@@ -143,9 +154,9 @@
         .register-button {
             width: 100%;
 
-            padding: 14px;
+            padding: 12px;
 
-            margin-top: 8px;
+            margin-top: 15px;
 
             border: none;
 
@@ -177,9 +188,9 @@
         .links {
             text-align: center;
 
-            margin-top: 25px;
+            margin-top: 15px;
 
-            font-size: 14px;
+            font-size: 13px;
 
             color: #607d8b;
         }
@@ -201,13 +212,13 @@
 
             text-align: center;
 
-            margin-top: 18px;
+            margin-top: 12px;
 
             color: #607d8b;
 
             text-decoration: none;
 
-            font-size: 13px;
+            font-size: 12px;
         }
 
         .back:hover {
@@ -215,17 +226,25 @@
         }
 
         /* =========================
-           RESPONSIVE
+           RESPONSIVE (A 1 Columna en Celulares)
         ========================= */
 
-        @media (max-width: 500px) {
+        @media (max-width: 520px) {
 
             body {
-                padding: 20px;
+                padding: 15px;
             }
 
             .register-container {
-                padding: 30px 25px;
+                padding: 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: span 1;
             }
 
         }
@@ -261,78 +280,66 @@
 
         <form id="registerForm" novalidate>
 
+            <div class="form-grid">
 
-            <div class="form-group">
-
-                <label for="name">
-                    Nombre completo
-                </label>
-
-                <input
-                    type="text"
-                    id="name"
-                    placeholder="Ingresa tu nombre"
-                >
-
-            </div>
+                <div class="form-group">
+                    <label for="name">
+                        Nombre completo
+                    </label>
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Ingresa tu nombre"
+                    >
+                </div>
 
 
-            <div class="form-group">
-
-                <label for="email">
-                    Correo electrónico
-                </label>
-
-                <input
-                    type="email"
-                    id="email"
-                    placeholder="ejemplo@correo.com"
-                >
-
-            </div>
+                <div class="form-group">
+                    <label for="phone">
+                        Teléfono
+                    </label>
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="Ingresa tu teléfono"
+                    >
+                </div>
 
 
-            <div class="form-group">
-
-                <label for="phone">
-                    Teléfono
-                </label>
-
-                <input
-                    type="tel"
-                    id="phone"
-                    placeholder="Ingresa tu teléfono"
-                >
-
-            </div>
+                <div class="form-group full-width">
+                    <label for="email">
+                        Correo electrónico
+                    </label>
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="ejemplo@correo.com"
+                    >
+                </div>
 
 
-            <div class="form-group">
-
-                <label for="password">
-                    Contraseña
-                </label>
-
-                <input
-                    type="password"
-                    id="password"
-                    placeholder="Crea una contraseña"
-                >
-
-            </div>
+                <div class="form-group">
+                    <label for="password">
+                        Contraseña
+                    </label>
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Crea una contraseña"
+                    >
+                </div>
 
 
-            <div class="form-group">
-
-                <label for="confirmPassword">
-                    Confirmar contraseña
-                </label>
-
-                <input
-                    type="password"
-                    id="confirmPassword"
-                    placeholder="Repite tu contraseña"
-                >
+                <div class="form-group">
+                    <label for="confirmPassword">
+                        Confirmar contraseña
+                    </label>
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Repite tu contraseña"
+                    >
+                </div>
 
             </div>
 
