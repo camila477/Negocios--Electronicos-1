@@ -168,13 +168,25 @@
             box-shadow: 0 18px 40px rgba(24,59,78,0.13);
         }
 
+        /* FOTOS EN TARJETAS */
         .product-image {
             height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 100%;
             background: #e0f2fe;
-            font-size: 70px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
         }
 
         .product-content {
@@ -295,6 +307,7 @@
             margin-bottom: 20px;
         }
 
+        /* FOTOS EN MODAL */
         .modal-gallery {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -303,14 +316,18 @@
         }
 
         .modal-photo {
-            height: 90px;
+            height: 100px;
             background: #e0f2fe;
             border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 35px;
+            overflow: hidden;
             border: 1px solid #bae6fd;
+        }
+
+        .modal-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .modal-description {
@@ -390,7 +407,7 @@
             font-size: 14px;
         }
 
-        /* SECCIÓN DE CONTACTO Y REDES SOCIALES (ESTILO IMAGEN) */
+        /* SECCIÓN DE CONTACTO Y REDES SOCIALES */
         .contact-section {
             background: #0d2c38;
             color: white;
@@ -550,10 +567,8 @@
             <div id="mPrecio" class="modal-price">$0 MXN</div>
 
             <p style="font-weight: bold; margin-bottom: 8px; color: #155e75;">Galería de fotografías:</p>
-            <div class="modal-gallery">
-                <div class="modal-photo">📷</div>
-                <div class="modal-photo">🏗️</div>
-                <div class="modal-photo">💧</div>
+            <div class="modal-gallery" id="mGaleria">
+                <!-- Se llena dinámicamente -->
             </div>
 
             <p id="mDescripcion" class="modal-description">Descripción extendida...</p>
@@ -601,12 +616,66 @@
 
     <script>
         const servicios = [
-            { id: 1, icon: "💧", nombre: "Perforación de pozos", precioNum: 45000, precio: "$45,000 MXN", descripcion: "Servicio completo de perforación profunda utilizando maquinaria rotatoria de última generación.", detalles: ["Estudio hidrogeológico previo", "Entubado con tubería de alta resistencia", "Aforo preliminar de caudal", "Garantía de profundidad según contrato"] },
-            { id: 2, icon: "⚙️", nombre: "Equipamiento de pozos", precioNum: 28500, precio: "$28,500 MXN", descripcion: "Instalación completa de sistemas electromecánicos para la extracción eficiente del agua de pozos profundos.", detalles: ["Suministro e instalación de bomba sumergible", "Arrancador y tablero de control eléctrico", "Cableado sumergible de uso rudo", "Instalación de línea de descarga"] },
-            { id: 3, icon: "🔧", nombre: "Mantenimiento", precioNum: 12000, precio: "$12,000 MXN", descripcion: "Mantenimiento preventivo y correctivo para recuperar el caudal original y alargar la vida útil del pozo.", detalles: ["Limpieza y cepillado de ademe", "Desincrustación química no contaminante", "Videoinspección con cámara sumergible", "Revisión general de bombas y motores"] },
-            { id: 4, icon: "🏗️", nombre: "Preparación del proyecto", precioNum: 18000, precio: "$18,000 MXN", descripcion: "Trabajos preparatorios en el predio para garantizar la maniobrabilidad de la maquinaria pesada.", detalles: ["Nivelación y acondicionamiento del área", "Construcción de presas de lodo", "Instalaciones temporales de obra", "Tramitología básica e inspección"] },
-            { id: 5, icon: "📐", nombre: "Evaluación del terreno", precioNum: 8500, precio: "$8,500 MXN", descripcion: "Estudios geofísicos y detección de acuíferos para determinar el punto óptimo de perforación.", detalles: ["Sondeos eléctricos verticales (SEV)", "Identificación de estratos rocosos", "Estimación de profundidad y calidad del agua", "Entrega de reporte técnico firmado"] },
-            { id: 6, icon: "🌊", nombre: "Soluciones de agua", precioNum: 32000, precio: "$32,000 MXN", descripcion: "Diseño e implementación de redes de distribución, tanques de almacenamiento e hiper-filtración.", detalles: ["Sistemas de purificación y filtrado", "Tanques elevados y cisternas", "Automatización de llenado", "Asesoría en uso eficiente del agua"] }
+            { 
+                id: 1, 
+                imagen: "imagenes/imagenaforo.jpg", 
+                galeria: ["imagenes/imagenaforo.jpg", "imagenes/imagenaforo.jpg", "imagenes/imagenaforo.jpg"],
+                nombre: "Perforación de pozos", 
+                precioNum: 45000, 
+                precio: "$45,000 MXN", 
+                descripcion: "Servicio completo de perforación profunda utilizando maquinaria rotatoria de última generación.", 
+                detalles: ["Estudio hidrogeológico previo", "Entubado con tubería de alta resistencia", "Aforo preliminar de caudal", "Garantía de profundidad según contrato"] 
+            },
+            { 
+                id: 2, 
+                imagen: "imagenes/equipamiento.jpg", 
+                galeria: ["imagenes/equipamiento.jpg", "imagenes/equipamiento.jpg", "imagenes/equipamiento.jpg"],
+                nombre: "Equipamiento de pozos", 
+                precioNum: 28500, 
+                precio: "$28,500 MXN", 
+                descripcion: "Instalación completa de sistemas electromecánicos para la extracción eficiente del agua de pozos profundos.", 
+                detalles: ["Suministro e instalación de bomba sumergible", "Arrancador y tablero de control eléctrico", "Cableado sumergible de uso rudo", "Instalación de línea de descarga"] 
+            },
+            { 
+                id: 3, 
+                imagen: "imagenes/mantenimiento.jpg", 
+                galeria: ["imagenes/mantenimiento.jpg", "imagenes/mantenimiento.jpg", "imagenes/mantenimiento.jpg"],
+                nombre: "Mantenimiento", 
+                precioNum: 12000, 
+                precio: "$12,000 MXN", 
+                descripcion: "Mantenimiento preventivo y correctivo para recuperar el caudal original y alargar la vida útil del pozo.", 
+                detalles: ["Limpieza y cepillado de ademe", "Desincrustación química no contaminante", "Videoinspección con cámara sumergible", "Revisión general de bombas y motores"] 
+            },
+            { 
+                id: 4, 
+                imagen: "imagenes/preparacion.jpg", 
+                galeria: ["imagenes/preparacion.jpg", "imagenes/preparacion.jpg", "imagenes/preparacion.jpg"],
+                nombre: "Preparación del proyecto", 
+                precioNum: 18000, 
+                precio: "$18,000 MXN", 
+                descripcion: "Trabajos preparatorios en el predio para garantizar la maniobrabilidad de la maquinaria pesada.", 
+                detalles: ["Nivelación y acondicionamiento del área", "Construcción de presas de lodo", "Instalaciones temporales de obra", "Tramitología básica e inspección"] 
+            },
+            { 
+                id: 5, 
+                imagen: "imagenes/evaluacion.jpg", 
+                galeria: ["imagenes/evaluacion.jpg", "imagenes/evaluacion.jpg", "imagenes/evaluacion.jpg"],
+                nombre: "Evaluación del terreno", 
+                precioNum: 8500, 
+                precio: "$8,500 MXN", 
+                descripcion: "Estudios geofísicos y detección de acuíferos para determinar el punto óptimo de perforación.", 
+                detalles: ["Sondeos eléctricos verticales (SEV)", "Identificación de estratos rocosos", "Estimación de profundidad y calidad del agua", "Entrega de reporte técnico firmado"] 
+            },
+            { 
+                id: 6, 
+                imagen: "imagenes/soluciones.jpg", 
+                galeria: ["imagenes/soluciones.jpg", "imagenes/soluciones.jpg", "imagenes/soluciones.jpg"],
+                nombre: "Soluciones de agua", 
+                precioNum: 32000, 
+                precio: "$32,000 MXN", 
+                descripcion: "Diseño e implementación de redes de distribución, tanques de almacenamiento e hiper-filtración.", 
+                detalles: ["Sistemas de purificación y filtrado", "Tanques elevados y cisternas", "Automatización de llenado", "Asesoría en uso eficiente del agua"] 
+            }
         ];
 
         let servicioSeleccionado = null;
@@ -615,7 +684,9 @@
             const grid = document.getElementById("catalogGrid");
             grid.innerHTML = servicios.map((s, index) => `
                 <div class="product-card">
-                    <div class="product-image">${s.icon}</div>
+                    <div class="product-image">
+                        <img src="${s.imagen}" alt="${s.nombre}" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'height:100%;display:flex;align-items:center;justify-content:center;font-size:70px;\'>💧</div>';">
+                    </div>
                     <div class="product-content">
                         <h3>${s.nombre}</h3>
                         <p>${s.descripcion}</p>
@@ -641,6 +712,15 @@
             document.getElementById("mTitulo").textContent = s.nombre;
             document.getElementById("mPrecio").textContent = s.precio;
             document.getElementById("mDescripcion").textContent = s.descripcion;
+            
+            // Renderizar la galería del modal
+            const galeriaContainer = document.getElementById("mGaleria");
+            galeriaContainer.innerHTML = s.galeria.map(imgUrl => `
+                <div class="modal-photo">
+                    <img src="${imgUrl}" alt="Foto ${s.nombre}" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'height:100%;display:flex;align-items:center;justify-content:center;font-size:35px;\'>📷</div>';">
+                </div>
+            `).join('');
+
             document.getElementById("mLista").innerHTML = s.detalles.map(d => `<li>✓ ${d}</li>`).join("");
             document.getElementById("modalDetalles").style.display = "flex";
         }
