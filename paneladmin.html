@@ -1,0 +1,829 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Administrador | Perforaciones Palacios</title>
+
+    <style>
+
+        /* =========================
+           ESTILO GENERAL
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f8fa;
+            color: #183b4e;
+        }
+
+
+        /* =========================
+           MENÚ LATERAL
+        ========================= */
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+
+            width: 250px;
+            height: 100vh;
+
+            background: #183b4e;
+            color: white;
+
+            padding: 30px 18px;
+
+            display: flex;
+            flex-direction: column;
+
+            box-shadow: 3px 0 15px rgba(0, 0, 0, 0.08);
+        }
+
+
+        /* LOGOTIPO */
+
+        .logo {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .logo h2 {
+            font-size: 21px;
+            font-weight: 600;
+        }
+
+        .logo span {
+            display: block;
+
+            color: #38bdf8;
+
+            font-size: 25px;
+            font-weight: bold;
+
+            margin-top: 3px;
+        }
+
+
+        /* NAVEGACIÓN */
+
+        .sidebar nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sidebar nav a,
+        .menu-bottom a {
+
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 14px 16px;
+
+            border-radius: 8px;
+
+            color: #dce8ee;
+
+            text-decoration: none;
+
+            font-size: 15px;
+
+            transition: 0.3s;
+        }
+
+
+        .sidebar nav a:hover,
+        .menu-bottom a:hover {
+
+            background: #24566d;
+
+            color: white;
+        }
+
+
+        /* OPCIÓN ACTIVA */
+
+        .sidebar nav a.active {
+
+            background: #38bdf8;
+
+            color: #073b4c;
+
+            font-weight: bold;
+        }
+
+
+        /* PARTE INFERIOR */
+
+        .menu-bottom {
+
+            margin-top: auto;
+
+            display: flex;
+            flex-direction: column;
+
+            gap: 8px;
+        }
+
+
+        /* =========================
+           CONTENIDO
+        ========================= */
+
+        .main-content {
+
+            margin-left: 250px;
+
+            min-height: 100vh;
+
+            padding: 35px 50px;
+        }
+
+
+        /* =========================
+           ENCABEZADO
+        ========================= */
+
+        .topbar {
+
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 30px;
+        }
+
+
+        .topbar h1 {
+
+            font-size: 30px;
+
+            color: #183b4e;
+
+            margin-bottom: 7px;
+        }
+
+
+        .topbar p {
+
+            color: #607d8b;
+
+            font-size: 15px;
+        }
+
+
+        /* ADMINISTRADOR */
+
+        .admin-user {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .admin-icon {
+
+            width: 45px;
+            height: 45px;
+
+            border-radius: 50%;
+
+            background: #38bdf8;
+
+            color: #073b4c;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-weight: bold;
+
+            font-size: 18px;
+        }
+
+
+        .admin-user strong {
+
+            display: block;
+
+            color: #183b4e;
+
+            font-size: 14px;
+        }
+
+
+        .admin-user small {
+
+            display: block;
+
+            color: #718792;
+
+            margin-top: 4px;
+        }
+
+
+        /* =========================
+           BIENVENIDA
+        ========================= */
+
+        .welcome {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(24, 59, 78, 0.98),
+                    rgba(36, 86, 109, 0.95)
+                );
+
+            color: white;
+
+            padding: 32px;
+
+            border-radius: 14px;
+
+            margin-bottom: 28px;
+
+            box-shadow:
+                0 8px 20px rgba(24, 59, 78, 0.12);
+        }
+
+
+        .welcome h2 {
+
+            font-size: 23px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .welcome p {
+
+            color: #dce8ee;
+
+            line-height: 1.6;
+
+            font-size: 15px;
+        }
+
+
+        /* =========================
+           TARJETAS
+        ========================= */
+
+        .cards {
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 22px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .card {
+
+            background: white;
+
+            border: 1px solid #e1eaee;
+
+            border-radius: 14px;
+
+            padding: 25px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+
+            box-shadow:
+                0 4px 12px rgba(0, 0, 0, 0.04);
+
+            transition: 0.3s;
+        }
+
+
+        .card:hover {
+
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 8px 20px rgba(24, 59, 78, 0.10);
+        }
+
+
+        .card-icon {
+
+            width: 58px;
+            height: 58px;
+
+            border-radius: 12px;
+
+            background: #e8f7fd;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 25px;
+        }
+
+
+        .card-info span {
+
+            display: block;
+
+            color: #607d8b;
+
+            font-size: 14px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .card-info strong {
+
+            display: block;
+
+            color: #183b4e;
+
+            font-size: 30px;
+
+            margin-bottom: 4px;
+        }
+
+
+        .card-info small {
+
+            color: #8a9ba3;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           INFORMACIÓN
+        ========================= */
+
+        .information {
+
+            background: white;
+
+            border: 1px solid #e1eaee;
+
+            border-radius: 14px;
+
+            padding: 28px;
+
+            box-shadow:
+                0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+
+
+        .information h2 {
+
+            color: #183b4e;
+
+            font-size: 20px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .information p {
+
+            color: #607d8b;
+
+            line-height: 1.7;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           SECCIONES
+        ========================= */
+
+        .hidden-section {
+
+            margin-top: 50px;
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 14px;
+
+            border: 1px solid #e1eaee;
+
+            box-shadow:
+                0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+
+
+        .hidden-section h2 {
+
+            color: #183b4e;
+
+            margin-bottom: 10px;
+        }
+
+
+        .hidden-section p {
+
+            color: #607d8b;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 950px) {
+
+            .cards {
+
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .sidebar {
+
+                width: 70px;
+
+                padding: 20px 10px;
+            }
+
+
+            .logo h2,
+            .logo span,
+            .sidebar nav a span,
+            .menu-bottom a span {
+
+                display: none;
+            }
+
+
+            .sidebar nav a,
+            .menu-bottom a {
+
+                justify-content: center;
+
+                padding: 14px 5px;
+            }
+
+
+            .main-content {
+
+                margin-left: 70px;
+
+                padding: 25px 20px;
+            }
+
+
+            .topbar {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         MENÚ LATERAL
+    ========================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h2>Perforaciones</h2>
+
+            <span>Palacios</span>
+
+        </div>
+
+
+        <nav>
+
+            <a href="#inicio" class="active">
+
+                🏠
+
+                <span>Inicio</span>
+
+            </a>
+
+
+            <a href="#productos">
+
+                📦
+
+                <span>Productos</span>
+
+            </a>
+
+
+            <a href="#pedidos">
+
+                🛒
+
+                <span>Pedidos</span>
+
+            </a>
+
+
+            <a href="#promociones">
+
+                🎟️
+
+                <span>Promociones</span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="menu-bottom">
+
+            <a href="inicio.html">
+
+                🌐
+
+                <span>Volver al sitio</span>
+
+            </a>
+
+
+            <a href="inicio.html">
+
+                🚪
+
+                <span>Cerrar sesión</span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =========================
+         CONTENIDO
+    ========================= -->
+
+    <main class="main-content">
+
+
+        <!-- ENCABEZADO -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>Panel de Administrador</h1>
+
+                <p>
+                    Bienvenido al panel de administración
+                    de Perforaciones Palacios.
+                </p>
+
+            </div>
+
+
+            <div class="admin-user">
+
+                <div class="admin-icon">
+                    A
+                </div>
+
+                <div>
+
+                    <strong>Administrador</strong>
+
+                    <small>
+                        Panel de control
+                    </small>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =========================
+             INICIO
+        ========================= -->
+
+        <section id="inicio">
+
+
+            <div class="welcome">
+
+                <h2>Resumen general</h2>
+
+                <p>
+                    Consulta rápidamente la información
+                    principal del sitio.
+                </p>
+
+            </div>
+
+
+
+            <!-- TARJETAS -->
+
+            <div class="cards">
+
+
+                <div class="card">
+
+                    <div class="card-icon">
+                        📦
+                    </div>
+
+
+                    <div class="card-info">
+
+                        <span>Productos</span>
+
+                        <strong>12</strong>
+
+                        <small>
+                            Productos registrados
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="card">
+
+                    <div class="card-icon">
+                        🛒
+                    </div>
+
+
+                    <div class="card-info">
+
+                        <span>Pedidos</span>
+
+                        <strong>5</strong>
+
+                        <small>
+                            Pedidos realizados
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="card">
+
+                    <div class="card-icon">
+                        🎟️
+                    </div>
+
+
+                    <div class="card-info">
+
+                        <span>Promociones</span>
+
+                        <strong>3</strong>
+
+                        <small>
+                            Promociones activas
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- INFORMACIÓN -->
+
+            <div class="information">
+
+                <h2>Actividad del sitio</h2>
+
+                <p>
+                    Desde este panel puedes administrar los
+                    productos, revisar los pedidos y gestionar
+                    las promociones disponibles en el sitio web.
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             PRODUCTOS
+        ========================= -->
+
+        <section id="productos" class="hidden-section">
+
+            <h2>Productos</h2>
+
+            <p>
+                Aquí se podrán administrar los productos
+                disponibles en Perforaciones Palacios.
+            </p>
+
+        </section>
+
+
+
+        <!-- =========================
+             PEDIDOS
+        ========================= -->
+
+        <section id="pedidos" class="hidden-section">
+
+            <h2>Pedidos</h2>
+
+            <p>
+                Aquí se podrán consultar y administrar
+                los pedidos realizados.
+            </p>
+
+        </section>
+
+
+
+        <!-- =========================
+             PROMOCIONES
+        ========================= -->
+
+        <section id="promociones" class="hidden-section">
+
+            <h2>Promociones</h2>
+
+            <p>
+                Aquí se podrán administrar las promociones
+                disponibles para los clientes.
+            </p>
+
+        </section>
+
+
+    </main>
+
+
+</body>
+</html>
+```
