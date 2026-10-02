@@ -135,7 +135,7 @@
         }
 
         /* =========================
-           BOTÓN
+           BOTÓN LOGIN
         ========================= */
 
         .login-button {
@@ -224,6 +224,52 @@
             text-decoration: underline;
         }
 
+        /* =========================
+           ACCESO ADMINISTRADOR
+        ========================= */
+
+        .admin-access {
+            display: block;
+
+            width: 100%;
+
+            margin-top: 18px;
+
+            padding: 12px;
+
+            background: #e8f7fd;
+
+            color: #155e75;
+
+            border: 1px solid #b9e8f8;
+
+            border-radius: 8px;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .admin-access:hover {
+            background: #38bdf8;
+
+            color: #073b4c;
+
+            border-color: #38bdf8;
+
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           REGRESAR
+        ========================= */
+
         .back {
             display: block;
 
@@ -272,6 +318,7 @@
         <div class="logo">
             Perforaciones <span>Palacios</span>
         </div>
+
 
         <div class="subtitle">
             Soluciones profesionales en perforación de pozos
@@ -340,6 +387,10 @@
         </div>
 
 
+        <!-- =========================
+             CREAR CUENTA
+        ========================= -->
+
         <div class="links">
 
             ¿No tienes una cuenta?
@@ -350,6 +401,23 @@
 
         </div>
 
+
+        <!-- =========================
+             ACCESO ADMINISTRADOR
+             SIN VERIFICACIÓN
+        ========================= -->
+
+        <a
+            href="paneladmin.html"
+            class="admin-access"
+        >
+            ⚙️ Acceder al administrador
+        </a>
+
+
+        <!-- =========================
+             REGRESAR AL INICIO
+        ========================= -->
 
         <a
             href="inicio.html"
@@ -369,108 +437,121 @@
 
     <script>
 
-        const form = document.getElementById("loginForm");
+        const form =
+            document.getElementById("loginForm");
 
-        const message = document.getElementById("message");
-
-
-        form.addEventListener("submit", function(event) {
-
-            event.preventDefault();
+        const message =
+            document.getElementById("message");
 
 
-            const email =
-                document.getElementById("email").value;
+        form.addEventListener(
+            "submit",
+            function(event) {
 
-            const password =
-                document.getElementById("password").value;
-
-
-            /* =========================
-               OBTENER USUARIO
-               DEL LOCALSTORAGE
-            ========================= */
-
-            const savedUser =
-                localStorage.getItem("usuarioPalacios");
+                event.preventDefault();
 
 
-            /* =========================
-               COMPROBAR SI EXISTE
-            ========================= */
+                const email =
+                    document.getElementById("email").value;
 
-            if (!savedUser) {
-
-                message.style.display = "block";
-
-                message.className =
-                    "message error";
-
-                message.innerText =
-                    "No existe un usuario registrado. Primero crea una cuenta.";
-
-                return;
-            }
-
-
-            const user =
-                JSON.parse(savedUser);
-
-
-            /* =========================
-               VALIDAR DATOS
-            ========================= */
-
-            if (
-                email === user.email &&
-                password === user.password
-            ) {
+                const password =
+                    document.getElementById("password").value;
 
 
                 /* =========================
-                   CREAR SESIÓN SIMULADA
+                   OBTENER USUARIO
+                   DEL LOCALSTORAGE
                 ========================= */
 
-                localStorage.setItem(
-                    "sesionPalacios",
-                    "activa"
-                );
-
-
-                message.style.display = "block";
-
-                message.className =
-                    "message success";
-
-                message.innerText =
-                    "Inicio de sesión correcto. Redirigiendo...";
+                const savedUser =
+                    localStorage.getItem(
+                        "usuarioPalacios"
+                    );
 
 
                 /* =========================
-                   IR AL PERFIL
+                   COMPROBAR SI EXISTE
                 ========================= */
 
-                setTimeout(function() {
+                if (!savedUser) {
 
-                    window.location.href =
-                        "perfil.html";
+                    message.style.display =
+                        "block";
 
-                }, 1200);
+                    message.className =
+                        "message error";
+
+                    message.innerText =
+                        "No existe un usuario registrado. Primero crea una cuenta.";
+
+                    return;
+                }
 
 
-            } else {
+                const user =
+                    JSON.parse(savedUser);
 
-                message.style.display = "block";
 
-                message.className =
-                    "message error";
+                /* =========================
+                   VALIDAR DATOS
+                ========================= */
 
-                message.innerText =
-                    "Correo o contraseña incorrectos.";
+                if (
+                    email === user.email &&
+                    password === user.password
+                ) {
+
+
+                    /* =========================
+                       CREAR SESIÓN SIMULADA
+                    ========================= */
+
+                    localStorage.setItem(
+                        "sesionPalacios",
+                        "activa"
+                    );
+
+
+                    message.style.display =
+                        "block";
+
+                    message.className =
+                        "message success";
+
+                    message.innerText =
+                        "Inicio de sesión correcto. Redirigiendo...";
+
+
+                    /* =========================
+                       IR AL PERFIL
+                    ========================= */
+
+                    setTimeout(
+                        function() {
+
+                            window.location.href =
+                                "perfil.html";
+
+                        },
+                        1200
+                    );
+
+
+                } else {
+
+                    message.style.display =
+                        "block";
+
+                    message.className =
+                        "message error";
+
+                    message.innerText =
+                        "Correo o contraseña incorrectos.";
+
+                }
 
             }
-
-        });
+        );
 
     </script>
 
