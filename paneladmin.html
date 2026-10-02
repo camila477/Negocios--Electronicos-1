@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -25,7 +24,7 @@
 
         body {
             font-family: Arial, Helvetica, sans-serif;
-            background: #f5f8fa;
+            background: #f7f9fa;
             color: #183b4e;
         }
 
@@ -39,31 +38,34 @@
             top: 0;
             left: 0;
 
-            width: 250px;
+            width: 235px;
             height: 100vh;
 
             background: #183b4e;
             color: white;
 
-            padding: 30px 18px;
+            padding: 28px 15px;
 
             display: flex;
             flex-direction: column;
 
-            box-shadow: 3px 0 15px rgba(0, 0, 0, 0.08);
+            border-right: 1px solid rgba(255,255,255,0.05);
         }
 
 
-        /* LOGOTIPO */
+        /* =========================
+           LOGOTIPO
+        ========================= */
 
         .logo {
-            text-align: center;
-            margin-bottom: 45px;
+            padding: 0 12px;
+            margin-bottom: 42px;
         }
 
         .logo h2 {
-            font-size: 21px;
-            font-weight: 600;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 0.2px;
         }
 
         .logo span {
@@ -71,19 +73,21 @@
 
             color: #38bdf8;
 
-            font-size: 25px;
-            font-weight: bold;
+            font-size: 23px;
+            font-weight: 700;
 
-            margin-top: 3px;
+            margin-top: 2px;
         }
 
 
-        /* NAVEGACIÓN */
+        /* =========================
+           NAVEGACIÓN
+        ========================= */
 
         .sidebar nav {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 4px;
         }
 
         .sidebar nav a,
@@ -92,67 +96,281 @@
             display: flex;
             align-items: center;
 
-            gap: 12px;
+            gap: 13px;
 
-            padding: 14px 16px;
+            padding: 12px 14px;
 
-            border-radius: 8px;
+            border-radius: 7px;
 
-            color: #dce8ee;
+            color: #cbdbe2;
 
             text-decoration: none;
 
-            font-size: 15px;
+            font-size: 14px;
 
-            transition: 0.3s;
+            transition: 0.2s ease;
         }
-
 
         .sidebar nav a:hover,
         .menu-bottom a:hover {
-
-            background: #24566d;
-
+            background: rgba(255,255,255,0.07);
             color: white;
+        }
+
+
+        /* =========================
+           ICONOS DEL MENÚ
+        ========================= */
+
+        .menu-icon {
+            width: 18px;
+            height: 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: currentColor;
+
+            flex-shrink: 0;
+        }
+
+
+        /* Icono Inicio */
+
+        .icon-home {
+            width: 14px;
+            height: 12px;
+
+            border: 1.5px solid currentColor;
+            border-top: none;
+
+            position: relative;
+            margin-top: 4px;
+        }
+
+        .icon-home::before {
+            content: "";
+
+            position: absolute;
+
+            width: 10px;
+            height: 10px;
+
+            border-left: 1.5px solid currentColor;
+            border-top: 1.5px solid currentColor;
+
+            transform: rotate(45deg);
+
+            top: -5px;
+            left: 0px;
+        }
+
+
+        /* Icono Productos */
+
+        .icon-box {
+            width: 14px;
+            height: 13px;
+
+            border: 1.5px solid currentColor;
+
+            border-radius: 2px;
+
+            position: relative;
+        }
+
+        .icon-box::before {
+            content: "";
+
+            position: absolute;
+
+            left: 2px;
+            right: 2px;
+            top: 3px;
+
+            border-top: 1.5px solid currentColor;
+        }
+
+
+        /* Icono Pedidos */
+
+        .icon-cart {
+            width: 14px;
+            height: 10px;
+
+            border-bottom: 1.5px solid currentColor;
+            border-left: 1.5px solid currentColor;
+
+            transform: skew(-10deg);
+
+            position: relative;
+        }
+
+        .icon-cart::before,
+        .icon-cart::after {
+            content: "";
+
+            position: absolute;
+
+            width: 3px;
+            height: 3px;
+
+            border: 1.5px solid currentColor;
+            border-radius: 50%;
+
+            bottom: -6px;
+        }
+
+        .icon-cart::before {
+            left: 1px;
+        }
+
+        .icon-cart::after {
+            right: 0;
+        }
+
+
+        /* Icono Promociones */
+
+        .icon-tag {
+            width: 15px;
+            height: 11px;
+
+            border: 1.5px solid currentColor;
+
+            border-radius: 2px;
+
+            transform: rotate(-45deg);
+
+            position: relative;
+        }
+
+        .icon-tag::after {
+            content: "";
+
+            position: absolute;
+
+            width: 3px;
+            height: 3px;
+
+            border: 1px solid currentColor;
+            border-radius: 50%;
+
+            left: 2px;
+            top: 2px;
+        }
+
+
+        /* Icono sitio */
+
+        .icon-globe {
+            width: 15px;
+            height: 15px;
+
+            border: 1.5px solid currentColor;
+
+            border-radius: 50%;
+
+            position: relative;
+        }
+
+        .icon-globe::before {
+            content: "";
+
+            position: absolute;
+
+            top: 2px;
+            bottom: 2px;
+            left: 5px;
+
+            width: 3px;
+
+            border-left: 1px solid currentColor;
+            border-right: 1px solid currentColor;
+
+            border-radius: 50%;
+        }
+
+        .icon-globe::after {
+            content: "";
+
+            position: absolute;
+
+            left: 2px;
+            right: 2px;
+            top: 6px;
+
+            border-top: 1px solid currentColor;
+        }
+
+
+        /* Icono salir */
+
+        .icon-exit {
+            width: 14px;
+            height: 14px;
+
+            border: 1.5px solid currentColor;
+
+            border-radius: 2px;
+
+            position: relative;
+        }
+
+        .icon-exit::after {
+            content: "";
+
+            position: absolute;
+
+            width: 7px;
+
+            border-top: 1.5px solid currentColor;
+
+            right: -5px;
+            top: 6px;
         }
 
 
         /* OPCIÓN ACTIVA */
 
         .sidebar nav a.active {
+            background: rgba(56, 189, 248, 0.15);
 
-            background: #38bdf8;
+            color: #38bdf8;
 
-            color: #073b4c;
-
-            font-weight: bold;
+            font-weight: 600;
         }
 
 
-        /* PARTE INFERIOR */
+        /* =========================
+           PARTE INFERIOR
+        ========================= */
 
         .menu-bottom {
-
             margin-top: auto;
 
             display: flex;
             flex-direction: column;
 
-            gap: 8px;
+            gap: 3px;
+
+            border-top: 1px solid rgba(255,255,255,0.08);
+
+            padding-top: 15px;
         }
 
 
         /* =========================
-           CONTENIDO
+           CONTENIDO PRINCIPAL
         ========================= */
 
         .main-content {
-
-            margin-left: 250px;
+            margin-left: 235px;
 
             min-height: 100vh;
 
-            padding: 35px 50px;
+            padding: 38px 50px;
         }
 
 
@@ -167,79 +385,80 @@
             justify-content: space-between;
             align-items: center;
 
-            margin-bottom: 30px;
+            margin-bottom: 35px;
+
+            padding-bottom: 24px;
+
+            border-bottom: 1px solid #e5ecef;
         }
 
-
         .topbar h1 {
+            font-size: 27px;
 
-            font-size: 30px;
+            font-weight: 600;
 
             color: #183b4e;
 
             margin-bottom: 7px;
         }
 
-
         .topbar p {
+            color: #70838c;
 
-            color: #607d8b;
-
-            font-size: 15px;
+            font-size: 14px;
         }
 
 
-        /* ADMINISTRADOR */
+        /* =========================
+           USUARIO ADMIN
+        ========================= */
 
         .admin-user {
-
             display: flex;
 
             align-items: center;
 
-            gap: 12px;
+            gap: 11px;
         }
 
-
         .admin-icon {
-
-            width: 45px;
-            height: 45px;
+            width: 38px;
+            height: 38px;
 
             border-radius: 50%;
 
-            background: #38bdf8;
+            background: #e8f7fd;
 
-            color: #073b4c;
+            color: #155e75;
+
+            border: 1px solid #cdebf5;
 
             display: flex;
 
             align-items: center;
             justify-content: center;
 
-            font-weight: bold;
+            font-size: 14px;
 
-            font-size: 18px;
+            font-weight: 600;
         }
 
-
         .admin-user strong {
-
             display: block;
 
             color: #183b4e;
 
-            font-size: 14px;
+            font-size: 13px;
         }
 
-
         .admin-user small {
-
             display: block;
 
-            color: #718792;
+            color: #84959d;
 
-            margin-top: 4px;
+            font-size: 11px;
+
+            margin-top: 3px;
         }
 
 
@@ -249,41 +468,31 @@
 
         .welcome {
 
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(24, 59, 78, 0.98),
-                    rgba(36, 86, 109, 0.95)
-                );
+            background: #183b4e;
 
             color: white;
 
-            padding: 32px;
+            padding: 28px 30px;
 
-            border-radius: 14px;
+            border-radius: 10px;
 
-            margin-bottom: 28px;
-
-            box-shadow:
-                0 8px 20px rgba(24, 59, 78, 0.12);
+            margin-bottom: 25px;
         }
-
 
         .welcome h2 {
+            font-size: 20px;
 
-            font-size: 23px;
+            font-weight: 500;
 
-            margin-bottom: 8px;
+            margin-bottom: 7px;
         }
 
-
         .welcome p {
+            color: #cbdbe2;
 
-            color: #dce8ee;
+            line-height: 1.5;
 
-            line-height: 1.6;
-
-            font-size: 15px;
+            font-size: 14px;
         }
 
 
@@ -297,91 +506,109 @@
 
             grid-template-columns: repeat(3, 1fr);
 
-            gap: 22px;
+            gap: 18px;
 
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
-
 
         .card {
 
             background: white;
 
-            border: 1px solid #e1eaee;
+            border: 1px solid #e3eaed;
 
-            border-radius: 14px;
+            border-radius: 10px;
 
-            padding: 25px;
+            padding: 22px;
 
             display: flex;
 
             align-items: center;
 
-            gap: 18px;
+            gap: 15px;
 
-            box-shadow:
-                0 4px 12px rgba(0, 0, 0, 0.04);
-
-            transition: 0.3s;
+            transition: 0.2s ease;
         }
-
 
         .card:hover {
+            border-color: #c9e5ed;
 
-            transform: translateY(-4px);
-
-            box-shadow:
-                0 8px 20px rgba(24, 59, 78, 0.10);
+            transform: translateY(-2px);
         }
 
+
+        /* ICONOS DE TARJETAS */
 
         .card-icon {
 
-            width: 58px;
-            height: 58px;
+            width: 45px;
+            height: 45px;
 
-            border-radius: 12px;
+            border-radius: 9px;
 
-            background: #e8f7fd;
+            background: #eef9fc;
+
+            color: #1685a5;
 
             display: flex;
 
             align-items: center;
             justify-content: center;
 
-            font-size: 25px;
+            flex-shrink: 0;
+        }
+
+
+        /* Caja */
+
+        .card-icon .icon-box {
+            width: 15px;
+            height: 14px;
+        }
+
+
+        /* Carrito */
+
+        .card-icon .icon-cart {
+            width: 15px;
+            height: 11px;
+        }
+
+
+        /* Etiqueta */
+
+        .card-icon .icon-tag {
+            width: 16px;
+            height: 12px;
         }
 
 
         .card-info span {
-
             display: block;
 
-            color: #607d8b;
+            color: #71848d;
 
-            font-size: 14px;
-
-            margin-bottom: 5px;
-        }
-
-
-        .card-info strong {
-
-            display: block;
-
-            color: #183b4e;
-
-            font-size: 30px;
+            font-size: 13px;
 
             margin-bottom: 4px;
         }
 
+        .card-info strong {
+            display: block;
+
+            color: #183b4e;
+
+            font-size: 27px;
+
+            font-weight: 600;
+
+            margin-bottom: 2px;
+        }
 
         .card-info small {
+            color: #9aa9af;
 
-            color: #8a9ba3;
-
-            font-size: 12px;
+            font-size: 11px;
         }
 
 
@@ -393,34 +620,31 @@
 
             background: white;
 
-            border: 1px solid #e1eaee;
+            border: 1px solid #e3eaed;
 
-            border-radius: 14px;
+            border-radius: 10px;
 
-            padding: 28px;
-
-            box-shadow:
-                0 4px 12px rgba(0, 0, 0, 0.03);
+            padding: 24px 26px;
         }
-
 
         .information h2 {
 
             color: #183b4e;
 
-            font-size: 20px;
+            font-size: 18px;
 
-            margin-bottom: 10px;
+            font-weight: 600;
+
+            margin-bottom: 8px;
         }
-
 
         .information p {
 
-            color: #607d8b;
+            color: #71848d;
 
-            line-height: 1.7;
+            line-height: 1.6;
 
-            font-size: 14px;
+            font-size: 13px;
         }
 
 
@@ -430,34 +654,35 @@
 
         .hidden-section {
 
-            margin-top: 50px;
+            margin-top: 40px;
 
             background: white;
 
-            padding: 30px;
+            padding: 25px 26px;
 
-            border-radius: 14px;
+            border-radius: 10px;
 
-            border: 1px solid #e1eaee;
-
-            box-shadow:
-                0 4px 12px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e3eaed;
         }
-
 
         .hidden-section h2 {
 
             color: #183b4e;
 
-            margin-bottom: 10px;
-        }
+            font-size: 19px;
 
+            font-weight: 600;
+
+            margin-bottom: 8px;
+        }
 
         .hidden-section p {
 
-            color: #607d8b;
+            color: #71848d;
 
             line-height: 1.6;
+
+            font-size: 13px;
         }
 
 
@@ -468,58 +693,62 @@
         @media (max-width: 950px) {
 
             .cards {
-
                 grid-template-columns: 1fr;
             }
 
+            .main-content {
+                padding: 30px;
+            }
         }
 
 
         @media (max-width: 700px) {
 
             .sidebar {
+                width: 65px;
 
-                width: 70px;
-
-                padding: 20px 10px;
+                padding: 20px 8px;
             }
 
+            .logo {
+                text-align: center;
+
+                padding: 0;
+
+                margin-bottom: 35px;
+            }
 
             .logo h2,
             .logo span,
             .sidebar nav a span,
             .menu-bottom a span {
-
                 display: none;
             }
 
-
             .sidebar nav a,
             .menu-bottom a {
-
                 justify-content: center;
 
-                padding: 14px 5px;
+                padding: 13px 5px;
             }
-
 
             .main-content {
+                margin-left: 65px;
 
-                margin-left: 70px;
-
-                padding: 25px 20px;
+                padding: 25px 18px;
             }
 
-
             .topbar {
-
                 flex-direction: column;
 
                 align-items: flex-start;
 
-                gap: 20px;
+                gap: 18px;
             }
 
+            .topbar h1 {
+                font-size: 23px;
+            }
         }
 
     </style>
@@ -549,7 +778,9 @@
 
             <a href="#inicio" class="active">
 
-                🏠
+                <div class="menu-icon">
+                    <div class="icon-home"></div>
+                </div>
 
                 <span>Inicio</span>
 
@@ -558,7 +789,9 @@
 
             <a href="#productos">
 
-                📦
+                <div class="menu-icon">
+                    <div class="icon-box"></div>
+                </div>
 
                 <span>Productos</span>
 
@@ -567,7 +800,9 @@
 
             <a href="#pedidos">
 
-                🛒
+                <div class="menu-icon">
+                    <div class="icon-cart"></div>
+                </div>
 
                 <span>Pedidos</span>
 
@@ -576,7 +811,9 @@
 
             <a href="#promociones">
 
-                🎟️
+                <div class="menu-icon">
+                    <div class="icon-tag"></div>
+                </div>
 
                 <span>Promociones</span>
 
@@ -589,7 +826,9 @@
 
             <a href="inicio.html">
 
-                🌐
+                <div class="menu-icon">
+                    <div class="icon-globe"></div>
+                </div>
 
                 <span>Volver al sitio</span>
 
@@ -598,7 +837,9 @@
 
             <a href="inicio.html">
 
-                🚪
+                <div class="menu-icon">
+                    <div class="icon-exit"></div>
+                </div>
 
                 <span>Cerrar sesión</span>
 
@@ -680,10 +921,14 @@
             <div class="cards">
 
 
+                <!-- PRODUCTOS -->
+
                 <div class="card">
 
                     <div class="card-icon">
-                        📦
+
+                        <div class="icon-box"></div>
+
                     </div>
 
 
@@ -703,10 +948,14 @@
 
 
 
+                <!-- PEDIDOS -->
+
                 <div class="card">
 
                     <div class="card-icon">
-                        🛒
+
+                        <div class="icon-cart"></div>
+
                     </div>
 
 
@@ -726,10 +975,14 @@
 
 
 
+                <!-- PROMOCIONES -->
+
                 <div class="card">
 
                     <div class="card-icon">
-                        🎟️
+
+                        <div class="icon-tag"></div>
+
                     </div>
 
 
@@ -826,4 +1079,3 @@
 
 </body>
 </html>
-```
