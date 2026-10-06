@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,10 +8,6 @@
     <title>Administrador | Perforaciones Palacios</title>
 
     <style>
-
-        /* =========================
-           ESTILO GENERAL
-        ========================= */
 
         * {
             margin: 0;
@@ -28,7 +25,6 @@
             color: #183b4e;
         }
 
-
         /* =========================
            MENÚ LATERAL
         ========================= */
@@ -37,25 +33,16 @@
             position: fixed;
             top: 0;
             left: 0;
-
             width: 235px;
             height: 100vh;
-
             background: #183b4e;
             color: white;
-
             padding: 28px 15px;
-
             display: flex;
             flex-direction: column;
-
             border-right: 1px solid rgba(255,255,255,0.05);
+            z-index: 1000;
         }
-
-
-        /* =========================
-           LOGOTIPO
-        ========================= */
 
         .logo {
             padding: 0 12px;
@@ -70,15 +57,11 @@
 
         .logo span {
             display: block;
-
             color: #38bdf8;
-
             font-size: 23px;
             font-weight: 700;
-
             margin-top: 2px;
         }
-
 
         /* =========================
            NAVEGACIÓN
@@ -92,22 +75,14 @@
 
         .sidebar nav a,
         .menu-bottom a {
-
             display: flex;
             align-items: center;
-
             gap: 13px;
-
             padding: 12px 14px;
-
             border-radius: 7px;
-
             color: #cbdbe2;
-
             text-decoration: none;
-
             font-size: 14px;
-
             transition: 0.2s ease;
         }
 
@@ -117,108 +92,81 @@
             color: white;
         }
 
+        .sidebar nav a.active {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            font-weight: 600;
+        }
 
         /* =========================
-           ICONOS DEL MENÚ
+           ICONOS
         ========================= */
 
         .menu-icon {
             width: 18px;
             height: 18px;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             color: currentColor;
-
             flex-shrink: 0;
         }
-
-
-        /* Icono Inicio */
 
         .icon-home {
             width: 14px;
             height: 12px;
-
             border: 1.5px solid currentColor;
             border-top: none;
-
             position: relative;
             margin-top: 4px;
         }
 
         .icon-home::before {
             content: "";
-
             position: absolute;
-
             width: 10px;
             height: 10px;
-
             border-left: 1.5px solid currentColor;
             border-top: 1.5px solid currentColor;
-
             transform: rotate(45deg);
-
             top: -5px;
-            left: 0px;
+            left: 0;
         }
-
-
-        /* Icono Productos */
 
         .icon-box {
             width: 14px;
             height: 13px;
-
             border: 1.5px solid currentColor;
-
             border-radius: 2px;
-
             position: relative;
         }
 
         .icon-box::before {
             content: "";
-
             position: absolute;
-
             left: 2px;
             right: 2px;
             top: 3px;
-
             border-top: 1.5px solid currentColor;
         }
-
-
-        /* Icono Pedidos */
 
         .icon-cart {
             width: 14px;
             height: 10px;
-
             border-bottom: 1.5px solid currentColor;
             border-left: 1.5px solid currentColor;
-
             transform: skew(-10deg);
-
             position: relative;
         }
 
         .icon-cart::before,
         .icon-cart::after {
             content: "";
-
             position: absolute;
-
             width: 3px;
             height: 3px;
-
             border: 1.5px solid currentColor;
             border-radius: 50%;
-
             bottom: -6px;
         }
 
@@ -230,118 +178,71 @@
             right: 0;
         }
 
-
-        /* Icono Promociones */
-
         .icon-tag {
             width: 15px;
             height: 11px;
-
             border: 1.5px solid currentColor;
-
             border-radius: 2px;
-
             transform: rotate(-45deg);
-
             position: relative;
         }
 
         .icon-tag::after {
             content: "";
-
             position: absolute;
-
             width: 3px;
             height: 3px;
-
             border: 1px solid currentColor;
             border-radius: 50%;
-
             left: 2px;
             top: 2px;
         }
 
-
-        /* Icono sitio */
-
         .icon-globe {
             width: 15px;
             height: 15px;
-
             border: 1.5px solid currentColor;
-
             border-radius: 50%;
-
             position: relative;
         }
 
         .icon-globe::before {
             content: "";
-
             position: absolute;
-
             top: 2px;
             bottom: 2px;
             left: 5px;
-
             width: 3px;
-
             border-left: 1px solid currentColor;
             border-right: 1px solid currentColor;
-
             border-radius: 50%;
         }
 
         .icon-globe::after {
             content: "";
-
             position: absolute;
-
             left: 2px;
             right: 2px;
             top: 6px;
-
             border-top: 1px solid currentColor;
         }
-
-
-        /* Icono salir */
 
         .icon-exit {
             width: 14px;
             height: 14px;
-
             border: 1.5px solid currentColor;
-
             border-radius: 2px;
-
             position: relative;
         }
 
         .icon-exit::after {
             content: "";
-
             position: absolute;
-
             width: 7px;
-
             border-top: 1.5px solid currentColor;
-
             right: -5px;
             top: 6px;
         }
-
-
-        /* OPCIÓN ACTIVA */
-
-        .sidebar nav a.active {
-            background: rgba(56, 189, 248, 0.15);
-
-            color: #38bdf8;
-
-            font-weight: 600;
-        }
-
 
         /* =========================
            PARTE INFERIOR
@@ -349,351 +250,472 @@
 
         .menu-bottom {
             margin-top: auto;
-
             display: flex;
             flex-direction: column;
-
             gap: 3px;
-
             border-top: 1px solid rgba(255,255,255,0.08);
-
             padding-top: 15px;
         }
 
-
         /* =========================
-           CONTENIDO PRINCIPAL
+           CONTENIDO
         ========================= */
 
         .main-content {
             margin-left: 235px;
-
             min-height: 100vh;
-
             padding: 38px 50px;
         }
 
-
-        /* =========================
-           ENCABEZADO
-        ========================= */
-
         .topbar {
-
             display: flex;
-
             justify-content: space-between;
             align-items: center;
-
             margin-bottom: 35px;
-
             padding-bottom: 24px;
-
             border-bottom: 1px solid #e5ecef;
         }
 
         .topbar h1 {
             font-size: 27px;
-
             font-weight: 600;
-
             color: #183b4e;
-
             margin-bottom: 7px;
         }
 
         .topbar p {
             color: #70838c;
-
             font-size: 14px;
         }
 
-
         /* =========================
-           USUARIO ADMIN
+           USUARIO
         ========================= */
 
         .admin-user {
             display: flex;
-
             align-items: center;
-
             gap: 11px;
         }
 
         .admin-icon {
             width: 38px;
             height: 38px;
-
             border-radius: 50%;
-
             background: #e8f7fd;
-
             color: #155e75;
-
             border: 1px solid #cdebf5;
-
             display: flex;
-
             align-items: center;
             justify-content: center;
-
             font-size: 14px;
-
             font-weight: 600;
         }
 
         .admin-user strong {
             display: block;
-
             color: #183b4e;
-
             font-size: 13px;
         }
 
         .admin-user small {
             display: block;
-
             color: #84959d;
-
             font-size: 11px;
-
             margin-top: 3px;
         }
-
 
         /* =========================
            BIENVENIDA
         ========================= */
 
         .welcome {
-
             background: #183b4e;
-
             color: white;
-
             padding: 28px 30px;
-
             border-radius: 10px;
-
             margin-bottom: 25px;
         }
 
         .welcome h2 {
             font-size: 20px;
-
             font-weight: 500;
-
             margin-bottom: 7px;
         }
 
         .welcome p {
             color: #cbdbe2;
-
             line-height: 1.5;
-
             font-size: 14px;
         }
 
-
         /* =========================
-           TARJETAS
+           TARJETAS PRINCIPALES
         ========================= */
 
         .cards {
-
             display: grid;
-
             grid-template-columns: repeat(3, 1fr);
-
             gap: 18px;
-
             margin-bottom: 25px;
         }
 
         .card {
-
             background: white;
-
             border: 1px solid #e3eaed;
-
             border-radius: 10px;
-
             padding: 22px;
-
             display: flex;
-
             align-items: center;
-
             gap: 15px;
-
             transition: 0.2s ease;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
         }
 
         .card:hover {
             border-color: #c9e5ed;
-
             transform: translateY(-2px);
+            box-shadow: 0 7px 18px rgba(24,59,78,0.06);
         }
-
-
-        /* ICONOS DE TARJETAS */
 
         .card-icon {
-
             width: 45px;
             height: 45px;
-
             border-radius: 9px;
-
             background: #eef9fc;
-
             color: #1685a5;
-
             display: flex;
-
             align-items: center;
             justify-content: center;
-
             flex-shrink: 0;
         }
-
-
-        /* Caja */
 
         .card-icon .icon-box {
             width: 15px;
             height: 14px;
         }
 
-
-        /* Carrito */
-
         .card-icon .icon-cart {
             width: 15px;
             height: 11px;
         }
-
-
-        /* Etiqueta */
 
         .card-icon .icon-tag {
             width: 16px;
             height: 12px;
         }
 
-
         .card-info span {
             display: block;
-
             color: #71848d;
-
             font-size: 13px;
-
             margin-bottom: 4px;
         }
 
         .card-info strong {
             display: block;
-
             color: #183b4e;
-
             font-size: 27px;
-
             font-weight: 600;
-
             margin-bottom: 2px;
         }
 
         .card-info small {
             color: #9aa9af;
-
             font-size: 11px;
         }
-
 
         /* =========================
            INFORMACIÓN
         ========================= */
 
         .information {
-
             background: white;
-
             border: 1px solid #e3eaed;
-
             border-radius: 10px;
-
             padding: 24px 26px;
         }
 
         .information h2 {
-
             color: #183b4e;
-
             font-size: 18px;
-
             font-weight: 600;
-
             margin-bottom: 8px;
         }
 
         .information p {
-
             color: #71848d;
-
             line-height: 1.6;
-
             font-size: 13px;
         }
-
 
         /* =========================
            SECCIONES
         ========================= */
 
         .hidden-section {
-
             margin-top: 40px;
-
             background: white;
-
             padding: 25px 26px;
-
             border-radius: 10px;
-
             border: 1px solid #e3eaed;
+            scroll-margin-top: 25px;
         }
 
         .hidden-section h2 {
-
             color: #183b4e;
-
             font-size: 19px;
-
             font-weight: 600;
-
             margin-bottom: 8px;
         }
 
-        .hidden-section p {
-
+        .hidden-section > p {
             color: #71848d;
-
             line-height: 1.6;
-
             font-size: 13px;
         }
 
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .section-header h2 {
+            margin-bottom: 5px;
+        }
+
+        .section-header p {
+            margin: 0;
+            color: #71848d;
+            font-size: 13px;
+        }
+
+        /* =========================
+           PRODUCTOS
+        ========================= */
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid #e3eaed;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: 0.2s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+            border-color: #c9e5ed;
+            box-shadow: 0 8px 20px rgba(24,59,78,0.07);
+        }
+
+        .product-image {
+            height: 135px;
+            background: #eef9fc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1685a5;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .product-content {
+            padding: 18px;
+        }
+
+        .product-content h3 {
+            color: #183b4e;
+            font-size: 16px;
+            margin-bottom: 7px;
+        }
+
+        .product-content p {
+            color: #71848d;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
+
+        .product-footer,
+        .promotion-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .price {
+            color: #183b4e;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .action-button {
+            display: inline-block;
+            border: none;
+            border-radius: 6px;
+            padding: 9px 13px;
+            background: #183b4e;
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .action-button:hover {
+            background: #24566d;
+        }
+
+        /* =========================
+           PROMOCIONES
+        ========================= */
+
+        .promotion-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .promotion-card {
+            background: white;
+            border: 1px solid #e3eaed;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            transition: 0.2s ease;
+        }
+
+        .promotion-card:hover {
+            transform: translateY(-3px);
+            border-color: #c9e5ed;
+            box-shadow: 0 8px 20px rgba(24,59,78,0.07);
+        }
+
+        .promotion-image {
+            height: 135px;
+            background: #eef9fc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1685a5;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .promotion-content {
+            padding: 18px;
+        }
+
+        .promotion-content h3 {
+            color: #183b4e;
+            font-size: 16px;
+            margin-bottom: 7px;
+        }
+
+        .promotion-content p {
+            color: #71848d;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
+
+        .discount {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #38bdf8;
+            color: #183b4e;
+            padding: 5px 8px;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 4px 7px;
+            border-radius: 4px;
+            background: #e9f8ef;
+            color: #28734a;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .promotion-note {
+            margin-top: 18px;
+            padding: 13px 15px;
+            background: #f1f9fc;
+            border: 1px solid #d9eef5;
+            border-radius: 7px;
+            color: #5e747e;
+            font-size: 12px;
+        }
+
+        /* =========================
+           PEDIDOS
+        ========================= */
+
+        .orders-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .order {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f9fbfc;
+            border: 1px solid #e3eaed;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .order strong {
+            display: block;
+            color: #183b4e;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .order small {
+            color: #84959d;
+            font-size: 11px;
+        }
+
+        .order-status {
+            padding: 5px 9px;
+            border-radius: 5px;
+            background: #e8f7fd;
+            color: #155e75;
+            font-size: 10px;
+            font-weight: 600;
+        }
 
         /* =========================
            RESPONSIVE
         ========================= */
 
-        @media (max-width: 950px) {
+        @media (max-width: 1100px) {
 
             .cards {
                 grid-template-columns: 1fr;
+            }
+
+            .product-grid,
+            .promotion-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .main-content {
@@ -701,20 +723,16 @@
             }
         }
 
-
         @media (max-width: 700px) {
 
             .sidebar {
                 width: 65px;
-
                 padding: 20px 8px;
             }
 
             .logo {
                 text-align: center;
-
                 padding: 0;
-
                 margin-bottom: 35px;
             }
 
@@ -728,36 +746,40 @@
             .sidebar nav a,
             .menu-bottom a {
                 justify-content: center;
-
                 padding: 13px 5px;
             }
 
             .main-content {
                 margin-left: 65px;
-
                 padding: 25px 18px;
             }
 
             .topbar {
                 flex-direction: column;
-
                 align-items: flex-start;
-
                 gap: 18px;
             }
 
             .topbar h1 {
                 font-size: 23px;
             }
+
+            .product-grid,
+            .promotion-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .order {
+                align-items: flex-start;
+                gap: 12px;
+                flex-direction: column;
+            }
         }
 
     </style>
-
 </head>
 
-
 <body>
-
 
     <!-- =========================
          MENÚ LATERAL
@@ -766,89 +788,61 @@
     <aside class="sidebar">
 
         <div class="logo">
-
             <h2>Perforaciones</h2>
-
             <span>Palacios</span>
-
         </div>
-
 
         <nav>
 
             <a href="#inicio" class="active">
-
                 <div class="menu-icon">
                     <div class="icon-home"></div>
                 </div>
-
                 <span>Inicio</span>
-
             </a>
 
-
             <a href="#productos">
-
                 <div class="menu-icon">
                     <div class="icon-box"></div>
                 </div>
-
                 <span>Productos</span>
-
             </a>
 
-
             <a href="#pedidos">
-
                 <div class="menu-icon">
                     <div class="icon-cart"></div>
                 </div>
-
                 <span>Pedidos</span>
-
             </a>
 
-
             <a href="#promociones">
-
                 <div class="menu-icon">
                     <div class="icon-tag"></div>
                 </div>
-
                 <span>Promociones</span>
-
             </a>
 
         </nav>
 
-
         <div class="menu-bottom">
 
             <a href="inicio.html">
-
                 <div class="menu-icon">
                     <div class="icon-globe"></div>
                 </div>
-
                 <span>Volver al sitio</span>
-
             </a>
 
-
             <a href="inicio.html">
-
                 <div class="menu-icon">
                     <div class="icon-exit"></div>
                 </div>
-
                 <span>Cerrar sesión</span>
-
             </a>
 
         </div>
 
     </aside>
-
 
 
     <!-- =========================
@@ -857,22 +851,18 @@
 
     <main class="main-content">
 
-
         <!-- ENCABEZADO -->
 
         <header class="topbar">
 
             <div>
-
                 <h1>Panel de Administrador</h1>
 
                 <p>
                     Bienvenido al panel de administración
                     de Perforaciones Palacios.
                 </p>
-
             </div>
-
 
             <div class="admin-user">
 
@@ -881,19 +871,16 @@
                 </div>
 
                 <div>
-
                     <strong>Administrador</strong>
 
                     <small>
                         Panel de control
                     </small>
-
                 </div>
 
             </div>
 
         </header>
-
 
 
         <!-- =========================
@@ -902,41 +889,36 @@
 
         <section id="inicio">
 
-
             <div class="welcome">
 
                 <h2>Resumen general</h2>
 
                 <p>
                     Consulta rápidamente la información
-                    principal del sitio.
+                    principal del sitio y accede a cada
+                    sección del panel.
                 </p>
 
             </div>
-
 
 
             <!-- TARJETAS -->
 
             <div class="cards">
 
-
                 <!-- PRODUCTOS -->
 
-                <div class="card">
+                <a href="#productos" class="card">
 
                     <div class="card-icon">
-
                         <div class="icon-box"></div>
-
                     </div>
-
 
                     <div class="card-info">
 
                         <span>Productos</span>
 
-                        <strong>12</strong>
+                        <strong>6</strong>
 
                         <small>
                             Productos registrados
@@ -944,20 +926,16 @@
 
                     </div>
 
-                </div>
-
+                </a>
 
 
                 <!-- PEDIDOS -->
 
-                <div class="card">
+                <a href="#pedidos" class="card">
 
                     <div class="card-icon">
-
                         <div class="icon-cart"></div>
-
                     </div>
-
 
                     <div class="card-info">
 
@@ -971,20 +949,16 @@
 
                     </div>
 
-                </div>
-
+                </a>
 
 
                 <!-- PROMOCIONES -->
 
-                <div class="card">
+                <a href="#promociones" class="card">
 
                     <div class="card-icon">
-
                         <div class="icon-tag"></div>
-
                     </div>
-
 
                     <div class="card-info">
 
@@ -998,11 +972,9 @@
 
                     </div>
 
-                </div>
-
+                </a>
 
             </div>
-
 
 
             <!-- INFORMACIÓN -->
@@ -1015,13 +987,13 @@
                     Desde este panel puedes administrar los
                     productos, revisar los pedidos y gestionar
                     las promociones disponibles en el sitio web.
+                    Utiliza el menú lateral o las tarjetas
+                    superiores para navegar.
                 </p>
 
             </div>
 
-
         </section>
-
 
 
         <!-- =========================
@@ -1030,15 +1002,260 @@
 
         <section id="productos" class="hidden-section">
 
-            <h2>Productos</h2>
+            <div class="section-header">
 
-            <p>
-                Aquí se podrán administrar los productos
-                disponibles en Perforaciones Palacios.
-            </p>
+                <div>
+
+                    <h2>Productos</h2>
+
+                    <p>
+                        Productos disponibles para los servicios
+                        de Perforaciones Palacios.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="product-grid">
+
+
+                <!-- PRODUCTO 1 -->
+
+                <article class="product-card">
+
+                    <div class="product-image">
+                        Bomba sumergible
+                    </div>
+
+                    <div class="product-content">
+
+                        <h3>
+                            Bomba Sumergible 1 HP
+                        </h3>
+
+                        <p>
+                            Bomba para extracción y suministro
+                            de agua en instalaciones residenciales.
+                        </p>
+
+                        <div class="product-footer">
+
+                            <span class="price">
+                                $4,850
+                            </span>
+
+                            <a href="#promociones"
+                               class="action-button">
+                                Ver promoción
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PRODUCTO 2 -->
+
+                <article class="product-card">
+
+                    <div class="product-image">
+                        Tubería hidráulica
+                    </div>
+
+                    <div class="product-content">
+
+                        <h3>
+                            Tubería PVC Hidráulica
+                        </h3>
+
+                        <p>
+                            Tubería resistente para instalaciones
+                            y sistemas de conducción de agua.
+                        </p>
+
+                        <div class="product-footer">
+
+                            <span class="price">
+                                $680
+                            </span>
+
+                            <a href="#promociones"
+                               class="action-button">
+                                Ver promoción
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PRODUCTO 3 -->
+
+                <article class="product-card">
+
+                    <div class="product-image">
+                        Tanque de almacenamiento
+                    </div>
+
+                    <div class="product-content">
+
+                        <h3>
+                            Tanque de Agua 1,100 L
+                        </h3>
+
+                        <p>
+                            Tanque para almacenamiento de agua,
+                            ideal para hogares y pequeños negocios.
+                        </p>
+
+                        <div class="product-footer">
+
+                            <span class="price">
+                                $5,290
+                            </span>
+
+                            <a href="#promociones"
+                               class="action-button">
+                                Ver promoción
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PRODUCTO 4 -->
+
+                <article class="product-card">
+
+                    <div class="product-image">
+                        Bomba presurizadora
+                    </div>
+
+                    <div class="product-content">
+
+                        <h3>
+                            Bomba Presurizadora
+                        </h3>
+
+                        <p>
+                            Equipo para mejorar la presión del agua
+                            en diferentes puntos de consumo.
+                        </p>
+
+                        <div class="product-footer">
+
+                            <span class="price">
+                                $3,250
+                            </span>
+
+                            <a href="#promociones"
+                               class="action-button">
+                                Ver promoción
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PRODUCTO 5 -->
+
+                <article class="product-card">
+
+                    <div class="product-image">
+                        Kit de instalación
+                    </div>
+
+                    <div class="product-content">
+
+                        <h3>
+                            Kit de Instalación
+                        </h3>
+
+                        <p>
+                            Conjunto de materiales básicos para
+                            complementar una instalación hidráulica.
+                        </p>
+
+                        <div class="product-footer">
+
+                            <span class="price">
+                                $1,490
+                            </span>
+
+                            <a href="#promociones"
+                               class="action-button">
+                                Ver promoción
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PRODUCTO 6 -->
+
+                <article class="product-card">
+
+                    <div class="product-image">
+                        Servicio de perforación
+                    </div>
+
+                    <div class="product-content">
+
+                        <h3>
+                            Perforación de Pozo
+                        </h3>
+
+                        <p>
+                            Servicio de perforación para proyectos
+                            de extracción y aprovechamiento de agua.
+                        </p>
+
+                        <div class="product-footer">
+
+                            <span class="price">
+                                Cotizar
+                            </span>
+
+                            <a href="#pedidos"
+                               class="action-button">
+                                Solicitar
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+
+            <div class="promotion-note">
+
+                <strong>Tip:</strong>
+
+                selecciona “Ver promoción” para ir directamente
+                a las promociones disponibles.
+
+            </div>
 
         </section>
-
 
 
         <!-- =========================
@@ -1047,15 +1264,133 @@
 
         <section id="pedidos" class="hidden-section">
 
-            <h2>Pedidos</h2>
+            <div class="section-header">
 
-            <p>
-                Aquí se podrán consultar y administrar
-                los pedidos realizados.
-            </p>
+                <div>
+
+                    <h2>Pedidos</h2>
+
+                    <p>
+                        Consulta y administra los pedidos
+                        realizados por los clientes.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="orders-list">
+
+
+                <div class="order">
+
+                    <div>
+
+                        <strong>
+                            Pedido #001 — Bomba Sumergible 1 HP
+                        </strong>
+
+                        <small>
+                            Cliente: Juan Martínez · $4,850
+                        </small>
+
+                    </div>
+
+                    <span class="order-status">
+                        En proceso
+                    </span>
+
+                </div>
+
+
+                <div class="order">
+
+                    <div>
+
+                        <strong>
+                            Pedido #002 — Tanque de Agua 1,100 L
+                        </strong>
+
+                        <small>
+                            Cliente: Laura Hernández · $5,290
+                        </small>
+
+                    </div>
+
+                    <span class="order-status">
+                        Confirmado
+                    </span>
+
+                </div>
+
+
+                <div class="order">
+
+                    <div>
+
+                        <strong>
+                            Pedido #003 — Kit de Instalación
+                        </strong>
+
+                        <small>
+                            Cliente: Carlos Ramírez · $1,490
+                        </small>
+
+                    </div>
+
+                    <span class="order-status">
+                        Entregado
+                    </span>
+
+                </div>
+
+
+                <div class="order">
+
+                    <div>
+
+                        <strong>
+                            Pedido #004 — Tubería PVC Hidráulica
+                        </strong>
+
+                        <small>
+                            Cliente: María López · $680
+                        </small>
+
+                    </div>
+
+                    <span class="order-status">
+                        En proceso
+                    </span>
+
+                </div>
+
+
+                <div class="order">
+
+                    <div>
+
+                        <strong>
+                            Pedido #005 — Perforación de Pozo
+                        </strong>
+
+                        <small>
+                            Cliente: Empresa Constructora · Cotización
+                        </small>
+
+                    </div>
+
+                    <span class="order-status">
+                        Pendiente
+                    </span>
+
+                </div>
+
+
+            </div>
 
         </section>
-
 
 
         <!-- =========================
@@ -1064,12 +1399,159 @@
 
         <section id="promociones" class="hidden-section">
 
-            <h2>Promociones</h2>
+            <div class="section-header">
 
-            <p>
-                Aquí se podrán administrar las promociones
-                disponibles para los clientes.
-            </p>
+                <div>
+
+                    <h2>Promociones</h2>
+
+                    <p>
+                        Ofertas activas para clientes de
+                        Perforaciones Palacios.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="promotion-grid">
+
+
+                <!-- PROMOCIÓN 1 -->
+
+                <article class="promotion-card">
+
+                    <span class="discount">
+                        15% OFF
+                    </span>
+
+                    <div class="promotion-image">
+                        Promoción 01
+                    </div>
+
+                    <div class="promotion-content">
+
+                        <h3>
+                            Descuento en bomba sumergible
+                        </h3>
+
+                        <p>
+                            Obtén 15% de descuento en la compra
+                            de una bomba sumergible de 1 HP.
+                        </p>
+
+                        <div class="promotion-footer">
+
+                            <span class="status">
+                                Activa
+                            </span>
+
+                            <a href="#productos"
+                               class="action-button">
+                                Ver producto
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PROMOCIÓN 2 -->
+
+                <article class="promotion-card">
+
+                    <span class="discount">
+                        10% OFF
+                    </span>
+
+                    <div class="promotion-image">
+                        Promoción 02
+                    </div>
+
+                    <div class="promotion-content">
+
+                        <h3>
+                            Promoción Kit de instalación
+                        </h3>
+
+                        <p>
+                            10% de descuento al adquirir un kit
+                            de instalación junto con otro producto.
+                        </p>
+
+                        <div class="promotion-footer">
+
+                            <span class="status">
+                                Activa
+                            </span>
+
+                            <a href="#productos"
+                               class="action-button">
+                                Ver productos
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PROMOCIÓN 3 -->
+
+                <article class="promotion-card">
+
+                    <span class="discount">
+                        20% OFF
+                    </span>
+
+                    <div class="promotion-image">
+                        Promoción 03
+                    </div>
+
+                    <div class="promotion-content">
+
+                        <h3>
+                            Promoción por temporada
+                        </h3>
+
+                        <p>
+                            20% de descuento en productos seleccionados
+                            durante la temporada de promoción.
+                        </p>
+
+                        <div class="promotion-footer">
+
+                            <span class="status">
+                                Activa
+                            </span>
+
+                            <a href="#productos"
+                               class="action-button">
+                                Ver catálogo
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+
+            <div class="promotion-note">
+
+                <strong>Promociones activas:</strong>
+
+                3 ofertas disponibles. Puedes navegar entre
+                promociones y productos utilizando los botones.
+
+            </div>
 
         </section>
 
@@ -1077,5 +1559,70 @@
     </main>
 
 
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        const links = document.querySelectorAll(
+            '.sidebar nav a'
+        );
+
+        links.forEach(function(link) {
+
+            link.addEventListener('click', function() {
+
+                links.forEach(function(item) {
+                    item.classList.remove('active');
+                });
+
+                this.classList.add('active');
+
+            });
+
+        });
+
+
+        /* Cambiar automáticamente la opción
+           activa al desplazarse */
+
+        const sections = document.querySelectorAll(
+            'main section[id]'
+        );
+
+        window.addEventListener('scroll', function() {
+
+            let current = '';
+
+            sections.forEach(function(section) {
+
+                const sectionTop =
+                    section.offsetTop - 150;
+
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+
+            });
+
+            links.forEach(function(link) {
+
+                link.classList.remove('active');
+
+                if (
+                    link.getAttribute('href') ===
+                    '#' + current
+                ) {
+                    link.classList.add('active');
+                }
+
+            });
+
+        });
+
+    </script>
+
 </body>
 </html>
+```
