@@ -99,6 +99,36 @@
             background: #0e7490;
         }
 
+        /* =========================
+           CARRITO EN NAVBAR
+        ========================= */
+
+        .cart-link {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .cart-badge {
+            display: none;
+            min-width: 18px;
+            height: 18px;
+            background: #0ea5e9;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5px;
+            line-height: 1;
+        }
+
+        .cart-badge.show {
+            display: flex;
+        }
+
 
         /* =========================
            HERO
@@ -470,7 +500,7 @@
                 gap: 15px;
             }
 
-            .nav-links a:not(.contact-button) {
+            .nav-links a:not(.contact-button):not(.cart-link) {
                 display: none;
             }
 
@@ -534,6 +564,13 @@
             <a href="catalogo.html" class="nav-item">Catálogo</a>
             <a href="#nosotros" class="nav-item">Nosotros</a>
             <a href="#contacto" class="nav-item">Contacto</a>
+
+            <!-- ENLACE AL CARRITO -->
+            <a href="carrito.html" class="cart-link">
+                🛒 Carrito
+                <span class="cart-badge" id="cart-badge">0</span>
+            </a>
+
             <a href="login.html" class="contact-button">Iniciar sesión</a>
         </div>
     </nav>
@@ -737,10 +774,12 @@
 
 
     <!-- =========================
-         SCRIPT DE DETECCIÓN DE SECCIÓN (NAVBAR ACTIVO)
+         SCRIPT
     ========================= -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+
+            // ===== NAVBAR ACTIVO =====
             const sections = document.querySelectorAll("section[id]");
             const navLinks = document.querySelectorAll(".nav-links a.nav-item");
 
@@ -763,6 +802,32 @@
                     }
                 });
             });
+
+            // ===== CONTADOR DEL CARRITO =====
+            function actualizarContadorCarrito() {
+                const badge = document.getElementById("cart-badge");
+                const guardado = localStorage.getItem("carrito");
+
+                let totalItems = 0;
+
+                if (guardado) {
+                    const carrito = JSON.parse(guardado);
+                    totalItems = carrito.reduce((suma, item) => suma + item.cantidad, 0);
+                }
+
+                if (totalItems > 0) {
+                    badge.textContent = totalItems;
+                    badge.classList.add("show");
+                } else {
+                    badge.classList.remove("show");
+                }
+            }
+
+            // Actualizar al cargar la página
+            actualizarContadorCarrito();
+
+            // Actualizar cuando se regresa a esta pestaña (por si se eliminó algo en el carrito)
+            window.addEventListener("focus", actualizarContadorCarrito);
         });
     </script>
 

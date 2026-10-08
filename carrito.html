@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito | Perforaciones Palacios</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f9fa;
+            color: #183b4e;
+        }
+
+        /* =========================
+           MENÚ LATERAL
+        ========================= */
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 235px;
+            height: 100vh;
+            background: #183b4e;
+            color: white;
+            padding: 28px 15px;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid rgba(255,255,255,0.05);
+            z-index: 1000;
+        }
+
+        .logo {
+            padding: 0 12px;
+            margin-bottom: 42px;
+        }
+
+        .logo h2 {
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+        }
+
+        .logo span {
+            display: block;
+            color: #38bdf8;
+            font-size: 23px;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+
+        .sidebar nav {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .sidebar nav a,
+        .menu-bottom a {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 12px 14px;
+            border-radius: 7px;
+            color: #cbdbe2;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.2s ease;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            font-family: inherit;
+        }
+
+        .sidebar nav a:hover,
+        .menu-bottom a:hover {
+            background: rgba(255,255,255,0.07);
+            color: white;
+        }
+
+        .sidebar nav a.active {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            font-weight: 600;
+        }
+
+        .menu-icon {
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: currentColor;
+            flex-shrink: 0;
+        }
+
+        .icon-home {
+            width: 14px;
+            height: 12px;
+            border: 1.5px solid currentColor;
+            border-top: none;
+            position: relative;
+            margin-top: 4px;
+        }
+
+        .icon-home::before {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-left: 1.5px solid currentColor;
+            border-top: 1.5px solid currentColor;
+            transform: rotate(45deg);
+            top: -5px;
+            left: 0;
+        }
+
+        .icon-box {
+            width: 14px;
+            height: 13px;
+            border: 1.5px solid currentColor;
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .icon-box::before {
+            content: "";
+            position: absolute;
+            left: 2px;
+            right: 2px;
+            top: 3px;
+            border-top: 1.5px solid currentColor;
+        }
+
+        .icon-cart {
+            width: 16px;
+            height: 14px;
+            position: relative;
+        }
+
+        .icon-cart::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 2px;
+            width: 12px;
+            height: 9px;
+            border: 1.5px solid currentColor;
+            border-radius: 1px 1px 2px 2px;
+            border-top: none;
+            transform: perspective(8px) rotateX(8deg);
+        }
+
+        .icon-cart::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 3px;
+            width: 3px;
+            height: 3px;
+            border: 1.5px solid currentColor;
+            border-radius: 50%;
+            box-shadow: 6px 0 0 -1.5px currentColor, 6px 0 0 0 transparent;
+        }
+
+        .icon-tag {
+            width: 15px;
+            height: 11px;
+            border: 1.5px solid currentColor;
+            border-radius: 2px;
+            transform: rotate(-45deg);
+            position: relative;
+        }
+
+        .icon-tag::after {
+            content: "";
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            border: 1px solid currentColor;
+            border-radius: 50%;
+            left: 2px;
+            top: 2px;
+        }
+
+        .icon-globe {
+            width: 15px;
+            height: 15px;
+            border: 1.5px solid currentColor;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .icon-globe::before {
+            content: "";
+            position: absolute;
+            top: 2px;
+            bottom: 2px;
+            left: 5px;
+            width: 3px;
+            border-left: 1px solid currentColor;
+            border-right: 1px solid currentColor;
+            border-radius: 50%;
+        }
+
+        .icon-globe::after {
+            content: "";
+            position: absolute;
+            left: 2px;
+            right: 2px;
+            top: 6px;
+            border-top: 1px solid currentColor;
+        }
+
+        .menu-bottom {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-top: 15px;
+        }
+
+        /* =========================
+           CONTENIDO
+        ========================= */
+
+        .main-content {
+            margin-left: 235px;
+            min-height: 100vh;
+            padding: 38px 50px;
+        }
+
+        .topbar {
+            margin-bottom: 35px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #e5ecef;
+        }
+
+        .topbar h1 {
+            font-size: 27px;
+            font-weight: 600;
+            color: #183b4e;
+            margin-bottom: 7px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .topbar-icon {
+            width: 36px;
+            height: 36px;
+            background: #eef9fc;
+            border: 1px solid #d9eef5;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1685a5;
+        }
+
+        .topbar-icon .icon-cart {
+            width: 18px;
+            height: 16px;
+        }
+
+        .topbar p {
+            color: #70838c;
+            font-size: 14px;
+        }
+
+        .section-block {
+            display: none;
+        }
+
+        .section-block.active {
+            display: block;
+        }
+
+        /* =========================
+           CARRITO
+        ========================= */
+
+        .cart-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+            align-items: start;
+        }
+
+        .cart-items-container {
+            background: white;
+            border: 1px solid #e3eaed;
+            border-radius: 12px;
+            padding: 22px 24px;
+        }
+
+        .cart-items-container h2 {
+            color: #183b4e;
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 18px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid #edf2f4;
+        }
+
+        #cart-items-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: #f9fbfc;
+            border: 1px solid #e8eef1;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .cart-item:hover {
+            border-color: #c9e5ed;
+            background: #f4fafc;
+            box-shadow: 0 4px 14px rgba(24, 59, 78, 0.05);
+        }
+
+        .item-img {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #e0f2fe, #eef9fc);
+            border: 1px solid #d9eef5;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1685a5;
+            font-size: 11px;
+            font-weight: 700;
+            text-align: center;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .item-details {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .item-details h3 {
+            font-size: 15px;
+            color: #183b4e;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .item-details p {
+            font-size: 12px;
+            color: #84959d;
+            line-height: 1.4;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 280px;
+        }
+
+        .item-controls {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-shrink: 0;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            border: 1px solid #d9eef5;
+            border-radius: 8px;
+            background: white;
+            overflow: hidden;
+        }
+
+        .qty-btn {
+            background: none;
+            border: none;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            color: #183b4e;
+            font-weight: 700;
+            font-size: 15px;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qty-btn:hover {
+            background: #eef9fc;
+            color: #0ea5e9;
+        }
+
+        .qty-value {
+            min-width: 28px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 700;
+            color: #183b4e;
+        }
+
+        .item-price {
+            font-size: 16px;
+            font-weight: 700;
+            color: #183b4e;
+            min-width: 90px;
+            text-align: right;
+        }
+
+        .remove-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            border: 1px solid #fecaca;
+            background: #fef2f2;
+            color: #b91c1c;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+            padding: 0;
+        }
+
+        .remove-btn:hover {
+            background: #fee2e2;
+            border-color: #f87171;
+            transform: scale(1.05);
+        }
+
+        .remove-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .cart-summary {
+            background: white;
+            border: 1px solid #e3eaed;
+            border-radius: 12px;
+            padding: 24px 26px;
+        }
+
+        .cart-summary h2 {
+            color: #183b4e;
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 18px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid #edf2f4;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #71848d;
+        }
+
+        .summary-row.total {
+            font-size: 18px;
+            font-weight: 700;
+            color: #183b4e;
+            border-top: 1px solid #edf2f4;
+            padding-top: 15px;
+            margin-top: 15px;
+            margin-bottom: 22px;
+        }
+
+        .checkout-btn {
+            display: block;
+            width: 100%;
+            background: #183b4e;
+            color: white;
+            text-align: center;
+            padding: 13px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .checkout-btn:hover {
+            background: #24566d;
+        }
+
+        .empty-cart-msg {
+            text-align: center;
+            padding: 50px 20px;
+            color: #71848d;
+            display: none;
+        }
+
+        .empty-cart-msg p {
+            margin-bottom: 18px;
+            font-size: 14px;
+        }
+
+        /* =========================
+           PROMOCIONES
+        ========================= */
+
+        .promos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .promo-card {
+            background: white;
+            border: 1px solid #e3eaed;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            transition: 0.2s ease;
+        }
+
+        .promo-card:hover {
+            transform: translateY(-3px);
+            border-color: #c9e5ed;
+            box-shadow: 0 8px 20px rgba(24,59,78,0.07);
+        }
+
+        .promo-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #38bdf8;
+            color: #183b4e;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        .promo-img {
+            height: 120px;
+            background: linear-gradient(135deg, #e0f2fe, #eef9fc);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1685a5;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .promo-body {
+            padding: 18px;
+        }
+
+        .promo-body h3 {
+            color: #183b4e;
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+
+        .promo-body p {
+            color: #71848d;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
+
+        .promo-status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: #e9f8ef;
+            color: #28734a;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* =========================
+           PEDIDOS
+        ========================= */
+
+        .orders-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .order-card {
+            background: white;
+            border: 1px solid #e3eaed;
+            border-radius: 10px;
+            padding: 16px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .order-card strong {
+            display: block;
+            color: #183b4e;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .order-card small {
+            color: #84959d;
+            font-size: 12px;
+        }
+
+        .order-total {
+            font-size: 16px;
+            font-weight: 700;
+            color: #183b4e;
+            white-space: nowrap;
+        }
+
+        .order-status {
+            padding: 5px 10px;
+            border-radius: 5px;
+            background: #e8f7fd;
+            color: #155e75;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .empty-orders {
+            text-align: center;
+            padding: 40px 20px;
+            color: #84959d;
+            font-size: 14px;
+            background: white;
+            border: 1px solid #e3eaed;
+            border-radius: 10px;
+        }
+
+        /* =========================
+           MODAL / TOAST
+        ========================= */
+
+        .confirm-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(24, 59, 78, 0.55);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 5000;
+            padding: 20px;
+        }
+
+        .confirm-overlay.show {
+            display: flex;
+        }
+
+        .confirm-box {
+            background: white;
+            border-radius: 14px;
+            padding: 28px 30px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 20px 50px rgba(24, 59, 78, 0.2);
+            text-align: center;
+        }
+
+        .confirm-icon {
+            width: 52px;
+            height: 52px;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            color: #b91c1c;
+        }
+
+        .confirm-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .confirm-box h3 {
+            color: #183b4e;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .confirm-box p {
+            color: #71848d;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        .confirm-box p strong {
+            color: #183b4e;
+        }
+
+        .confirm-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .confirm-actions button {
+            flex: 1;
+            padding: 11px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s ease;
+            border: none;
+        }
+
+        .btn-confirm-cancel {
+            background: #f1f5f7;
+            color: #5e747e;
+            border: 1px solid #e3eaed !important;
+        }
+
+        .btn-confirm-cancel:hover {
+            background: #e8eef1;
+        }
+
+        .btn-confirm-delete {
+            background: #b91c1c;
+            color: white;
+        }
+
+        .btn-confirm-delete:hover {
+            background: #991b1b;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #183b4e;
+            color: white;
+            padding: 14px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            box-shadow: 0 8px 24px rgba(24, 59, 78, 0.25);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 9999;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .toast .toast-icon {
+            width: 18px;
+            height: 18px;
+            background: #38bdf8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+            color: #183b4e;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 1000px) {
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+            .promos-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .sidebar {
+                width: 65px;
+                padding: 20px 8px;
+            }
+            .logo h2,
+            .logo span,
+            .sidebar nav a span,
+            .menu-bottom a span {
+                display: none;
+            }
+            .main-content {
+                margin-left: 65px;
+                padding: 25px 18px;
+            }
+            .cart-item {
+                flex-wrap: wrap;
+            }
+            .item-controls {
+                width: 100%;
+                justify-content: space-between;
+            }
+            .promos-grid {
+                grid-template-columns: 1fr;
+            }
+            .toast {
+                bottom: 20px;
+                right: 15px;
+                left: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo">
+            <h2>Perforaciones</h2>
+            <span>Palacios</span>
+        </div>
+
+        <nav>
+            <a href="inicio.html">
+                <div class="menu-icon"><div class="icon-home"></div></div>
+                <span>Inicio</span>
+            </a>
+
+            <a href="catalogo.html">
+                <div class="menu-icon"><div class="icon-box"></div></div>
+                <span>Productos</span>
+            </a>
+
+            <a href="#" class="active" id="nav-carrito" onclick="mostrarSeccion('carrito'); return false;">
+                <div class="menu-icon"><div class="icon-cart"></div></div>
+                <span>Carrito</span>
+            </a>
+
+            <a href="#" id="nav-promos" onclick="mostrarSeccion('promociones'); return false;">
+                <div class="menu-icon"><div class="icon-tag"></div></div>
+                <span>Promociones</span>
+            </a>
+
+            <a href="#" id="nav-pedidos" onclick="mostrarSeccion('pedidos'); return false;">
+                <div class="menu-icon"><div class="icon-box"></div></div>
+                <span>Mis pedidos</span>
+            </a>
+        </nav>
+
+        <div class="menu-bottom">
+            <a href="inicio.html">
+                <div class="menu-icon"><div class="icon-globe"></div></div>
+                <span>Volver al sitio</span>
+            </a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <!-- CARRITO -->
+        <div id="seccion-carrito" class="section-block active">
+            <header class="topbar">
+                <div>
+                    <h1>
+                        <div class="topbar-icon"><div class="icon-cart"></div></div>
+                        Carrito de Compras
+                    </h1>
+                    <p>Revisa los productos seleccionados antes de confirmar tu pedido.</p>
+                </div>
+            </header>
+
+            <div class="cart-layout">
+                <div class="cart-items-container">
+                    <h2>Productos en tu carrito</h2>
+                    <div id="cart-items-list"></div>
+                    <div id="empty-message" class="empty-cart-msg">
+                        <p>Tu carrito está actualmente vacío.</p>
+                        <a href="catalogo.html" class="checkout-btn" style="max-width: 200px; margin: 0 auto; display:inline-block;">Ver catálogo</a>
+                    </div>
+                </div>
+
+                <div class="cart-summary">
+                    <h2>Resumen del pedido</h2>
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span id="summary-subtotal">$0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Envío estimado</span>
+                        <span id="summary-shipping">$0</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span id="summary-total">$0</span>
+                    </div>
+                    <button class="checkout-btn" id="btn-pagar">Proceder al pago</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROMOCIONES -->
+        <div id="seccion-promociones" class="section-block">
+            <header class="topbar">
+                <div>
+                    <h1>Promociones activas</h1>
+                    <p>Aprovecha estas ofertas disponibles en Perforaciones Palacios.</p>
+                </div>
+            </header>
+
+            <div class="promos-grid">
+                <article class="promo-card">
+                    <span class="promo-badge">15% OFF</span>
+                    <div class="promo-img">Bomba sumergible</div>
+                    <div class="promo-body">
+                        <h3>Descuento en bomba sumergible</h3>
+                        <p>15% de descuento en la compra de una bomba sumergible de 1 HP.</p>
+                        <span class="promo-status">Activa</span>
+                    </div>
+                </article>
+
+                <article class="promo-card">
+                    <span class="promo-badge">10% OFF</span>
+                    <div class="promo-img">Kit de instalación</div>
+                    <div class="promo-body">
+                        <h3>Promo kit de instalación</h3>
+                        <p>10% de descuento al adquirir un kit de instalación junto con otro producto.</p>
+                        <span class="promo-status">Activa</span>
+                    </div>
+                </article>
+
+                <article class="promo-card">
+                    <span class="promo-badge">20% OFF</span>
+                    <div class="promo-img">Temporada</div>
+                    <div class="promo-body">
+                        <h3>Promoción por temporada</h3>
+                        <p>20% de descuento en productos seleccionados durante la temporada.</p>
+                        <span class="promo-status">Activa</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <!-- PEDIDOS -->
+        <div id="seccion-pedidos" class="section-block">
+            <header class="topbar">
+                <div>
+                    <h1>Mis pedidos</h1>
+                    <p>Historial de pedidos realizados desde el carrito.</p>
+                </div>
+            </header>
+            <div id="lista-pedidos" class="orders-list"></div>
+        </div>
+
+    </main>
+
+    <!-- MODAL CONFIRMACIÓN -->
+    <div class="confirm-overlay" id="confirm-overlay">
+        <div class="confirm-box">
+            <div class="confirm-icon">
+                <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+            </div>
+            <h3>¿Eliminar producto?</h3>
+            <p>¿Seguro que deseas eliminar <strong id="confirm-nombre">este producto</strong> del carrito?</p>
+            <div class="confirm-actions">
+                <button class="btn-confirm-cancel" id="btn-cancelar-eliminar">Cancelar</button>
+                <button class="btn-confirm-delete" id="btn-confirmar-eliminar">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+        <div class="toast-icon">✓</div>
+        <span id="toast-mensaje">Producto eliminado</span>
+    </div>
+
+    <script>
+        function mostrarSeccion(nombre) {
+            document.querySelectorAll(".section-block").forEach(s => s.classList.remove("active"));
+            document.querySelectorAll(".sidebar nav a").forEach(a => a.classList.remove("active"));
+
+            if (nombre === "carrito") {
+                document.getElementById("seccion-carrito").classList.add("active");
+                document.getElementById("nav-carrito").classList.add("active");
+            } else if (nombre === "promociones") {
+                document.getElementById("seccion-promociones").classList.add("active");
+                document.getElementById("nav-promos").classList.add("active");
+            } else if (nombre === "pedidos") {
+                document.getElementById("seccion-pedidos").classList.add("active");
+                document.getElementById("nav-pedidos").classList.add("active");
+                renderizarPedidos();
+            }
+        }
+
+        function obtenerCarrito() {
+            const guardado = localStorage.getItem("carrito");
+            return guardado ? JSON.parse(guardado) : [];
+        }
+
+        function guardarCarrito(carrito) {
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+        }
+
+        function mostrarNotificacion(mensaje) {
+            const toast = document.getElementById("toast");
+            document.getElementById("toast-mensaje").textContent = mensaje;
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 2800);
+        }
+
+        let idPendienteEliminar = null;
+
+        function pedirConfirmacion(id, nombre) {
+            idPendienteEliminar = id;
+            document.getElementById("confirm-nombre").textContent = `"${nombre}"`;
+            document.getElementById("confirm-overlay").classList.add("show");
+        }
+
+        function cerrarConfirmacion() {
+            idPendienteEliminar = null;
+            document.getElementById("confirm-overlay").classList.remove("show");
+        }
+
+        document.getElementById("btn-cancelar-eliminar").addEventListener("click", cerrarConfirmacion);
+
+        document.getElementById("btn-confirmar-eliminar").addEventListener("click", function() {
+            if (idPendienteEliminar === null) return;
+            let carrito = obtenerCarrito();
+            const item = carrito.find(p => p.id === idPendienteEliminar);
+            const nombre = item ? item.nombre : "Producto";
+            carrito = carrito.filter(p => p.id !== idPendienteEliminar);
+            guardarCarrito(carrito);
+            renderizarCarrito();
+            cerrarConfirmacion();
+            mostrarNotificacion(`"${nombre}" eliminado del carrito`);
+        });
+
+        document.getElementById("confirm-overlay").addEventListener("click", function(e) {
+            if (e.target === this) cerrarConfirmacion();
+        });
+
+        function renderizarCarrito() {
+            const carrito = obtenerCarrito();
+            const lista = document.getElementById("cart-items-list");
+            const emptyMsg = document.getElementById("empty-message");
+
+            if (carrito.length === 0) {
+                lista.innerHTML = "";
+                emptyMsg.style.display = "block";
+                actualizarTotales();
+                return;
+            }
+
+            emptyMsg.style.display = "none";
+
+            lista.innerHTML = carrito.map(item => {
+                const esFoto = item.imagen && (item.imagen.includes("/") || item.imagen.includes("."));
+                const fallback = (item.nombre || "").split(" ")[0];
+                const imagenHTML = esFoto
+                    ? `<img src="${item.imagen}" alt="${item.nombre}" onerror="this.parentElement.textContent='${fallback}'">`
+                    : (item.imagen || fallback);
+
+                return `
+                    <div class="cart-item" data-id="${item.id}">
+                        <div class="item-img">${imagenHTML}</div>
+                        <div class="item-details">
+                            <h3>${item.nombre}</h3>
+                            <p>${item.descripcion || ""}</p>
+                        </div>
+                        <div class="item-controls">
+                            <div class="quantity-selector">
+                                <button class="qty-btn" onclick="cambiarCantidad(${item.id}, -1)">−</button>
+                                <span class="qty-value">${item.cantidad}</span>
+                                <button class="qty-btn" onclick="cambiarCantidad(${item.id}, 1)">+</button>
+                            </div>
+                            <div class="item-price">$${(item.precio * item.cantidad).toLocaleString("es-MX")}</div>
+                            <button class="remove-btn" onclick="pedirConfirmacion(${item.id}, '${item.nombre.replace(/'/g, "\\'")}')" title="Eliminar">
+                                <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join("");
+
+            actualizarTotales();
+        }
+
+        function cambiarCantidad(id, cambio) {
+            let carrito = obtenerCarrito();
+            const item = carrito.find(p => p.id === id);
+            if (!item) return;
+            item.cantidad += cambio;
+            if (item.cantidad < 1) item.cantidad = 1;
+            guardarCarrito(carrito);
+            renderizarCarrito();
+        }
+
+        function actualizarTotales() {
+            const carrito = obtenerCarrito();
+            let subtotal = 0;
+            carrito.forEach(item => {
+                subtotal += item.precio * item.cantidad;
+            });
+            const envio = subtotal > 0 ? 350 : 0;
+            const total = subtotal + envio;
+
+            document.getElementById("summary-subtotal").textContent = "$" + subtotal.toLocaleString("es-MX");
+            document.getElementById("summary-shipping").textContent = envio > 0 ? "$" + envio.toLocaleString("es-MX") : "$0";
+            document.getElementById("summary-total").textContent = "$" + total.toLocaleString("es-MX");
+        }
+
+        function obtenerPedidos() {
+            const guardado = localStorage.getItem("pedidos");
+            return guardado ? JSON.parse(guardado) : [];
+        }
+
+        function guardarPedidos(pedidos) {
+            localStorage.setItem("pedidos", JSON.stringify(pedidos));
+        }
+
+        document.getElementById("btn-pagar").addEventListener("click", function() {
+            const carrito = obtenerCarrito();
+            if (carrito.length === 0) {
+                mostrarNotificacion("Tu carrito está vacío");
+                return;
+            }
+
+            let subtotal = 0;
+            carrito.forEach(item => {
+                subtotal += item.precio * item.cantidad;
+            });
+            const envio = 350;
+            const total = subtotal + envio;
+
+            const pedidos = obtenerPedidos();
+            pedidos.unshift({
+                id: Date.now(),
+                fecha: new Date().toLocaleString("es-MX"),
+                productos: carrito.map(p => ({
+                    nombre: p.nombre,
+                    cantidad: p.cantidad,
+                    precio: p.precio
+                })),
+                subtotal: subtotal,
+                envio: envio,
+                total: total,
+                estado: "En proceso"
+            });
+            guardarPedidos(pedidos);
+
+            localStorage.setItem("carrito", JSON.stringify([]));
+            renderizarCarrito();
+            mostrarNotificacion("¡Pedido guardado con éxito! Revisa en Mis pedidos.");
+        });
+
+        function renderizarPedidos() {
+            const pedidos = obtenerPedidos();
+            const contenedor = document.getElementById("lista-pedidos");
+
+            if (pedidos.length === 0) {
+                contenedor.innerHTML = `<div class="empty-orders">Aún no tienes pedidos realizados.</div>`;
+                return;
+            }
+
+            contenedor.innerHTML = pedidos.map(pedido => {
+                const nombres = pedido.productos.map(p => p.nombre).join(", ");
+                return `
+                    <div class="order-card">
+                        <div>
+                            <strong>Pedido #${String(pedido.id).slice(-4)} — ${nombres}</strong>
+                            <small>${pedido.fecha} · ${pedido.productos.length} producto(s)</small>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:14px;">
+                            <span class="order-total">$${pedido.total.toLocaleString("es-MX")}</span>
+                            <span class="order-status">${pedido.estado}</span>
+                        </div>
+                    </div>
+                `;
+            }).join("");
+        }
+
+        renderizarCarrito();
+    </script>
+</body>
+</html>

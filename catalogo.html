@@ -23,7 +23,6 @@
             color: #183b4e;
         }
 
-        /* NAVBAR */
         nav {
             position: fixed;
             top: 0;
@@ -79,25 +78,38 @@
             color: white !important;
             padding: 10px 20px;
             border-radius: 7px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .contact-button:hover {
             background: #0e7490;
         }
 
-        .cart-badge {
-            background: #0ea5e9;
-            color: white;
-            font-size: 12px;
-            padding: 2px 7px;
-            border-radius: 50%;
-            font-weight: bold;
+        .cart-link {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        /* ENCABEZADO */
+        .cart-badge {
+            display: none;
+            min-width: 18px;
+            height: 18px;
+            background: #0ea5e9;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5px;
+            line-height: 1;
+        }
+
+        .cart-badge.show {
+            display: flex;
+        }
+
         .header {
             padding: 150px 7% 70px;
             text-align: center;
@@ -122,7 +134,6 @@
             font-size: 17px;
         }
 
-        /* CATÁLOGO */
         .catalog {
             padding: 80px 7%;
         }
@@ -168,7 +179,6 @@
             box-shadow: 0 18px 40px rgba(24,59,78,0.13);
         }
 
-        /* FOTOS EN TARJETAS */
         .product-image {
             height: 200px;
             width: 100%;
@@ -270,7 +280,7 @@
         .modal-content {
             background: white;
             width: 100%;
-            max-width: 650px;
+            max-width: 700px;
             border-radius: 15px;
             padding: 30px;
             position: relative;
@@ -298,6 +308,7 @@
             color: #155e75;
             font-size: 24px;
             margin-bottom: 8px;
+            padding-right: 30px;
         }
 
         .modal-price {
@@ -307,7 +318,6 @@
             margin-bottom: 20px;
         }
 
-        /* FOTOS EN MODAL */
         .modal-gallery {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -369,7 +379,73 @@
             background: #0284c7;
         }
 
-        /* TOAST NOTIFICATION */
+        /* SERVICIOS RELACIONADOS */
+        .related-section {
+            margin-top: 28px;
+            padding-top: 22px;
+            border-top: 1px solid #e2edf1;
+        }
+
+        .related-section h3 {
+            color: #155e75;
+            font-size: 16px;
+            margin-bottom: 14px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .related-card {
+            background: #f8fbfc;
+            border: 1px solid #e2edf1;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .related-card:hover {
+            border-color: #0ea5e9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(24,59,78,0.08);
+        }
+
+        .related-img {
+            height: 70px;
+            background: #e0f2fe;
+            overflow: hidden;
+        }
+
+        .related-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .related-body {
+            padding: 10px;
+        }
+
+        .related-body h4 {
+            color: #183b4e;
+            font-size: 13px;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .related-body span {
+            color: #15803d;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* TOAST */
         .toast-notification {
             position: fixed;
             bottom: 30px;
@@ -407,7 +483,6 @@
             font-size: 14px;
         }
 
-        /* SECCIÓN DE CONTACTO Y REDES SOCIALES */
         .contact-section {
             background: #0d2c38;
             color: white;
@@ -419,7 +494,6 @@
             font-size: 42px;
             font-weight: 700;
             margin-bottom: 20px;
-            letter-spacing: -0.5px;
         }
 
         .contact-section p.contact-subtitle {
@@ -507,8 +581,11 @@
                 grid-template-columns: 1fr;
                 max-width: 500px;
             }
-            .nav-links a:not(.contact-button) {
+            .nav-links a:not(.contact-button):not(.cart-link) {
                 display: none;
+            }
+            .related-grid {
+                grid-template-columns: 1fr;
             }
             .social-links {
                 flex-direction: column;
@@ -534,9 +611,13 @@
             <a href="catalogo.html" class="active">Catálogo</a>
             <a href="inicio.html#nosotros">Nosotros</a>
             <a href="#contacto">Contacto</a>
-            <a href="perfil.html" class="contact-button">
-                Mi Perfil <span id="cartCount" class="cart-badge">0</span>
+
+            <a href="carrito.html" class="cart-link">
+                🛒 Carrito
+                <span class="cart-badge" id="cart-badge">0</span>
             </a>
+
+            <a href="login.html" class="contact-button">Iniciar sesión</a>
         </div>
     </nav>
 
@@ -548,18 +629,17 @@
     <section class="catalog">
         <div class="catalog-title">
             <h2>Servicios disponibles</h2>
-            <p>Haz clic en cualquier servicio para ver detalles técnicos, fotos explicativas y agregarlo a tu solicitud de cotización.</p>
+            <p>Haz clic en cualquier servicio para ver detalles técnicos, fotos explicativas y agregarlo a tu carrito.</p>
         </div>
 
-        <div class="catalog-container" id="catalogGrid">
-            <!-- Renderizado dinámico desde JS -->
-        </div>
+        <div class="catalog-container" id="catalogGrid"></div>
 
         <div class="notice">
             <strong>Catálogo informativo:</strong> los precios mostrados son estimaciones sujetas a variaciones según las condiciones del terreno y requerimientos técnicos.
         </div>
     </section>
 
+    <!-- MODAL -->
     <div id="modalDetalles" class="modal-overlay">
         <div class="modal-content">
             <button class="close-modal" onclick="cerrarModal()">&times;</button>
@@ -567,17 +647,21 @@
             <div id="mPrecio" class="modal-price">$0 MXN</div>
 
             <p style="font-weight: bold; margin-bottom: 8px; color: #155e75;">Galería de fotografías:</p>
-            <div class="modal-gallery" id="mGaleria">
-                <!-- Se llena dinámicamente -->
-            </div>
+            <div class="modal-gallery" id="mGaleria"></div>
 
             <p id="mDescripcion" class="modal-description">Descripción extendida...</p>
             <p style="font-weight: bold; margin-bottom: 8px; color: #155e75;">Incluye:</p>
             <ul id="mLista" class="modal-details-list"></ul>
 
             <button id="btnAgregar" class="btn-add-cart" onclick="agregarAlCarrito()">
-                🛒 Agregar a mis cotizaciones guardadas
+                🛒 Agregar al carrito
             </button>
+
+            <!-- SERVICIOS RELACIONADOS -->
+            <div class="related-section">
+                <h3>También te puede interesar</h3>
+                <div class="related-grid" id="mRelacionados"></div>
+            </div>
         </div>
     </div>
 
@@ -585,7 +669,6 @@
         <span id="toast-message"></span>
     </div>
 
-    <!-- SECCIÓN CONTACTO Y REDES SOCIALES -->
     <section class="contact-section" id="contacto">
         <h2>¿Tienes un proyecto?</h2>
         <p class="contact-subtitle">Ponte en contacto con nosotros y conoce cómo podemos ayudarte con tu proyecto de perforación de agua.</p>
@@ -619,7 +702,7 @@
             { 
                 id: 1, 
                 imagen: "imagenes/imagenaforo.jpg", 
-                galeria: ["imagenes/imagenaforo.jpg", "imagenes/imagenaforo.jpg", "imagenes/imagenaforo.jpg"],
+                galeria: ["imagenes/perforacion1.jpg", "imagenes/perforacion2.jpg", "imagenes/perforacion3.jpg"],
                 nombre: "Perforación de pozos", 
                 precioNum: 45000, 
                 precio: "$45,000 MXN", 
@@ -629,7 +712,7 @@
             { 
                 id: 2, 
                 imagen: "imagenes/equipamientopozo.jpg", 
-                galeria: ["imagenes/equipamientopozo.jpg", "imagenes/equipamientopozo.jpg", "imagenes/equipamientopozo.jpg"],
+                galeria: ["imagenes/equipamiento1.jpg", "imagenes/equipamiento2.jpg", "imagenes/equipamiento3.jpg"],
                 nombre: "Equipamiento de pozos", 
                 precioNum: 28500, 
                 precio: "$28,500 MXN", 
@@ -675,6 +758,37 @@
                 precio: "$32,000 MXN", 
                 descripcion: "Diseño e implementación de redes de distribución, tanques de almacenamiento e hiper-filtración.", 
                 detalles: ["Sistemas de purificación y filtrado", "Tanques elevados y cisternas", "Automatización de llenado", "Asesoría en uso eficiente del agua"] 
+            },
+            // ===== 3 SERVICIOS NUEVOS =====
+            { 
+                id: 7, 
+                imagen: "imagenes/desinfeccion.jpg", 
+                galeria: ["imagenes/imagenaforo.jpg", "imagenes/equipamientopozo.jpg", "imagenes/soluciones.jpg"],
+                nombre: "Desinfección de pozos", 
+                precioNum: 9500, 
+                precio: "$9,500 MXN", 
+                descripcion: "Tratamiento profesional para eliminar bacterias, sedimentos y contaminantes del agua del pozo.", 
+                detalles: ["Análisis bacteriológico inicial", "Aplicación de desinfectantes certificados", "Enjuague y neutralización", "Certificado de potabilidad"] 
+            },
+            { 
+                id: 8, 
+                imagen: "imagenes/instalacionbomba.jpg", 
+                galeria: ["imagenes/equipamientopozo.jpg", "imagenes/mantenimiento.jpg", "imagenes/soluciones.jpg"],
+                nombre: "Instalación de bombas", 
+                precioNum: 15500, 
+                precio: "$15,500 MXN", 
+                descripcion: "Suministro e instalación de bombas sumergibles y de superficie según el caudal requerido.", 
+                detalles: ["Selección de bomba según aforo", "Instalación de tubería y cableado", "Prueba de funcionamiento", "Garantía de equipo e instalación"] 
+            },
+            { 
+                id: 9, 
+                imagen: "imagenes/estudio.jpg", 
+                galeria: ["imagenes/evaluacion.jpg", "imagenes/preparacion.jpg", "imagenes/imagenaforo.jpg"],
+                nombre: "Estudio de aforo", 
+                precioNum: 6500, 
+                precio: "$6,500 MXN", 
+                descripcion: "Medición precisa del caudal y capacidad de extracción del pozo para dimensionar el equipo correcto.", 
+                detalles: ["Prueba de bombeo controlada", "Medición de niveles estático y dinámico", "Cálculo de caudal sostenible", "Informe técnico con recomendaciones"] 
             }
         ];
 
@@ -685,7 +799,7 @@
             grid.innerHTML = servicios.map((s, index) => `
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="${s.imagen}" alt="${s.nombre}" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'height:100%;display:flex;align-items:center;justify-content:center;font-size:70px;\'>💧</div>';">
+                        <img src="${s.imagen}" alt="${s.nombre}" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\\'height:100%;display:flex;align-items:center;justify-content:center;font-size:70px;\\'>💧</div>';">
                     </div>
                     <div class="product-content">
                         <h3>${s.nombre}</h3>
@@ -700,9 +814,30 @@
             `).join('');
         }
 
-        function actualizarInsigniaCarrito() {
-            const carrito = JSON.parse(localStorage.getItem("carritoPalacios")) || [];
-            document.getElementById("cartCount").textContent = carrito.length;
+        function actualizarContadorCarrito() {
+            const badge = document.getElementById("cart-badge");
+            const guardado = localStorage.getItem("carrito");
+            let totalItems = 0;
+
+            if (guardado) {
+                const carrito = JSON.parse(guardado);
+                totalItems = carrito.reduce((suma, item) => suma + (item.cantidad || 1), 0);
+            }
+
+            if (totalItems > 0) {
+                badge.textContent = totalItems;
+                badge.classList.add("show");
+            } else {
+                badge.classList.remove("show");
+            }
+        }
+
+        function obtenerRelacionados(servicioActual) {
+            // Otros servicios distintos al actual (máximo 3)
+            return servicios
+                .filter(s => s.id !== servicioActual.id)
+                .sort(() => Math.random() - 0.5)
+                .slice(0, 3);
         }
 
         function abrirModal(index) {
@@ -712,16 +847,32 @@
             document.getElementById("mTitulo").textContent = s.nombre;
             document.getElementById("mPrecio").textContent = s.precio;
             document.getElementById("mDescripcion").textContent = s.descripcion;
-            
-            // Renderizar la galería del modal
-            const galeriaContainer = document.getElementById("mGaleria");
-            galeriaContainer.innerHTML = s.galeria.map(imgUrl => `
+
+            document.getElementById("mGaleria").innerHTML = s.galeria.map(imgUrl => `
                 <div class="modal-photo">
-                    <img src="${imgUrl}" alt="Foto ${s.nombre}" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'height:100%;display:flex;align-items:center;justify-content:center;font-size:35px;\'>📷</div>';">
+                    <img src="${imgUrl}" alt="Foto ${s.nombre}" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\\'height:100%;display:flex;align-items:center;justify-content:center;font-size:35px;\\'>📷</div>';">
                 </div>
             `).join('');
 
             document.getElementById("mLista").innerHTML = s.detalles.map(d => `<li>✓ ${d}</li>`).join("");
+
+            // Servicios relacionados
+            const relacionados = obtenerRelacionados(s);
+            document.getElementById("mRelacionados").innerHTML = relacionados.map(r => {
+                const idx = servicios.findIndex(x => x.id === r.id);
+                return `
+                    <div class="related-card" onclick="abrirModal(${idx})">
+                        <div class="related-img">
+                            <img src="${r.imagen}" alt="${r.nombre}" onerror="this.parentElement.innerHTML='💧'">
+                        </div>
+                        <div class="related-body">
+                            <h4>${r.nombre}</h4>
+                            <span>${r.precio}</span>
+                        </div>
+                    </div>
+                `;
+            }).join("");
+
             document.getElementById("modalDetalles").style.display = "flex";
         }
 
@@ -739,25 +890,27 @@
         function agregarAlCarrito() {
             if (!servicioSeleccionado) return;
 
-            let carrito = JSON.parse(localStorage.getItem("carritoPalacios")) || [];
-            const yaExiste = carrito.some(item => item.id === servicioSeleccionado.id);
+            let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            const existente = carrito.find(item => item.id === servicioSeleccionado.id);
 
-            if (yaExiste) {
-                cerrarModal();
-                mostrarToast(`⚠️ "${servicioSeleccionado.nombre}" ya está en tus cotizaciones.`);
-                return;
+            if (existente) {
+                existente.cantidad += 1;
+                mostrarToast(`✓ Se aumentó la cantidad de "${servicioSeleccionado.nombre}"`);
+            } else {
+                carrito.push({
+                    id: servicioSeleccionado.id,
+                    nombre: servicioSeleccionado.nombre,
+                    descripcion: servicioSeleccionado.descripcion,
+                    precio: servicioSeleccionado.precioNum,
+                    cantidad: 1,
+                    imagen: servicioSeleccionado.imagen
+                });
+                mostrarToast(`✓ "${servicioSeleccionado.nombre}" se agregó al carrito`);
             }
 
-            carrito.push({
-                id: servicioSeleccionado.id,
-                servicio: servicioSeleccionado.nombre,
-                precio: servicioSeleccionado.precioNum
-            });
-
-            localStorage.setItem("carritoPalacios", JSON.stringify(carrito));
-            actualizarInsigniaCarrito();
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+            actualizarContadorCarrito();
             cerrarModal();
-            mostrarToast(`✓ "${servicioSeleccionado.nombre}" se agregó a tus cotizaciones.`);
         }
 
         window.onclick = function(event) {
@@ -768,9 +921,11 @@
 
         document.addEventListener("DOMContentLoaded", () => {
             renderizarCatalogo();
-            actualizarInsigniaCarrito();
+            actualizarContadorCarrito();
         });
+
+        window.addEventListener("focus", actualizarContadorCarrito);
     </script>
 </body>
 
-</html> 
+</html>
