@@ -4,1492 +4,602 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrador | Perforaciones Palacios</title>
-
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f7f9fa;
-            color: #183b4e;
-        }
-
-        /* =========================
-           MENÚ LATERAL
-        ========================= */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: Arial, Helvetica, sans-serif; background: #f7f9fa; color: #183b4e; }
 
         .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 235px;
-            height: 100vh;
-            background: #183b4e;
-            color: white;
-            padding: 28px 15px;
-            display: flex;
-            flex-direction: column;
-            border-right: 1px solid rgba(255,255,255,0.05);
-            z-index: 1000;
-        }
-
-        .logo {
-            padding: 0 12px;
-            margin-bottom: 42px;
-        }
-
-        .logo h2 {
-            font-size: 18px;
-            font-weight: 500;
-            letter-spacing: 0.2px;
-        }
-
-        .logo span {
-            display: block;
-            color: #38bdf8;
-            font-size: 23px;
-            font-weight: 700;
-            margin-top: 2px;
-        }
-
-        /* =========================
-           NAVEGACIÓN
-        ========================= */
-
-        .sidebar nav {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .sidebar nav a,
-        .menu-bottom a {
-            display: flex;
-            align-items: center;
-            gap: 13px;
-            padding: 12px 14px;
-            border-radius: 7px;
-            color: #cbdbe2;
-            text-decoration: none;
-            font-size: 14px;
-            transition: 0.2s ease;
-        }
-
-        .sidebar nav a:hover,
-        .menu-bottom a:hover {
-            background: rgba(255,255,255,0.07);
-            color: white;
-        }
-
-        .sidebar nav a.active {
-            background: rgba(56, 189, 248, 0.15);
-            color: #38bdf8;
-            font-weight: 600;
-        }
-
-        /* =========================
-           ICONOS
-        ========================= */
-
-        .menu-icon {
-            width: 18px;
-            height: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: currentColor;
-            flex-shrink: 0;
-        }
-
-        .icon-home {
-            width: 14px;
-            height: 12px;
-            border: 1.5px solid currentColor;
-            border-top: none;
-            position: relative;
-            margin-top: 4px;
-        }
-
-        .icon-home::before {
-            content: "";
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            border-left: 1.5px solid currentColor;
-            border-top: 1.5px solid currentColor;
-            transform: rotate(45deg);
-            top: -5px;
-            left: 0;
-        }
-
-        .icon-box {
-            width: 14px;
-            height: 13px;
-            border: 1.5px solid currentColor;
-            border-radius: 2px;
-            position: relative;
-        }
-
-        .icon-box::before {
-            content: "";
-            position: absolute;
-            left: 2px;
-            right: 2px;
-            top: 3px;
-            border-top: 1.5px solid currentColor;
-        }
-
-        .icon-cart {
-            width: 14px;
-            height: 10px;
-            border-bottom: 1.5px solid currentColor;
-            border-left: 1.5px solid currentColor;
-            transform: skew(-10deg);
-            position: relative;
-        }
-
-        .icon-cart::before,
-        .icon-cart::after {
-            content: "";
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            border: 1.5px solid currentColor;
-            border-radius: 50%;
-            bottom: -6px;
-        }
-
-        .icon-cart::before {
-            left: 1px;
-        }
-
-        .icon-cart::after {
-            right: 0;
-        }
-
-        .icon-tag {
-            width: 15px;
-            height: 11px;
-            border: 1.5px solid currentColor;
-            border-radius: 2px;
-            transform: rotate(-45deg);
-            position: relative;
-        }
-
-        .icon-tag::after {
-            content: "";
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            border: 1px solid currentColor;
-            border-radius: 50%;
-            left: 2px;
-            top: 2px;
-        }
-
-        .icon-globe {
-            width: 15px;
-            height: 15px;
-            border: 1.5px solid currentColor;
-            border-radius: 50%;
-            position: relative;
-        }
-
-        .icon-globe::before {
-            content: "";
-            position: absolute;
-            top: 2px;
-            bottom: 2px;
-            left: 5px;
-            width: 3px;
-            border-left: 1px solid currentColor;
-            border-right: 1px solid currentColor;
-            border-radius: 50%;
-        }
-
-        .icon-globe::after {
-            content: "";
-            position: absolute;
-            left: 2px;
-            right: 2px;
-            top: 6px;
-            border-top: 1px solid currentColor;
-        }
-
-        .icon-exit {
-            width: 14px;
-            height: 14px;
-            border: 1.5px solid currentColor;
-            border-radius: 2px;
-            position: relative;
-        }
-
-        .icon-exit::after {
-            content: "";
-            position: absolute;
-            width: 7px;
-            border-top: 1.5px solid currentColor;
-            right: -5px;
-            top: 6px;
-        }
-
-        /* =========================
-           PARTE INFERIOR
-        ========================= */
-
-        .menu-bottom {
-            margin-top: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            padding-top: 15px;
-        }
-
-        /* =========================
-           CONTENIDO
-        ========================= */
-
-        .main-content {
-            margin-left: 235px;
-            min-height: 100vh;
-            padding: 38px 50px;
-        }
-
-        .topbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 35px;
-            padding-bottom: 24px;
-            border-bottom: 1px solid #e5ecef;
-        }
-
-        .topbar h1 {
-            font-size: 27px;
-            font-weight: 600;
-            color: #183b4e;
-            margin-bottom: 7px;
-        }
-
-        .topbar p {
-            color: #70838c;
-            font-size: 14px;
-        }
-
-        /* =========================
-           USUARIO
-        ========================= */
-
-        .admin-user {
-            display: flex;
-            align-items: center;
-            gap: 11px;
-        }
-
-        .admin-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: #e8f7fd;
-            color: #155e75;
-            border: 1px solid #cdebf5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .admin-user strong {
-            display: block;
-            color: #183b4e;
-            font-size: 13px;
-        }
-
-        .admin-user small {
-            display: block;
-            color: #84959d;
-            font-size: 11px;
-            margin-top: 3px;
-        }
-
-        /* =========================
-           BIENVENIDA
-        ========================= */
-
-        .welcome {
-            background: #183b4e;
-            color: white;
-            padding: 28px 30px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-        }
-
-        .welcome h2 {
-            font-size: 20px;
-            font-weight: 500;
-            margin-bottom: 7px;
-        }
-
-        .welcome p {
-            color: #cbdbe2;
-            line-height: 1.5;
-            font-size: 14px;
-        }
-
-        /* =========================
-           TARJETAS PRINCIPALES
-        ========================= */
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-            margin-bottom: 25px;
-        }
-
-        .card {
-            background: white;
-            border: 1px solid #e3eaed;
-            border-radius: 10px;
-            padding: 22px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: 0.2s ease;
-            text-decoration: none;
-            color: inherit;
-            cursor: pointer;
-        }
-
-        .card:hover {
-            border-color: #c9e5ed;
-            transform: translateY(-2px);
-            box-shadow: 0 7px 18px rgba(24,59,78,0.06);
-        }
-
-        .card-icon {
-            width: 45px;
-            height: 45px;
-            border-radius: 9px;
-            background: #eef9fc;
-            color: #1685a5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .card-icon .icon-box {
-            width: 15px;
-            height: 14px;
-        }
-
-        .card-icon .icon-cart {
-            width: 15px;
-            height: 11px;
-        }
-
-        .card-icon .icon-tag {
-            width: 16px;
-            height: 12px;
-        }
-
-        .card-info span {
-            display: block;
-            color: #71848d;
-            font-size: 13px;
-            margin-bottom: 4px;
-        }
-
-        .card-info strong {
-            display: block;
-            color: #183b4e;
-            font-size: 27px;
-            font-weight: 600;
-            margin-bottom: 2px;
-        }
-
-        .card-info small {
-            color: #9aa9af;
-            font-size: 11px;
-        }
-
-        /* =========================
-           INFORMACIÓN
-        ========================= */
-
-        .information {
-            background: white;
-            border: 1px solid #e3eaed;
-            border-radius: 10px;
-            padding: 24px 26px;
-        }
-
-        .information h2 {
-            color: #183b4e;
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .information p {
-            color: #71848d;
-            line-height: 1.6;
-            font-size: 13px;
-        }
-
-        /* =========================
-           SECCIONES
-        ========================= */
-
-        .hidden-section {
-            margin-top: 40px;
-            background: white;
-            padding: 25px 26px;
-            border-radius: 10px;
-            border: 1px solid #e3eaed;
-            scroll-margin-top: 25px;
-        }
-
-        .hidden-section h2 {
-            color: #183b4e;
-            font-size: 19px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .hidden-section > p {
-            color: #71848d;
-            line-height: 1.6;
-            font-size: 13px;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 22px;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .section-header h2 {
-            margin-bottom: 5px;
-        }
-
-        .section-header p {
-            margin: 0;
-            color: #71848d;
-            font-size: 13px;
-        }
-
-        /* =========================
-           BOTONES
-        ========================= */
-
-        .action-button {
-            display: inline-block;
-            border: none;
-            border-radius: 6px;
-            padding: 9px 13px;
-            background: #183b4e;
-            color: white;
-            text-decoration: none;
-            font-size: 12px;
-            cursor: pointer;
-            transition: 0.2s ease;
-        }
-
-        .action-button:hover {
-            background: #24566d;
-        }
-
-        .btn-add {
-            background: #183b4e;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            padding: 10px 16px;
-            font-size: 13px;
-            cursor: pointer;
-            transition: 0.2s ease;
-        }
-
-        .btn-add:hover {
-            background: #24566d;
-        }
-
-        .btn-delete {
-            background: #fef2f2;
-            color: #b91c1c;
-            border: 1px solid #fecaca;
-            border-radius: 5px;
-            padding: 6px 11px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: 0.2s ease;
-        }
-
-        .btn-delete:hover {
-            background: #fee2e2;
-        }
-
-        /* =========================
-           TABLA DE PRODUCTOS
-        ========================= */
-
-        .table-wrapper {
-            overflow-x: auto;
-            border: 1px solid #e3eaed;
-            border-radius: 8px;
-        }
-
-        .products-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 13px;
-        }
-
-        .products-table thead {
-            background: #f1f9fc;
-        }
-
-        .products-table th {
-            text-align: left;
-            padding: 13px 16px;
-            color: #183b4e;
-            font-weight: 600;
-            border-bottom: 1px solid #e3eaed;
-            white-space: nowrap;
-        }
-
-        .products-table td {
-            padding: 14px 16px;
-            border-bottom: 1px solid #eef2f4;
-            color: #3a5563;
-            vertical-align: middle;
-        }
-
-        .products-table tbody tr:last-child td {
-            border-bottom: none;
-        }
-
-        .products-table tbody tr:hover {
-            background: #f9fbfc;
-        }
-
-        .products-table .price {
-            color: #183b4e;
-            font-weight: 700;
-            font-size: 14px;
-        }
-
-        .empty-message {
-            text-align: center;
-            padding: 40px 20px;
-            color: #84959d;
-            font-size: 14px;
-        }
-
-        /* =========================
-           FORMULARIO AGREGAR
-        ========================= */
-
-        .add-form {
-            display: none;
-            background: #f1f9fc;
-            border: 1px solid #d9eef5;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .add-form.active {
-            display: block;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr 140px;
-            gap: 12px;
-            margin-bottom: 14px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .form-group label {
-            font-size: 12px;
-            color: #5e747e;
-            font-weight: 600;
-        }
-
-        .form-group input {
-            padding: 9px 12px;
-            border: 1px solid #d0e0e6;
-            border-radius: 6px;
-            font-size: 13px;
-            color: #183b4e;
-            outline: none;
-            transition: 0.2s ease;
-        }
-
-        .form-group input:focus {
-            border-color: #38bdf8;
-            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
-        }
-
-        .form-actions {
-            display: flex;
-            gap: 10px;
-            justify-content: flex-end;
-        }
-
-        .btn-cancel {
-            background: white;
-            color: #5e747e;
-            border: 1px solid #d0e0e6;
-            border-radius: 6px;
-            padding: 9px 14px;
-            font-size: 13px;
-            cursor: pointer;
-            transition: 0.2s ease;
-        }
-
-        .btn-cancel:hover {
-            background: #f7f9fa;
-        }
-
-        .btn-save {
-            background: #183b4e;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            padding: 9px 16px;
-            font-size: 13px;
-            cursor: pointer;
-            transition: 0.2s ease;
-        }
-
-        .btn-save:hover {
-            background: #24566d;
-        }
-
-        /* =========================
-           PROMOCIONES
-        ========================= */
-
-        .promotion-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
-
-        .promotion-card {
-            background: white;
-            border: 1px solid #e3eaed;
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-            transition: 0.2s ease;
-        }
-
-        .promotion-card:hover {
-            transform: translateY(-3px);
-            border-color: #c9e5ed;
-            box-shadow: 0 8px 20px rgba(24,59,78,0.07);
-        }
-
-        .promotion-image {
-            height: 135px;
-            background: #eef9fc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #1685a5;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .promotion-content {
-            padding: 18px;
-        }
-
-        .promotion-content h3 {
-            color: #183b4e;
-            font-size: 16px;
-            margin-bottom: 7px;
-        }
-
-        .promotion-content p {
-            color: #71848d;
-            font-size: 13px;
-            line-height: 1.5;
-            margin-bottom: 14px;
-        }
-
-        .discount {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: #38bdf8;
-            color: #183b4e;
-            padding: 5px 8px;
-            border-radius: 5px;
-            font-size: 11px;
-            font-weight: 700;
-            z-index: 2;
-        }
-
-        .status {
-            display: inline-block;
-            padding: 4px 7px;
-            border-radius: 4px;
-            background: #e9f8ef;
-            color: #28734a;
-            font-size: 10px;
-            font-weight: 600;
-        }
-
-        .promotion-note {
-            margin-top: 18px;
-            padding: 13px 15px;
-            background: #f1f9fc;
-            border: 1px solid #d9eef5;
-            border-radius: 7px;
-            color: #5e747e;
-            font-size: 12px;
-        }
-
-        .promotion-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* =========================
-           PEDIDOS
-        ========================= */
-
-        .orders-list {
-            display: grid;
-            gap: 12px;
-        }
-
+            position: fixed; top: 0; left: 0; width: 235px; height: 100vh;
+            background: #183b4e; color: white; padding: 28px 15px;
+            display: flex; flex-direction: column;
+            border-right: 1px solid rgba(255,255,255,0.05); z-index: 1000;
+        }
+        .logo { padding: 0 12px; margin-bottom: 42px; }
+        .logo h2 { font-size: 18px; font-weight: 500; }
+        .logo span { display: block; color: #38bdf8; font-size: 23px; font-weight: 700; margin-top: 2px; }
+
+        .sidebar nav { display: flex; flex-direction: column; gap: 4px; }
+        .sidebar nav a, .menu-bottom a {
+            display: flex; align-items: center; gap: 13px; padding: 12px 14px;
+            border-radius: 7px; color: #cbdbe2; text-decoration: none; font-size: 14px; transition: 0.2s;
+        }
+        .sidebar nav a:hover, .menu-bottom a:hover { background: rgba(255,255,255,0.07); color: white; }
+        .sidebar nav a.active { background: rgba(56, 189, 248, 0.15); color: #38bdf8; font-weight: 600; }
+
+        .menu-icon { width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; color: currentColor; flex-shrink: 0; }
+        .icon-home { width: 14px; height: 12px; border: 1.5px solid currentColor; border-top: none; position: relative; margin-top: 4px; }
+        .icon-home::before { content: ""; position: absolute; width: 10px; height: 10px; border-left: 1.5px solid currentColor; border-top: 1.5px solid currentColor; transform: rotate(45deg); top: -5px; left: 0; }
+        .icon-box { width: 14px; height: 13px; border: 1.5px solid currentColor; border-radius: 2px; position: relative; }
+        .icon-box::before { content: ""; position: absolute; left: 2px; right: 2px; top: 3px; border-top: 1.5px solid currentColor; }
+        .icon-cart { width: 14px; height: 10px; border-bottom: 1.5px solid currentColor; border-left: 1.5px solid currentColor; transform: skew(-10deg); position: relative; }
+        .icon-cart::before, .icon-cart::after { content: ""; position: absolute; width: 3px; height: 3px; border: 1.5px solid currentColor; border-radius: 50%; bottom: -6px; }
+        .icon-cart::before { left: 1px; } .icon-cart::after { right: 0; }
+        .icon-tag { width: 15px; height: 11px; border: 1.5px solid currentColor; border-radius: 2px; transform: rotate(-45deg); position: relative; }
+        .icon-tag::after { content: ""; position: absolute; width: 3px; height: 3px; border: 1px solid currentColor; border-radius: 50%; left: 2px; top: 2px; }
+        .icon-globe { width: 15px; height: 15px; border: 1.5px solid currentColor; border-radius: 50%; position: relative; }
+        .icon-globe::before { content: ""; position: absolute; top: 2px; bottom: 2px; left: 5px; width: 3px; border-left: 1px solid currentColor; border-right: 1px solid currentColor; border-radius: 50%; }
+        .icon-globe::after { content: ""; position: absolute; left: 2px; right: 2px; top: 6px; border-top: 1px solid currentColor; }
+        .icon-exit { width: 14px; height: 14px; border: 1.5px solid currentColor; border-radius: 2px; position: relative; }
+        .icon-exit::after { content: ""; position: absolute; width: 7px; border-top: 1.5px solid currentColor; right: -5px; top: 6px; }
+
+        .menu-bottom { margin-top: auto; display: flex; flex-direction: column; gap: 3px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 15px; }
+
+        .main-content { margin-left: 235px; min-height: 100vh; padding: 38px 50px; }
+        .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px; padding-bottom: 24px; border-bottom: 1px solid #e5ecef; }
+        .topbar h1 { font-size: 27px; font-weight: 600; color: #183b4e; margin-bottom: 7px; }
+        .topbar p { color: #70838c; font-size: 14px; }
+
+        .admin-user { display: flex; align-items: center; gap: 11px; }
+        .admin-icon { width: 38px; height: 38px; border-radius: 50%; background: #e8f7fd; color: #155e75; border: 1px solid #cdebf5; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; }
+        .admin-user strong { display: block; color: #183b4e; font-size: 13px; }
+        .admin-user small { display: block; color: #84959d; font-size: 11px; margin-top: 3px; }
+
+        .welcome { background: #183b4e; color: white; padding: 28px 30px; border-radius: 10px; margin-bottom: 25px; }
+        .welcome h2 { font-size: 20px; font-weight: 500; margin-bottom: 7px; }
+        .welcome p { color: #cbdbe2; line-height: 1.5; font-size: 14px; }
+
+        .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 25px; }
+        .card { background: white; border: 1px solid #e3eaed; border-radius: 10px; padding: 22px; display: flex; align-items: center; gap: 15px; transition: 0.2s; text-decoration: none; color: inherit; cursor: pointer; }
+        .card:hover { border-color: #c9e5ed; transform: translateY(-2px); box-shadow: 0 7px 18px rgba(24,59,78,0.06); }
+        .card-icon { width: 45px; height: 45px; border-radius: 9px; background: #eef9fc; color: #1685a5; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .card-icon .icon-box { width: 15px; height: 14px; }
+        .card-icon .icon-cart { width: 15px; height: 11px; }
+        .card-icon .icon-tag { width: 16px; height: 12px; }
+        .card-info span { display: block; color: #71848d; font-size: 13px; margin-bottom: 4px; }
+        .card-info strong { display: block; color: #183b4e; font-size: 27px; font-weight: 600; margin-bottom: 2px; }
+        .card-info small { color: #9aa9af; font-size: 11px; }
+
+        .information { background: white; border: 1px solid #e3eaed; border-radius: 10px; padding: 24px 26px; }
+        .information h2 { color: #183b4e; font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .information p { color: #71848d; line-height: 1.6; font-size: 13px; }
+
+        .hidden-section { margin-top: 40px; background: white; padding: 25px 26px; border-radius: 10px; border: 1px solid #e3eaed; scroll-margin-top: 25px; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; gap: 15px; flex-wrap: wrap; }
+        .section-header h2 { color: #183b4e; font-size: 19px; font-weight: 600; margin-bottom: 5px; }
+        .section-header p { margin: 0; color: #71848d; font-size: 13px; }
+
+        .btn-add, .btn-save { background: #183b4e; color: white; border: none; border-radius: 6px; padding: 10px 16px; font-size: 13px; cursor: pointer; }
+        .btn-add:hover, .btn-save:hover { background: #24566d; }
+        .btn-delete { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; border-radius: 5px; padding: 6px 11px; font-size: 12px; cursor: pointer; }
+        .btn-delete:hover { background: #fee2e2; }
+        .btn-edit { background: #eef9fc; color: #1685a5; border: 1px solid #d9eef5; border-radius: 5px; padding: 6px 11px; font-size: 12px; cursor: pointer; margin-right: 6px; }
+        .btn-edit:hover { background: #e0f2fe; }
+        .btn-cancel { background: white; color: #5e747e; border: 1px solid #d0e0e6; border-radius: 6px; padding: 9px 14px; font-size: 13px; cursor: pointer; }
+        .btn-cancel:hover { background: #f7f9fa; }
+
+        .table-wrapper { overflow-x: auto; border: 1px solid #e3eaed; border-radius: 8px; }
+        .products-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .products-table thead { background: #f1f9fc; }
+        .products-table th { text-align: left; padding: 13px 16px; color: #183b4e; font-weight: 600; border-bottom: 1px solid #e3eaed; }
+        .products-table td { padding: 14px 16px; border-bottom: 1px solid #eef2f4; color: #3a5563; vertical-align: middle; }
+        .products-table tbody tr:last-child td { border-bottom: none; }
+        .products-table tbody tr:hover { background: #f9fbfc; }
+        .products-table .price { color: #183b4e; font-weight: 700; font-size: 14px; }
+        .empty-message { text-align: center; padding: 40px 20px; color: #84959d; font-size: 14px; }
+
+        .add-form { display: none; background: #f1f9fc; border: 1px solid #d9eef5; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+        .add-form.active { display: block; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr 140px; gap: 12px; margin-bottom: 14px; }
+        .form-group { display: flex; flex-direction: column; gap: 5px; }
+        .form-group label { font-size: 12px; color: #5e747e; font-weight: 600; }
+        .form-group input { padding: 9px 12px; border: 1px solid #d0e0e6; border-radius: 6px; font-size: 13px; color: #183b4e; outline: none; }
+        .form-group input:focus { border-color: #38bdf8; box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15); }
+        .form-actions { display: flex; gap: 10px; justify-content: flex-end; }
+
+        .orders-list { display: grid; gap: 12px; }
         .order {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #f9fbfc;
-            border: 1px solid #e3eaed;
-            border-radius: 8px;
-            padding: 15px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: #f9fbfc; border: 1px solid #e3eaed; border-radius: 8px; padding: 15px; gap: 12px; flex-wrap: wrap;
+        }
+        .order strong { display: block; color: #183b4e; font-size: 13px; margin-bottom: 4px; }
+        .order small { color: #84959d; font-size: 11px; }
+        .order-status-select {
+            padding: 6px 10px; border-radius: 5px; border: 1px solid #d0e0e6;
+            font-size: 12px; color: #183b4e; background: white; cursor: pointer;
         }
 
-        .order strong {
-            display: block;
-            color: #183b4e;
-            font-size: 13px;
-            margin-bottom: 4px;
+        .promotion-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        .promotion-card {
+            background: #f9fbfc; border: 1px solid #e3eaed; border-radius: 10px;
+            overflow: hidden; position: relative; transition: 0.2s;
         }
-
-        .order small {
-            color: #84959d;
-            font-size: 11px;
+        .promotion-card:hover { border-color: #c9e5ed; box-shadow: 0 8px 20px rgba(24,59,78,0.07); }
+        .promotion-image {
+            height: 120px; background: #eef9fc; display: flex; align-items: center;
+            justify-content: center; color: #1685a5; font-size: 14px; font-weight: 600;
         }
-
-        .order-status {
-            padding: 5px 9px;
-            border-radius: 5px;
-            background: #e8f7fd;
-            color: #155e75;
-            font-size: 10px;
-            font-weight: 600;
+        .promotion-content { padding: 18px; }
+        .promotion-content h3 { color: #183b4e; font-size: 16px; margin-bottom: 7px; }
+        .promotion-content p { color: #71848d; font-size: 13px; line-height: 1.5; margin-bottom: 14px; }
+        .discount {
+            position: absolute; top: 12px; right: 12px; background: #38bdf8; color: #183b4e;
+            padding: 5px 8px; border-radius: 5px; font-size: 11px; font-weight: 700;
         }
+        .status { display: inline-block; padding: 4px 7px; border-radius: 4px; background: #e9f8ef; color: #28734a; font-size: 10px; font-weight: 600; }
+        .promotion-footer { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .promotion-note { margin-top: 18px; padding: 13px 15px; background: #f1f9fc; border: 1px solid #d9eef5; border-radius: 7px; color: #5e747e; font-size: 12px; }
 
-        /* =========================
-           NOTIFICACIÓN TOAST
-        ========================= */
+        /* MODAL CONFIRMACIÓN */
+        .confirm-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(24, 59, 78, 0.55); backdrop-filter: blur(4px);
+            display: none; justify-content: center; align-items: center;
+            z-index: 5000; padding: 20px;
+        }
+        .confirm-overlay.show { display: flex; }
+        .confirm-box {
+            background: white; border-radius: 14px; padding: 28px 30px;
+            max-width: 400px; width: 100%;
+            box-shadow: 0 20px 50px rgba(24, 59, 78, 0.2); text-align: center;
+        }
+        .confirm-icon {
+            width: 52px; height: 52px; background: #fef2f2; border: 1px solid #fecaca;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 16px; color: #b91c1c; font-size: 22px; font-weight: bold;
+        }
+        .confirm-box h3 { color: #183b4e; font-size: 18px; margin-bottom: 8px; }
+        .confirm-box p { color: #71848d; font-size: 14px; line-height: 1.5; margin-bottom: 24px; }
+        .confirm-box p strong { color: #183b4e; }
+        .confirm-actions { display: flex; gap: 12px; }
+        .confirm-actions button {
+            flex: 1; padding: 11px 16px; border-radius: 8px; font-size: 13px;
+            font-weight: 600; cursor: pointer; border: none; transition: 0.2s;
+        }
+        .btn-confirm-cancel { background: #f1f5f7; color: #5e747e; border: 1px solid #e3eaed !important; }
+        .btn-confirm-cancel:hover { background: #e8eef1; }
+        .btn-confirm-delete { background: #b91c1c; color: white; }
+        .btn-confirm-delete:hover { background: #991b1b; }
 
         .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #183b4e;
-            color: white;
-            padding: 14px 20px;
-            border-radius: 8px;
-            font-size: 13px;
-            box-shadow: 0 8px 24px rgba(24, 59, 78, 0.25);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            z-index: 9999;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-            pointer-events: none;
+            position: fixed; bottom: 30px; right: 30px; background: #183b4e; color: white;
+            padding: 14px 20px; border-radius: 8px; font-size: 13px;
+            box-shadow: 0 8px 24px rgba(24, 59, 78, 0.25); display: flex; align-items: center; gap: 10px;
+            z-index: 9999; opacity: 0; transform: translateY(20px); transition: all 0.3s; pointer-events: none;
         }
-
-        .toast.show {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-
+        .toast.show { opacity: 1; transform: translateY(0); }
         .toast .toast-icon {
-            width: 18px;
-            height: 18px;
-            background: #38bdf8;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            font-weight: bold;
-            color: #183b4e;
-            flex-shrink: 0;
+            width: 18px; height: 18px; background: #38bdf8; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; color: #183b4e;
         }
-
-        /* =========================
-           RESPONSIVE
-        ========================= */
 
         @media (max-width: 1100px) {
-            .cards {
-                grid-template-columns: 1fr;
-            }
-
-            .promotion-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .main-content {
-                padding: 30px;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr 1fr;
-            }
+            .cards, .promotion-grid { grid-template-columns: 1fr; }
+            .main-content { padding: 30px; }
+            .form-row { grid-template-columns: 1fr; }
         }
-
         @media (max-width: 700px) {
-            .sidebar {
-                width: 65px;
-                padding: 20px 8px;
-            }
-
-            .logo {
-                text-align: center;
-                padding: 0;
-                margin-bottom: 35px;
-            }
-
-            .logo h2,
-            .logo span,
-            .sidebar nav a span,
-            .menu-bottom a span {
-                display: none;
-            }
-
-            .sidebar nav a,
-            .menu-bottom a {
-                justify-content: center;
-                padding: 13px 5px;
-            }
-
-            .main-content {
-                margin-left: 65px;
-                padding: 25px 18px;
-            }
-
-            .topbar {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 18px;
-            }
-
-            .topbar h1 {
-                font-size: 23px;
-            }
-
-            .promotion-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .order {
-                align-items: flex-start;
-                gap: 12px;
-                flex-direction: column;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .section-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .toast {
-                bottom: 20px;
-                right: 15px;
-                left: 15px;
-            }
+            .sidebar { width: 65px; padding: 20px 8px; }
+            .logo h2, .logo span, .sidebar nav a span, .menu-bottom a span { display: none; }
+            .sidebar nav a, .menu-bottom a { justify-content: center; padding: 13px 5px; }
+            .main-content { margin-left: 65px; padding: 25px 18px; }
+            .topbar { flex-direction: column; align-items: flex-start; gap: 18px; }
+            .order { flex-direction: column; align-items: flex-start; }
+            .toast { bottom: 20px; right: 15px; left: 15px; }
         }
     </style>
 </head>
-
 <body>
 
-    <!-- =========================
-         MENÚ LATERAL
-    ========================= -->
-
-    <aside class="sidebar">
-        <div class="logo">
-            <h2>Perforaciones</h2>
-            <span>Palacios</span>
-        </div>
-
-        <nav>
-            <a href="#inicio" class="active">
-                <div class="menu-icon">
-                    <div class="icon-home"></div>
-                </div>
-                <span>Inicio</span>
-            </a>
-
-            <a href="#productos">
-                <div class="menu-icon">
-                    <div class="icon-box"></div>
-                </div>
-                <span>Productos</span>
-            </a>
-
-            <a href="#pedidos">
-                <div class="menu-icon">
-                    <div class="icon-cart"></div>
-                </div>
-                <span>Pedidos</span>
-            </a>
-
-            <a href="#promociones">
-                <div class="menu-icon">
-                    <div class="icon-tag"></div>
-                </div>
-                <span>Promociones</span>
-            </a>
-        </nav>
-
-        <div class="menu-bottom">
-            <a href="inicio.html">
-                <div class="menu-icon">
-                    <div class="icon-globe"></div>
-                </div>
-                <span>Volver al sitio</span>
-            </a>
-
-            <a href="inicio.html">
-                <div class="menu-icon">
-                    <div class="icon-exit"></div>
-                </div>
-                <span>Cerrar sesión</span>
-            </a>
-        </div>
-    </aside>
-
-
-    <!-- =========================
-         CONTENIDO
-    ========================= -->
-
-    <main class="main-content">
-
-        <!-- ENCABEZADO -->
-        <header class="topbar">
-            <div>
-                <h1>Panel de Administrador</h1>
-                <p>
-                    Bienvenido al panel de administración
-                    de Perforaciones Palacios.
-                </p>
-            </div>
-
-            <div class="admin-user">
-                <div class="admin-icon">A</div>
-                <div>
-                    <strong>Administrador</strong>
-                    <small>Panel de control</small>
-                </div>
-            </div>
-        </header>
-
-
-        <!-- =========================
-             INICIO
-        ========================= -->
-
-        <section id="inicio">
-            <div class="welcome">
-                <h2>Resumen general</h2>
-                <p>
-                    Consulta rápidamente la información
-                    principal del sitio y accede a cada
-                    sección del panel.
-                </p>
-            </div>
-
-            <div class="cards">
-                <a href="#productos" class="card">
-                    <div class="card-icon">
-                        <div class="icon-box"></div>
-                    </div>
-                    <div class="card-info">
-                        <span>Productos</span>
-                        <strong id="total-productos">6</strong>
-                        <small>Productos registrados</small>
-                    </div>
-                </a>
-
-                <a href="#pedidos" class="card">
-                    <div class="card-icon">
-                        <div class="icon-cart"></div>
-                    </div>
-                    <div class="card-info">
-                        <span>Pedidos</span>
-                        <strong>5</strong>
-                        <small>Pedidos realizados</small>
-                    </div>
-                </a>
-
-                <a href="#promociones" class="card">
-                    <div class="card-icon">
-                        <div class="icon-tag"></div>
-                    </div>
-                    <div class="card-info">
-                        <span>Promociones</span>
-                        <strong>3</strong>
-                        <small>Promociones activas</small>
-                    </div>
-                </a>
-            </div>
-
-            <div class="information">
-                <h2>Actividad del sitio</h2>
-                <p>
-                    Desde este panel puedes administrar los
-                    productos, revisar los pedidos y gestionar
-                    las promociones disponibles en el sitio web.
-                    Utiliza el menú lateral o las tarjetas
-                    superiores para navegar.
-                </p>
-            </div>
-        </section>
-
-
-        <!-- =========================
-             PRODUCTOS (TABLA)
-        ========================= -->
-
-        <section id="productos" class="hidden-section">
-
-            <div class="section-header">
-                <div>
-                    <h2>Productos</h2>
-                    <p>Productos disponibles para los servicios de Perforaciones Palacios.</p>
-                </div>
-                <button class="btn-add" id="btn-mostrar-form">+ Agregar producto</button>
-            </div>
-
-            <!-- Formulario para agregar -->
-            <div class="add-form" id="form-agregar">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="nuevo-nombre">Nombre del producto</label>
-                        <input type="text" id="nuevo-nombre" placeholder="Ej: Bomba Sumergible 1 HP">
-                    </div>
-                    <div class="form-group">
-                        <label for="nuevo-descripcion">Descripción</label>
-                        <input type="text" id="nuevo-descripcion" placeholder="Breve descripción">
-                    </div>
-                    <div class="form-group">
-                        <label for="nuevo-precio">Precio</label>
-                        <input type="text" id="nuevo-precio" placeholder="Ej: 4850">
-                    </div>
-                </div>
-                <div class="form-actions">
-                    <button type="button" class="btn-cancel" id="btn-cancelar">Cancelar</button>
-                    <button type="button" class="btn-save" id="btn-guardar">Guardar producto</button>
-                </div>
-            </div>
-
-            <!-- Tabla -->
-            <div class="table-wrapper">
-                <table class="products-table">
-                    <thead>
-                        <tr>
-                            <th>Producto</th>
-                            <th>Descripción</th>
-                            <th>Precio</th>
-                            <th style="width: 110px;">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tabla-productos">
-                        <!-- Se llena con JavaScript -->
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="promotion-note" style="margin-top: 18px;">
-                <strong>Tip:</strong> Puedes agregar o eliminar productos. Los cambios se reflejan inmediatamente en la tabla y en el contador del resumen.
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             PEDIDOS
-        ========================= -->
-
-        <section id="pedidos" class="hidden-section">
-            <div class="section-header">
-                <div>
-                    <h2>Pedidos</h2>
-                    <p>Consulta y administra los pedidos realizados por los clientes.</p>
-                </div>
-            </div>
-
-            <div class="orders-list">
-                <div class="order">
-                    <div>
-                        <strong>Pedido #001 — Bomba Sumergible 1 HP</strong>
-                        <small>Cliente: Juan Martínez · $4,850</small>
-                    </div>
-                    <span class="order-status">En proceso</span>
-                </div>
-
-                <div class="order">
-                    <div>
-                        <strong>Pedido #002 — Tanque de Agua 1,100 L</strong>
-                        <small>Cliente: Laura Hernández · $5,290</small>
-                    </div>
-                    <span class="order-status">Confirmado</span>
-                </div>
-
-                <div class="order">
-                    <div>
-                        <strong>Pedido #003 — Kit de Instalación</strong>
-                        <small>Cliente: Carlos Ramírez · $1,490</small>
-                    </div>
-                    <span class="order-status">Entregado</span>
-                </div>
-
-                <div class="order">
-                    <div>
-                        <strong>Pedido #004 — Tubería PVC Hidráulica</strong>
-                        <small>Cliente: María López · $680</small>
-                    </div>
-                    <span class="order-status">En proceso</span>
-                </div>
-
-                <div class="order">
-                    <div>
-                        <strong>Pedido #005 — Perforación de Pozo</strong>
-                        <small>Cliente: Empresa Constructora · Cotización</small>
-                    </div>
-                    <span class="order-status">Pendiente</span>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- =========================
-             PROMOCIONES
-        ========================= -->
-
-        <section id="promociones" class="hidden-section">
-            <div class="section-header">
-                <div>
-                    <h2>Promociones</h2>
-                    <p>Ofertas activas para clientes de Perforaciones Palacios.</p>
-                </div>
-            </div>
-
-            <div class="promotion-grid">
-                <article class="promotion-card">
-                    <span class="discount">15% OFF</span>
-                    <div class="promotion-image">Promoción 01</div>
-                    <div class="promotion-content">
-                        <h3>Descuento en bomba sumergible</h3>
-                        <p>Obtén 15% de descuento en la compra de una bomba sumergible de 1 HP.</p>
-                        <div class="promotion-footer">
-                            <span class="status">Activa</span>
-                            <a href="#productos" class="action-button">Ver producto</a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="promotion-card">
-                    <span class="discount">10% OFF</span>
-                    <div class="promotion-image">Promoción 02</div>
-                    <div class="promotion-content">
-                        <h3>Promoción Kit de instalación</h3>
-                        <p>10% de descuento al adquirir un kit de instalación junto con otro producto.</p>
-                        <div class="promotion-footer">
-                            <span class="status">Activa</span>
-                            <a href="#productos" class="action-button">Ver productos</a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="promotion-card">
-                    <span class="discount">20% OFF</span>
-                    <div class="promotion-image">Promoción 03</div>
-                    <div class="promotion-content">
-                        <h3>Promoción por temporada</h3>
-                        <p>20% de descuento en productos seleccionados durante la temporada de promoción.</p>
-                        <div class="promotion-footer">
-                            <span class="status">Activa</span>
-                            <a href="#productos" class="action-button">Ver catálogo</a>
-                        </div>
-                    </div>
-                </article>
-            </div>
-
-            <div class="promotion-note">
-                <strong>Promociones activas:</strong>
-                3 ofertas disponibles. Puedes navegar entre promociones y productos utilizando los botones.
-            </div>
-        </section>
-
-    </main>
-
-
-    <!-- Notificación Toast -->
-    <div class="toast" id="toast">
-        <div class="toast-icon">✓</div>
-        <span id="toast-mensaje">Producto eliminado correctamente</span>
+<aside class="sidebar">
+    <div class="logo">
+        <h2>Perforaciones</h2>
+        <span>Palacios</span>
     </div>
+    <nav>
+        <a href="#inicio" class="active"><div class="menu-icon"><div class="icon-home"></div></div><span>Inicio</span></a>
+        <a href="#productos"><div class="menu-icon"><div class="icon-box"></div></div><span>Productos</span></a>
+        <a href="#pedidos"><div class="menu-icon"><div class="icon-cart"></div></div><span>Pedidos</span></a>
+        <a href="#promociones"><div class="menu-icon"><div class="icon-tag"></div></div><span>Promociones</span></a>
+    </nav>
+    <div class="menu-bottom">
+        <a href="inicio.html"><div class="menu-icon"><div class="icon-globe"></div></div><span>Volver al sitio</span></a>
+        <a href="inicio.html"><div class="menu-icon"><div class="icon-exit"></div></div><span>Cerrar sesión</span></a>
+    </div>
+</aside>
 
+<main class="main-content">
+    <header class="topbar">
+        <div>
+            <h1>Panel de Administrador</h1>
+            <p>Bienvenido al panel de administración de Perforaciones Palacios.</p>
+        </div>
+        <div class="admin-user">
+            <div class="admin-icon">A</div>
+            <div><strong>Administrador</strong><small>Panel de control</small></div>
+        </div>
+    </header>
 
-    <!-- =========================
-         JAVASCRIPT
-    ========================= -->
+    <section id="inicio">
+        <div class="welcome">
+            <h2>Resumen general</h2>
+            <p>Consulta productos, pedidos y promociones desde este panel.</p>
+        </div>
+        <div class="cards">
+            <a href="#productos" class="card">
+                <div class="card-icon"><div class="icon-box"></div></div>
+                <div class="card-info"><span>Productos</span><strong id="total-productos">6</strong><small>Productos registrados</small></div>
+            </a>
+            <a href="#pedidos" class="card">
+                <div class="card-icon"><div class="icon-cart"></div></div>
+                <div class="card-info"><span>Pedidos</span><strong>5</strong><small>Pedidos realizados</small></div>
+            </a>
+            <a href="#promociones" class="card">
+                <div class="card-icon"><div class="icon-tag"></div></div>
+                <div class="card-info"><span>Promociones</span><strong>3</strong><small>Promociones activas</small></div>
+            </a>
+        </div>
+        <div class="information">
+            <h2>Actividad del sitio</h2>
+            <p>Desde este panel puedes administrar productos, revisar pedidos y gestionar promociones. Al eliminar un producto se pide confirmación dentro de la página.</p>
+        </div>
+    </section>
 
-    <script>
-        // =========================
-        // DATOS DE PRODUCTOS
-        // =========================
-        let productos = [
-            {
-                id: 1,
-                nombre: "Bomba Sumergible 1 HP",
-                descripcion: "Bomba para extracción y suministro de agua en instalaciones residenciales.",
-                precio: "4850"
-            },
-            {
-                id: 2,
-                nombre: "Tubería PVC Hidráulica",
-                descripcion: "Tubería resistente para instalaciones y sistemas de conducción de agua.",
-                precio: "680"
-            },
-            {
-                id: 3,
-                nombre: "Tanque de Agua 1,100 L",
-                descripcion: "Tanque para almacenamiento de agua, ideal para hogares y pequeños negocios.",
-                precio: "5290"
-            },
-            {
-                id: 4,
-                nombre: "Bomba Presurizadora",
-                descripcion: "Equipo para mejorar la presión del agua en diferentes puntos de consumo.",
-                precio: "3250"
-            },
-            {
-                id: 5,
-                nombre: "Kit de Instalación",
-                descripcion: "Conjunto de materiales básicos para complementar una instalación hidráulica.",
-                precio: "1490"
-            },
-            {
-                id: 6,
-                nombre: "Perforación de Pozo",
-                descripcion: "Servicio de perforación para proyectos de extracción y aprovechamiento de agua.",
-                precio: "Cotizar"
-            }
-        ];
-
-        let siguienteId = 7;
-
-        // =========================
-        // NOTIFICACIÓN
-        // =========================
-        function mostrarNotificacion(mensaje) {
-            const toast = document.getElementById("toast");
-            const texto = document.getElementById("toast-mensaje");
-
-            texto.textContent = mensaje;
-            toast.classList.add("show");
-
-            setTimeout(() => {
-                toast.classList.remove("show");
-            }, 2800);
-        }
-
-        // =========================
-        // RENDERIZAR TABLA
-        // =========================
-        function renderizarProductos() {
-            const tbody = document.getElementById("tabla-productos");
-            const contador = document.getElementById("total-productos");
-
-            contador.textContent = productos.length;
-
-            if (productos.length === 0) {
-                tbody.innerHTML = `
+    <!-- PRODUCTOS -->
+    <section id="productos" class="hidden-section">
+        <div class="section-header">
+            <div>
+                <h2>Productos</h2>
+                <p>Productos disponibles para los servicios de Perforaciones Palacios.</p>
+            </div>
+            <button class="btn-add" id="btn-mostrar-form">+ Agregar producto</button>
+        </div>
+        <div class="add-form" id="form-agregar">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Nombre del producto</label>
+                    <input type="text" id="nuevo-nombre" placeholder="Ej: Bomba Sumergible 1 HP">
+                </div>
+                <div class="form-group">
+                    <label>Descripción</label>
+                    <input type="text" id="nuevo-descripcion" placeholder="Breve descripción">
+                </div>
+                <div class="form-group">
+                    <label>Precio</label>
+                    <input type="text" id="nuevo-precio" placeholder="Ej: 4850">
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn-cancel" id="btn-cancelar">Cancelar</button>
+                <button type="button" class="btn-save" id="btn-guardar">Guardar producto</button>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table class="products-table">
+                <thead>
                     <tr>
-                        <td colspan="4" class="empty-message">
-                            No hay productos registrados. Agrega el primero con el botón de arriba.
-                        </td>
+                        <th>Producto</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th style="width:110px;">Acciones</th>
                     </tr>
-                `;
-                return;
-            }
+                </thead>
+                <tbody id="tabla-productos"></tbody>
+            </table>
+        </div>
+        <div class="promotion-note" style="margin-top:18px;">
+            <strong>Tip:</strong> Al eliminar un producto se pedirá confirmación en la página.
+        </div>
+    </section>
 
-            tbody.innerHTML = productos.map(producto => {
-                const precioFormateado = producto.precio === "Cotizar"
-                    ? "Cotizar"
-                    : "$" + Number(producto.precio).toLocaleString("es-MX");
+    <!-- PEDIDOS -->
+    <section id="pedidos" class="hidden-section">
+        <div class="section-header">
+            <div>
+                <h2>Pedidos</h2>
+                <p>Consulta y simula cambios de estado de los pedidos.</p>
+            </div>
+        </div>
+        <div class="orders-list">
+            <div class="order">
+                <div>
+                    <strong>Pedido #001 — Bomba Sumergible 1 HP</strong>
+                    <small>Cliente: Juan Martínez · $4,850</small>
+                </div>
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <select class="order-status-select" onchange="simularCambioEstado(this)">
+                        <option selected>En proceso</option>
+                        <option>Confirmado</option>
+                        <option>Entregado</option>
+                        <option>Pendiente</option>
+                        <option>Cancelado</option>
+                    </select>
+                    <button class="btn-delete" onclick="simularEliminarPedido(this)">Eliminar</button>
+                </div>
+            </div>
+            <div class="order">
+                <div>
+                    <strong>Pedido #002 — Tanque de Agua 1,100 L</strong>
+                    <small>Cliente: Laura Hernández · $5,290</small>
+                </div>
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <select class="order-status-select" onchange="simularCambioEstado(this)">
+                        <option>En proceso</option>
+                        <option selected>Confirmado</option>
+                        <option>Entregado</option>
+                        <option>Pendiente</option>
+                        <option>Cancelado</option>
+                    </select>
+                    <button class="btn-delete" onclick="simularEliminarPedido(this)">Eliminar</button>
+                </div>
+            </div>
+            <div class="order">
+                <div>
+                    <strong>Pedido #003 — Kit de Instalación</strong>
+                    <small>Cliente: Carlos Ramírez · $1,490</small>
+                </div>
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <select class="order-status-select" onchange="simularCambioEstado(this)">
+                        <option>En proceso</option>
+                        <option>Confirmado</option>
+                        <option selected>Entregado</option>
+                        <option>Pendiente</option>
+                        <option>Cancelado</option>
+                    </select>
+                    <button class="btn-delete" onclick="simularEliminarPedido(this)">Eliminar</button>
+                </div>
+            </div>
+            <div class="order">
+                <div>
+                    <strong>Pedido #004 — Tubería PVC Hidráulica</strong>
+                    <small>Cliente: María López · $680</small>
+                </div>
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <select class="order-status-select" onchange="simularCambioEstado(this)">
+                        <option selected>En proceso</option>
+                        <option>Confirmado</option>
+                        <option>Entregado</option>
+                        <option>Pendiente</option>
+                        <option>Cancelado</option>
+                    </select>
+                    <button class="btn-delete" onclick="simularEliminarPedido(this)">Eliminar</button>
+                </div>
+            </div>
+            <div class="order">
+                <div>
+                    <strong>Pedido #005 — Perforación de Pozo</strong>
+                    <small>Cliente: Empresa Constructora · Cotización</small>
+                </div>
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <select class="order-status-select" onchange="simularCambioEstado(this)">
+                        <option>En proceso</option>
+                        <option>Confirmado</option>
+                        <option>Entregado</option>
+                        <option selected>Pendiente</option>
+                        <option>Cancelado</option>
+                    </select>
+                    <button class="btn-delete" onclick="simularEliminarPedido(this)">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                return `
-                    <tr>
-                        <td><strong>${producto.nombre}</strong></td>
-                        <td>${producto.descripcion}</td>
-                        <td class="price">${precioFormateado}</td>
-                        <td>
-                            <button class="btn-delete" onclick="eliminarProducto(${producto.id})">
-                                Eliminar
-                            </button>
-                        </td>
-                    </tr>
-                `;
-            }).join("");
+    <!-- PROMOCIONES -->
+    <section id="promociones" class="hidden-section">
+        <div class="section-header">
+            <div>
+                <h2>Promociones</h2>
+                <p>Ofertas activas (edición simulada).</p>
+            </div>
+        </div>
+        <div class="promotion-grid">
+            <article class="promotion-card">
+                <span class="discount">15% OFF</span>
+                <div class="promotion-image">Promoción 01</div>
+                <div class="promotion-content">
+                    <h3>Descuento en bomba sumergible</h3>
+                    <p>Obtén 15% de descuento en la compra de una bomba sumergible de 1 HP.</p>
+                    <div class="promotion-footer">
+                        <span class="status">Activa</span>
+                        <div>
+                            <button class="btn-edit" onclick="simularEditarPromo(this)">Editar</button>
+                            <button class="btn-delete" onclick="simularEliminarPromo(this)">Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article class="promotion-card">
+                <span class="discount">10% OFF</span>
+                <div class="promotion-image">Promoción 02</div>
+                <div class="promotion-content">
+                    <h3>Promoción Kit de instalación</h3>
+                    <p>10% de descuento al adquirir un kit de instalación junto con otro producto.</p>
+                    <div class="promotion-footer">
+                        <span class="status">Activa</span>
+                        <div>
+                            <button class="btn-edit" onclick="simularEditarPromo(this)">Editar</button>
+                            <button class="btn-delete" onclick="simularEliminarPromo(this)">Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article class="promotion-card">
+                <span class="discount">20% OFF</span>
+                <div class="promotion-image">Promoción 03</div>
+                <div class="promotion-content">
+                    <h3>Promoción por temporada</h3>
+                    <p>20% de descuento en productos seleccionados durante la temporada de promoción.</p>
+                    <div class="promotion-footer">
+                        <span class="status">Activa</span>
+                        <div>
+                            <button class="btn-edit" onclick="simularEditarPromo(this)">Editar</button>
+                            <button class="btn-delete" onclick="simularEliminarPromo(this)">Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+        <div class="promotion-note">
+            <strong>Simulación:</strong> Editar y Eliminar de promociones y pedidos solo afectan la vista.
+        </div>
+    </section>
+</main>
+
+<!-- MODAL CONFIRMACIÓN PRODUCTO -->
+<div class="confirm-overlay" id="confirm-overlay">
+    <div class="confirm-box">
+        <div class="confirm-icon">✕</div>
+        <h3>¿Eliminar producto?</h3>
+        <p>¿Seguro que deseas eliminar <strong id="confirm-nombre">este producto</strong>?</p>
+        <div class="confirm-actions">
+            <button class="btn-confirm-cancel" id="btn-cancelar-eliminar">Cancelar</button>
+            <button class="btn-confirm-delete" id="btn-confirmar-eliminar">Eliminar</button>
+        </div>
+    </div>
+</div>
+
+<div class="toast" id="toast">
+    <div class="toast-icon">✓</div>
+    <span id="toast-mensaje">Listo</span>
+</div>
+
+<script>
+    let productos = [
+        { id: 1, nombre: "Bomba Sumergible 1 HP", descripcion: "Bomba para extracción y suministro de agua en instalaciones residenciales.", precio: "4850" },
+        { id: 2, nombre: "Tubería PVC Hidráulica", descripcion: "Tubería resistente para instalaciones y sistemas de conducción de agua.", precio: "680" },
+        { id: 3, nombre: "Tanque de Agua 1,100 L", descripcion: "Tanque para almacenamiento de agua, ideal para hogares y pequeños negocios.", precio: "5290" },
+        { id: 4, nombre: "Bomba Presurizadora", descripcion: "Equipo para mejorar la presión del agua en diferentes puntos de consumo.", precio: "3250" },
+        { id: 5, nombre: "Kit de Instalación", descripcion: "Conjunto de materiales básicos para complementar una instalación hidráulica.", precio: "1490" },
+        { id: 6, nombre: "Perforación de Pozo", descripcion: "Servicio de perforación para proyectos de extracción y aprovechamiento de agua.", precio: "Cotizar" }
+    ];
+    let siguienteId = 7;
+    let idPendienteEliminar = null;
+
+    function mostrarNotificacion(mensaje) {
+        document.getElementById("toast-mensaje").textContent = mensaje;
+        const toast = document.getElementById("toast");
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 2800);
+    }
+
+    function renderizarProductos() {
+        const tbody = document.getElementById("tabla-productos");
+        document.getElementById("total-productos").textContent = productos.length;
+        if (productos.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="4" class="empty-message">No hay productos registrados.</td></tr>`;
+            return;
         }
+        tbody.innerHTML = productos.map(p => {
+            const precio = p.precio === "Cotizar" ? "Cotizar" : "$" + Number(p.precio).toLocaleString("es-MX");
+            return `<tr>
+                <td><strong>${p.nombre}</strong></td>
+                <td>${p.descripcion}</td>
+                <td class="price">${precio}</td>
+                <td><button class="btn-delete" onclick="pedirConfirmacionProducto(${p.id})">Eliminar</button></td>
+            </tr>`;
+        }).join("");
+    }
 
-        // =========================
-        // ELIMINAR PRODUCTO (sin confirm del navegador)
-        // =========================
-        function eliminarProducto(id) {
-            const producto = productos.find(p => p.id === id);
-            const nombre = producto ? producto.nombre : "Producto";
+    // Confirmación al borrar producto
+    function pedirConfirmacionProducto(id) {
+        const p = productos.find(x => x.id === id);
+        idPendienteEliminar = id;
+        document.getElementById("confirm-nombre").textContent = p ? `"${p.nombre}"` : "este producto";
+        document.getElementById("confirm-overlay").classList.add("show");
+    }
 
-            productos = productos.filter(p => p.id !== id);
-            renderizarProductos();
+    function cerrarConfirmacion() {
+        idPendienteEliminar = null;
+        document.getElementById("confirm-overlay").classList.remove("show");
+    }
 
-            mostrarNotificacion(`"${nombre}" eliminado correctamente`);
-        }
+    document.getElementById("btn-cancelar-eliminar").onclick = cerrarConfirmacion;
 
-        // =========================
-        // FORMULARIO AGREGAR
-        // =========================
-        const formAgregar = document.getElementById("form-agregar");
-        const btnMostrarForm = document.getElementById("btn-mostrar-form");
-        const btnCancelar = document.getElementById("btn-cancelar");
-        const btnGuardar = document.getElementById("btn-guardar");
-
-        btnMostrarForm.addEventListener("click", () => {
-            formAgregar.classList.add("active");
-            document.getElementById("nuevo-nombre").focus();
-        });
-
-        btnCancelar.addEventListener("click", () => {
-            formAgregar.classList.remove("active");
-            limpiarFormulario();
-        });
-
-        btnGuardar.addEventListener("click", () => {
-            const nombre = document.getElementById("nuevo-nombre").value.trim();
-            const descripcion = document.getElementById("nuevo-descripcion").value.trim();
-            const precio = document.getElementById("nuevo-precio").value.trim();
-
-            if (!nombre) {
-                mostrarNotificacion("El nombre del producto es obligatorio");
-                return;
-            }
-
-            productos.push({
-                id: siguienteId++,
-                nombre: nombre,
-                descripcion: descripcion || "Sin descripción",
-                precio: precio || "Cotizar"
-            });
-
-            renderizarProductos();
-            formAgregar.classList.remove("active");
-            limpiarFormulario();
-
-            mostrarNotificacion(`"${nombre}" agregado correctamente`);
-        });
-
-        function limpiarFormulario() {
-            document.getElementById("nuevo-nombre").value = "";
-            document.getElementById("nuevo-descripcion").value = "";
-            document.getElementById("nuevo-precio").value = "";
-        }
-
-        // =========================
-        // NAVEGACIÓN
-        // =========================
-        const links = document.querySelectorAll('.sidebar nav a');
-
-        links.forEach(function(link) {
-            link.addEventListener('click', function() {
-                links.forEach(function(item) {
-                    item.classList.remove('active');
-                });
-                this.classList.add('active');
-            });
-        });
-
-        const sections = document.querySelectorAll('main section[id]');
-
-        window.addEventListener('scroll', function() {
-            let current = '';
-
-            sections.forEach(function(section) {
-                const sectionTop = section.offsetTop - 150;
-                if (window.scrollY >= sectionTop) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            links.forEach(function(link) {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
-            });
-        });
-
-        // Inicializar tabla
+    document.getElementById("btn-confirmar-eliminar").onclick = function () {
+        if (idPendienteEliminar === null) return;
+        const p = productos.find(x => x.id === idPendienteEliminar);
+        const nombre = p ? p.nombre : "Producto";
+        productos = productos.filter(x => x.id !== idPendienteEliminar);
         renderizarProductos();
-    </script>
+        cerrarConfirmacion();
+        mostrarNotificacion(`"${nombre}" eliminado correctamente`);
+    };
 
+    document.getElementById("confirm-overlay").addEventListener("click", function (e) {
+        if (e.target === this) cerrarConfirmacion();
+    });
+
+    document.getElementById("btn-mostrar-form").onclick = () => {
+        document.getElementById("form-agregar").classList.add("active");
+    };
+    document.getElementById("btn-cancelar").onclick = () => {
+        document.getElementById("form-agregar").classList.remove("active");
+    };
+    document.getElementById("btn-guardar").onclick = () => {
+        const nombre = document.getElementById("nuevo-nombre").value.trim();
+        if (!nombre) { mostrarNotificacion("El nombre es obligatorio"); return; }
+        productos.push({
+            id: siguienteId++,
+            nombre,
+            descripcion: document.getElementById("nuevo-descripcion").value.trim() || "Sin descripción",
+            precio: document.getElementById("nuevo-precio").value.trim() || "Cotizar"
+        });
+        document.getElementById("form-agregar").classList.remove("active");
+        document.getElementById("nuevo-nombre").value = "";
+        document.getElementById("nuevo-descripcion").value = "";
+        document.getElementById("nuevo-precio").value = "";
+        renderizarProductos();
+        mostrarNotificacion(`"${nombre}" agregado`);
+    };
+
+    // Simulación pedidos / promos
+    function simularCambioEstado(select) {
+        mostrarNotificacion("Estado cambiado a: " + select.value + " (simulación)");
+    }
+    function simularEliminarPedido(btn) {
+        const order = btn.closest(".order");
+        if (order) order.remove();
+        mostrarNotificacion("Pedido eliminado (simulación)");
+    }
+    function simularEditarPromo(btn) {
+        const card = btn.closest(".promotion-card");
+        const titulo = card ? card.querySelector("h3").textContent : "Promoción";
+        mostrarNotificacion('Editando "' + titulo + '" (simulación)');
+    }
+    function simularEliminarPromo(btn) {
+        const card = btn.closest(".promotion-card");
+        if (card) card.remove();
+        mostrarNotificacion("Promoción eliminada (simulación)");
+    }
+
+    document.querySelectorAll(".sidebar nav a").forEach(link => {
+        link.addEventListener("click", function () {
+            document.querySelectorAll(".sidebar nav a").forEach(i => i.classList.remove("active"));
+            this.classList.add("active");
+        });
+    });
+    window.addEventListener("scroll", () => {
+        let current = "";
+        document.querySelectorAll("main section[id]").forEach(s => {
+            if (window.scrollY >= s.offsetTop - 150) current = s.getAttribute("id");
+        });
+        document.querySelectorAll(".sidebar nav a").forEach(link => {
+            link.classList.remove("active");
+            if (link.getAttribute("href") === "#" + current) link.classList.add("active");
+        });
+    });
+
+    renderizarProductos();
+</script>
 </body>
 </html>
