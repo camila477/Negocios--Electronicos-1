@@ -1,204 +1,122 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrador | Perforaciones Palacios</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: Arial, Helvetica, sans-serif; background: #f7f9fa; color: #183b4e; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Administrador | Perforaciones Palacios</title>
 
-        .sidebar {
-            position: fixed; top: 0; left: 0; width: 235px; height: 100vh;
-            background: #183b4e; color: white; padding: 28px 15px;
-            display: flex; flex-direction: column;
-            border-right: 1px solid rgba(255,255,255,0.05); z-index: 1000;
-        }
-        .logo { padding: 0 12px; margin-bottom: 42px; }
-        .logo h2 { font-size: 18px; font-weight: 500; }
-        .logo span { display: block; color: #38bdf8; font-size: 23px; font-weight: 700; margin-top: 2px; }
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:#f7f9fa;color:#183b4e}
 
-        .sidebar nav { display: flex; flex-direction: column; gap: 4px; }
-        .sidebar nav a, .menu-bottom a {
-            display: flex; align-items: center; gap: 13px; padding: 12px 14px;
-            border-radius: 7px; color: #cbdbe2; text-decoration: none; font-size: 14px; transition: 0.2s;
-        }
-        .sidebar nav a:hover, .menu-bottom a:hover { background: rgba(255,255,255,0.07); color: white; }
-        .sidebar nav a.active { background: rgba(56, 189, 248, 0.15); color: #38bdf8; font-weight: 600; }
+.sidebar{position:fixed;top:0;left:0;width:235px;height:100vh;background:#183b4e;color:white;padding:28px 15px;display:flex;flex-direction:column;z-index:1000}
+.logo{padding:0 12px;margin-bottom:42px}
+.logo h2{font-size:18px;font-weight:500}
+.logo span{display:block;color:#38bdf8;font-size:23px;font-weight:bold;margin-top:3px}
+.sidebar nav,.menu-bottom{display:flex;flex-direction:column;gap:5px}
+.sidebar nav a,.menu-bottom a{display:flex;align-items:center;gap:12px;padding:13px 14px;color:#cbdbe2;text-decoration:none;border-radius:7px;font-size:14px}
+.sidebar nav a:hover,.menu-bottom a:hover,.sidebar nav a.active{background:rgba(56,189,248,.15);color:#38bdf8}
+.menu-bottom{margin-top:auto;border-top:1px solid #45606e;padding-top:15px}
+.main-content{margin-left:235px;padding:38px 40px;min-height:100vh}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:35px;padding-bottom:24px;border-bottom:1px solid #e5ecef}
+.topbar h1{font-size:27px;margin-bottom:7px}
+.topbar p,.section-header p{color:#71848d;font-size:13px}
+.admin-user{display:flex;align-items:center;gap:11px}
+.admin-icon{width:40px;height:40px;border-radius:50%;background:#e8f7fd;color:#155e75;border:1px solid #cdebf5;display:flex;align-items:center;justify-content:center;font-weight:bold}
+.admin-user strong,.admin-user small{display:block}
+.admin-user strong{font-size:13px}
+.admin-user small{font-size:11px;color:#84959d;margin-top:3px}
 
-        .menu-icon { width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; color: currentColor; flex-shrink: 0; }
-        .icon-home { width: 14px; height: 12px; border: 1.5px solid currentColor; border-top: none; position: relative; margin-top: 4px; }
-        .icon-home::before { content: ""; position: absolute; width: 10px; height: 10px; border-left: 1.5px solid currentColor; border-top: 1.5px solid currentColor; transform: rotate(45deg); top: -5px; left: 0; }
-        .icon-box { width: 14px; height: 13px; border: 1.5px solid currentColor; border-radius: 2px; position: relative; }
-        .icon-box::before { content: ""; position: absolute; left: 2px; right: 2px; top: 3px; border-top: 1.5px solid currentColor; }
-        .icon-cart { width: 14px; height: 10px; border-bottom: 1.5px solid currentColor; border-left: 1.5px solid currentColor; transform: skew(-10deg); position: relative; }
-        .icon-cart::before, .icon-cart::after { content: ""; position: absolute; width: 3px; height: 3px; border: 1.5px solid currentColor; border-radius: 50%; bottom: -6px; }
-        .icon-cart::before { left: 1px; } .icon-cart::after { right: 0; }
-        .icon-tag { width: 15px; height: 11px; border: 1.5px solid currentColor; border-radius: 2px; transform: rotate(-45deg); position: relative; }
-        .icon-tag::after { content: ""; position: absolute; width: 3px; height: 3px; border: 1px solid currentColor; border-radius: 50%; left: 2px; top: 2px; }
-        .icon-globe { width: 15px; height: 15px; border: 1.5px solid currentColor; border-radius: 50%; position: relative; }
-        .icon-globe::before { content: ""; position: absolute; top: 2px; bottom: 2px; left: 5px; width: 3px; border-left: 1px solid currentColor; border-right: 1px solid currentColor; border-radius: 50%; }
-        .icon-globe::after { content: ""; position: absolute; left: 2px; right: 2px; top: 6px; border-top: 1px solid currentColor; }
-        .icon-exit { width: 14px; height: 14px; border: 1.5px solid currentColor; border-radius: 2px; position: relative; }
-        .icon-exit::after { content: ""; position: absolute; width: 7px; border-top: 1.5px solid currentColor; right: -5px; top: 6px; }
+.welcome{background:#183b4e;color:white;padding:28px 30px;border-radius:10px;margin-bottom:25px}
+.welcome h2{font-size:20px;margin-bottom:7px}
+.welcome p{color:#cbdbe2;font-size:14px;line-height:1.5}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:25px}
+.card{background:white;border:1px solid #e3eaed;border-radius:10px;padding:22px;text-decoration:none;color:inherit;transition:.2s}
+.card:hover{border-color:#38bdf8;transform:translateY(-2px)}
+.card span{display:block;color:#71848d;font-size:13px;margin-bottom:5px}
+.card strong{display:block;font-size:27px;margin:8px 0}
+.information,.hidden-section{background:white;border:1px solid #e3eaed;border-radius:10px;padding:25px;margin-top:30px}
+.information h2{font-size:18px;margin-bottom:8px}
+.information p{font-size:13px;color:#71848d;line-height:1.6}
+.section-header{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;margin-bottom:22px}
+.section-header h2{font-size:20px;margin-bottom:6px}
 
-        .menu-bottom { margin-top: auto; display: flex; flex-direction: column; gap: 3px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 15px; }
+button{cursor:pointer;font-size:13px;border-radius:6px;padding:9px 13px;transition:.2s}
+.btn-add,.btn-save{background:#183b4e;color:white;border:none}
+.btn-add:hover,.btn-save:hover{background:#24566d}
+.btn-edit{background:#eef9fc;color:#1685a5;border:1px solid #d9eef5;margin-right:5px}
+.btn-edit:hover{background:#e0f2fe}
+.btn-delete{background:#fef2f2;color:#b91c1c;border:1px solid #fecaca}
+.btn-delete:hover{background:#fee2e2}
+.btn-cancel{background:white;color:#5e747e;border:1px solid #d0e0e6}
+.btn-cancel:hover{background:#f1f5f7}
 
-        .main-content { margin-left: 235px; min-height: 100vh; padding: 38px 50px; }
-        .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px; padding-bottom: 24px; border-bottom: 1px solid #e5ecef; }
-        .topbar h1 { font-size: 27px; font-weight: 600; color: #183b4e; margin-bottom: 7px; }
-        .topbar p { color: #70838c; font-size: 14px; }
+.table-wrapper{overflow-x:auto;border:1px solid #e3eaed;border-radius:8px}
+.products-table{width:100%;border-collapse:collapse;font-size:13px}
+.products-table thead{background:#f1f9fc}
+.products-table th{text-align:left;padding:13px;color:#183b4e;border-bottom:1px solid #e3eaed}
+.products-table td{padding:14px;border-bottom:1px solid #eef2f4;color:#3a5563;vertical-align:middle}
+.products-table tbody tr:hover{background:#f9fbfc}
+.price{font-weight:bold;color:#183b4e}
+.empty-message{text-align:center;padding:30px;color:#84959d}
 
-        .admin-user { display: flex; align-items: center; gap: 11px; }
-        .admin-icon { width: 38px; height: 38px; border-radius: 50%; background: #e8f7fd; color: #155e75; border: 1px solid #cdebf5; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; }
-        .admin-user strong { display: block; color: #183b4e; font-size: 13px; }
-        .admin-user small { display: block; color: #84959d; font-size: 11px; margin-top: 3px; }
+.add-form{display:none;background:#f1f9fc;border:1px solid #d9eef5;border-radius:8px;padding:20px;margin-bottom:20px}
+.add-form.active{display:block}
+.form-row{display:grid;grid-template-columns:1fr 1fr 140px;gap:12px;margin-bottom:14px}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-group label{font-size:12px;color:#5e747e;font-weight:bold}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:11px 12px;border:1px solid #d0e0e6;border-radius:6px;font:inherit;font-size:13px;color:#183b4e;background:white}
+.form-group textarea{min-height:90px;resize:vertical}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:#38bdf8;box-shadow:0 0 0 3px rgba(56,189,248,.15)}
+.form-actions{display:flex;justify-content:flex-end;gap:10px}
 
-        .welcome { background: #183b4e; color: white; padding: 28px 30px; border-radius: 10px; margin-bottom: 25px; }
-        .welcome h2 { font-size: 20px; font-weight: 500; margin-bottom: 7px; }
-        .welcome p { color: #cbdbe2; line-height: 1.5; font-size: 14px; }
+.orders-list{display:grid;gap:12px}
+.order{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:#f9fbfc;border:1px solid #e3eaed;border-radius:8px;padding:16px}
+.order strong{display:block;font-size:13px;margin-bottom:5px}
+.order small{font-size:12px;color:#71848d}
+.order-controls{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.order-status-select{padding:8px;border:1px solid #d0e0e6;border-radius:5px;background:white;color:#183b4e}
 
-        .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 25px; }
-        .card { background: white; border: 1px solid #e3eaed; border-radius: 10px; padding: 22px; display: flex; align-items: center; gap: 15px; transition: 0.2s; text-decoration: none; color: inherit; cursor: pointer; }
-        .card:hover { border-color: #c9e5ed; transform: translateY(-2px); box-shadow: 0 7px 18px rgba(24,59,78,0.06); }
-        .card-icon { width: 45px; height: 45px; border-radius: 9px; background: #eef9fc; color: #1685a5; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .card-icon .icon-box { width: 15px; height: 14px; }
-        .card-icon .icon-cart { width: 15px; height: 11px; }
-        .card-icon .icon-tag { width: 16px; height: 12px; }
-        .card-info span { display: block; color: #71848d; font-size: 13px; margin-bottom: 4px; }
-        .card-info strong { display: block; color: #183b4e; font-size: 27px; font-weight: 600; margin-bottom: 2px; }
-        .card-info small { color: #9aa9af; font-size: 11px; }
+.promotion-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.promotion-card{background:#f9fbfc;border:1px solid #e3eaed;border-radius:10px;overflow:hidden}
+.promotion-image{height:110px;background:#eef9fc;display:flex;align-items:center;justify-content:center;color:#1685a5;font-weight:bold}
+.promotion-content{padding:18px}
+.promotion-content h3{font-size:16px;margin-bottom:8px}
+.promotion-content p{font-size:13px;line-height:1.5;color:#71848d;margin-bottom:15px}
+.discount{display:inline-block;margin:12px 12px 0;background:#38bdf8;padding:6px 9px;border-radius:5px;font-size:12px;font-weight:bold}
+.promotion-footer{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.status{font-size:11px;color:#28734a;background:#e9f8ef;padding:5px 8px;border-radius:4px}
+.promotion-note{margin-top:18px;padding:14px;background:#f1f9fc;border:1px solid #d9eef5;border-radius:7px;font-size:12px;color:#5e747e}
 
-        .information { background: white; border: 1px solid #e3eaed; border-radius: 10px; padding: 24px 26px; }
-        .information h2 { color: #183b4e; font-size: 18px; font-weight: 600; margin-bottom: 8px; }
-        .information p { color: #71848d; line-height: 1.6; font-size: 13px; }
+/* FORMULARIO DE EDICIÓN DENTRO DE LA PÁGINA */
+.editor-overlay{position:fixed;inset:0;background:rgba(24,59,78,.58);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;padding:18px;z-index:6000}
+.editor-overlay.show{display:flex}
+.editor-box{background:white;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;border-radius:13px;padding:26px;box-shadow:0 20px 55px rgba(24,59,78,.25)}
+.editor-box h3{font-size:21px;margin-bottom:7px}
+.editor-subtitle{font-size:13px;color:#71848d;margin-bottom:20px;line-height:1.5}
+.editor-fields{display:grid;gap:14px}
+.editor-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:22px;flex-wrap:wrap}
 
-        .hidden-section { margin-top: 40px; background: white; padding: 25px 26px; border-radius: 10px; border: 1px solid #e3eaed; scroll-margin-top: 25px; }
-        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; gap: 15px; flex-wrap: wrap; }
-        .section-header h2 { color: #183b4e; font-size: 19px; font-weight: 600; margin-bottom: 5px; }
-        .section-header p { margin: 0; color: #71848d; font-size: 13px; }
+/* CONFIRMACIÓN Y MENSAJES DENTRO DE LA PÁGINA */
+.confirm-overlay{position:fixed;inset:0;background:rgba(24,59,78,.55);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;padding:20px;z-index:7000}
+.confirm-overlay.show{display:flex}
+.confirm-box{background:white;border-radius:13px;padding:28px;max-width:400px;width:100%;text-align:center;box-shadow:0 20px 50px rgba(24,59,78,.2)}
+.confirm-icon{width:48px;height:48px;background:#fef2f2;color:#b91c1c;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 15px;font-size:22px}
+.confirm-box h3{margin-bottom:8px}
+.confirm-box p{color:#71848d;font-size:14px;line-height:1.5;margin-bottom:22px}
+.confirm-actions{display:flex;gap:10px}
+.confirm-actions button{flex:1}
+.btn-confirm-delete{background:#b91c1c;color:white;border:0}
+.toast{position:fixed;bottom:25px;right:25px;background:#183b4e;color:white;padding:14px 20px;border-radius:8px;box-shadow:0 8px 24px rgba(24,59,78,.25);opacity:0;transform:translateY(15px);transition:.25s;pointer-events:none;z-index:8000;font-size:13px}
+.toast.show{opacity:1;transform:translateY(0)}
 
-        .btn-add, .btn-save { background: #183b4e; color: white; border: none; border-radius: 6px; padding: 10px 16px; font-size: 13px; cursor: pointer; }
-        .btn-add:hover, .btn-save:hover { background: #24566d; }
-        .btn-delete { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; border-radius: 5px; padding: 6px 11px; font-size: 12px; cursor: pointer; }
-        .btn-delete:hover { background: #fee2e2; }
-        .btn-edit { background: #eef9fc; color: #1685a5; border: 1px solid #d9eef5; border-radius: 5px; padding: 6px 11px; font-size: 12px; cursor: pointer; margin-right: 6px; }
-        .btn-edit:hover { background: #e0f2fe; }
-        .btn-cancel { background: white; color: #5e747e; border: 1px solid #d0e0e6; border-radius: 6px; padding: 9px 14px; font-size: 13px; cursor: pointer; }
-        .btn-cancel:hover { background: #f7f9fa; }
-
-        .table-wrapper { overflow-x: auto; border: 1px solid #e3eaed; border-radius: 8px; }
-        .products-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-        .products-table thead { background: #f1f9fc; }
-        .products-table th { text-align: left; padding: 13px 16px; color: #183b4e; font-weight: 600; border-bottom: 1px solid #e3eaed; }
-        .products-table td { padding: 14px 16px; border-bottom: 1px solid #eef2f4; color: #3a5563; vertical-align: middle; }
-        .products-table tbody tr:last-child td { border-bottom: none; }
-        .products-table tbody tr:hover { background: #f9fbfc; }
-        .products-table .price { color: #183b4e; font-weight: 700; font-size: 14px; }
-        .empty-message { text-align: center; padding: 40px 20px; color: #84959d; font-size: 14px; }
-
-        .add-form { display: none; background: #f1f9fc; border: 1px solid #d9eef5; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
-        .add-form.active { display: block; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr 140px; gap: 12px; margin-bottom: 14px; }
-        .form-group { display: flex; flex-direction: column; gap: 5px; }
-        .form-group label { font-size: 12px; color: #5e747e; font-weight: 600; }
-        .form-group input { padding: 9px 12px; border: 1px solid #d0e0e6; border-radius: 6px; font-size: 13px; color: #183b4e; outline: none; }
-        .form-group input:focus { border-color: #38bdf8; box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15); }
-        .form-actions { display: flex; gap: 10px; justify-content: flex-end; }
-
-        .orders-list { display: grid; gap: 12px; }
-        .order {
-            display: flex; justify-content: space-between; align-items: center;
-            background: #f9fbfc; border: 1px solid #e3eaed; border-radius: 8px; padding: 15px; gap: 12px; flex-wrap: wrap;
-        }
-        .order strong { display: block; color: #183b4e; font-size: 13px; margin-bottom: 4px; }
-        .order small { color: #84959d; font-size: 11px; }
-        .order-status-select {
-            padding: 6px 10px; border-radius: 5px; border: 1px solid #d0e0e6;
-            font-size: 12px; color: #183b4e; background: white; cursor: pointer;
-        }
-
-        .promotion-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-        .promotion-card {
-            background: #f9fbfc; border: 1px solid #e3eaed; border-radius: 10px;
-            overflow: hidden; position: relative; transition: 0.2s;
-        }
-        .promotion-card:hover { border-color: #c9e5ed; box-shadow: 0 8px 20px rgba(24,59,78,0.07); }
-        .promotion-image {
-            height: 120px; background: #eef9fc; display: flex; align-items: center;
-            justify-content: center; color: #1685a5; font-size: 14px; font-weight: 600;
-        }
-        .promotion-content { padding: 18px; }
-        .promotion-content h3 { color: #183b4e; font-size: 16px; margin-bottom: 7px; }
-        .promotion-content p { color: #71848d; font-size: 13px; line-height: 1.5; margin-bottom: 14px; }
-        .discount {
-            position: absolute; top: 12px; right: 12px; background: #38bdf8; color: #183b4e;
-            padding: 5px 8px; border-radius: 5px; font-size: 11px; font-weight: 700;
-        }
-        .status { display: inline-block; padding: 4px 7px; border-radius: 4px; background: #e9f8ef; color: #28734a; font-size: 10px; font-weight: 600; }
-        .promotion-footer { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
-        .promotion-note { margin-top: 18px; padding: 13px 15px; background: #f1f9fc; border: 1px solid #d9eef5; border-radius: 7px; color: #5e747e; font-size: 12px; }
-
-        /* MODAL CONFIRMACIÓN */
-        .confirm-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(24, 59, 78, 0.55); backdrop-filter: blur(4px);
-            display: none; justify-content: center; align-items: center;
-            z-index: 5000; padding: 20px;
-        }
-        .confirm-overlay.show { display: flex; }
-        .confirm-box {
-            background: white; border-radius: 14px; padding: 28px 30px;
-            max-width: 400px; width: 100%;
-            box-shadow: 0 20px 50px rgba(24, 59, 78, 0.2); text-align: center;
-        }
-        .confirm-icon {
-            width: 52px; height: 52px; background: #fef2f2; border: 1px solid #fecaca;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 16px; color: #b91c1c; font-size: 22px; font-weight: bold;
-        }
-        .confirm-box h3 { color: #183b4e; font-size: 18px; margin-bottom: 8px; }
-        .confirm-box p { color: #71848d; font-size: 14px; line-height: 1.5; margin-bottom: 24px; }
-        .confirm-box p strong { color: #183b4e; }
-        .confirm-actions { display: flex; gap: 12px; }
-        .confirm-actions button {
-            flex: 1; padding: 11px 16px; border-radius: 8px; font-size: 13px;
-            font-weight: 600; cursor: pointer; border: none; transition: 0.2s;
-        }
-        .btn-confirm-cancel { background: #f1f5f7; color: #5e747e; border: 1px solid #e3eaed !important; }
-        .btn-confirm-cancel:hover { background: #e8eef1; }
-        .btn-confirm-delete { background: #b91c1c; color: white; }
-        .btn-confirm-delete:hover { background: #991b1b; }
-
-        .toast {
-            position: fixed; bottom: 30px; right: 30px; background: #183b4e; color: white;
-            padding: 14px 20px; border-radius: 8px; font-size: 13px;
-            box-shadow: 0 8px 24px rgba(24, 59, 78, 0.25); display: flex; align-items: center; gap: 10px;
-            z-index: 9999; opacity: 0; transform: translateY(20px); transition: all 0.3s; pointer-events: none;
-        }
-        .toast.show { opacity: 1; transform: translateY(0); }
-        .toast .toast-icon {
-            width: 18px; height: 18px; background: #38bdf8; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; color: #183b4e;
-        }
-
-        @media (max-width: 1100px) {
-            .cards, .promotion-grid { grid-template-columns: 1fr; }
-            .main-content { padding: 30px; }
-            .form-row { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 700px) {
-            .sidebar { width: 65px; padding: 20px 8px; }
-            .logo h2, .logo span, .sidebar nav a span, .menu-bottom a span { display: none; }
-            .sidebar nav a, .menu-bottom a { justify-content: center; padding: 13px 5px; }
-            .main-content { margin-left: 65px; padding: 25px 18px; }
-            .topbar { flex-direction: column; align-items: flex-start; gap: 18px; }
-            .order { flex-direction: column; align-items: flex-start; }
-            .toast { bottom: 20px; right: 15px; left: 15px; }
-        }
-    </style>
+@media(max-width:1100px){.cards,.promotion-grid{grid-template-columns:1fr 1fr}.main-content{padding:25px}.form-row{grid-template-columns:1fr}}
+@media(max-width:700px){.sidebar{width:65px;padding:20px 7px}.logo h2,.logo span,.sidebar nav a span,.menu-bottom a span{display:none}.sidebar nav a,.menu-bottom a{justify-content:center;padding:13px 5px}.main-content{margin-left:65px;padding:20px 12px}.cards,.promotion-grid{grid-template-columns:1fr}.topbar{align-items:flex-start;flex-direction:column;gap:12px}.order{align-items:flex-start;flex-direction:column}.toast{left:15px;right:15px;bottom:15px}.hidden-section{padding:17px}}
+</style>
 </head>
+
 <body>
 
 <aside class="sidebar">
@@ -237,369 +155,474 @@
         </div>
         <div class="cards">
             <a href="#productos" class="card">
-                <div class="card-icon"><div class="icon-box"></div></div>
-                <div class="card-info"><span>Productos</span><strong id="total-productos">6</strong><small>Productos registrados</small></div>
+                <span>Productos</span>
+                <strong id="total-productos">0</strong>
+                <small>Productos registrados</small>
             </a>
             <a href="#pedidos" class="card">
-                <div class="card-icon"><div class="icon-cart"></div></div>
-                <div class="card-info"><span>Pedidos</span><strong>5</strong><small>Pedidos realizados</small></div>
+                <span>Pedidos</span>
+                <strong id="total-pedidos">0</strong>
+                <small>Pedidos registrados</small>
             </a>
             <a href="#promociones" class="card">
-                <div class="card-icon"><div class="icon-tag"></div></div>
-                <div class="card-info"><span>Promociones</span><strong>3</strong><small>Promociones activas</small></div>
+                <span>Promociones</span>
+                <strong id="total-promociones">0</strong>
+                <small>Promociones registradas</small>
             </a>
         </div>
         <div class="information">
             <h2>Actividad del sitio</h2>
-            <p>Desde este panel puedes administrar productos, revisar pedidos y gestionar promociones. Al eliminar un producto se pide confirmación dentro de la página.</p>
+            <p>Administra productos, pedidos y promociones. Los formularios y las confirmaciones aparecen dentro de esta página.</p>
         </div>
     </section>
 
-    <!-- PRODUCTOS -->
     <section id="productos" class="hidden-section">
         <div class="section-header">
             <div>
                 <h2>Productos</h2>
-                <p>Productos disponibles para los servicios de Perforaciones Palacios.</p>
+                <p>Administra los productos y servicios disponibles.</p>
             </div>
-            <button class="btn-add" id="btn-mostrar-form">+ Agregar producto</button>
+            <button class="btn-add" onclick="mostrarFormularioProducto()">+ Agregar producto</button>
         </div>
+
         <div class="add-form" id="form-agregar">
             <div class="form-row">
                 <div class="form-group">
                     <label>Nombre del producto</label>
-                    <input type="text" id="nuevo-nombre" placeholder="Ej: Bomba Sumergible 1 HP">
+                    <input type="text" id="nuevo-nombre" placeholder="Nombre del producto">
                 </div>
                 <div class="form-group">
                     <label>Descripción</label>
-                    <input type="text" id="nuevo-descripcion" placeholder="Breve descripción">
+                    <input type="text" id="nuevo-descripcion" placeholder="Descripción">
                 </div>
                 <div class="form-group">
                     <label>Precio</label>
-                    <input type="text" id="nuevo-precio" placeholder="Ej: 4850">
+                    <input type="text" id="nuevo-precio" placeholder="Precio">
                 </div>
             </div>
             <div class="form-actions">
-                <button type="button" class="btn-cancel" id="btn-cancelar">Cancelar</button>
-                <button type="button" class="btn-save" id="btn-guardar">Guardar producto</button>
+                <button class="btn-cancel" onclick="cancelarFormularioProducto()">Cancelar</button>
+                <button class="btn-save" onclick="agregarProducto()">Guardar producto</button>
             </div>
         </div>
+
         <div class="table-wrapper">
             <table class="products-table">
                 <thead>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Descripción</th>
-                        <th>Precio</th>
-                        <th style="width:110px;">Acciones</th>
-                    </tr>
+                    <tr><th>Producto</th><th>Descripción</th><th>Precio</th><th>Acciones</th></tr>
                 </thead>
                 <tbody id="tabla-productos"></tbody>
             </table>
         </div>
-        <div class="promotion-note" style="margin-top:18px;">
-            <strong>Tip:</strong> Al eliminar un producto se pedirá confirmación en la página.
-        </div>
     </section>
 
-    <!-- PEDIDOS -->
     <section id="pedidos" class="hidden-section">
         <div class="section-header">
             <div>
                 <h2>Pedidos</h2>
-                <p>Consulta y simula cambios de estado de los pedidos.</p>
+                <p>Consulta, edita y cambia el estado de los pedidos.</p>
             </div>
+            <button class="btn-add" onclick="abrirEditor('pedido')">+ Agregar pedido</button>
         </div>
-        <div class="orders-list">
-            <div class="order">
-                <div>
-                    <strong>Pedido #001 — Bomba Sumergible 1 HP</strong>
-                    <small>Cliente: Juan Martínez · $4,850</small>
-                </div>
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <select class="order-status-select" onchange="simularCambioEstado(this)">
-                        <option selected>En proceso</option>
-                        <option>Confirmado</option>
-                        <option>Entregado</option>
-                        <option>Pendiente</option>
-                        <option>Cancelado</option>
-                    </select>
-                    <button class="btn-delete" onclick="simularEliminarPedido(this)">Eliminar</button>
-                </div>
-            </div>
-            <div class="order">
-                <div>
-                    <strong>Pedido #002 — Tanque de Agua 1,100 L</strong>
-                    <small>Cliente: Laura Hernández · $5,290</small>
-                </div>
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <select class="order-status-select" onchange="simularCambioEstado(this)">
-                        <option>En proceso</option>
-                        <option selected>Confirmado</option>
-                        <option>Entregado</option>
-                        <option>Pendiente</option>
-                        <option>Cancelado</option>
-                    </select>
-                    <button class="btn-delete" onclick="simularEliminarPedido(this)">Eliminar</button>
-                </div>
-            </div>
-            <div class="order">
-                <div>
-                    <strong>Pedido #003 — Kit de Instalación</strong>
-                    <small>Cliente: Carlos Ramírez · $1,490</small>
-                </div>
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <select class="order-status-select" onchange="simularCambioEstado(this)">
-                        <option>En proceso</option>
-                        <option>Confirmado</option>
-                        <option selected>Entregado</option>
-                        <option>Pendiente</option>
-                        <option>Cancelado</option>
-                    </select>
-                    <button class="btn-delete" onclick="simularEliminarPedido(this)">Eliminar</button>
-                </div>
-            </div>
-            <div class="order">
-                <div>
-                    <strong>Pedido #004 — Tubería PVC Hidráulica</strong>
-                    <small>Cliente: María López · $680</small>
-                </div>
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <select class="order-status-select" onchange="simularCambioEstado(this)">
-                        <option selected>En proceso</option>
-                        <option>Confirmado</option>
-                        <option>Entregado</option>
-                        <option>Pendiente</option>
-                        <option>Cancelado</option>
-                    </select>
-                    <button class="btn-delete" onclick="simularEliminarPedido(this)">Eliminar</button>
-                </div>
-            </div>
-            <div class="order">
-                <div>
-                    <strong>Pedido #005 — Perforación de Pozo</strong>
-                    <small>Cliente: Empresa Constructora · Cotización</small>
-                </div>
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <select class="order-status-select" onchange="simularCambioEstado(this)">
-                        <option>En proceso</option>
-                        <option>Confirmado</option>
-                        <option>Entregado</option>
-                        <option selected>Pendiente</option>
-                        <option>Cancelado</option>
-                    </select>
-                    <button class="btn-delete" onclick="simularEliminarPedido(this)">Eliminar</button>
-                </div>
-            </div>
-        </div>
+        <div class="orders-list" id="lista-pedidos"></div>
     </section>
 
-    <!-- PROMOCIONES -->
     <section id="promociones" class="hidden-section">
         <div class="section-header">
             <div>
                 <h2>Promociones</h2>
-                <p>Ofertas activas (edición simulada).</p>
+                <p>Administra las ofertas de tu negocio.</p>
             </div>
+            <button class="btn-add" onclick="abrirEditor('promocion')">+ Agregar promoción</button>
         </div>
-        <div class="promotion-grid">
-            <article class="promotion-card">
-                <span class="discount">15% OFF</span>
-                <div class="promotion-image">Promoción 01</div>
-                <div class="promotion-content">
-                    <h3>Descuento en bomba sumergible</h3>
-                    <p>Obtén 15% de descuento en la compra de una bomba sumergible de 1 HP.</p>
-                    <div class="promotion-footer">
-                        <span class="status">Activa</span>
-                        <div>
-                            <button class="btn-edit" onclick="simularEditarPromo(this)">Editar</button>
-                            <button class="btn-delete" onclick="simularEliminarPromo(this)">Eliminar</button>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article class="promotion-card">
-                <span class="discount">10% OFF</span>
-                <div class="promotion-image">Promoción 02</div>
-                <div class="promotion-content">
-                    <h3>Promoción Kit de instalación</h3>
-                    <p>10% de descuento al adquirir un kit de instalación junto con otro producto.</p>
-                    <div class="promotion-footer">
-                        <span class="status">Activa</span>
-                        <div>
-                            <button class="btn-edit" onclick="simularEditarPromo(this)">Editar</button>
-                            <button class="btn-delete" onclick="simularEliminarPromo(this)">Eliminar</button>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article class="promotion-card">
-                <span class="discount">20% OFF</span>
-                <div class="promotion-image">Promoción 03</div>
-                <div class="promotion-content">
-                    <h3>Promoción por temporada</h3>
-                    <p>20% de descuento en productos seleccionados durante la temporada de promoción.</p>
-                    <div class="promotion-footer">
-                        <span class="status">Activa</span>
-                        <div>
-                            <button class="btn-edit" onclick="simularEditarPromo(this)">Editar</button>
-                            <button class="btn-delete" onclick="simularEliminarPromo(this)">Eliminar</button>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </div>
-        <div class="promotion-note">
-            <strong>Simulación:</strong> Editar y Eliminar de promociones y pedidos solo afectan la vista.
-        </div>
+        <div class="promotion-grid" id="lista-promociones"></div>
+        <div class="promotion-note">Los cambios se guardan en este navegador.</div>
     </section>
 </main>
 
-<!-- MODAL CONFIRMACIÓN PRODUCTO -->
+<!-- FORMULARIO DE EDICIÓN DENTRO DE LA PÁGINA -->
+<div class="editor-overlay" id="editor-overlay">
+    <div class="editor-box">
+        <h3 id="editor-titulo">Editar elemento</h3>
+        <p class="editor-subtitle" id="editor-subtitulo">Modifica la información y guarda los cambios.</p>
+        <form id="editor-form">
+            <div class="editor-fields" id="editor-campos"></div>
+            <div class="editor-actions">
+                <button type="button" class="btn-cancel" onclick="cerrarEditor()">Cancelar</button>
+                <button type="submit" class="btn-save" id="editor-guardar">Guardar cambios</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- CONFIRMACIÓN DENTRO DE LA PÁGINA -->
 <div class="confirm-overlay" id="confirm-overlay">
     <div class="confirm-box">
-        <div class="confirm-icon">✕</div>
-        <h3>¿Eliminar producto?</h3>
-        <p>¿Seguro que deseas eliminar <strong id="confirm-nombre">este producto</strong>?</p>
+        <div class="confirm-icon">!</div>
+        <h3 id="confirm-titulo">¿Eliminar elemento?</h3>
+        <p id="confirm-texto">¿Estás seguro de que deseas eliminar este elemento?</p>
         <div class="confirm-actions">
-            <button class="btn-confirm-cancel" id="btn-cancelar-eliminar">Cancelar</button>
-            <button class="btn-confirm-delete" id="btn-confirmar-eliminar">Eliminar</button>
+            <button class="btn-cancel" onclick="cerrarConfirmacion()">Cancelar</button>
+            <button class="btn-confirm-delete" onclick="confirmarEliminacion()">Eliminar</button>
         </div>
     </div>
 </div>
 
-<div class="toast" id="toast">
-    <div class="toast-icon">✓</div>
-    <span id="toast-mensaje">Listo</span>
-</div>
+<div class="toast" id="toast"></div>
 
 <script>
-    let productos = [
-        { id: 1, nombre: "Bomba Sumergible 1 HP", descripcion: "Bomba para extracción y suministro de agua en instalaciones residenciales.", precio: "4850" },
-        { id: 2, nombre: "Tubería PVC Hidráulica", descripcion: "Tubería resistente para instalaciones y sistemas de conducción de agua.", precio: "680" },
-        { id: 3, nombre: "Tanque de Agua 1,100 L", descripcion: "Tanque para almacenamiento de agua, ideal para hogares y pequeños negocios.", precio: "5290" },
-        { id: 4, nombre: "Bomba Presurizadora", descripcion: "Equipo para mejorar la presión del agua en diferentes puntos de consumo.", precio: "3250" },
-        { id: 5, nombre: "Kit de Instalación", descripcion: "Conjunto de materiales básicos para complementar una instalación hidráulica.", precio: "1490" },
-        { id: 6, nombre: "Perforación de Pozo", descripcion: "Servicio de perforación para proyectos de extracción y aprovechamiento de agua.", precio: "Cotizar" }
-    ];
-    let siguienteId = 7;
-    let idPendienteEliminar = null;
+let productos = [
+    {id:1,nombre:"Bomba Sumergible 1 HP",descripcion:"Bomba para extracción y suministro de agua en instalaciones residenciales.",precio:"4850"},
+    {id:2,nombre:"Tubería PVC Hidráulica",descripcion:"Tubería resistente para instalaciones y sistemas de conducción de agua.",precio:"680"},
+    {id:3,nombre:"Tanque de Agua 1,100 L",descripcion:"Tanque para almacenamiento de agua.",precio:"5290"},
+    {id:4,nombre:"Bomba Presurizadora",descripcion:"Equipo para mejorar la presión del agua.",precio:"3250"},
+    {id:5,nombre:"Kit de Instalación",descripcion:"Materiales para complementar una instalación hidráulica.",precio:"1490"},
+    {id:6,nombre:"Perforación de Pozo",descripcion:"Servicio de perforación de pozos.",precio:"Cotizar"}
+];
 
-    function mostrarNotificacion(mensaje) {
-        document.getElementById("toast-mensaje").textContent = mensaje;
-        const toast = document.getElementById("toast");
-        toast.classList.add("show");
-        setTimeout(() => toast.classList.remove("show"), 2800);
+let pedidos = [
+    {id:1,producto:"Bomba Sumergible 1 HP",cliente:"Juan Martínez",precio:"4850",estado:"En proceso"},
+    {id:2,producto:"Tanque de Agua 1,100 L",cliente:"Laura Hernández",precio:"5290",estado:"Confirmado"},
+    {id:3,producto:"Kit de Instalación",cliente:"Carlos Ramírez",precio:"1490",estado:"Entregado"},
+    {id:4,producto:"Tubería PVC Hidráulica",cliente:"María López",precio:"680",estado:"En proceso"},
+    {id:5,producto:"Perforación de Pozo",cliente:"Empresa Constructora",precio:"Cotización",estado:"Pendiente"}
+];
+
+let promociones = [
+    {id:1,titulo:"Descuento en bomba sumergible",descripcion:"Obtén un descuento en la compra de una bomba sumergible de 1 HP.",descuento:"15"},
+    {id:2,titulo:"Promoción Kit de instalación",descripcion:"Descuento al adquirir un kit de instalación junto con otro producto.",descuento:"10"},
+    {id:3,titulo:"Promoción por temporada",descripcion:"Descuento en productos seleccionados durante la temporada.",descuento:"20"}
+];
+
+let siguienteProducto=7;
+let siguientePedido=6;
+let siguientePromocion=4;
+let tipoEditor="";
+let idEditando=null;
+let tipoEliminar="";
+let idEliminar=null;
+
+function notificar(mensaje){
+    const toast=document.getElementById("toast");
+    toast.textContent=mensaje;
+    toast.classList.add("show");
+    clearTimeout(notificar.temporizador);
+    notificar.temporizador=setTimeout(()=>toast.classList.remove("show"),2600);
+}
+
+function escapar(valor){
+    return String(valor??"")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+function guardarDatos(){
+    localStorage.setItem("pp_productos",JSON.stringify(productos));
+    localStorage.setItem("pp_pedidos",JSON.stringify(pedidos));
+    localStorage.setItem("pp_promociones",JSON.stringify(promociones));
+}
+
+function cargarDatos(){
+    try{
+        const p=localStorage.getItem("pp_productos");
+        const pe=localStorage.getItem("pp_pedidos");
+        const pr=localStorage.getItem("pp_promociones");
+        if(p)productos=JSON.parse(p);
+        if(pe)pedidos=JSON.parse(pe);
+        if(pr)promociones=JSON.parse(pr);
+        siguienteProducto=Math.max(0,...productos.map(x=>Number(x.id)||0))+1;
+        siguientePedido=Math.max(0,...pedidos.map(x=>Number(x.id)||0))+1;
+        siguientePromocion=Math.max(0,...promociones.map(x=>Number(x.id)||0))+1;
+    }catch(e){
+        console.error("No se pudieron cargar los datos.",e);
     }
+}
 
-    function renderizarProductos() {
-        const tbody = document.getElementById("tabla-productos");
-        document.getElementById("total-productos").textContent = productos.length;
-        if (productos.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="4" class="empty-message">No hay productos registrados.</td></tr>`;
-            return;
-        }
-        tbody.innerHTML = productos.map(p => {
-            const precio = p.precio === "Cotizar" ? "Cotizar" : "$" + Number(p.precio).toLocaleString("es-MX");
-            return `<tr>
-                <td><strong>${p.nombre}</strong></td>
-                <td>${p.descripcion}</td>
-                <td class="price">${precio}</td>
-                <td><button class="btn-delete" onclick="pedirConfirmacionProducto(${p.id})">Eliminar</button></td>
-            </tr>`;
-        }).join("");
-    }
+/* PRODUCTOS: agregar sin validaciones */
+function mostrarFormularioProducto(){
+    document.getElementById("form-agregar").classList.add("active");
+}
 
-    // Confirmación al borrar producto
-    function pedirConfirmacionProducto(id) {
-        const p = productos.find(x => x.id === id);
-        idPendienteEliminar = id;
-        document.getElementById("confirm-nombre").textContent = p ? `"${p.nombre}"` : "este producto";
-        document.getElementById("confirm-overlay").classList.add("show");
-    }
+function cancelarFormularioProducto(){
+    document.getElementById("form-agregar").classList.remove("active");
+    document.getElementById("nuevo-nombre").value="";
+    document.getElementById("nuevo-descripcion").value="";
+    document.getElementById("nuevo-precio").value="";
+}
 
-    function cerrarConfirmacion() {
-        idPendienteEliminar = null;
-        document.getElementById("confirm-overlay").classList.remove("show");
-    }
-
-    document.getElementById("btn-cancelar-eliminar").onclick = cerrarConfirmacion;
-
-    document.getElementById("btn-confirmar-eliminar").onclick = function () {
-        if (idPendienteEliminar === null) return;
-        const p = productos.find(x => x.id === idPendienteEliminar);
-        const nombre = p ? p.nombre : "Producto";
-        productos = productos.filter(x => x.id !== idPendienteEliminar);
-        renderizarProductos();
-        cerrarConfirmacion();
-        mostrarNotificacion(`"${nombre}" eliminado correctamente`);
-    };
-
-    document.getElementById("confirm-overlay").addEventListener("click", function (e) {
-        if (e.target === this) cerrarConfirmacion();
+function agregarProducto(){
+    productos.push({
+        id:siguienteProducto++,
+        nombre:document.getElementById("nuevo-nombre").value,
+        descripcion:document.getElementById("nuevo-descripcion").value,
+        precio:document.getElementById("nuevo-precio").value
     });
-
-    document.getElementById("btn-mostrar-form").onclick = () => {
-        document.getElementById("form-agregar").classList.add("active");
-    };
-    document.getElementById("btn-cancelar").onclick = () => {
-        document.getElementById("form-agregar").classList.remove("active");
-    };
-    document.getElementById("btn-guardar").onclick = () => {
-        const nombre = document.getElementById("nuevo-nombre").value.trim();
-        if (!nombre) { mostrarNotificacion("El nombre es obligatorio"); return; }
-        productos.push({
-            id: siguienteId++,
-            nombre,
-            descripcion: document.getElementById("nuevo-descripcion").value.trim() || "Sin descripción",
-            precio: document.getElementById("nuevo-precio").value.trim() || "Cotizar"
-        });
-        document.getElementById("form-agregar").classList.remove("active");
-        document.getElementById("nuevo-nombre").value = "";
-        document.getElementById("nuevo-descripcion").value = "";
-        document.getElementById("nuevo-precio").value = "";
-        renderizarProductos();
-        mostrarNotificacion(`"${nombre}" agregado`);
-    };
-
-    // Simulación pedidos / promos
-    function simularCambioEstado(select) {
-        mostrarNotificacion("Estado cambiado a: " + select.value + " (simulación)");
-    }
-    function simularEliminarPedido(btn) {
-        const order = btn.closest(".order");
-        if (order) order.remove();
-        mostrarNotificacion("Pedido eliminado (simulación)");
-    }
-    function simularEditarPromo(btn) {
-        const card = btn.closest(".promotion-card");
-        const titulo = card ? card.querySelector("h3").textContent : "Promoción";
-        mostrarNotificacion('Editando "' + titulo + '" (simulación)');
-    }
-    function simularEliminarPromo(btn) {
-        const card = btn.closest(".promotion-card");
-        if (card) card.remove();
-        mostrarNotificacion("Promoción eliminada (simulación)");
-    }
-
-    document.querySelectorAll(".sidebar nav a").forEach(link => {
-        link.addEventListener("click", function () {
-            document.querySelectorAll(".sidebar nav a").forEach(i => i.classList.remove("active"));
-            this.classList.add("active");
-        });
-    });
-    window.addEventListener("scroll", () => {
-        let current = "";
-        document.querySelectorAll("main section[id]").forEach(s => {
-            if (window.scrollY >= s.offsetTop - 150) current = s.getAttribute("id");
-        });
-        document.querySelectorAll(".sidebar nav a").forEach(link => {
-            link.classList.remove("active");
-            if (link.getAttribute("href") === "#" + current) link.classList.add("active");
-        });
-    });
-
+    guardarDatos();
     renderizarProductos();
+    cancelarFormularioProducto();
+    notificar("Producto agregado correctamente");
+}
+
+function renderizarProductos(){
+    document.getElementById("total-productos").textContent=productos.length;
+    const tabla=document.getElementById("tabla-productos");
+
+    if(!productos.length){
+        tabla.innerHTML='<tr><td colspan="4" class="empty-message">No hay productos registrados.</td></tr>';
+        return;
+    }
+
+    tabla.innerHTML=productos.map(p=>`
+        <tr>
+            <td><strong>${escapar(p.nombre)}</strong></td>
+            <td>${escapar(p.descripcion)}</td>
+            <td class="price">${escapar(p.precio)}</td>
+            <td>
+                <button class="btn-edit" onclick="abrirEditor('producto',${p.id})">Editar</button>
+                <button class="btn-delete" onclick="pedirEliminacion('producto',${p.id})">Eliminar</button>
+            </td>
+        </tr>
+    `).join("");
+}
+
+/* FORMULARIO INTERNO PARA EDITAR Y AGREGAR */
+function campo(nombre,etiqueta,valor="",tipo="text"){
+    const id="campo-"+nombre;
+    if(tipo==="textarea"){
+        return `<div class="form-group">
+            <label for="${id}">${etiqueta}</label>
+            <textarea id="${id}" name="${nombre}">${escapar(valor)}</textarea>
+        </div>`;
+    }
+    if(tipo==="estado"){
+        const estados=["Pendiente","Confirmado","En proceso","Entregado","Cancelado"];
+        return `<div class="form-group">
+            <label for="${id}">${etiqueta}</label>
+            <select id="${id}" name="${nombre}">
+                ${estados.map(e=>`<option ${valor===e?"selected":""}>${e}</option>`).join("")}
+            </select>
+        </div>`;
+    }
+    return `<div class="form-group">
+        <label for="${id}">${etiqueta}</label>
+        <input id="${id}" name="${nombre}" type="text" value="${escapar(valor)}">
+    </div>`;
+}
+
+function abrirEditor(tipo,id=null){
+    tipoEditor=tipo;
+    idEditando=id;
+
+    const existente=id===null?null:
+        (tipo==="producto"?productos.find(x=>x.id===id):
+        tipo==="pedido"?pedidos.find(x=>x.id===id):
+        promociones.find(x=>x.id===id));
+
+    if(id!==null&&!existente)return;
+
+    let titulo="",campos="";
+
+    if(tipo==="producto"){
+        titulo=existente?"Editar producto":"Agregar producto";
+        campos+=campo("nombre","Nombre del producto",existente?.nombre??"");
+        campos+=campo("descripcion","Descripción",existente?.descripcion??"","textarea");
+        campos+=campo("precio","Precio",existente?.precio??"");
+    }else if(tipo==="pedido"){
+        titulo=existente?"Editar pedido":"Agregar pedido";
+        campos+=campo("producto","Producto o servicio",existente?.producto??"");
+        campos+=campo("cliente","Nombre del cliente",existente?.cliente??"");
+        campos+=campo("precio","Precio o cotización",existente?.precio??"");
+        campos+=campo("estado","Estado",existente?.estado??"Pendiente","estado");
+    }else{
+        titulo=existente?"Editar promoción":"Agregar promoción";
+        campos+=campo("titulo","Título de la promoción",existente?.titulo??"");
+        campos+=campo("descripcion","Descripción",existente?.descripcion??"","textarea");
+        campos+=campo("descuento","Porcentaje de descuento",existente?.descuento??"");
+    }
+
+    document.getElementById("editor-titulo").textContent=titulo;
+    document.getElementById("editor-subtitulo").textContent="Modifica los campos y guarda los cambios. Puedes dejar los campos vacíos.";
+    document.getElementById("editor-campos").innerHTML=campos;
+    document.getElementById("editor-guardar").textContent=existente?"Guardar cambios":"Guardar";
+    document.getElementById("editor-overlay").classList.add("show");
+}
+
+function cerrarEditor(){
+    document.getElementById("editor-overlay").classList.remove("show");
+    document.getElementById("editor-form").reset();
+    tipoEditor="";
+    idEditando=null;
+}
+
+document.getElementById("editor-form").addEventListener("submit",function(e){
+    e.preventDefault();
+    const datos=Object.fromEntries(new FormData(this).entries());
+
+    if(tipoEditor==="producto"){
+        if(idEditando===null){
+            productos.push({id:siguienteProducto++,...datos});
+            notificar("Producto agregado correctamente");
+        }else{
+            const p=productos.find(x=>x.id===idEditando);
+            if(p)Object.assign(p,datos);
+            notificar("Producto actualizado correctamente");
+        }
+        renderizarProductos();
+    }
+
+    if(tipoEditor==="pedido"){
+        if(idEditando===null){
+            pedidos.push({id:siguientePedido++,...datos});
+            notificar("Pedido agregado correctamente");
+        }else{
+            const p=pedidos.find(x=>x.id===idEditando);
+            if(p)Object.assign(p,datos);
+            notificar("Pedido actualizado correctamente");
+        }
+        renderizarPedidos();
+    }
+
+    if(tipoEditor==="promocion"){
+        if(idEditando===null){
+            promociones.push({id:siguientePromocion++,...datos});
+            notificar("Promoción agregada correctamente");
+        }else{
+            const p=promociones.find(x=>x.id===idEditando);
+            if(p)Object.assign(p,datos);
+            notificar("Promoción actualizada correctamente");
+        }
+        renderizarPromociones();
+    }
+
+    guardarDatos();
+    cerrarEditor();
+});
+
+/* PEDIDOS */
+function renderizarPedidos(){
+    document.getElementById("total-pedidos").textContent=pedidos.length;
+
+    document.getElementById("lista-pedidos").innerHTML=pedidos.map(p=>`
+        <div class="order">
+            <div>
+                <strong>Pedido #${p.id} — ${escapar(p.producto)}</strong>
+                <small>Cliente: ${escapar(p.cliente)} · ${escapar(p.precio)}</small>
+            </div>
+            <div class="order-controls">
+                <select class="order-status-select" onchange="cambiarEstado(${p.id},this.value)">
+                    ${["Pendiente","Confirmado","En proceso","Entregado","Cancelado"].map(e=>
+                        `<option ${p.estado===e?"selected":""}>${e}</option>`
+                    ).join("")}
+                </select>
+                <button class="btn-edit" onclick="abrirEditor('pedido',${p.id})">Editar</button>
+                <button class="btn-delete" onclick="pedirEliminacion('pedido',${p.id})">Eliminar</button>
+            </div>
+        </div>
+    `).join("")||'<p class="empty-message">No hay pedidos registrados.</p>';
+}
+
+function cambiarEstado(id,estado){
+    const p=pedidos.find(x=>x.id===id);
+    if(!p)return;
+    p.estado=estado;
+    guardarDatos();
+    notificar("Estado del pedido actualizado");
+}
+
+/* PROMOCIONES */
+function renderizarPromociones(){
+    document.getElementById("total-promociones").textContent=promociones.length;
+
+    document.getElementById("lista-promociones").innerHTML=promociones.map(p=>`
+        <article class="promotion-card">
+            <span class="discount">${escapar(p.descuento)}% OFF</span>
+            <div class="promotion-image">Promoción</div>
+            <div class="promotion-content">
+                <h3>${escapar(p.titulo)}</h3>
+                <p>${escapar(p.descripcion)}</p>
+                <div class="promotion-footer">
+                    <span class="status">Activa</span>
+                    <div>
+                        <button class="btn-edit" onclick="abrirEditor('promocion',${p.id})">Editar</button>
+                        <button class="btn-delete" onclick="pedirEliminacion('promocion',${p.id})">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </article>
+    `).join("")||'<p class="empty-message">No hay promociones registradas.</p>';
+}
+
+/* CONFIRMACIÓN DE ELIMINACIÓN DENTRO DE LA PÁGINA */
+function pedirEliminacion(tipo,id){
+    tipoEliminar=tipo;
+    idEliminar=id;
+
+    let elemento;
+    if(tipo==="producto")elemento=productos.find(x=>x.id===id);
+    if(tipo==="pedido")elemento=pedidos.find(x=>x.id===id);
+    if(tipo==="promocion")elemento=promociones.find(x=>x.id===id);
+
+    let nombre="este elemento";
+    if(elemento){
+        nombre=elemento.nombre||elemento.producto||elemento.titulo||nombre;
+    }
+
+    const nombres={producto:"producto",pedido:"pedido",promocion:"promoción"};
+    document.getElementById("confirm-titulo").textContent="¿Eliminar "+nombres[tipo]+"?";
+    document.getElementById("confirm-texto").textContent='¿Seguro que deseas eliminar "'+nombre+'"?';
+    document.getElementById("confirm-overlay").classList.add("show");
+}
+
+function cerrarConfirmacion(){
+    document.getElementById("confirm-overlay").classList.remove("show");
+    tipoEliminar="";
+    idEliminar=null;
+}
+
+function confirmarEliminacion(){
+    if(idEliminar===null)return;
+
+    if(tipoEliminar==="producto"){
+        productos=productos.filter(x=>x.id!==idEliminar);
+        renderizarProductos();
+    }else if(tipoEliminar==="pedido"){
+        pedidos=pedidos.filter(x=>x.id!==idEliminar);
+        renderizarPedidos();
+    }else if(tipoEliminar==="promocion"){
+        promociones=promociones.filter(x=>x.id!==idEliminar);
+        renderizarPromociones();
+    }
+
+    guardarDatos();
+    cerrarConfirmacion();
+    notificar("Elemento eliminado correctamente");
+}
+
+/* MENÚ LATERAL */
+document.querySelectorAll(".sidebar nav a").forEach(link=>{
+    link.addEventListener("click",()=>{
+        document.querySelectorAll(".sidebar nav a").forEach(a=>a.classList.remove("active"));
+        link.classList.add("active");
+    });
+});
+
+document.getElementById("editor-overlay").addEventListener("click",function(e){
+    if(e.target===this)cerrarEditor();
+});
+
+document.getElementById("confirm-overlay").addEventListener("click",function(e){
+    if(e.target===this)cerrarConfirmacion();
+});
+
+/* INICIALIZAR */
+cargarDatos();
+renderizarProductos();
+renderizarPedidos();
+renderizarPromociones();
 </script>
 </body>
 </html>
+```

@@ -141,7 +141,7 @@
         .catalog-title {
             text-align: center;
             max-width: 700px;
-            margin: 0 auto 45px;
+            margin: 0 auto 35px;
         }
 
         .catalog-title h2 {
@@ -155,12 +155,99 @@
             line-height: 1.7;
         }
 
+        /* BARRA DE BÚSQUEDA Y FILTROS */
+        .filter-search-container {
+            max-width: 1100px;
+            margin: 0 auto 35px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #e2edf1;
+            box-shadow: 0 4px 15px rgba(24,59,78,0.04);
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 260px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 16px 12px 40px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .search-box input:focus {
+            border-color: #0ea5e9;
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+        }
+
+        .search-box svg {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            fill: #64748b;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            color: #475569;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .filter-btn:hover {
+            background: #e2edf1;
+            color: #155e75;
+        }
+
+        .filter-btn.active {
+            background: #155e75;
+            color: white;
+            border-color: #155e75;
+        }
+
         .catalog-container {
             max-width: 1100px;
             margin: auto;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 25px;
+        }
+
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 50px;
+            background: white;
+            border-radius: 12px;
+            color: #64748b;
+            font-size: 18px;
+            border: 1px dashed #cbd5e1;
         }
 
         .product-card {
@@ -596,6 +683,10 @@
             .social-btn {
                 justify-content: center;
             }
+            .filter-search-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
         }
     </style>
 </head>
@@ -630,6 +721,21 @@
         <div class="catalog-title">
             <h2>Servicios disponibles</h2>
             <p>Haz clic en cualquier servicio para ver detalles técnicos, fotos explicativas y agregarlo a tu carrito.</p>
+        </div>
+
+        <!-- BARRA DE BÚSQUEDA Y FILTROS -->
+        <div class="filter-search-container">
+            <div class="search-box">
+                <svg viewBox="0 0 24 24"><path d="M21.71 20.29l-5.005-5.005C17.653 13.786 18.5 11.996 18.5 10c0-4.694-4.306-8.5-9.5-8.5S-0.5 5.306-0.5 10s4.306 8.5 9.5 8.5c1.996 0 3.786-.847 5.285-1.795l5.005 5.005c.39.39 1.024.39 1.414 0s.39-1.024 0-1.414zM9.5 16C6.467 16 4 13.533 4 10.5S6.467 5 9.5 5 15 7.467 15 10.5 12.533 16 9.5 16z"/></svg>
+                <input type="text" id="searchInput" placeholder="Buscar servicios o descripción..." oninput="filtrarServicios()">
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filtrarCategoria('todos', this)">Todos</button>
+                <button class="filter-btn" onclick="filtrarCategoria('perforacion', this)">Perforación</button>
+                <button class="filter-btn" onclick="filtrarCategoria('equipamiento', this)">Equipamiento</button>
+                <button class="filter-btn" onclick="filtrarCategoria('mantenimiento', this)">Mantenimiento</button>
+                <button class="filter-btn" onclick="filtrarCategoria('estudios', this)">Estudios</button>
+            </div>
         </div>
 
         <div class="catalog-container" id="catalogGrid"></div>
@@ -701,6 +807,7 @@
         const servicios = [
             { 
                 id: 1, 
+                categoria: "perforacion",
                 imagen: "imagenes/imagenaforo.jpg", 
                 galeria: ["imagenes/perforacion1.jpg", "imagenes/perforacion2.jpg", "imagenes/perforacion3.jpg"],
                 nombre: "Perforación de pozos", 
@@ -711,6 +818,7 @@
             },
             { 
                 id: 2, 
+                categoria: "equipamiento",
                 imagen: "imagenes/equipamientopozo.jpg", 
                 galeria: ["imagenes/equipamiento1.jpg", "imagenes/equipamiento2.jpg", "imagenes/equipamiento3.jpg"],
                 nombre: "Equipamiento de pozos", 
@@ -721,6 +829,7 @@
             },
             { 
                 id: 3, 
+                categoria: "mantenimiento",
                 imagen: "imagenes/mantenimiento.jpg", 
                 galeria: ["imagenes/mantenimiento1.jpg", "imagenes/mantenimiento2.jpg", "imagenes/mantenimiento3.jpg"],
                 nombre: "Mantenimiento", 
@@ -731,6 +840,7 @@
             },
             { 
                 id: 4, 
+                categoria: "perforacion",
                 imagen: "imagenes/preparacion.jpg", 
                 galeria: ["imagenes/preparacion1.jpg", "imagenes/preparacion2.jpg", "imagenes/preparacion3.jpg"],
                 nombre: "Preparación del proyecto", 
@@ -741,6 +851,7 @@
             },
             { 
                 id: 5, 
+                categoria: "estudios",
                 imagen: "imagenes/evaluacion.jpg", 
                 galeria: ["imagenes/evaluacion1.jpg", "imagenes/evaluacion2.jpg", "imagenes/evaluacion3.jpg"],
                 nombre: "Evaluación del terreno", 
@@ -751,6 +862,7 @@
             },
             { 
                 id: 6, 
+                categoria: "equipamiento",
                 imagen: "imagenes/soluciones.jpg", 
                 galeria: ["imagenes/soluciones1.jpg", "imagenes/soluciones4.jpg", "imagenes/soluciones3.jpg"],
                 nombre: "Soluciones de agua", 
@@ -759,9 +871,9 @@
                 descripcion: "Diseño e implementación de redes de distribución, tanques de almacenamiento e hiper-filtración.", 
                 detalles: ["Sistemas de purificación y filtrado", "Tanques elevados y cisternas", "Automatización de llenado", "Asesoría en uso eficiente del agua"] 
             },
-            // ===== 3 SERVICIOS NUEVOS =====
             { 
                 id: 7, 
+                categoria: "mantenimiento",
                 imagen: "imagenes/desinfeccion.jpg", 
                 galeria: ["imagenes/desinfeccion1.jpg", "imagenes/desinfeccion2.jpg", "imagenes/desinfeccion3.jpg"],
                 nombre: "Desinfección de pozos", 
@@ -772,6 +884,7 @@
             },
             { 
                 id: 8, 
+                categoria: "equipamiento",
                 imagen: "imagenes/instalacionbomba.jpg", 
                 galeria: ["imagenes/boma1.jpg", "imagenes/bomba2.png", "imagenes/bomba3.jpg"],
                 nombre: "Instalación de bombas", 
@@ -782,6 +895,7 @@
             },
             { 
                 id: 9, 
+                categoria: "estudios",
                 imagen: "imagenes/estudio.jpg", 
                 galeria: ["imagenes/estudio1.jpg", "imagenes/estudio2.jpg", "imagenes/estudio3.jpg"],
                 nombre: "Estudio de aforo", 
@@ -793,25 +907,58 @@
         ];
 
         let servicioSeleccionado = null;
+        let categoriaActual = 'todos';
 
-        function renderizarCatalogo() {
+        function renderizarCatalogo(listaServicios) {
             const grid = document.getElementById("catalogGrid");
-            grid.innerHTML = servicios.map((s, index) => `
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="${s.imagen}" alt="${s.nombre}" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\\'height:100%;display:flex;align-items:center;justify-content:center;font-size:70px;\\'>💧</div>';">
-                    </div>
-                    <div class="product-content">
-                        <h3>${s.nombre}</h3>
-                        <p>${s.descripcion}</p>
-                        <div class="price-box">
-                            <span class="price-label">Precio Estimado</span>
-                            <span class="price-amount">${s.precio}</span>
+            
+            if (listaServicios.length === 0) {
+                grid.innerHTML = `<div class="no-results">No se encontraron servicios que coincidan con tu búsqueda.</div>`;
+                return;
+            }
+
+            grid.innerHTML = listaServicios.map((s) => {
+                // Buscamos el índice real en el arreglo principal para mantener funcionalidad del modal
+                const indexReal = servicios.findIndex(item => item.id === s.id);
+                return `
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="${s.imagen}" alt="${s.nombre}" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\\'height:100%;display:flex;align-items:center;justify-content:center;font-size:70px;\\'>💧</div>';">
                         </div>
-                        <button class="product-button" onclick="abrirModal(${index})">Ver detalles y fotos</button>
+                        <div class="product-content">
+                            <h3>${s.nombre}</h3>
+                            <p>${s.descripcion}</p>
+                            <div class="price-box">
+                                <span class="price-label">Precio Estimado</span>
+                                <span class="price-amount">${s.precio}</span>
+                            </div>
+                            <button class="product-button" onclick="abrirModal(${indexReal})">Ver detalles y fotos</button>
+                        </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
+        }
+
+        function filtrarServicios() {
+            const texto = document.getElementById("searchInput").value.toLowerCase();
+
+            const filtrados = servicios.filter(s => {
+                const coincideCategoria = (categoriaActual === 'todos' || s.categoria === categoriaActual);
+                const coincideTexto = s.nombre.toLowerCase().includes(texto) || s.descripcion.toLowerCase().includes(texto);
+                return coincideCategoria && coincideTexto;
+            });
+
+            renderizarCatalogo(filtrados);
+        }
+
+        function filtrarCategoria(cat, boton) {
+            categoriaActual = cat;
+
+            // Actualizar botones activos
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            boton.classList.add('active');
+
+            filtrarServicios();
         }
 
         function actualizarContadorCarrito() {
@@ -833,7 +980,6 @@
         }
 
         function obtenerRelacionados(servicioActual) {
-            // Otros servicios distintos al actual (máximo 3)
             return servicios
                 .filter(s => s.id !== servicioActual.id)
                 .sort(() => Math.random() - 0.5)
@@ -856,7 +1002,6 @@
 
             document.getElementById("mLista").innerHTML = s.detalles.map(d => `<li>✓ ${d}</li>`).join("");
 
-            // Servicios relacionados
             const relacionados = obtenerRelacionados(s);
             document.getElementById("mRelacionados").innerHTML = relacionados.map(r => {
                 const idx = servicios.findIndex(x => x.id === r.id);
@@ -913,18 +1058,11 @@
             cerrarModal();
         }
 
-        window.onclick = function(event) {
-            if (event.target === document.getElementById("modalDetalles")) {
-                cerrarModal();
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            renderizarCatalogo();
+        // Inicializar al cargar la página
+        window.onload = function() {
+            renderizarCatalogo(servicios);
             actualizarContadorCarrito();
-        });
-
-        window.addEventListener("focus", actualizarContadorCarrito);
+        };
     </script>
 </body>
 
