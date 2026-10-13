@@ -259,11 +259,37 @@
             transition: 0.3s;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
 
         .product-card:hover {
             transform: translateY(-7px);
             box-shadow: 0 18px 40px rgba(24,59,78,0.13);
+        }
+
+        /* ETIQUETAS DE NUEVO / PROMOCIÓN */
+        .product-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            z-index: 10;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .badge-nuevo {
+            background: #0ea5e9;
+            color: white;
+        }
+
+        .badge-promo {
+            background: #10b981;
+            color: white;
         }
 
         .product-image {
@@ -327,6 +353,62 @@
             font-size: 20px;
             color: #15803d;
             font-weight: bold;
+        }
+
+        /* SELECTOR DE CANTIDAD EN TARJETA Y MODAL */
+        .quantity-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
+
+        .quantity-box label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .qty-btn {
+            background: white;
+            border: 1px solid #cbd5e1;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #155e75;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .qty-btn:hover {
+            background: #0ea5e9;
+            color: white;
+            border-color: #0ea5e9;
+        }
+
+        .qty-input {
+            width: 40px;
+            text-align: center;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            padding: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            outline: none;
         }
 
         .product-button {
@@ -720,7 +802,7 @@
     <section class="catalog">
         <div class="catalog-title">
             <h2>Servicios disponibles</h2>
-            <p>Haz clic en cualquier servicio para ver detalles técnicos, fotos explicativas y agregarlo a tu carrito.</p>
+            <p>Selecciona la cantidad deseada, haz clic en cualquier servicio para ver detalles técnicos y agrégalo a tu carrito.</p>
         </div>
 
         <!-- BARRA DE BÚSQUEDA Y FILTROS -->
@@ -759,7 +841,17 @@
             <p style="font-weight: bold; margin-bottom: 8px; color: #155e75;">Incluye:</p>
             <ul id="mLista" class="modal-details-list"></ul>
 
-            <button id="btnAgregar" class="btn-add-cart" onclick="agregarAlCarrito()">
+            <!-- SELECTOR DE CANTIDAD EN MODAL -->
+            <div class="quantity-box">
+                <label>Cantidad:</label>
+                <div class="qty-controls">
+                    <button class="qty-btn" onclick="cambiarCantidadModal(-1)">-</button>
+                    <input type="text" id="modalQty" class="qty-input" value="1" readonly>
+                    <button class="qty-btn" onclick="cambiarCantidadModal(1)">+</button>
+                </div>
+            </div>
+
+            <button id="btnAgregar" class="btn-add-cart" onclick="agregarAlCarritoDesdeModal()">
                 🛒 Agregar al carrito
             </button>
 
@@ -808,6 +900,8 @@
             { 
                 id: 1, 
                 categoria: "perforacion",
+                nuevo: true,
+                promocion: false,
                 imagen: "imagenes/imagenaforo.jpg", 
                 galeria: ["imagenes/perforacion1.jpg", "imagenes/perforacion2.jpg", "imagenes/perforacion3.jpg"],
                 nombre: "Perforación de pozos", 
@@ -819,6 +913,8 @@
             { 
                 id: 2, 
                 categoria: "equipamiento",
+                nuevo: false,
+                promocion: true,
                 imagen: "imagenes/equipamientopozo.jpg", 
                 galeria: ["imagenes/equipamiento1.jpg", "imagenes/equipamiento2.jpg", "imagenes/equipamiento3.jpg"],
                 nombre: "Equipamiento de pozos", 
@@ -830,6 +926,8 @@
             { 
                 id: 3, 
                 categoria: "mantenimiento",
+                nuevo: false,
+                promocion: false,
                 imagen: "imagenes/mantenimiento.jpg", 
                 galeria: ["imagenes/mantenimiento1.jpg", "imagenes/mantenimiento2.jpg", "imagenes/mantenimiento3.jpg"],
                 nombre: "Mantenimiento", 
@@ -841,6 +939,8 @@
             { 
                 id: 4, 
                 categoria: "perforacion",
+                nuevo: false,
+                promocion: false,
                 imagen: "imagenes/preparacion.jpg", 
                 galeria: ["imagenes/preparacion1.jpg", "imagenes/preparacion2.jpg", "imagenes/preparacion3.jpg"],
                 nombre: "Preparación del proyecto", 
@@ -852,6 +952,8 @@
             { 
                 id: 5, 
                 categoria: "estudios",
+                nuevo: true,
+                promocion: false,
                 imagen: "imagenes/evaluacion.jpg", 
                 galeria: ["imagenes/evaluacion1.jpg", "imagenes/evaluacion2.jpg", "imagenes/evaluacion3.jpg"],
                 nombre: "Evaluación del terreno", 
@@ -863,6 +965,8 @@
             { 
                 id: 6, 
                 categoria: "equipamiento",
+                nuevo: false,
+                promocion: false,
                 imagen: "imagenes/soluciones.jpg", 
                 galeria: ["imagenes/soluciones1.jpg", "imagenes/soluciones4.jpg", "imagenes/soluciones3.jpg"],
                 nombre: "Soluciones de agua", 
@@ -874,6 +978,8 @@
             { 
                 id: 7, 
                 categoria: "mantenimiento",
+                nuevo: false,
+                promocion: true,
                 imagen: "imagenes/desinfeccion.jpg", 
                 galeria: ["imagenes/desinfeccion1.jpg", "imagenes/desinfeccion2.jpg", "imagenes/desinfeccion3.jpg"],
                 nombre: "Desinfección de pozos", 
@@ -885,6 +991,8 @@
             { 
                 id: 8, 
                 categoria: "equipamiento",
+                nuevo: true,
+                promocion: false,
                 imagen: "imagenes/instalacionbomba.jpg", 
                 galeria: ["imagenes/boma1.jpg", "imagenes/bomba2.png", "imagenes/bomba3.jpg"],
                 nombre: "Instalación de bombas", 
@@ -896,6 +1004,8 @@
             { 
                 id: 9, 
                 categoria: "estudios",
+                nuevo: false,
+                promocion: false,
                 imagen: "imagenes/estudio.jpg", 
                 galeria: ["imagenes/estudio1.jpg", "imagenes/estudio2.jpg", "imagenes/estudio3.jpg"],
                 nombre: "Estudio de aforo", 
@@ -918,10 +1028,19 @@
             }
 
             grid.innerHTML = listaServicios.map((s) => {
-                // Buscamos el índice real en el arreglo principal para mantener funcionalidad del modal
                 const indexReal = servicios.findIndex(item => item.id === s.id);
+                
+                // Generar etiqueta según corresponda
+                let badgeHTML = '';
+                if (s.nuevo) {
+                    badgeHTML = `<span class="product-badge badge-nuevo">Nuevo</span>`;
+                } else if (s.promocion) {
+                    badgeHTML = `<span class="product-badge badge-promo">En Promoción</span>`;
+                }
+
                 return `
                     <div class="product-card">
+                        ${badgeHTML}
                         <div class="product-image">
                             <img src="${s.imagen}" alt="${s.nombre}" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\\'height:100%;display:flex;align-items:center;justify-content:center;font-size:70px;\\'>💧</div>';">
                         </div>
@@ -932,11 +1051,35 @@
                                 <span class="price-label">Precio Estimado</span>
                                 <span class="price-amount">${s.precio}</span>
                             </div>
+                            <div class="quantity-box">
+                                <label>Cantidad:</label>
+                                <div class="qty-controls">
+                                    <button class="qty-btn" onclick="cambiarQtyCard(${s.id}, -1)">-</button>
+                                    <input type="text" id="qty-card-${s.id}" class="qty-input" value="1" readonly>
+                                    <button class="qty-btn" onclick="cambiarQtyCard(${s.id}, 1)">+</button>
+                                </div>
+                            </div>
                             <button class="product-button" onclick="abrirModal(${indexReal})">Ver detalles y fotos</button>
                         </div>
                     </div>
                 `;
             }).join('');
+        }
+
+        function cambiarQtyCard(id, cambio) {
+            const input = document.getElementById(`qty-card-${id}`);
+            if (!input) return;
+            let val = parseInt(input.value) + cambio;
+            if (val < 1) val = 1;
+            input.value = val;
+        }
+
+        function cambiarCantidadModal(cambio) {
+            const input = document.getElementById("modalQty");
+            if (!input) return;
+            let val = parseInt(input.value) + cambio;
+            if (val < 1) val = 1;
+            input.value = val;
         }
 
         function filtrarServicios() {
@@ -953,11 +1096,8 @@
 
         function filtrarCategoria(cat, boton) {
             categoriaActual = cat;
-
-            // Actualizar botones activos
             document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             boton.classList.add('active');
-
             filtrarServicios();
         }
 
@@ -993,6 +1133,7 @@
             document.getElementById("mTitulo").textContent = s.nombre;
             document.getElementById("mPrecio").textContent = s.precio;
             document.getElementById("mDescripcion").textContent = s.descripcion;
+            document.getElementById("modalQty").value = 1;
 
             document.getElementById("mGaleria").innerHTML = s.galeria.map(imgUrl => `
                 <div class="modal-photo">
@@ -1032,25 +1173,26 @@
             setTimeout(() => toast.classList.remove("show"), 3500);
         }
 
-        function agregarAlCarrito() {
+        function agregarAlCarritoDesdeModal() {
             if (!servicioSeleccionado) return;
+            const cantidad = parseInt(document.getElementById("modalQty").value) || 1;
 
             let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
             const existente = carrito.find(item => item.id === servicioSeleccionado.id);
 
             if (existente) {
-                existente.cantidad += 1;
-                mostrarToast(`✓ Se aumentó la cantidad de "${servicioSeleccionado.nombre}"`);
+                existente.cantidad += cantidad;
+                mostrarToast(`✓ Se sumaron ${cantidad} unidades de "${servicioSeleccionado.nombre}"`);
             } else {
                 carrito.push({
                     id: servicioSeleccionado.id,
                     nombre: servicioSeleccionado.nombre,
                     descripcion: servicioSeleccionado.descripcion,
                     precio: servicioSeleccionado.precioNum,
-                    cantidad: 1,
+                    cantidad: cantidad,
                     imagen: servicioSeleccionado.imagen
                 });
-                mostrarToast(`✓ "${servicioSeleccionado.nombre}" se agregó al carrito`);
+                mostrarToast(`✓ "${servicioSeleccionado.nombre}" (${cantidad}) se agregó al carrito`);
             }
 
             localStorage.setItem("carrito", JSON.stringify(carrito));
@@ -1058,7 +1200,6 @@
             cerrarModal();
         }
 
-        // Inicializar al cargar la página
         window.onload = function() {
             renderizarCatalogo(servicios);
             actualizarContadorCarrito();

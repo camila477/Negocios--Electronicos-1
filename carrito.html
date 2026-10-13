@@ -376,27 +376,27 @@
         }
 
         .primary-btn,
-        .checkout-btn {
-            border: none;
-            background: var(--celeste);
-            color: #12384b;
-            padding: 13px 18px;
-            border-radius: 10px;
-            font-size: 13px;
-            font-weight: 700;
-            text-decoration: none;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            transition: .2s;
-        }
+.checkout-btn {
+    border: none;
+    background: var(--azul);
+    color: white;
+    padding: 13px 18px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transition: .2s;
+}
 
-        .primary-btn:hover,
-        .checkout-btn:hover {
-            background: #7dd3fc;
-            transform: translateY(-1px);
-        }
+.primary-btn:hover,
+.checkout-btn:hover {
+    background: var(--azul-claro);
+    transform: translateY(-1px);
+}
 
         .summary-panel {
             padding: 24px;
@@ -451,12 +451,9 @@
         }
 
         .summary-note {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
             margin-top: 18px;
             background: #f2f9fc;
-            padding: 13px;
+            padding: 13px 15px;
             border-radius: 10px;
             color: #587383;
             font-size: 11px;
@@ -471,12 +468,6 @@
             line-height: 1.8;
         }
 
-        .payment-icons {
-            font-size: 21px;
-            margin-top: 7px;
-            letter-spacing: 5px;
-        }
-
         .footer {
             margin-top: 35px;
             color: #8a9aa5;
@@ -484,7 +475,7 @@
             text-align: center;
         }
 
-        /* VENTANA DE POLÍTICAS */
+        /* MODALES */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -512,6 +503,74 @@
             animation: appear .2s ease-out;
         }
 
+        /* Modal de confirmación */
+        .confirm-modal {
+            background: white;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 18px;
+            box-shadow: 0 25px 80px rgba(0,0,0,.25);
+            animation: appear .2s ease-out;
+            overflow: hidden;
+        }
+
+        .confirm-body {
+            padding: 28px 28px 8px;
+            text-align: center;
+        }
+
+        .confirm-body h2 {
+            font-size: 18px;
+            color: var(--azul);
+            margin-bottom: 10px;
+        }
+
+        .confirm-body p {
+            font-size: 13px;
+            color: var(--gris);
+            line-height: 1.6;
+        }
+
+        .confirm-body p strong {
+            color: var(--texto);
+        }
+
+        .confirm-actions {
+            display: flex;
+            gap: 12px;
+            padding: 20px 28px 26px;
+        }
+
+        .confirm-cancel {
+            flex: 1;
+            background: white;
+            border: 1px solid #d7e1e7;
+            color: #526775;
+            padding: 13px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .confirm-cancel:hover {
+            background: #f5f8fa;
+        }
+
+        .confirm-delete {
+            flex: 1;
+            background: #e05353;
+            color: white;
+            border: none;
+            padding: 13px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .confirm-delete:hover {
+            background: #c93f3f;
+        }
+
         @keyframes appear {
             from {
                 opacity: 0;
@@ -524,22 +583,10 @@
         }
 
         .modal-header {
-            padding: 27px 30px 22px;
+            padding: 28px 30px 22px;
             background: linear-gradient(120deg, #183b4e, #24566d);
             color: white;
             position: relative;
-        }
-
-        .policy-icon {
-            width: 48px;
-            height: 48px;
-            display: grid;
-            place-items: center;
-            background: rgba(56,189,248,.18);
-            border: 1px solid rgba(125,211,252,.4);
-            border-radius: 14px;
-            font-size: 23px;
-            margin-bottom: 15px;
         }
 
         .modal-header h2 {
@@ -582,24 +629,12 @@
         }
 
         .policy-card {
-            display: flex;
-            gap: 14px;
-            padding: 16px;
+            padding: 16px 18px;
             border: 1px solid #e8eef2;
-            border-radius: 13px;
+            border-left: 3px solid var(--celeste);
+            border-radius: 10px;
             margin-bottom: 12px;
             background: #fcfdfe;
-        }
-
-        .policy-card-icon {
-            flex-shrink: 0;
-            width: 38px;
-            height: 38px;
-            display: grid;
-            place-items: center;
-            border-radius: 11px;
-            background: #eaf7fd;
-            font-size: 18px;
         }
 
         .policy-card h3 {
@@ -661,7 +696,7 @@
             background: #7dd3fc;
         }
 
-        /* NOTIFICACIONES DENTRO DE LA PÁGINA */
+        /* NOTIFICACIONES */
         .toast {
             position: fixed;
             right: 25px;
@@ -812,6 +847,10 @@
                 width: 100%;
             }
 
+            .confirm-actions {
+                flex-direction: column-reverse;
+            }
+
             .secure-label {
                 font-size: 11px;
             }
@@ -859,12 +898,12 @@
     <main class="main">
         <header class="topbar">
             <div>
-                <small>Inicio / Compras / Carrito</small>
+               
                 <h1>Mi carrito de compras</h1>
             </div>
 
             <div class="secure-label">
-                <span>🔒</span> Compra segura
+                <span></span> Compra segura
             </div>
         </header>
 
@@ -915,16 +954,12 @@
                     </button>
 
                     <div class="summary-note">
-                        <span>ℹ️</span>
-                        <span>
-                            Antes de continuar podrás consultar las políticas
-                            de compra, entrega y devoluciones.
-                        </span>
+                        Antes de continuar consulta las políticas
+                        de compra, entrega y devoluciones.
                     </div>
 
                     <div class="payment-methods">
                         Proceso de compra de Perforaciones Palacios
-                        <div class="payment-icons">🔐 📦 ✓</div>
                     </div>
                 </div>
             </aside>
@@ -945,7 +980,6 @@
             <button class="modal-close" id="cerrar-politicas"
                     aria-label="Cerrar ventana">×</button>
 
-            <div class="policy-icon">📋</div>
             <h2 id="titulo-politicas">Políticas de compra</h2>
             <p>
                 Te invitamos a revisar la siguiente información antes
@@ -960,51 +994,39 @@
             </p>
 
             <article class="policy-card">
-                <div class="policy-card-icon">📦</div>
-                <div>
-                    <h3>1. Productos y pedidos</h3>
-                    <p>
-                        Los productos y las cantidades de tu pedido se muestran
-                        en el carrito. Revisa el resumen para identificar los
-                        artículos que deseas solicitar.
-                    </p>
-                </div>
+                <h3>1. Productos y pedidos</h3>
+                <p>
+                    Los productos y las cantidades de tu pedido se muestran
+                    en el carrito. Revisa el resumen para identificar los
+                    artículos que deseas solicitar.
+                </p>
             </article>
 
             <article class="policy-card">
-                <div class="policy-card-icon">🚚</div>
-                <div>
-                    <h3>2. Entregas y envío</h3>
-                    <p>
-                        El costo de envío se presenta en el resumen de compra.
-                        Los tiempos y condiciones de entrega pueden depender
-                        de la ubicación y la disponibilidad del producto.
-                    </p>
-                </div>
+                <h3>2. Entregas y envío</h3>
+                <p>
+                    El costo de envío se presenta en el resumen de compra.
+                    Los tiempos y condiciones de entrega pueden depender
+                    de la ubicación y la disponibilidad del producto.
+                </p>
             </article>
 
             <article class="policy-card">
-                <div class="policy-card-icon">↩️</div>
-                <div>
-                    <h3>3. Cambios y devoluciones</h3>
-                    <p>
-                        Si necesitas solicitar un cambio o reportar un problema
-                        con un producto, comunícate con el equipo de atención
-                        para revisar tu caso.
-                    </p>
-                </div>
+                <h3>3. Cambios y devoluciones</h3>
+                <p>
+                    Si necesitas solicitar un cambio o reportar un problema
+                    con un producto, comunícate con el equipo de atención
+                    para revisar tu caso.
+                </p>
             </article>
 
             <article class="policy-card">
-                <div class="policy-card-icon">🔐</div>
-                <div>
-                    <h3>4. Información del cliente</h3>
-                    <p>
-                        Los datos proporcionados para gestionar un pedido deben
-                        utilizarse de forma responsable y únicamente para los
-                        fines correspondientes al servicio.
-                    </p>
-                </div>
+                <h3>4. Información del cliente</h3>
+                <p>
+                    Los datos proporcionados para gestionar un pedido deben
+                    utilizarse de forma responsable y únicamente para los
+                    fines correspondientes al servicio.
+                </p>
             </article>
 
             <div class="policy-footer-note">
@@ -1025,10 +1047,32 @@
     </section>
 </div>
 
+<!-- MODAL DE CONFIRMACIÓN PARA ELIMINAR -->
+<div class="modal-overlay" id="modal-confirmar">
+    <section class="confirm-modal" role="dialog" aria-modal="true"
+             aria-labelledby="titulo-confirmar">
+        <div class="confirm-body">
+            <h2 id="titulo-confirmar">Quitar producto</h2>
+            <p id="texto-confirmar">
+                ¿Estás seguro de que deseas quitar este producto del carrito?
+            </p>
+        </div>
+        <div class="confirm-actions">
+            <button class="confirm-cancel" id="cancelar-eliminar" type="button">
+                Cancelar
+            </button>
+            <button class="confirm-delete" id="confirmar-eliminar" type="button">
+                Sí, quitar
+            </button>
+        </div>
+    </section>
+</div>
+
 <div class="toast" id="notificacion"></div>
 
 <script>
     const COSTO_ENVIO = 350;
+    let indiceAEliminar = null;
 
     function obtenerCarrito() {
         try {
@@ -1169,7 +1213,7 @@
                     <div class="product-price">
                         <strong>${formatoPrecio(precio * cantidad)}</strong>
                         <button class="remove-btn" type="button"
-                            onclick="eliminarProducto(${indice})">
+                            onclick="pedirConfirmacion(${indice})">
                             Quitar
                         </button>
                     </div>
@@ -1187,7 +1231,7 @@
         const nuevaCantidad = cantidadActual + cambio;
 
         if (nuevaCantidad <= 0) {
-            eliminarProducto(indice);
+            pedirConfirmacion(indice);
             return;
         }
 
@@ -1196,13 +1240,43 @@
         renderizarCarrito();
     }
 
-    function eliminarProducto(indice) {
+    function pedirConfirmacion(indice) {
         const carrito = obtenerCarrito();
 
         if (!carrito[indice]) return;
 
-        carrito.splice(indice, 1);
+        indiceAEliminar = indice;
+        const nombre = carrito[indice].nombre || "este producto";
+
+        document.getElementById("texto-confirmar").innerHTML =
+            '¿Estás seguro de que deseas quitar <strong>' +
+            escaparHTML(nombre) +
+            '</strong> del carrito?';
+
+        document.getElementById("modal-confirmar").classList.add("show");
+    }
+
+    function cerrarConfirmacion() {
+        document.getElementById("modal-confirmar").classList.remove("show");
+        indiceAEliminar = null;
+    }
+
+    function confirmarEliminar() {
+        if (indiceAEliminar === null) {
+            cerrarConfirmacion();
+            return;
+        }
+
+        const carrito = obtenerCarrito();
+
+        if (!carrito[indiceAEliminar]) {
+            cerrarConfirmacion();
+            return;
+        }
+
+        carrito.splice(indiceAEliminar, 1);
         guardarCarrito(carrito);
+        cerrarConfirmacion();
         renderizarCarrito();
         mostrarNotificacion("Producto eliminado del carrito.");
     }
@@ -1285,9 +1359,26 @@
         }
     );
 
+    document.getElementById("cancelar-eliminar").addEventListener(
+        "click", cerrarConfirmacion
+    );
+
+    document.getElementById("confirmar-eliminar").addEventListener(
+        "click", confirmarEliminar
+    );
+
+    document.getElementById("modal-confirmar").addEventListener(
+        "click", function(evento) {
+            if (evento.target === this) {
+                cerrarConfirmacion();
+            }
+        }
+    );
+
     document.addEventListener("keydown", function(evento) {
         if (evento.key === "Escape") {
             cerrarPoliticas();
+            cerrarConfirmacion();
         }
     });
 
