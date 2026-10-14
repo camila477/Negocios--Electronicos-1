@@ -1,0 +1,970 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promociones | Perforaciones Palacios</title>
+
+    <style>
+        :root {
+            --azul: #183b4e;
+            --azul-claro: #24566d;
+            --celeste: #38bdf8;
+            --fondo: #f5f8fa;
+            --blanco: #ffffff;
+            --texto: #263746;
+            --gris: #718096;
+            --borde: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: var(--fondo);
+            color: var(--texto);
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* BARRA LATERAL */
+
+        .sidebar {
+            width: 250px;
+            background: var(--azul);
+            color: white;
+            padding: 30px 18px;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+        .brand {
+            padding: 0 12px 28px;
+            border-bottom: 1px solid rgba(255,255,255,.14);
+            margin-bottom: 26px;
+        }
+
+        .brand-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--celeste);
+            color: var(--azul);
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 14px;
+        }
+
+        .brand h2 {
+            font-size: 18px;
+            line-height: 1.4;
+        }
+
+        .brand p {
+            font-size: 12px;
+            color: #c3d7e2;
+            margin-top: 5px;
+        }
+
+        .menu-label {
+            font-size: 11px;
+            color: #a9c2d0;
+            text-transform: uppercase;
+            letter-spacing: 1.4px;
+            padding: 0 12px;
+            margin-bottom: 12px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #dce8ee;
+            padding: 13px 14px;
+            border-radius: 10px;
+            margin-bottom: 7px;
+            font-size: 14px;
+            transition: .2s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(56,189,248,.16);
+            color: white;
+        }
+
+        .nav-link.active {
+            border-left: 3px solid var(--celeste);
+        }
+
+        .nav-icon {
+            width: 22px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .sidebar-bottom {
+            margin-top: auto;
+            padding-top: 25px;
+        }
+
+        .sidebar-bottom a {
+            display: block;
+            color: #dce8ee;
+            font-size: 13px;
+            padding: 12px;
+            border-radius: 9px;
+        }
+
+        .sidebar-bottom a:hover {
+            background: rgba(255,255,255,.09);
+        }
+
+        /* CONTENIDO PRINCIPAL */
+
+        .main {
+            flex: 1;
+            min-width: 0;
+            padding: 35px clamp(18px, 4vw, 55px);
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .breadcrumb {
+            color: var(--gris);
+            font-size: 13px;
+        }
+
+        .topbar h1 {
+            color: var(--azul);
+            font-size: clamp(25px, 3vw, 32px);
+            margin-top: 7px;
+        }
+
+        .topbar-description {
+            color: var(--gris);
+            font-size: 13px;
+            margin-top: 8px;
+            line-height: 1.6;
+        }
+
+        .offer-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            border: 1px solid var(--borde);
+            border-radius: 30px;
+            padding: 11px 15px;
+            color: var(--azul);
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        /* BANNER */
+
+        .hero {
+            background: linear-gradient(120deg, #183b4e, #24566d);
+            color: white;
+            border-radius: 18px;
+            padding: 35px;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: rgba(56,189,248,.18);
+            color: #a8e5ff;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .hero h2 {
+            font-size: clamp(24px, 3vw, 34px);
+            line-height: 1.3;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            color: #d3e4ec;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .hero-symbol {
+            font-size: 90px;
+            opacity: .9;
+            flex-shrink: 0;
+        }
+
+        /* ENCABEZADO DE PROMOCIONES */
+
+        .section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 22px;
+        }
+
+        .section-heading h2 {
+            color: var(--azul);
+            font-size: 21px;
+            margin-bottom: 7px;
+        }
+
+        .section-heading p {
+            color: var(--gris);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .section-count {
+            background: #e3f5fd;
+            color: var(--azul);
+            padding: 8px 13px;
+            border-radius: 20px;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        /* TARJETAS */
+
+        .promotions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .promotion-card {
+            background: white;
+            border: 1px solid #e6edf1;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(24,59,78,.06);
+            display: flex;
+            flex-direction: column;
+            transition: transform .2s, box-shadow .2s;
+        }
+
+        .promotion-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 30px rgba(24,59,78,.12);
+        }
+
+        .promotion-top {
+            min-height: 175px;
+            padding: 24px;
+            background: linear-gradient(135deg, #e3f5fd, #f5fbfe);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .promotion-top::after {
+            content: "";
+            width: 130px;
+            height: 130px;
+            background: rgba(56,189,248,.12);
+            border-radius: 50%;
+            position: absolute;
+            right: -30px;
+            bottom: -45px;
+        }
+
+        .promotion-type {
+            color: #42687a;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .discount {
+            font-size: 43px;
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--azul);
+            position: relative;
+            z-index: 1;
+        }
+
+        .discount span {
+            font-size: 21px;
+        }
+
+        .promotion-symbol {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 34px;
+            z-index: 1;
+        }
+
+        .promotion-body {
+            padding: 23px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .promotion-body h3 {
+            font-size: 17px;
+            color: var(--azul);
+            margin-bottom: 10px;
+        }
+
+        .promotion-body p {
+            font-size: 13px;
+            line-height: 1.8;
+            color: var(--gris);
+            margin-bottom: 18px;
+        }
+
+        .code-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--gris);
+            letter-spacing: .8px;
+            margin-bottom: 8px;
+        }
+
+        .code-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 10px;
+            border: 1px dashed #9bcfe5;
+            background: #f5fbfe;
+            border-radius: 9px;
+            margin-bottom: 19px;
+        }
+
+        .promo-code {
+            color: var(--azul);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: .6px;
+            overflow-wrap: anywhere;
+        }
+
+        .copy-btn {
+            border: none;
+            background: transparent;
+            color: #1677a2;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 5px;
+            flex-shrink: 0;
+        }
+
+        .copy-btn:hover {
+            color: var(--azul);
+            text-decoration: underline;
+        }
+
+        .promotion-btn {
+            width: 100%;
+            margin-top: auto;
+            padding: 13px;
+            border: none;
+            border-radius: 9px;
+            background: var(--celeste);
+            color: #12384b;
+            font-size: 13px;
+            font-weight: 700;
+            text-align: center;
+            transition: .2s;
+        }
+
+        .promotion-btn:hover {
+            background: #7dd3fc;
+        }
+
+        .promotion-note {
+            margin-top: 14px;
+            font-size: 11px;
+            color: #8999a4;
+            line-height: 1.6;
+        }
+
+        /* INFORMACIÓN ADICIONAL */
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 35px;
+        }
+
+        .info-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 13px;
+            background: white;
+            border: 1px solid #e6edf1;
+            border-radius: 13px;
+            padding: 19px;
+        }
+
+        .info-icon {
+            width: 42px;
+            height: 42px;
+            background: #e8f7fd;
+            color: var(--azul);
+            border-radius: 11px;
+            display: grid;
+            place-items: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .info-card h3 {
+            font-size: 13px;
+            color: var(--azul);
+            margin-bottom: 6px;
+        }
+
+        .info-card p {
+            font-size: 12px;
+            color: var(--gris);
+            line-height: 1.7;
+        }
+
+        .footer {
+            margin-top: 35px;
+            padding: 20px 0;
+            border-top: 1px solid var(--borde);
+            text-align: center;
+            color: #8a9aa5;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        /* NOTIFICACIÓN */
+
+        .toast {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            background: var(--azul);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 11px;
+            box-shadow: 0 12px 30px rgba(0,0,0,.18);
+            font-size: 13px;
+            max-width: calc(100% - 40px);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(12px);
+            pointer-events: none;
+            transition: .25s;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1150px) {
+            .promotions-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 800px) {
+            .layout {
+                display: block;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 18px;
+            }
+
+            .brand {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 0 0 15px;
+                margin-bottom: 14px;
+            }
+
+            .brand-icon {
+                margin: 0;
+                flex-shrink: 0;
+            }
+
+            .brand p {
+                display: none;
+            }
+
+            .menu-label,
+            .sidebar-bottom {
+                display: none;
+            }
+
+            .sidebar nav {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+
+            .nav-link {
+                padding: 10px 12px;
+                margin: 0;
+                font-size: 12px;
+            }
+
+            .main {
+                padding: 25px 18px;
+            }
+
+            .hero {
+                padding: 26px;
+            }
+
+            .hero-symbol {
+                font-size: 60px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .topbar {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .hero {
+                padding: 23px;
+            }
+
+            .hero-symbol {
+                display: none;
+            }
+
+            .promotions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .promotion-top {
+                min-height: 150px;
+            }
+
+            .section-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .offer-label {
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- BARRA LATERAL -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">PP</div>
+            <div>
+                <h2>Perforaciones Palacios</h2>
+                <p>Soluciones para el agua</p>
+            </div>
+        </div>
+
+        <div class="menu-label">Menú principal</div>
+
+        <nav>
+            <a class="nav-link" href="inicio.html">
+                <span class="nav-icon">⌂</span>
+                Inicio
+            </a>
+
+            <a class="nav-link" href="catalogo.html">
+                <span class="nav-icon">▦</span>
+                Productos
+            </a>
+
+            <a class="nav-link" href="carrito.html">
+                <span class="nav-icon">🛒</span>
+                Carrito
+            </a>
+
+            <a class="nav-link active" href="promociones.html">
+                <span class="nav-icon">✧</span>
+                Promociones
+            </a>
+
+            <a class="nav-link" href="pedidos.html">
+                <span class="nav-icon">▤</span>
+                Mis pedidos
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a href="inicio.html">← Volver al sitio</a>
+        </div>
+
+    </aside>
+
+    <!-- CONTENIDO -->
+    <main class="main">
+
+        <header class="topbar">
+            <div>
+                <div class="breadcrumb">
+                    Inicio / Ofertas / Promociones
+                </div>
+
+                <h1>Promociones especiales</h1>
+
+                <p class="topbar-description">
+                    Encuentra ofertas para tus proyectos de agua,
+                    instalación y perforación.
+                </p>
+            </div>
+
+            <div class="offer-label">
+                <span>✦</span>
+                Ofertas disponibles
+            </div>
+        </header>
+
+        <!-- BANNER PRINCIPAL -->
+        <section class="hero">
+            <div class="hero-content">
+                <span class="hero-tag">Ofertas especiales</span>
+
+                <h2>Aprovecha nuestras promociones</h2>
+
+                <p>
+                    Equipa tu proyecto con nuestras ofertas especiales.
+                    Consulta los descuentos disponibles y explora nuestro
+                    catálogo para encontrar los productos que necesitas.
+                </p>
+            </div>
+
+            <div class="hero-symbol">%</div>
+        </section>
+
+        <!-- PROMOCIONES -->
+        <section>
+
+            <div class="section-heading">
+                <div>
+                    <h2>Promociones disponibles</h2>
+                    <p>
+                        Consulta cada oferta y copia su código promocional.
+                    </p>
+                </div>
+
+                <span class="section-count">3 promociones</span>
+            </div>
+
+            <div class="promotions-grid">
+
+                <!-- PROMOCIÓN 1 -->
+                <article class="promotion-card">
+
+                    <div class="promotion-top">
+                        <span class="promotion-type">
+                            Oferta especial
+                        </span>
+
+                        <div class="discount">
+                            15<span>%</span>
+                        </div>
+
+                        <div class="promotion-symbol">✦</div>
+                    </div>
+
+                    <div class="promotion-body">
+                        <h3>Descuento en productos</h3>
+
+                        <p>
+                            Aprovecha un descuento promocional en productos
+                            seleccionados para tus instalaciones y proyectos.
+                        </p>
+
+                        <div class="code-label">Código promocional</div>
+
+                        <div class="code-box">
+                            <span class="promo-code">PALACIOS15</span>
+
+                            <button class="copy-btn"
+                                onclick="copiarCodigo('PALACIOS15')">
+                                Copiar
+                            </button>
+                        </div>
+
+                        <a href="catalogo.html" class="promotion-btn">
+                            Explorar catálogo →
+                        </a>
+
+                        <div class="promotion-note">
+                            Oferta demostrativa. Consulta las condiciones
+                            antes de realizar tu pedido.
+                        </div>
+                    </div>
+
+                </article>
+
+                <!-- PROMOCIÓN 2 -->
+                <article class="promotion-card">
+
+                    <div class="promotion-top">
+                        <span class="promotion-type">
+                            Beneficio especial
+                        </span>
+
+                        <div class="discount">
+                            10<span>%</span>
+                        </div>
+
+                        <div class="promotion-symbol">◇</div>
+                    </div>
+
+                    <div class="promotion-body">
+                        <h3>Prepara tu instalación</h3>
+
+                        <p>
+                            Encuentra materiales y artículos para tu
+                            instalación hidráulica con una oferta especial.
+                        </p>
+
+                        <div class="code-label">Código promocional</div>
+
+                        <div class="code-box">
+                            <span class="promo-code">INSTALA10</span>
+
+                            <button class="copy-btn"
+                                onclick="copiarCodigo('INSTALA10')">
+                                Copiar
+                            </button>
+                        </div>
+
+                        <a href="catalogo.html" class="promotion-btn">
+                            Ver productos →
+                        </a>
+
+                        <div class="promotion-note">
+                            Oferta demostrativa. Consulta las condiciones
+                            antes de realizar tu pedido.
+                        </div>
+                    </div>
+
+                </article>
+
+                <!-- PROMOCIÓN 3 -->
+                <article class="promotion-card">
+
+                    <div class="promotion-top">
+                        <span class="promotion-type">
+                            Ahorro destacado
+                        </span>
+
+                        <div class="discount">
+                            20<span>%</span>
+                        </div>
+
+                        <div class="promotion-symbol">✧</div>
+                    </div>
+
+                    <div class="promotion-body">
+                        <h3>Oferta en artículos seleccionados</h3>
+
+                        <p>
+                            Conoce esta promoción especial y revisa los
+                            artículos que podrían ayudarte en tu proyecto.
+                        </p>
+
+                        <div class="code-label">Código promocional</div>
+
+                        <div class="code-box">
+                            <span class="promo-code">AHORRA20</span>
+
+                            <button class="copy-btn"
+                                onclick="copiarCodigo('AHORRA20')">
+                                Copiar
+                            </button>
+                        </div>
+
+                        <a href="catalogo.html" class="promotion-btn">
+                            Consultar catálogo →
+                        </a>
+
+                        <div class="promotion-note">
+                            Oferta demostrativa. Consulta las condiciones
+                            antes de realizar tu pedido.
+                        </div>
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+        <!-- INFORMACIÓN ADICIONAL -->
+        <section class="info-grid">
+
+            <article class="info-card">
+                <div class="info-icon">▦</div>
+
+                <div>
+                    <h3>Consulta los productos</h3>
+                    <p>
+                        Visita el catálogo para conocer los artículos
+                        disponibles para tus proyectos.
+                    </p>
+                </div>
+            </article>
+
+            <article class="info-card">
+                <div class="info-icon">⌑</div>
+
+                <div>
+                    <h3>Revisa tu pedido</h3>
+                    <p>
+                        Agrega productos al carrito y revisa las cantidades
+                        antes de continuar con tu compra.
+                    </p>
+                </div>
+            </article>
+
+            <article class="info-card">
+                <div class="info-icon">✓</div>
+
+                <div>
+                    <h3>Atención al cliente</h3>
+                    <p>
+                        Si tienes dudas sobre un producto o una promoción,
+                        consulta los medios de contacto del sitio.
+                    </p>
+                </div>
+            </article>
+
+        </section>
+
+        <footer class="footer">
+            <p>
+                © 2026 Perforaciones Palacios. Todos los derechos reservados.
+            </p>
+
+            <p>
+                Soluciones confiables para tus proyectos de agua.
+            </p>
+        </footer>
+
+    </main>
+
+</div>
+
+<!-- NOTIFICACIÓN -->
+<div class="toast" id="notificacion"></div>
+
+<script>
+    function mostrarNotificacion(mensaje) {
+        const toast = document.getElementById("notificacion");
+
+        toast.textContent = mensaje;
+        toast.classList.add("show");
+
+        clearTimeout(window.temporizadorToast);
+
+        window.temporizadorToast = setTimeout(function() {
+            toast.classList.remove("show");
+        }, 2500);
+    }
+
+    async function copiarCodigo(codigo) {
+        try {
+            await navigator.clipboard.writeText(codigo);
+            mostrarNotificacion(
+                "Código " + codigo + " copiado correctamente."
+            );
+        } catch (error) {
+            const campo = document.createElement("textarea");
+
+            campo.value = codigo;
+            campo.style.position = "fixed";
+            campo.style.opacity = "0";
+
+            document.body.appendChild(campo);
+            campo.select();
+
+            const copiado = document.execCommand("copy");
+            campo.remove();
+
+            if (copiado) {
+                mostrarNotificacion(
+                    "Código " + codigo + " copiado correctamente."
+                );
+            } else {
+                mostrarNotificacion("Tu código es: " + codigo);
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
