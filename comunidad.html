@@ -1,0 +1,576 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaña | Perforaciones Palacios</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --azul: #183b4e;
+            --azul-claro: #38bdf8;
+            --azul-hover: #7dd3fc;
+            --fondo: #f5f8fa;
+            --texto: #334155;
+            --blanco: #ffffff;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--fondo);
+            color: var(--texto);
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--azul);
+            color: white;
+            padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        nav a:hover,
+        nav a.activo {
+            color: var(--azul-claro);
+        }
+
+        .hero {
+            background: linear-gradient(120deg, #183b4e, #24566d);
+            color: white;
+            padding: 55px 7%;
+            text-align: center;
+        }
+
+        .etiqueta {
+            display: inline-block;
+            background: rgba(56, 189, 248, .18);
+            color: #7dd3fc;
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: clamp(30px, 5vw, 44px);
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+            color: #e0f2fe;
+        }
+
+        .contenedor {
+            width: 86%;
+            max-width: 1100px;
+            margin: 45px auto;
+        }
+
+        .producto {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(24, 59, 78, .08);
+        }
+
+        .producto-imagen {
+            min-height: 340px;
+            background: #e7f2f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+        }
+
+        .producto-imagen img {
+            width: 100%;
+            max-height: 350px;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .sin-imagen {
+            color: #456778;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .producto-info {
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .producto-info h2 {
+            color: var(--azul);
+            font-size: 29px;
+            margin-bottom: 12px;
+        }
+
+        .precio {
+            font-size: 30px;
+            color: var(--azul);
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .boton {
+            display: inline-block;
+            background: var(--azul-claro);
+            color: var(--azul);
+            border: none;
+            border-radius: 7px;
+            padding: 12px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .2s;
+            font-size: 15px;
+        }
+
+        .boton:hover {
+            background: var(--azul-hover);
+            transform: translateY(-1px);
+        }
+
+        .opiniones {
+            margin-top: 55px;
+        }
+
+        .titulo-seccion {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .titulo-seccion h2 {
+            color: var(--azul);
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .resumen {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 25px;
+            border: 1px solid #e0e8ed;
+        }
+
+        .estrellas {
+            color: #e6a817;
+            letter-spacing: 2px;
+            font-size: 21px;
+        }
+
+        .lista-comentarios {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .comentario {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            border: 1px solid #e0e8ed;
+            overflow-wrap: anywhere;
+        }
+
+        .comentario h3 {
+            color: var(--azul);
+            font-size: 17px;
+            margin-bottom: 5px;
+        }
+
+        .comentario p {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .formulario {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border: 1px solid #e0e8ed;
+        }
+
+        .formulario h3 {
+            color: var(--azul);
+            margin-bottom: 18px;
+        }
+
+        .campo {
+            margin-bottom: 18px;
+        }
+
+        .campo label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+            color: var(--azul);
+        }
+
+        .campo input,
+        .campo textarea,
+        .campo select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font: inherit;
+            background: white;
+        }
+
+        .campo textarea {
+            resize: vertical;
+            min-height: 110px;
+        }
+
+        .mensaje {
+            display: none;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 7px;
+            background: #e0f2fe;
+            color: var(--azul);
+        }
+
+        footer {
+            background: var(--azul);
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 60px;
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+
+        @media (max-width: 800px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav {
+                justify-content: center;
+            }
+
+            .producto {
+                grid-template-columns: 1fr;
+            }
+
+            .producto-imagen {
+                min-height: 250px;
+            }
+
+            .lista-comentarios {
+                grid-template-columns: 1fr;
+            }
+
+            .contenedor {
+                width: 92%;
+                margin: 30px auto;
+            }
+
+            .producto-info {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">PERFORACIONES PALACIOS</div>
+
+    <nav>
+        <a href="inicio.html">Inicio</a>
+        <a href="catalogo.html">Productos</a>
+        <a href="campana.html" class="activo">Campaña</a>
+        <a href="contacto.html">Contacto</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <span class="etiqueta">CAMPAÑA DESTACADA</span>
+    <h1>Soluciones para el agua de tu hogar</h1>
+    <p>
+        Conoce nuestro producto destacado y descubre cómo podemos
+        ayudarte a encontrar soluciones para tus necesidades de agua.
+    </p>
+</section>
+
+<main class="contenedor">
+
+    <section class="producto" id="producto">
+        <div class="producto-imagen">
+            <!-- Puedes colocar tu imagen en img/bomba-sumergible.jpg -->
+            <img
+                src="img/bomba-sumergible.jpg"
+                alt="Bomba sumergible de agua"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+            >
+            <div class="sin-imagen" style="display:none;">
+                <p>Imagen del producto destacado</p>
+                <small>Agrega tu fotografía en img/bomba-sumergible.jpg</small>
+            </div>
+        </div>
+
+        <div class="producto-info">
+            <span class="etiqueta"
+                style="background:#e0f2fe;color:#183b4e;">
+                PRODUCTO DESTACADO
+            </span>
+
+            <h2>Bomba Sumergible 1 HP</h2>
+
+            <p>
+                Una alternativa para la extracción de agua en pozos.
+                Antes de elegirla, verifica que sus características
+                sean adecuadas para tu instalación.
+            </p>
+
+            <div class="precio">$4,850 MXN</div>
+
+            <p style="font-size:13px; margin-bottom:20px;">
+                Precio de referencia. Confirma disponibilidad y
+                especificaciones con el establecimiento.
+            </p>
+
+            <a href="contacto.html" class="boton">
+                Solicitar información
+            </a>
+        </div>
+    </section>
+
+    <section class="opiniones" id="opiniones">
+        <div class="titulo-seccion">
+            <h2>Opiniones de nuestros clientes</h2>
+            <p>Tu experiencia nos ayuda a seguir mejorando.</p>
+        </div>
+
+        <div class="resumen">
+            <div class="estrellas">★★★★★</div>
+            <p id="total-comentarios">3 opiniones de demostración</p>
+        </div>
+
+        <div class="lista-comentarios" id="lista-comentarios"></div>
+
+        <form class="formulario" id="form-comentario">
+            <h3>Comparte tu experiencia</h3>
+
+            <div class="mensaje" id="mensaje"></div>
+
+            <div class="campo">
+                <label for="nombre">Tu nombre</label>
+                <input
+                    type="text"
+                    id="nombre"
+                    maxlength="60"
+                    placeholder="Escribe tu nombre"
+                    required
+                >
+            </div>
+
+            <div class="campo">
+                <label for="calificacion">Calificación</label>
+                <select id="calificacion" required>
+                    <option value="5">★★★★★ - Excelente</option>
+                    <option value="4">★★★★☆ - Muy bueno</option>
+                    <option value="3">★★★☆☆ - Bueno</option>
+                    <option value="2">★★☆☆☆ - Regular</option>
+                    <option value="1">★☆☆☆☆ - Malo</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="comentario">Tu comentario</label>
+                <textarea
+                    id="comentario"
+                    maxlength="500"
+                    placeholder="Cuéntanos tu experiencia..."
+                    required
+                ></textarea>
+            </div>
+
+            <button type="submit" class="boton">
+                Publicar comentario
+            </button>
+        </form>
+    </section>
+
+</main>
+
+<footer>
+    <p><strong>Perforaciones Palacios</strong></p>
+    <p>Soluciones y servicios relacionados con el agua.</p>
+    <p>&copy; 2026 Perforaciones Palacios. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+    const comentariosIniciales = [
+        {
+            nombre: "Carlos M.",
+            calificacion: 5,
+            comentario: "Me pareció muy útil la información para conocer el producto.",
+            demostracion: true
+        },
+        {
+            nombre: "María G.",
+            calificacion: 5,
+            comentario: "El diseño permite encontrar fácilmente la información.",
+            demostracion: true
+        },
+        {
+            nombre: "José R.",
+            calificacion: 4,
+            comentario: "Me gustaría conocer más detalles sobre las características de la bomba.",
+            demostracion: true
+        }
+    ];
+
+    const lista = document.getElementById("lista-comentarios");
+    const total = document.getElementById("total-comentarios");
+    const formulario = document.getElementById("form-comentario");
+    const mensaje = document.getElementById("mensaje");
+
+    let comentarios = [];
+
+    try {
+        const guardados = localStorage.getItem("pp_comentarios_campana");
+        comentarios = guardados ? JSON.parse(guardados) : comentariosIniciales;
+
+        if (!Array.isArray(comentarios)) {
+            comentarios = comentariosIniciales;
+        }
+    } catch (error) {
+        comentarios = comentariosIniciales;
+    }
+
+    function mostrarComentarios() {
+        lista.replaceChildren();
+
+        comentarios.forEach(function(c) {
+            const tarjeta = document.createElement("article");
+            tarjeta.className = "comentario";
+
+            const encabezado = document.createElement("h3");
+            encabezado.textContent = c.nombre;
+
+            const estrellas = document.createElement("div");
+            estrellas.className = "estrellas";
+            estrellas.textContent =
+                "★".repeat(Number(c.calificacion)) +
+                "☆".repeat(5 - Number(c.calificacion));
+
+            const texto = document.createElement("p");
+            texto.textContent = c.comentario;
+
+            tarjeta.append(encabezado, estrellas, texto);
+
+            if (c.demostracion) {
+                const nota = document.createElement("small");
+                nota.textContent = "Comentario de ejemplo";
+                nota.style.color = "#64748b";
+                tarjeta.appendChild(nota);
+            }
+
+            lista.appendChild(tarjeta);
+        });
+
+        const cantidad = comentarios.length;
+        total.textContent = cantidad +
+            (cantidad === 1 ? " comentario" : " comentarios");
+    }
+
+    function mostrarMensaje(texto) {
+        mensaje.textContent = texto;
+        mensaje.style.display = "block";
+    }
+
+    formulario.addEventListener("submit", function(evento) {
+        evento.preventDefault();
+
+        const nombre = document.getElementById("nombre").value.trim();
+        const comentario = document.getElementById("comentario").value.trim();
+        const calificacion = Number(
+            document.getElementById("calificacion").value
+        );
+
+        if (!nombre || !comentario) {
+            mostrarMensaje("Escribe tu nombre y tu comentario.");
+            return;
+        }
+
+        const nuevoComentario = {
+            nombre: nombre,
+            comentario: comentario,
+            calificacion: calificacion,
+            demostracion: false
+        };
+
+        comentarios.unshift(nuevoComentario);
+
+        try {
+            localStorage.setItem(
+                "pp_comentarios_campana",
+                JSON.stringify(comentarios)
+            );
+        } catch (error) {
+            mostrarMensaje(
+                "El comentario se mostrará, pero no se pudo guardar en este navegador."
+            );
+            mostrarComentarios();
+            return;
+        }
+
+        mostrarComentarios();
+        formulario.reset();
+        mostrarMensaje("Tu comentario se agregó correctamente.");
+    });
+
+    mostrarComentarios();
+</script>
+
+</body>
+</html>
