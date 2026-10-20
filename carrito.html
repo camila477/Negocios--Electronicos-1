@@ -376,28 +376,29 @@
         }
 
         .primary-btn,
-.checkout-btn {
-    border: none;
-    background: var(--azul);
-    color: white;
-    padding: 13px 18px;
-    border-radius: 10px;
-    font-size: 13px;
-    font-weight: 700;
-    text-decoration: none;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    transition: .2s;
-}
+        .checkout-btn {
+            border: none;
+            background: var(--azul);
+            color: white;
+            padding: 13px 18px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            transition: .2s;
+        }
 
-.primary-btn:hover,
-.checkout-btn:hover {
-    background: var(--azul-claro);
-    transform: translateY(-1px);
-}
+        .primary-btn:hover,
+        .checkout-btn:hover {
+            background: var(--azul-claro);
+            transform: translateY(-1px);
+        }
 
+        /* RESUMEN DE COMPRA */
         .summary-panel {
             padding: 24px;
         }
@@ -468,6 +469,126 @@
             line-height: 1.8;
         }
 
+        /* APARTADO PARA CANJEAR CUPONES */
+        .coupon-box {
+            border: 1px solid #dceaf1;
+            background: #f7fbfd;
+            border-radius: 13px;
+            padding: 16px;
+            margin-bottom: 22px;
+        }
+
+        .coupon-heading {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .coupon-icon {
+            width: 37px;
+            height: 37px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 10px;
+            background: #e2f5fd;
+            color: var(--azul);
+            font-size: 19px;
+        }
+
+        .coupon-heading h3 {
+            color: var(--azul);
+            font-size: 14px;
+        }
+
+        .coupon-description {
+            font-size: 11px;
+            color: var(--gris);
+            line-height: 1.6;
+            margin-bottom: 13px;
+        }
+
+        .coupon-form {
+            display: flex;
+            gap: 7px;
+        }
+
+        .coupon-form input {
+            min-width: 0;
+            width: 100%;
+            border: 1px solid #cfdae1;
+            border-radius: 8px;
+            padding: 11px 10px;
+            outline: none;
+            font-size: 12px;
+            text-transform: uppercase;
+            background: white;
+            color: var(--texto);
+        }
+
+        .coupon-form input:focus {
+            border-color: var(--celeste);
+            box-shadow: 0 0 0 3px rgba(56,189,248,.13);
+        }
+
+        .coupon-form button {
+            border: none;
+            border-radius: 8px;
+            background: var(--azul);
+            color: white;
+            padding: 0 13px;
+            font-size: 12px;
+            font-weight: 700;
+            transition: .2s;
+            white-space: nowrap;
+        }
+
+        .coupon-form button:hover {
+            background: var(--azul-claro);
+        }
+
+        .coupon-message {
+            margin-top: 10px;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .coupon-message.success {
+            color: var(--verde);
+        }
+
+        .coupon-message.error {
+            color: #c24141;
+        }
+
+        .remove-coupon {
+            display: inline-block;
+            margin-top: 9px;
+            border: none;
+            background: none;
+            color: #b44444;
+            font-size: 11px;
+            text-decoration: underline;
+        }
+
+        .discount-row strong {
+            color: var(--verde) !important;
+        }
+
+        .coupon-examples {
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px dashed #d8e5eb;
+            color: var(--gris);
+            font-size: 10px;
+            line-height: 1.8;
+        }
+
+        .coupon-examples strong {
+            color: var(--azul);
+        }
+
         .footer {
             margin-top: 35px;
             color: #8a9aa5;
@@ -503,7 +624,7 @@
             animation: appear .2s ease-out;
         }
 
-        /* Modal de confirmación */
+        /* MODAL DE CONFIRMACIÓN */
         .confirm-modal {
             background: white;
             width: 100%;
@@ -854,6 +975,14 @@
             .secure-label {
                 font-size: 11px;
             }
+
+            .coupon-form {
+                flex-direction: column;
+            }
+
+            .coupon-form button {
+                padding: 11px;
+            }
         }
     </style>
 </head>
@@ -898,12 +1027,10 @@
     <main class="main">
         <header class="topbar">
             <div>
-               
                 <h1>Mi carrito de compras</h1>
             </div>
-
             <div class="secure-label">
-                <span></span> Compra segura
+                <span>🔒</span> Compra segura
             </div>
         </header>
 
@@ -940,6 +1067,49 @@
                     <div class="summary-row">
                         <span>Envío</span>
                         <strong id="costo-envio">$350.00</strong>
+                    </div>
+
+                    <!-- APARTADO PARA CANJEAR CUPONES -->
+                    <section class="coupon-box" aria-labelledby="titulo-cupon">
+                        <div class="coupon-heading">
+                            <div class="coupon-icon">％</div>
+                            <h3 id="titulo-cupon">¿Tienes un cupón de descuento?</h3>
+                        </div>
+
+                        <p class="coupon-description">
+                            Escribe tu código promocional y aplícalo para ahorrar
+                            en tu compra.
+                        </p>
+
+                        <div class="coupon-form">
+                            <input
+                                type="text"
+                                id="codigo-cupon"
+                                placeholder="Ej. PERFO10"
+                                aria-label="Código de cupón"
+                                autocomplete="off"
+                            >
+                            <button type="button" id="btn-canjear">Canjear</button>
+                        </div>
+
+                        <div class="coupon-message" id="mensaje-cupon"
+                             role="status" aria-live="polite"></div>
+
+                        <button type="button" class="remove-coupon"
+                                id="quitar-cupon" hidden>
+                            Quitar cupón
+                        </button>
+
+                        <div class="coupon-examples">
+                            Cupones disponibles de demostración:<br>
+                            <strong>PERFO10</strong> — 10% de descuento<br>
+                            <strong>AGUA15</strong> — 15% de descuento
+                        </div>
+                    </section>
+
+                    <div class="summary-row discount-row" id="fila-descuento" hidden>
+                        <span>Descuento (<span id="etiqueta-cupon"></span>)</span>
+                        <strong id="monto-descuento">−$0.00</strong>
                     </div>
 
                     <hr class="summary-divider">
@@ -1073,6 +1243,23 @@
 <script>
     const COSTO_ENVIO = 350;
     let indiceAEliminar = null;
+    let cuponAplicado = null;
+
+    /*
+       CUPONES DE DEMOSTRACIÓN
+       PERFO10: 10% de descuento
+       AGUA15: 15% de descuento
+    */
+    const CUPONES = {
+        PERFO10: {
+            descuento: 10,
+            descripcion: "10% de descuento"
+        },
+        AGUA15: {
+            descuento: 15,
+            descripcion: "15% de descuento"
+        }
+    };
 
     function obtenerCarrito() {
         try {
@@ -1114,6 +1301,7 @@
                 '"': "&quot;",
                 "'": "&#039;"
             };
+
             return equivalencias[caracter];
         });
     }
@@ -1137,25 +1325,130 @@
         }, 0);
     }
 
+    function calcularDescuento(subtotal) {
+        if (!cuponAplicado) {
+            return 0;
+        }
+
+        return subtotal * (cuponAplicado.descuento / 100);
+    }
+
+    function actualizarResumen() {
+        const carrito = obtenerCarrito();
+        const subtotal = calcularSubtotal(carrito);
+        const envio = carrito.length ? COSTO_ENVIO : 0;
+        const descuento = calcularDescuento(subtotal);
+        const total = Math.max(0, subtotal - descuento + envio);
+
+        document.getElementById("subtotal").textContent =
+            formatoPrecio(subtotal);
+
+        document.getElementById("costo-envio").textContent =
+            formatoPrecio(envio);
+
+        document.getElementById("total").textContent =
+            formatoPrecio(total);
+
+        const filaDescuento = document.getElementById("fila-descuento");
+
+        if (cuponAplicado && carrito.length > 0) {
+            filaDescuento.hidden = false;
+
+            document.getElementById("etiqueta-cupon").textContent =
+                cuponAplicado.codigo;
+
+            document.getElementById("monto-descuento").textContent =
+                "−" + formatoPrecio(descuento);
+        } else {
+            filaDescuento.hidden = true;
+            document.getElementById("monto-descuento").textContent =
+                "−" + formatoPrecio(0);
+        }
+    }
+
+    function actualizarInterfazCupon() {
+        const input = document.getElementById("codigo-cupon");
+        const mensaje = document.getElementById("mensaje-cupon");
+        const quitar = document.getElementById("quitar-cupon");
+
+        if (cuponAplicado) {
+            input.value = cuponAplicado.codigo;
+            input.disabled = true;
+
+            mensaje.textContent =
+                "✓ ¡Cupón aplicado! " + cuponAplicado.descripcion + ".";
+
+            mensaje.className = "coupon-message success";
+            quitar.hidden = false;
+        } else {
+            input.disabled = false;
+            mensaje.textContent = "";
+            mensaje.className = "coupon-message";
+            quitar.hidden = true;
+        }
+    }
+
+    function canjearCupon() {
+        const carrito = obtenerCarrito();
+        const input = document.getElementById("codigo-cupon");
+        const mensaje = document.getElementById("mensaje-cupon");
+        const codigo = input.value.trim().toUpperCase();
+
+        if (carrito.length === 0) {
+            mensaje.textContent =
+                "Agrega productos al carrito antes de canjear un cupón.";
+            mensaje.className = "coupon-message error";
+            return;
+        }
+
+        if (!codigo) {
+            mensaje.textContent = "Escribe un código de cupón.";
+            mensaje.className = "coupon-message error";
+            input.focus();
+            return;
+        }
+
+        if (!CUPONES[codigo]) {
+            mensaje.textContent =
+                "El cupón no es válido. Prueba PERFO10 o AGUA15.";
+            mensaje.className = "coupon-message error";
+            return;
+        }
+
+        cuponAplicado = {
+            codigo: codigo,
+            descuento: CUPONES[codigo].descuento,
+            descripcion: CUPONES[codigo].descripcion
+        };
+
+        actualizarInterfazCupon();
+        actualizarResumen();
+
+        mostrarNotificacion(
+            "Cupón " + codigo + " aplicado correctamente."
+        );
+    }
+
+    function quitarCupon() {
+        cuponAplicado = null;
+
+        document.getElementById("codigo-cupon").value = "";
+        actualizarInterfazCupon();
+        actualizarResumen();
+
+        mostrarNotificacion("Se quitó el cupón de descuento.");
+    }
+
     function renderizarCarrito() {
         const carrito = obtenerCarrito();
         const lista = document.getElementById("lista-carrito");
-        const subtotal = calcularSubtotal(carrito);
+
         const totalUnidades = carrito.reduce(function(total, producto) {
             return total + Number(producto.cantidad || 1);
         }, 0);
 
         document.getElementById("contador-productos").textContent =
             totalUnidades + (totalUnidades === 1 ? " producto" : " productos");
-
-        document.getElementById("subtotal").textContent =
-            formatoPrecio(subtotal);
-
-        document.getElementById("costo-envio").textContent =
-            formatoPrecio(COSTO_ENVIO);
-
-        document.getElementById("total").textContent =
-            formatoPrecio(subtotal + (carrito.length ? COSTO_ENVIO : 0));
 
         if (carrito.length === 0) {
             lista.innerHTML = `
@@ -1171,6 +1464,17 @@
                     </a>
                 </div>
             `;
+
+            /*
+             * Si el carrito queda vacío, se retira el cupón para evitar
+             * que se aplique a productos agregados en otra compra.
+             */
+            if (cuponAplicado) {
+                cuponAplicado = null;
+                actualizarInterfazCupon();
+            }
+
+            actualizarResumen();
             return;
         }
 
@@ -1183,10 +1487,13 @@
             let imagenHTML = "📦";
 
             if (imagen && /^https?:\/\//i.test(imagen)) {
-                imagenHTML = `<img src="${escaparHTML(imagen)}" alt="${nombre}">`;
+                imagenHTML =
+                    `<img src="${escaparHTML(imagen)}" alt="${nombre}">`;
             } else if (imagen && /^[\w./-]+$/.test(imagen)) {
-                imagenHTML = `<img src="${escaparHTML(imagen)}" alt="${nombre}"
-                    onerror="this.parentElement.textContent='📦'">`;
+                imagenHTML = `
+                    <img src="${escaparHTML(imagen)}" alt="${nombre}"
+                    onerror="this.parentElement.textContent='📦'">
+                `;
             }
 
             return `
@@ -1220,6 +1527,8 @@
                 </article>
             `;
         }).join("");
+
+        actualizarResumen();
     }
 
     function cambiarCantidad(indice, cambio) {
@@ -1278,6 +1587,7 @@
         guardarCarrito(carrito);
         cerrarConfirmacion();
         renderizarCarrito();
+
         mostrarNotificacion("Producto eliminado del carrito.");
     }
 
@@ -1308,12 +1618,14 @@
 
         const subtotal = calcularSubtotal(carrito);
         const envio = COSTO_ENVIO;
-        const total = subtotal + envio;
+        const descuento = calcularDescuento(subtotal);
+        const total = Math.max(0, subtotal - descuento + envio);
         const pedidos = obtenerPedidos();
 
         pedidos.unshift({
             id: Date.now(),
             fecha: new Date().toLocaleString("es-MX"),
+
             productos: carrito.map(function(producto) {
                 return {
                     nombre: producto.nombre,
@@ -1321,14 +1633,24 @@
                     precio: Number(producto.precio || 0)
                 };
             }),
+
             subtotal: subtotal,
             envio: envio,
+            descuento: descuento,
+            cupon: cuponAplicado ? cuponAplicado.codigo : null,
+            porcentajeDescuento: cuponAplicado
+                ? cuponAplicado.descuento
+                : 0,
             total: total,
             estado: "En proceso"
         });
 
         guardarPedidos(pedidos);
         guardarCarrito([]);
+
+        cuponAplicado = null;
+        actualizarInterfazCupon();
+
         cerrarPoliticas();
         renderizarCarrito();
 
@@ -1337,7 +1659,9 @@
         );
     }
 
-    document.getElementById("btn-pagar").addEventListener("click", abrirPoliticas);
+    document.getElementById("btn-pagar").addEventListener(
+        "click", abrirPoliticas
+    );
 
     document.getElementById("continuar-pago").addEventListener(
         "click", continuarConPedido
@@ -1375,6 +1699,22 @@
         }
     );
 
+    document.getElementById("btn-canjear").addEventListener(
+        "click", canjearCupon
+    );
+
+    document.getElementById("codigo-cupon").addEventListener(
+        "keydown", function(evento) {
+            if (evento.key === "Enter") {
+                canjearCupon();
+            }
+        }
+    );
+
+    document.getElementById("quitar-cupon").addEventListener(
+        "click", quitarCupon
+    );
+
     document.addEventListener("keydown", function(evento) {
         if (evento.key === "Escape") {
             cerrarPoliticas();
@@ -1382,6 +1722,7 @@
         }
     });
 
+    actualizarInterfazCupon();
     renderizarCarrito();
 </script>
 </body>
