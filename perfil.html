@@ -202,7 +202,9 @@
             margin-bottom: 6px;
         }
 
-        .form-group input {
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
             width: 100%;
             padding: 12px 14px;
             border: 1px solid #c9e5ed;
@@ -212,9 +214,17 @@
             background: #fafcfd;
             outline: none;
             transition: 0.3s;
+            font-family: inherit;
         }
 
-        .form-group input:focus {
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
             border-color: #0ea5e9;
             background: white;
             box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
@@ -451,6 +461,87 @@
         }
 
         /* =========================
+           NUEVAS SECCIONES: COMENTARIOS Y PRODUCTOS
+        ========================= */
+
+        .comment-item,
+        .product-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .comment-item:last-child,
+        .product-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .comment-header,
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+            gap: 10px;
+        }
+
+        .comment-author,
+        .product-name {
+            font-weight: bold;
+            color: #155e75;
+            font-size: 15px;
+        }
+
+        .comment-date,
+        .product-price {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .product-price {
+            font-weight: bold;
+            color: #0ea5e9;
+            font-size: 14px;
+        }
+
+        .comment-text,
+        .product-desc {
+            font-size: 14px;
+            color: #334155;
+            line-height: 1.5;
+        }
+
+        .product-meta {
+            display: flex;
+            gap: 15px;
+            margin-top: 8px;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 25px 10px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* =========================
            TOAST NOTIFICATION
         ========================= */
 
@@ -619,7 +710,7 @@
         </h1>
 
         <p>
-            Gestiona tu información personal, consulta tu carrito de cotizaciones y dale seguimiento a tus pedidos.
+            Gestiona tu información personal, consulta tu carrito, revisa tus comentarios y sube productos.
         </p>
 
     </header>
@@ -726,6 +817,106 @@
 
             <div id="emptyOrdersMessage" class="cart-empty" style="display: none;">
                 Aún no has confirmado ninguna solicitud de cotización o pedido.
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             NUEVA TARJETA 4: MIS COMENTARIOS
+        ========================= -->
+
+        <section class="card">
+
+            <h2 class="card-title">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                Mis Comentarios
+            </h2>
+
+            <!-- Formulario para agregar comentario -->
+            <form id="commentForm">
+                <div class="form-group">
+                    <label for="commentText">Escribe un comentario</label>
+                    <textarea id="commentText" placeholder="Comparte tu experiencia o deja un comentario..." required></textarea>
+                </div>
+                <button type="submit" class="btn-primary">
+                    <svg class="icon-svg" style="width:18px; height:18px;" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    Publicar comentario
+                </button>
+            </form>
+
+            <div style="margin-top: 25px; border-top: 1px solid #eef7fa; padding-top: 20px;">
+                <h3 style="font-size: 15px; color: #155e75; margin-bottom: 15px;">Comentarios publicados</h3>
+                
+                <div id="commentsList">
+                    <!-- Se llena dinámicamente -->
+                </div>
+
+                <div id="emptyCommentsMessage" class="empty-state" style="display: none;">
+                    Aún no has publicado ningún comentario.
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             NUEVA TARJETA 5: SUBIR PRODUCTOS
+        ========================= -->
+
+        <section class="card">
+
+            <h2 class="card-title">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                Subir Producto
+            </h2>
+
+            <!-- Formulario para subir producto -->
+            <form id="productForm">
+                <div class="form-group">
+                    <label for="productName">Nombre del producto</label>
+                    <input type="text" id="productName" placeholder="Ej: Bomba sumergible 1 HP" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productPrice">Precio (MXN)</label>
+                        <input type="number" id="productPrice" placeholder="0.00" min="0" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="productCategory">Categoría</label>
+                        <select id="productCategory" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="Bombas">Bombas</option>
+                            <option value="Tubería">Tubería</option>
+                            <option value="Herramientas">Herramientas</option>
+                            <option value="Accesorios">Accesorios</option>
+                            <option value="Otros">Otros</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="productDesc">Descripción</label>
+                    <textarea id="productDesc" placeholder="Describe el producto, características, etc." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary">
+                    <svg class="icon-svg" style="width:18px; height:18px;" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    Subir producto
+                </button>
+            </form>
+
+            <div style="margin-top: 25px; border-top: 1px solid #eef7fa; padding-top: 20px;">
+                <h3 style="font-size: 15px; color: #155e75; margin-bottom: 15px;">Mis productos subidos</h3>
+                
+                <div id="productsList">
+                    <!-- Se llena dinámicamente -->
+                </div>
+
+                <div id="emptyProductsMessage" class="empty-state" style="display: none;">
+                    Aún no has subido ningún producto.
+                </div>
             </div>
 
         </section>
@@ -947,7 +1138,171 @@
             mostrarToast("🎉 ¡Solicitud enviada! Se ha agregado a 'Mis Pedidos'.");
         }
 
-        // 5. NOTIFICACIONES Y MODALES
+        // =========================
+        // 5. LÓGICA DE COMENTARIOS
+        // =========================
+        let comentarios = JSON.parse(localStorage.getItem("comentariosPalacios")) || [];
+
+        function renderizarComentarios() {
+            const container = document.getElementById("commentsList");
+            const emptyMessage = document.getElementById("emptyCommentsMessage");
+
+            if (comentarios.length === 0) {
+                container.innerHTML = "";
+                emptyMessage.style.display = "block";
+                return;
+            }
+
+            emptyMessage.style.display = "none";
+            let html = "";
+
+            // Más reciente primero
+            comentarios.slice().reverse().forEach((com, index) => {
+                const realIndex = comentarios.length - 1 - index;
+                html += `
+                    <div class="comment-item">
+                        <div class="comment-header">
+                            <div>
+                                <div class="comment-author">${com.autor}</div>
+                                <div class="comment-date">${com.fecha}</div>
+                            </div>
+                            <button class="btn-delete" onclick="eliminarComentario(${realIndex})" title="Eliminar comentario">
+                                <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                            </button>
+                        </div>
+                        <div class="comment-text">${com.texto}</div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        document.getElementById("commentForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const texto = document.getElementById("commentText").value.trim();
+            if (!texto) return;
+
+            const fechaActual = new Date().toLocaleDateString('es-MX', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            const nuevoComentario = {
+                autor: usuario.name || "Usuario",
+                texto: texto,
+                fecha: fechaActual
+            };
+
+            comentarios.push(nuevoComentario);
+            localStorage.setItem("comentariosPalacios", JSON.stringify(comentarios));
+
+            document.getElementById("commentText").value = "";
+            renderizarComentarios();
+            mostrarToast("✓ ¡Comentario publicado correctamente!");
+        });
+
+        function eliminarComentario(index) {
+            comentarios.splice(index, 1);
+            localStorage.setItem("comentariosPalacios", JSON.stringify(comentarios));
+            renderizarComentarios();
+            mostrarToast("Comentario eliminado.");
+        }
+
+        // =========================
+        // 6. LÓGICA DE PRODUCTOS
+        // =========================
+        let productos = JSON.parse(localStorage.getItem("productosPalacios")) || [];
+
+        function renderizarProductos() {
+            const container = document.getElementById("productsList");
+            const emptyMessage = document.getElementById("emptyProductsMessage");
+
+            if (productos.length === 0) {
+                container.innerHTML = "";
+                emptyMessage.style.display = "block";
+                return;
+            }
+
+            emptyMessage.style.display = "none";
+            let html = "";
+
+            // Más reciente primero
+            productos.slice().reverse().forEach((prod, index) => {
+                const realIndex = productos.length - 1 - index;
+                html += `
+                    <div class="product-item">
+                        <div class="product-header">
+                            <div>
+                                <div class="product-name">${prod.nombre}</div>
+                                <div class="product-price">$${Number(prod.precio).toLocaleString('es-MX')} MXN</div>
+                            </div>
+                            <button class="btn-delete" onclick="eliminarProducto(${realIndex})" title="Eliminar producto">
+                                <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                            </button>
+                        </div>
+                        <div class="product-desc">${prod.descripcion}</div>
+                        <div class="product-meta">
+                            <span>📂 ${prod.categoria}</span>
+                            <span>📅 ${prod.fecha}</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        document.getElementById("productForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const nombre = document.getElementById("productName").value.trim();
+            const precio = parseFloat(document.getElementById("productPrice").value);
+            const categoria = document.getElementById("productCategory").value;
+            const descripcion = document.getElementById("productDesc").value.trim();
+
+            if (!nombre || isNaN(precio) || !categoria || !descripcion) {
+                mostrarToast("Por favor completa todos los campos.");
+                return;
+            }
+
+            const fechaActual = new Date().toLocaleDateString('es-MX', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            const nuevoProducto = {
+                nombre: nombre,
+                precio: precio,
+                categoria: categoria,
+                descripcion: descripcion,
+                fecha: fechaActual,
+                autor: usuario.name || "Usuario"
+            };
+
+            productos.push(nuevoProducto);
+            localStorage.setItem("productosPalacios", JSON.stringify(productos));
+
+            // Limpiar formulario
+            document.getElementById("productForm").reset();
+            renderizarProductos();
+            mostrarToast("✓ ¡Producto subido correctamente!");
+        });
+
+        function eliminarProducto(index) {
+            const eliminado = productos[index].nombre;
+            productos.splice(index, 1);
+            localStorage.setItem("productosPalacios", JSON.stringify(productos));
+            renderizarProductos();
+            mostrarToast(`Producto "${eliminado}" eliminado.`);
+        }
+
+        // 7. NOTIFICACIONES Y MODALES
         function mostrarToast(mensaje) {
             const toast = document.getElementById("toast");
             const toastMessage = document.getElementById("toast-message");
@@ -977,6 +1332,8 @@
         cargarPerfil();
         renderizarCarrito();
         renderizarPedidos();
+        renderizarComentarios();
+        renderizarProductos();
 
     </script>
 
