@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -32,7 +31,7 @@ body{font-family:Arial,Helvetica,sans-serif;background:#f7f9fa;color:#183b4e}
 .welcome{background:#183b4e;color:white;padding:28px 30px;border-radius:10px;margin-bottom:25px}
 .welcome h2{font-size:20px;margin-bottom:7px}
 .welcome p{color:#cbdbe2;font-size:14px;line-height:1.5}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:25px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:25px}
 .card{background:white;border:1px solid #e3eaed;border-radius:10px;padding:22px;text-decoration:none;color:inherit;transition:.2s}
 .card:hover{border-color:#38bdf8;transform:translateY(-2px)}
 .card span{display:block;color:#71848d;font-size:13px;margin-bottom:5px}
@@ -90,6 +89,23 @@ button{cursor:pointer;font-size:13px;border-radius:6px;padding:9px 13px;transiti
 .status{font-size:11px;color:#28734a;background:#e9f8ef;padding:5px 8px;border-radius:4px}
 .promotion-note{margin-top:18px;padding:14px;background:#f1f9fc;border:1px solid #d9eef5;border-radius:7px;font-size:12px;color:#5e747e}
 
+/* SUBASTAS */
+.auction-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.auction-card{background:#f9fbfc;border:1px solid #e3eaed;border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.auction-header{background:#183b4e;color:white;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
+.auction-header h3{font-size:15px;font-weight:600}
+.auction-badge{font-size:11px;padding:4px 8px;border-radius:4px;font-weight:bold}
+.auction-badge.activa{background:#38bdf8;color:#083344}
+.auction-badge.finalizada{background:#94a3b8;color:#1e293b}
+.auction-badge.pendiente{background:#fbbf24;color:#78350f}
+.auction-body{padding:18px;flex:1;display:flex;flex-direction:column}
+.auction-body p{font-size:13px;line-height:1.5;color:#71848d;margin-bottom:14px;flex:1}
+.auction-info{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.auction-info div{background:white;border:1px solid #e3eaed;border-radius:6px;padding:10px}
+.auction-info span{display:block;font-size:11px;color:#84959d;margin-bottom:3px}
+.auction-info strong{font-size:14px;color:#183b4e}
+.auction-footer{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;padding-top:12px;border-top:1px solid #e3eaed}
+
 /* FORMULARIO DE EDICIÓN DENTRO DE LA PÁGINA */
 .editor-overlay{position:fixed;inset:0;background:rgba(24,59,78,.58);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;padding:18px;z-index:6000}
 .editor-overlay.show{display:flex}
@@ -112,8 +128,8 @@ button{cursor:pointer;font-size:13px;border-radius:6px;padding:9px 13px;transiti
 .toast{position:fixed;bottom:25px;right:25px;background:#183b4e;color:white;padding:14px 20px;border-radius:8px;box-shadow:0 8px 24px rgba(24,59,78,.25);opacity:0;transform:translateY(15px);transition:.25s;pointer-events:none;z-index:8000;font-size:13px}
 .toast.show{opacity:1;transform:translateY(0)}
 
-@media(max-width:1100px){.cards,.promotion-grid{grid-template-columns:1fr 1fr}.main-content{padding:25px}.form-row{grid-template-columns:1fr}}
-@media(max-width:700px){.sidebar{width:65px;padding:20px 7px}.logo h2,.logo span,.sidebar nav a span,.menu-bottom a span{display:none}.sidebar nav a,.menu-bottom a{justify-content:center;padding:13px 5px}.main-content{margin-left:65px;padding:20px 12px}.cards,.promotion-grid{grid-template-columns:1fr}.topbar{align-items:flex-start;flex-direction:column;gap:12px}.order{align-items:flex-start;flex-direction:column}.toast{left:15px;right:15px;bottom:15px}.hidden-section{padding:17px}}
+@media(max-width:1100px){.cards,.promotion-grid,.auction-grid{grid-template-columns:1fr 1fr}.main-content{padding:25px}.form-row{grid-template-columns:1fr}}
+@media(max-width:700px){.sidebar{width:65px;padding:20px 7px}.logo h2,.logo span,.sidebar nav a span,.menu-bottom a span{display:none}.sidebar nav a,.menu-bottom a{justify-content:center;padding:13px 5px}.main-content{margin-left:65px;padding:20px 12px}.cards,.promotion-grid,.auction-grid{grid-template-columns:1fr}.topbar{align-items:flex-start;flex-direction:column;gap:12px}.order{align-items:flex-start;flex-direction:column}.toast{left:15px;right:15px;bottom:15px}.hidden-section{padding:17px}}
 </style>
 </head>
 
@@ -129,6 +145,7 @@ button{cursor:pointer;font-size:13px;border-radius:6px;padding:9px 13px;transiti
         <a href="#productos"><div class="menu-icon"><div class="icon-box"></div></div><span>Productos</span></a>
         <a href="#pedidos"><div class="menu-icon"><div class="icon-cart"></div></div><span>Pedidos</span></a>
         <a href="#promociones"><div class="menu-icon"><div class="icon-tag"></div></div><span>Promociones</span></a>
+        <a href="#subastas"><div class="menu-icon"><div class="icon-gavel"></div></div><span>Subastas</span></a>
     </nav>
     <div class="menu-bottom">
         <a href="inicio.html"><div class="menu-icon"><div class="icon-globe"></div></div><span>Volver al sitio</span></a>
@@ -151,7 +168,7 @@ button{cursor:pointer;font-size:13px;border-radius:6px;padding:9px 13px;transiti
     <section id="inicio">
         <div class="welcome">
             <h2>Resumen general</h2>
-            <p>Consulta productos, pedidos y promociones desde este panel.</p>
+            <p>Consulta productos, pedidos, promociones y subastas desde este panel.</p>
         </div>
         <div class="cards">
             <a href="#productos" class="card">
@@ -169,10 +186,15 @@ button{cursor:pointer;font-size:13px;border-radius:6px;padding:9px 13px;transiti
                 <strong id="total-promociones">0</strong>
                 <small>Promociones registradas</small>
             </a>
+            <a href="#subastas" class="card">
+                <span>Subastas</span>
+                <strong id="total-subastas">0</strong>
+                <small>Subastas registradas</small>
+            </a>
         </div>
         <div class="information">
             <h2>Actividad del sitio</h2>
-            <p>Administra productos, pedidos y promociones. Los formularios y las confirmaciones aparecen dentro de esta página.</p>
+            <p>Administra productos, pedidos, promociones y subastas. Los formularios y las confirmaciones aparecen dentro de esta página.</p>
         </div>
     </section>
 
@@ -238,6 +260,19 @@ button{cursor:pointer;font-size:13px;border-radius:6px;padding:9px 13px;transiti
         <div class="promotion-grid" id="lista-promociones"></div>
         <div class="promotion-note">Los cambios se guardan en este navegador.</div>
     </section>
+
+    <!-- SECCIÓN DE SUBASTAS -->
+    <section id="subastas" class="hidden-section">
+        <div class="section-header">
+            <div>
+                <h2>Subastas</h2>
+                <p>Crea, edita y administra las subastas de productos y servicios.</p>
+            </div>
+            <button class="btn-add" onclick="abrirEditor('subasta')">+ Nueva subasta</button>
+        </div>
+        <div class="auction-grid" id="lista-subastas"></div>
+        <div class="promotion-note">Las subastas se guardan en este navegador. Puedes editar el precio, estado y fecha de finalización en cualquier momento.</div>
+    </section>
 </main>
 
 <!-- FORMULARIO DE EDICIÓN DENTRO DE LA PÁGINA -->
@@ -294,9 +329,16 @@ let promociones = [
     {id:3,titulo:"Promoción por temporada",descripcion:"Descuento en productos seleccionados durante la temporada.",descuento:"20"}
 ];
 
+let subastas = [
+    {id:1,titulo:"Bomba Sumergible 1 HP - Subasta",descripcion:"Subasta de bomba sumergible de 1 HP en excelente estado.",precioInicial:"3500",precioActual:"4200",fechaFin:"2026-11-15",estado:"Activa"},
+    {id:2,titulo:"Tanque de Agua 1100L",descripcion:"Tanque de almacenamiento de agua en subasta especial.",precioInicial:"4000",precioActual:"4800",fechaFin:"2026-11-20",estado:"Activa"},
+    {id:3,titulo:"Kit de Instalación Completo",descripcion:"Kit completo de instalación hidráulica en subasta.",precioInicial:"1000",precioActual:"1350",fechaFin:"2026-10-30",estado:"Finalizada"}
+];
+
 let siguienteProducto=7;
 let siguientePedido=6;
 let siguientePromocion=4;
+let siguienteSubasta=4;
 let tipoEditor="";
 let idEditando=null;
 let tipoEliminar="";
@@ -323,6 +365,7 @@ function guardarDatos(){
     localStorage.setItem("pp_productos",JSON.stringify(productos));
     localStorage.setItem("pp_pedidos",JSON.stringify(pedidos));
     localStorage.setItem("pp_promociones",JSON.stringify(promociones));
+    localStorage.setItem("pp_subastas",JSON.stringify(subastas));
 }
 
 function cargarDatos(){
@@ -330,12 +373,15 @@ function cargarDatos(){
         const p=localStorage.getItem("pp_productos");
         const pe=localStorage.getItem("pp_pedidos");
         const pr=localStorage.getItem("pp_promociones");
+        const s=localStorage.getItem("pp_subastas");
         if(p)productos=JSON.parse(p);
         if(pe)pedidos=JSON.parse(pe);
         if(pr)promociones=JSON.parse(pr);
+        if(s)subastas=JSON.parse(s);
         siguienteProducto=Math.max(0,...productos.map(x=>Number(x.id)||0))+1;
         siguientePedido=Math.max(0,...pedidos.map(x=>Number(x.id)||0))+1;
         siguientePromocion=Math.max(0,...promociones.map(x=>Number(x.id)||0))+1;
+        siguienteSubasta=Math.max(0,...subastas.map(x=>Number(x.id)||0))+1;
     }catch(e){
         console.error("No se pudieron cargar los datos.",e);
     }
@@ -406,6 +452,21 @@ function campo(nombre,etiqueta,valor="",tipo="text"){
             </select>
         </div>`;
     }
+    if(tipo==="estado-subasta"){
+        const estados=["Pendiente","Activa","Finalizada"];
+        return `<div class="form-group">
+            <label for="${id}">${etiqueta}</label>
+            <select id="${id}" name="${nombre}">
+                ${estados.map(e=>`<option ${valor===e?"selected":""}>${e}</option>`).join("")}
+            </select>
+        </div>`;
+    }
+    if(tipo==="date"){
+        return `<div class="form-group">
+            <label for="${id}">${etiqueta}</label>
+            <input id="${id}" name="${nombre}" type="date" value="${escapar(valor)}">
+        </div>`;
+    }
     return `<div class="form-group">
         <label for="${id}">${etiqueta}</label>
         <input id="${id}" name="${nombre}" type="text" value="${escapar(valor)}">
@@ -419,7 +480,8 @@ function abrirEditor(tipo,id=null){
     const existente=id===null?null:
         (tipo==="producto"?productos.find(x=>x.id===id):
         tipo==="pedido"?pedidos.find(x=>x.id===id):
-        promociones.find(x=>x.id===id));
+        tipo==="promocion"?promociones.find(x=>x.id===id):
+        subastas.find(x=>x.id===id));
 
     if(id!==null&&!existente)return;
 
@@ -436,11 +498,19 @@ function abrirEditor(tipo,id=null){
         campos+=campo("cliente","Nombre del cliente",existente?.cliente??"");
         campos+=campo("precio","Precio o cotización",existente?.precio??"");
         campos+=campo("estado","Estado",existente?.estado??"Pendiente","estado");
-    }else{
+    }else if(tipo==="promocion"){
         titulo=existente?"Editar promoción":"Agregar promoción";
         campos+=campo("titulo","Título de la promoción",existente?.titulo??"");
         campos+=campo("descripcion","Descripción",existente?.descripcion??"","textarea");
         campos+=campo("descuento","Porcentaje de descuento",existente?.descuento??"");
+    }else if(tipo==="subasta"){
+        titulo=existente?"Editar subasta":"Nueva subasta";
+        campos+=campo("titulo","Título de la subasta",existente?.titulo??"");
+        campos+=campo("descripcion","Descripción",existente?.descripcion??"","textarea");
+        campos+=campo("precioInicial","Precio inicial",existente?.precioInicial??"");
+        campos+=campo("precioActual","Precio actual",existente?.precioActual??"");
+        campos+=campo("fechaFin","Fecha de finalización",existente?.fechaFin??"","date");
+        campos+=campo("estado","Estado",existente?.estado??"Pendiente","estado-subasta");
     }
 
     document.getElementById("editor-titulo").textContent=titulo;
@@ -495,6 +565,18 @@ document.getElementById("editor-form").addEventListener("submit",function(e){
             notificar("Promoción actualizada correctamente");
         }
         renderizarPromociones();
+    }
+
+    if(tipoEditor==="subasta"){
+        if(idEditando===null){
+            subastas.push({id:siguienteSubasta++,...datos});
+            notificar("Subasta creada correctamente");
+        }else{
+            const s=subastas.find(x=>x.id===idEditando);
+            if(s)Object.assign(s,datos);
+            notificar("Subasta actualizada correctamente");
+        }
+        renderizarSubastas();
     }
 
     guardarDatos();
@@ -555,6 +637,57 @@ function renderizarPromociones(){
     `).join("")||'<p class="empty-message">No hay promociones registradas.</p>';
 }
 
+/* SUBASTAS */
+function renderizarSubastas(){
+    document.getElementById("total-subastas").textContent=subastas.length;
+
+    const lista=document.getElementById("lista-subastas");
+    
+    if(!subastas.length){
+        lista.innerHTML='<p class="empty-message">No hay subastas registradas.</p>';
+        return;
+    }
+
+    lista.innerHTML=subastas.map(s=>{
+        const estadoClass = (s.estado||"").toLowerCase();
+        return `
+        <article class="auction-card">
+            <div class="auction-header">
+                <h3>${escapar(s.titulo)}</h3>
+                <span class="auction-badge ${estadoClass}">${escapar(s.estado||"Pendiente")}</span>
+            </div>
+            <div class="auction-body">
+                <p>${escapar(s.descripcion)}</p>
+                <div class="auction-info">
+                    <div>
+                        <span>Precio inicial</span>
+                        <strong>$${escapar(s.precioInicial||"0")}</strong>
+                    </div>
+                    <div>
+                        <span>Precio actual</span>
+                        <strong>$${escapar(s.precioActual||"0")}</strong>
+                    </div>
+                    <div>
+                        <span>Finaliza</span>
+                        <strong>${escapar(s.fechaFin||"—")}</strong>
+                    </div>
+                    <div>
+                        <span>Estado</span>
+                        <strong>${escapar(s.estado||"Pendiente")}</strong>
+                    </div>
+                </div>
+                <div class="auction-footer">
+                    <span class="status">${escapar(s.estado||"Pendiente")}</span>
+                    <div>
+                        <button class="btn-edit" onclick="abrirEditor('subasta',${s.id})">Editar</button>
+                        <button class="btn-delete" onclick="pedirEliminacion('subasta',${s.id})">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </article>
+    `}).join("");
+}
+
 /* CONFIRMACIÓN DE ELIMINACIÓN DENTRO DE LA PÁGINA */
 function pedirEliminacion(tipo,id){
     tipoEliminar=tipo;
@@ -564,13 +697,14 @@ function pedirEliminacion(tipo,id){
     if(tipo==="producto")elemento=productos.find(x=>x.id===id);
     if(tipo==="pedido")elemento=pedidos.find(x=>x.id===id);
     if(tipo==="promocion")elemento=promociones.find(x=>x.id===id);
+    if(tipo==="subasta")elemento=subastas.find(x=>x.id===id);
 
     let nombre="este elemento";
     if(elemento){
         nombre=elemento.nombre||elemento.producto||elemento.titulo||nombre;
     }
 
-    const nombres={producto:"producto",pedido:"pedido",promocion:"promoción"};
+    const nombres={producto:"producto",pedido:"pedido",promocion:"promoción",subasta:"subasta"};
     document.getElementById("confirm-titulo").textContent="¿Eliminar "+nombres[tipo]+"?";
     document.getElementById("confirm-texto").textContent='¿Seguro que deseas eliminar "'+nombre+'"?';
     document.getElementById("confirm-overlay").classList.add("show");
@@ -594,6 +728,9 @@ function confirmarEliminacion(){
     }else if(tipoEliminar==="promocion"){
         promociones=promociones.filter(x=>x.id!==idEliminar);
         renderizarPromociones();
+    }else if(tipoEliminar==="subasta"){
+        subastas=subastas.filter(x=>x.id!==idEliminar);
+        renderizarSubastas();
     }
 
     guardarDatos();
@@ -622,7 +759,7 @@ cargarDatos();
 renderizarProductos();
 renderizarPedidos();
 renderizarPromociones();
+renderizarSubastas();
 </script>
 </body>
 </html>
-```
