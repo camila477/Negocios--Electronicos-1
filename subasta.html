@@ -1,0 +1,1103 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subastas | Perforaciones Palacios</title>
+
+<style>
+:root {
+    --azul: #183b4e;
+    --claro: #38bdf8;
+    --hover: #7dd3fc;
+    --fondo: #f5f8fa;
+    --texto: #334155;
+    --borde: #dbe5eb;
+    --blanco: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--fondo);
+    color: var(--texto);
+    line-height: 1.6;
+}
+
+header {
+    background: var(--azul);
+    color: white;
+    padding: 20px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+nav a:hover,
+nav a.activo {
+    color: var(--claro);
+}
+
+.hero {
+    padding: 45px 7%;
+    background: linear-gradient(125deg, #183b4e, #24566d);
+    color: white;
+}
+
+.hero h1 {
+    font-size: clamp(30px, 4vw, 42px);
+    margin: 12px 0;
+}
+
+.hero p {
+    max-width: 680px;
+    color: #e0f2fe;
+}
+
+.etiqueta {
+    display: inline-block;
+    color: #075985;
+    background: #e0f2fe;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.hero .etiqueta {
+    background: #ffffff20;
+    color: #bdeaff;
+}
+
+main {
+    max-width: 1150px;
+    width: 90%;
+    margin: 30px auto 55px;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.toolbar h2 {
+    color: var(--azul);
+    font-size: 25px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 8px;
+    padding: 11px 16px;
+    background: var(--claro);
+    color: var(--azul);
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: .2s;
+    font-size: 14px;
+}
+
+.btn:hover {
+    background: var(--hover);
+}
+
+.btn.secundario {
+    background: #e5eef3;
+    color: var(--azul);
+}
+
+.btn.secundario:hover {
+    background: #d4e6ef;
+}
+
+.btn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+.estadisticas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 28px;
+}
+
+.estadistica {
+    background: white;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    padding: 17px;
+}
+
+.estadistica strong {
+    display: block;
+    color: var(--azul);
+    font-size: 24px;
+}
+
+.estadistica span {
+    font-size: 13px;
+    color: #64748b;
+}
+
+.formulario {
+    display: none;
+    background: white;
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+    padding: 25px;
+    margin-bottom: 30px;
+}
+
+.formulario.visible {
+    display: block;
+}
+
+.formulario h2 {
+    color: var(--azul);
+    margin-bottom: 5px;
+}
+
+.formulario > p {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 20px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.campo label {
+    display: block;
+    font-weight: bold;
+    font-size: 13px;
+    color: var(--azul);
+    margin-bottom: 6px;
+}
+
+.campo input,
+.campo textarea,
+.campo select,
+.busqueda,
+.filtro {
+    width: 100%;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 11px;
+    background: white;
+    color: var(--texto);
+    font: inherit;
+}
+
+.campo textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.campo.completo {
+    grid-column: 1 / -1;
+}
+
+.acciones-formulario {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+}
+
+.mensaje {
+    display: none;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    background: #dcfce7;
+    color: #166534;
+    font-size: 13px;
+}
+
+.mensaje.visible {
+    display: block;
+}
+
+.filtros {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.busqueda,
+.filtro {
+    width: auto;
+    min-width: 190px;
+}
+
+.productos {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.producto {
+    background: white;
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 15px #183b4e0a;
+}
+
+.imagen-producto {
+    height: 190px;
+    background: linear-gradient(135deg, #e4f3f9, #d7e7ef);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: var(--azul);
+}
+
+.imagen-producto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.icono-producto {
+    font-size: 55px;
+    color: var(--azul);
+}
+
+.contenido-producto {
+    padding: 17px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.encabezado-producto {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.vendedor {
+    font-size: 12px;
+    color: #64748b;
+}
+
+.producto h3 {
+    color: var(--azul);
+    font-size: 18px;
+    line-height: 1.35;
+}
+
+.descripcion {
+    color: #64748b;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+.precio-label {
+    font-size: 12px;
+    color: #64748b;
+}
+
+.precio {
+    font-size: 25px;
+    font-weight: bold;
+    color: var(--azul);
+}
+
+.tiempo {
+    background: #fff7ed;
+    color: #9a3412;
+    border-radius: 7px;
+    padding: 8px;
+    font-size: 12px;
+}
+
+.botones-producto {
+    display: flex;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.botones-producto .btn {
+    flex: 1;
+}
+
+.pie-producto {
+    border-top: 1px solid #edf2f5;
+    padding: 11px 17px;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 12px;
+    color: #64748b;
+}
+
+.vacio {
+    grid-column: 1 / -1;
+    background: white;
+    border: 1px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 35px;
+    text-align: center;
+    color: #64748b;
+}
+
+.nota {
+    margin-top: 20px;
+    color: #64748b;
+    font-size: 12px;
+}
+
+footer {
+    background: var(--azul);
+    color: white;
+    text-align: center;
+    padding: 25px;
+    font-size: 13px;
+}
+
+@media (max-width: 900px) {
+    .productos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 620px) {
+    header {
+        justify-content: center;
+        text-align: center;
+    }
+
+    nav {
+        justify-content: center;
+    }
+
+    .productos,
+    .estadisticas,
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .campo.completo {
+        grid-column: auto;
+    }
+
+    main {
+        width: 92%;
+    }
+
+    .busqueda,
+    .filtro {
+        width: 100%;
+    }
+
+    .formulario {
+        padding: 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">PERFORACIONES PALACIOS</div>
+
+    <nav>
+        <a href="inicio.html">Inicio</a>
+        <a href="catalogo.html">Catálogo</a>
+        <a href="campana.html">Campaña</a>
+        <a href="subastas.html" class="activo">Subastas</a>
+        <a href="contacto.html">Contacto</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <span class="etiqueta">COMUNIDAD · COMPRA Y OFERTA</span>
+    <h1>Subastas de la comunidad</h1>
+    <p>
+        Descubre productos publicados por otros usuarios, realiza
+        una oferta o publica tus propios productos para que otros
+        puedan participar en la subasta.
+    </p>
+</section>
+
+<main>
+
+    <section class="estadisticas">
+        <div class="estadistica">
+            <strong id="total-subastas">0</strong>
+            <span>Subastas disponibles</span>
+        </div>
+
+        <div class="estadistica">
+            <strong id="total-pujas">0</strong>
+            <span>Pujas realizadas en este navegador</span>
+        </div>
+
+        <div class="estadistica">
+            <strong id="total-mias">0</strong>
+            <span>Mis publicaciones</span>
+        </div>
+    </section>
+
+    <div class="toolbar">
+        <h2>Productos en subasta</h2>
+        <button class="btn" id="abrir-formulario" type="button">
+            + Publicar producto
+        </button>
+    </div>
+
+    <section class="formulario" id="panel-formulario">
+        <h2>Publica tu producto</h2>
+        <p>Completa los datos para agregar una nueva subasta.</p>
+
+        <div class="mensaje" id="mensaje" role="status"></div>
+
+        <form id="form-subasta">
+            <div class="form-grid">
+
+                <div class="campo">
+                    <label for="nombre-producto">Nombre del producto *</label>
+                    <input
+                        id="nombre-producto"
+                        maxlength="80"
+                        required
+                        placeholder="Ej. Bomba de agua"
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="categoria">Categoría *</label>
+                    <select id="categoria" required>
+                        <option value="Equipos de agua">Equipos de agua</option>
+                        <option value="Herramientas">Herramientas</option>
+                        <option value="Accesorios">Accesorios</option>
+                        <option value="Otros">Otros</option>
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label for="vendedor">Tu nombre de usuario *</label>
+                    <input
+                        id="vendedor"
+                        maxlength="50"
+                        required
+                        placeholder="Ej. Camila"
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="precio-inicial">Precio inicial (MXN) *</label>
+                    <input
+                        id="precio-inicial"
+                        type="number"
+                        min="1"
+                        step="1"
+                        required
+                        placeholder="Ej. 500"
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="duracion">Duración de la subasta *</label>
+                    <select id="duracion" required>
+                        <option value="1">1 día</option>
+                        <option value="3" selected>3 días</option>
+                        <option value="5">5 días</option>
+                        <option value="7">7 días</option>
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label for="imagen">URL de la imagen (opcional)</label>
+                    <input
+                        id="imagen"
+                        type="url"
+                        placeholder="https://ejemplo.com/imagen.jpg"
+                    >
+                </div>
+
+                <div class="campo completo">
+                    <label for="descripcion">Descripción del producto *</label>
+                    <textarea
+                        id="descripcion"
+                        maxlength="500"
+                        required
+                        placeholder="Describe el estado y las características del producto."
+                    ></textarea>
+                </div>
+
+            </div>
+
+            <div class="acciones-formulario">
+                <button class="btn" type="submit">Publicar subasta</button>
+                <button class="btn secundario" id="cancelar" type="button">
+                    Cancelar
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <div class="toolbar">
+        <div class="filtros">
+            <input
+                class="busqueda"
+                id="buscar"
+                type="search"
+                placeholder="Buscar producto..."
+                aria-label="Buscar producto"
+            >
+
+            <select class="filtro" id="filtro-categoria">
+                <option value="">Todas las categorías</option>
+                <option value="Equipos de agua">Equipos de agua</option>
+                <option value="Herramientas">Herramientas</option>
+                <option value="Accesorios">Accesorios</option>
+                <option value="Otros">Otros</option>
+            </select>
+
+            <select class="filtro" id="filtro-publicaciones">
+                <option value="todas">Todas las subastas</option>
+                <option value="mias">Mis publicaciones</option>
+            </select>
+        </div>
+    </div>
+
+    <section class="productos" id="lista-productos"></section>
+
+    <p class="nota">
+        Esta versión es una demostración. Los productos y las pujas
+        se guardan en el navegador y no se realizan pagos reales.
+    </p>
+
+</main>
+
+<footer>
+    <strong>Perforaciones Palacios</strong>
+    <p>Subastas de la comunidad</p>
+    <p>© 2026 Perforaciones Palacios. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+const CLAVE_SUBASTAS = "pp_subastas_v1";
+const CLAVE_PUJAS = "pp_subastas_pujas_v1";
+
+const ejemplos = [
+    {
+        id: "ejemplo-1",
+        nombre: "Bomba sumergible usada",
+        categoria: "Equipos de agua",
+        vendedor: "Roberto G.",
+        descripcion: "Bomba sumergible usada. Consulta las condiciones y compatibilidad antes de ofertar.",
+        precioInicial: 900,
+        precioActual: 1100,
+        imagen: "",
+        finaliza: Date.now() + 22 * 60 * 60 * 1000,
+        pujas: 2,
+        mia: false,
+        ejemplo: true
+    },
+    {
+        id: "ejemplo-2",
+        nombre: "Juego de herramientas",
+        categoria: "Herramientas",
+        vendedor: "Taller Luis",
+        descripcion: "Juego de herramientas para trabajos generales. Se ofrece el conjunto completo.",
+        precioInicial: 450,
+        precioActual: 450,
+        imagen: "",
+        finaliza: Date.now() + 38 * 60 * 60 * 1000,
+        pujas: 0,
+        mia: false,
+        ejemplo: true
+    },
+    {
+        id: "ejemplo-3",
+        nombre: "Tanque de almacenamiento",
+        categoria: "Equipos de agua",
+        vendedor: "Andrea M.",
+        descripcion: "Tanque para almacenamiento de agua. Revisa sus medidas y condiciones con el vendedor.",
+        precioInicial: 1200,
+        precioActual: 1450,
+        imagen: "",
+        finaliza: Date.now() + 12 * 60 * 60 * 1000,
+        pujas: 3,
+        mia: false,
+        ejemplo: true
+    },
+    {
+        id: "ejemplo-4",
+        nombre: "Accesorios para tubería",
+        categoria: "Accesorios",
+        vendedor: "Ferretería JR",
+        descripcion: "Lote de accesorios para instalaciones de tubería.",
+        precioInicial: 180,
+        precioActual: 220,
+        imagen: "",
+        finaliza: Date.now() + 50 * 60 * 60 * 1000,
+        pujas: 1,
+        mia: false,
+        ejemplo: true
+    },
+    {
+        id: "ejemplo-5",
+        nombre: "Taladro eléctrico",
+        categoria: "Herramientas",
+        vendedor: "Mónica R.",
+        descripcion: "Taladro eléctrico para trabajos domésticos. Consulta su estado antes de ofertar.",
+        precioInicial: 600,
+        precioActual: 600,
+        imagen: "",
+        finaliza: Date.now() + 30 * 60 * 60 * 1000,
+        pujas: 0,
+        mia: false,
+        ejemplo: true
+    },
+    {
+        id: "ejemplo-6",
+        nombre: "Kit de conexiones",
+        categoria: "Accesorios",
+        vendedor: "Pedro S.",
+        descripcion: "Kit de conexiones para instalaciones y proyectos relacionados con el agua.",
+        precioInicial: 250,
+        precioActual: 300,
+        imagen: "",
+        finaliza: Date.now() + 17 * 60 * 60 * 1000,
+        pujas: 1,
+        mia: false,
+        ejemplo: true
+    }
+];
+
+const $ = id => document.getElementById(id);
+
+let subastas = cargarSubastas();
+let contadorPujas = cargarPujas();
+
+function cargarSubastas() {
+    try {
+        const guardadas = localStorage.getItem(CLAVE_SUBASTAS);
+
+        if (guardadas !== null) {
+            const datos = JSON.parse(guardadas);
+
+            if (Array.isArray(datos)) {
+                return datos;
+            }
+        }
+    } catch (error) {
+        console.error("No se pudieron cargar las subastas.");
+    }
+
+    return ejemplos.map(producto => ({ ...producto }));
+}
+
+function guardarSubastas() {
+    try {
+        localStorage.setItem(CLAVE_SUBASTAS, JSON.stringify(subastas));
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+
+function cargarPujas() {
+    try {
+        return Number(localStorage.getItem(CLAVE_PUJAS) || 0);
+    } catch (error) {
+        return 0;
+    }
+}
+
+function guardarPujas() {
+    try {
+        localStorage.setItem(CLAVE_PUJAS, String(contadorPujas));
+    } catch (error) {
+        console.error("No se pudieron guardar las pujas.");
+    }
+}
+
+function formatoPrecio(precio) {
+    return new Intl.NumberFormat("es-MX", {
+        style: "currency",
+        currency: "MXN",
+        maximumFractionDigits: 0
+    }).format(Number(precio) || 0);
+}
+
+function tiempoRestante(fecha) {
+    const diferencia = Number(fecha) - Date.now();
+
+    if (diferencia <= 0) {
+        return "Subasta finalizada";
+    }
+
+    const dias = Math.floor(diferencia / 86400000);
+    const horas = Math.floor((diferencia % 86400000) / 3600000);
+    const minutos = Math.floor((diferencia % 3600000) / 60000);
+
+    if (dias > 0) {
+        return "Termina en " + dias + " d " + horas + " h";
+    }
+
+    if (horas > 0) {
+        return "Termina en " + horas + " h " + minutos + " min";
+    }
+
+    return "Termina en " + minutos + " min";
+}
+
+function crearTexto(etiqueta, clase, texto) {
+    const elemento = document.createElement(etiqueta);
+
+    if (clase) {
+        elemento.className = clase;
+    }
+
+    elemento.textContent = String(texto ?? "");
+    return elemento;
+}
+
+function iconoCategoria(categoria) {
+    const iconos = {
+        "Equipos de agua": "◉",
+        "Herramientas": "⚒",
+        "Accesorios": "◇",
+        "Otros": "▣"
+    };
+
+    return iconos[categoria] || "▣";
+}
+
+function crearTarjeta(producto) {
+    const tarjeta = document.createElement("article");
+    tarjeta.className = "producto";
+
+    const imagen = document.createElement("div");
+    imagen.className = "imagen-producto";
+
+    if (producto.imagen) {
+        const img = document.createElement("img");
+        img.src = producto.imagen;
+        img.alt = producto.nombre;
+        img.loading = "lazy";
+
+        img.onerror = function() {
+            imagen.replaceChildren(
+                crearTexto("span", "icono-producto", iconoCategoria(producto.categoria))
+            );
+        };
+
+        imagen.appendChild(img);
+    } else {
+        imagen.appendChild(
+            crearTexto("span", "icono-producto", iconoCategoria(producto.categoria))
+        );
+    }
+
+    const contenido = document.createElement("div");
+    contenido.className = "contenido-producto";
+
+    const encabezado = document.createElement("div");
+    encabezado.className = "encabezado-producto";
+
+    encabezado.append(
+        crearTexto("span", "etiqueta", producto.categoria),
+        crearTexto(
+            "span",
+            "vendedor",
+            producto.mia ? "Mi publicación" : "Por " + producto.vendedor
+        )
+    );
+
+    contenido.appendChild(encabezado);
+    contenido.appendChild(crearTexto("h3", "", producto.nombre));
+    contenido.appendChild(crearTexto("p", "descripcion", producto.descripcion));
+    contenido.appendChild(crearTexto("span", "precio-label", "Oferta actual"));
+    contenido.appendChild(crearTexto("div", "precio", formatoPrecio(producto.precioActual)));
+    contenido.appendChild(
+        crearTexto("span", "precio-label", "Precio inicial: " + formatoPrecio(producto.precioInicial))
+    );
+
+    contenido.appendChild(
+        crearTexto("div", "tiempo", "◷ " + tiempoRestante(producto.finaliza))
+    );
+
+    const botones = document.createElement("div");
+    botones.className = "botones-producto";
+
+    const botonPujar = crearTexto("button", "btn", "+ Ofertar");
+    botonPujar.type = "button";
+    botonPujar.disabled = Number(producto.finaliza) <= Date.now() || producto.mia;
+
+    botonPujar.addEventListener("click", function() {
+        realizarPuja(producto.id);
+    });
+
+    const botonDetalles = crearTexto("button", "btn secundario", "Detalles");
+    botonDetalles.type = "button";
+
+    botonDetalles.addEventListener("click", function() {
+        mostrarDetalles(producto);
+    });
+
+    botones.append(botonPujar, botonDetalles);
+    contenido.appendChild(botones);
+
+    const pie = document.createElement("div");
+    pie.className = "pie-producto";
+
+    pie.append(
+        crearTexto("span", "", "♧ " + Number(producto.pujas || 0) + " puja(s)"),
+        crearTexto("span", "", producto.ejemplo ? "Ejemplo" : "Publicación local")
+    );
+
+    tarjeta.append(imagen, contenido, pie);
+
+    return tarjeta;
+}
+
+function mostrarSubastas() {
+    const lista = $("lista-productos");
+    lista.replaceChildren();
+
+    const busqueda = $("buscar").value.trim().toLowerCase();
+    const categoria = $("filtro-categoria").value;
+    const tipo = $("filtro-publicaciones").value;
+
+    const filtradas = subastas.filter(producto => {
+        const coincideTexto = (
+            producto.nombre + " " +
+            producto.descripcion + " " +
+            producto.vendedor
+        ).toLowerCase().includes(busqueda);
+
+        const coincideCategoria = !categoria || producto.categoria === categoria;
+        const coincideTipo = tipo !== "mias" || producto.mia;
+
+        return coincideTexto && coincideCategoria && coincideTipo;
+    });
+
+    if (filtradas.length === 0) {
+        lista.appendChild(
+            crearTexto(
+                "div",
+                "vacio",
+                "No se encontraron subastas. Prueba otra búsqueda o publica un producto."
+            )
+        );
+    } else {
+        filtradas.forEach(producto => {
+            lista.appendChild(crearTarjeta(producto));
+        });
+    }
+
+    $("total-subastas").textContent = subastas.filter(
+        producto => Number(producto.finaliza) > Date.now()
+    ).length;
+
+    $("total-pujas").textContent = contadorPujas;
+
+    $("total-mias").textContent = subastas.filter(
+        producto => producto.mia
+    ).length;
+}
+
+function realizarPuja(id) {
+    const producto = subastas.find(item => item.id === id);
+
+    if (!producto) return;
+
+    if (Number(producto.finaliza) <= Date.now()) {
+        alert("Esta subasta ya finalizó.");
+        return;
+    }
+
+    const minimo = Number(producto.precioActual) + 50;
+
+    const respuesta = prompt(
+        "Oferta mínima: " + formatoPrecio(minimo) +
+        "\nEscribe el monto de tu oferta en MXN:",
+        String(minimo)
+    );
+
+    if (respuesta === null) return;
+
+    const cantidad = Number(respuesta);
+
+    if (!Number.isFinite(cantidad) || cantidad < minimo) {
+        alert("La oferta debe ser igual o mayor a " + formatoPrecio(minimo) + ".");
+        return;
+    }
+
+    const precioAnterior = producto.precioActual;
+    const pujasAnteriores = producto.pujas;
+    producto.precioActual = cantidad;
+    producto.pujas = Number(producto.pujas || 0) + 1;
+    contadorPujas++;
+
+    if (!guardarSubastas()) {
+        producto.precioActual = precioAnterior;
+        producto.pujas = pujasAnteriores;
+        contadorPujas--;
+        alert("No se pudo guardar la puja en este navegador.");
+        return;
+    }
+
+    guardarPujas();
+    mostrarSubastas();
+}
+
+function mostrarDetalles(producto) {
+    alert(
+        "PRODUCTO: " + producto.nombre +
+        "\nVendedor: " + producto.vendedor +
+        "\nCategoría: " + producto.categoria +
+        "\nPrecio inicial: " + formatoPrecio(producto.precioInicial) +
+        "\nOferta actual: " + formatoPrecio(producto.precioActual) +
+        "\nPujas: " + Number(producto.pujas || 0) +
+        "\n\nDescripción: " + producto.descripcion +
+        "\n\nDemostración local: no se realizan pagos reales."
+    );
+}
+
+function mostrarMensaje(texto) {
+    const mensaje = $("mensaje");
+    mensaje.textContent = texto;
+    mensaje.classList.add("visible");
+}
+
+$("abrir-formulario").addEventListener("click", function() {
+    $("panel-formulario").classList.toggle("visible");
+
+    if ($("panel-formulario").classList.contains("visible")) {
+        $("panel-formulario").scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
+});
+
+$("cancelar").addEventListener("click", function() {
+    $("form-subasta").reset();
+    $("panel-formulario").classList.remove("visible");
+    $("mensaje").classList.remove("visible");
+});
+
+$("form-subasta").addEventListener("submit", function(evento) {
+    evento.preventDefault();
+
+    const nombre = $("nombre-producto").value.trim();
+    const categoria = $("categoria").value;
+    const vendedor = $("vendedor").value.trim();
+    const precioInicial = Number($("precio-inicial").value);
+    const duracion = Number($("duracion").value);
+    const imagen = $("imagen").value.trim();
+    const descripcion = $("descripcion").value.trim();
+
+    if (
+        !nombre ||
+        !vendedor ||
+        !descripcion ||
+        !Number.isFinite(precioInicial) ||
+        precioInicial <= 0
+    ) {
+        mostrarMensaje("Completa los campos y coloca un precio mayor que cero.");
+        return;
+    }
+
+    const nuevaSubasta = {
+        id: "usuario-" + Date.now(),
+        nombre: nombre,
+        categoria: categoria,
+        vendedor: vendedor,
+        descripcion: descripcion,
+        precioInicial: precioInicial,
+        precioActual: precioInicial,
+        imagen: imagen,
+        finaliza: Date.now() + duracion * 86400000,
+        pujas: 0,
+        mia: true,
+        ejemplo: false
+    };
+
+    subastas.unshift(nuevaSubasta);
+
+    if (!guardarSubastas()) {
+        subastas.shift();
+        mostrarMensaje("No se pudo guardar la publicación en el navegador.");
+        return;
+    }
+
+    mostrarSubastas();
+    $("form-subasta").reset();
+
+    mostrarMensaje("¡Tu producto se publicó correctamente!");
+
+    setTimeout(function() {
+        $("panel-formulario").classList.remove("visible");
+        $("mensaje").classList.remove("visible");
+    }, 2000);
+
+    $("lista-productos").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+});
+
+$("buscar").addEventListener("input", mostrarSubastas);
+$("filtro-categoria").addEventListener("change", mostrarSubastas);
+$("filtro-publicaciones").addEventListener("change", mostrarSubastas);
+
+mostrarSubastas();
+
+setInterval(mostrarSubastas, 60000);
+</script>
+
+</body>
+</html>
