@@ -323,6 +323,60 @@
             color: #991b1b;
         }
 
+        .item-actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .btn-edit {
+            background: #e0f2fe;
+            color: #0369a1;
+            border: none;
+            border-radius: 6px;
+            padding: 7px 10px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: bold;
+            transition: .2s;
+        }
+
+        .btn-edit:hover { background: #bae6fd; }
+
+        .editor-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(9, 48, 62, .72);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            z-index: 5000;
+        }
+
+        .editor-box {
+            width: 100%;
+            max-width: 520px;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: white;
+            padding: 28px;
+            border-radius: 14px;
+            box-shadow: 0 15px 40px rgba(0,0,0,.25);
+        }
+
+        .editor-box h3 { color: #155e75; margin-bottom: 20px; }
+        .editor-buttons { display: flex; gap: 12px; margin-top: 18px; }
+        .editor-buttons button {
+            flex: 1; border: 0; border-radius: 8px; padding: 12px;
+            cursor: pointer; font-weight: bold;
+        }
+        .btn-editor-cancel { background: #e2e8f0; color: #334155; }
+        .btn-editor-save { background: #155e75; color: white; }
+        .btn-editor-save:hover { background: #0ea5e9; }
+
         .btn-delete .icon-svg {
             width: 18px;
             height: 18px;
@@ -847,7 +901,7 @@
 
             <div style="margin-top: 25px; border-top: 1px solid #eef7fa; padding-top: 20px;">
                 <h3 style="font-size: 15px; color: #155e75; margin-bottom: 15px;">Comentarios publicados</h3>
-                
+
                 <div id="commentsList">
                     <!-- Se llena dinámicamente -->
                 </div>
@@ -909,7 +963,7 @@
 
             <div style="margin-top: 25px; border-top: 1px solid #eef7fa; padding-top: 20px;">
                 <h3 style="font-size: 15px; color: #155e75; margin-bottom: 15px;">Mis productos subidos</h3>
-                
+
                 <div id="productsList">
                     <!-- Se llena dinámicamente -->
                 </div>
@@ -923,6 +977,20 @@
 
     </main>
 
+
+    <!-- MODAL PARA EDITAR COMENTARIOS Y PRODUCTOS -->
+    <div id="modalEditor" class="editor-overlay">
+        <div class="editor-box">
+            <h3 id="editorTitulo">Editar publicación</h3>
+            <form id="editorForm">
+                <div id="editorCampos"></div>
+                <div class="editor-buttons">
+                    <button type="button" class="btn-editor-cancel" onclick="cerrarEditor()">Cancelar</button>
+                    <button type="submit" class="btn-editor-save">Guardar cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- =========================
          NOTIFICACIÓN TOAST
@@ -1156,7 +1224,6 @@
             emptyMessage.style.display = "none";
             let html = "";
 
-            // Más reciente primero
             comentarios.slice().reverse().forEach((com, index) => {
                 const realIndex = comentarios.length - 1 - index;
                 html += `
@@ -1166,9 +1233,12 @@
                                 <div class="comment-author">${com.autor}</div>
                                 <div class="comment-date">${com.fecha}</div>
                             </div>
-                            <button class="btn-delete" onclick="eliminarComentario(${realIndex})" title="Eliminar comentario">
-                                <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                            </button>
+                            <div class="item-actions">
+                                <button class="btn-edit" onclick="editarComentario(${realIndex})" type="button">Editar</button>
+                                <button class="btn-delete" onclick="eliminarComentario(${realIndex})" title="Eliminar comentario" type="button">
+                                    <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                                </button>
+                            </div>
                         </div>
                         <div class="comment-text">${com.texto}</div>
                     </div>
@@ -1207,6 +1277,7 @@
         });
 
         function eliminarComentario(index) {
+            if (!confirm("¿Estás seguro de que deseas eliminar este comentario?")) return;
             comentarios.splice(index, 1);
             localStorage.setItem("comentariosPalacios", JSON.stringify(comentarios));
             renderizarComentarios();
@@ -1231,7 +1302,6 @@
             emptyMessage.style.display = "none";
             let html = "";
 
-            // Más reciente primero
             productos.slice().reverse().forEach((prod, index) => {
                 const realIndex = productos.length - 1 - index;
                 html += `
@@ -1241,9 +1311,12 @@
                                 <div class="product-name">${prod.nombre}</div>
                                 <div class="product-price">$${Number(prod.precio).toLocaleString('es-MX')} MXN</div>
                             </div>
-                            <button class="btn-delete" onclick="eliminarProducto(${realIndex})" title="Eliminar producto">
-                                <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                            </button>
+                            <div class="item-actions">
+                                <button class="btn-edit" onclick="editarProducto(${realIndex})" type="button">Editar</button>
+                                <button class="btn-delete" onclick="eliminarProducto(${realIndex})" title="Eliminar producto" type="button">
+                                    <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                                </button>
+                            </div>
                         </div>
                         <div class="product-desc">${prod.descripcion}</div>
                         <div class="product-meta">
@@ -1296,17 +1369,110 @@
 
         function eliminarProducto(index) {
             const eliminado = productos[index].nombre;
+            if (!confirm(`¿Estás seguro de que deseas eliminar "${eliminado}"?`)) return;
             productos.splice(index, 1);
             localStorage.setItem("productosPalacios", JSON.stringify(productos));
             renderizarProductos();
             mostrarToast(`Producto "${eliminado}" eliminado.`);
         }
 
+        // EDITAR COMENTARIOS Y PRODUCTOS DESDE EL PERFIL
+        let tipoEdicion = "";
+        let indiceEdicion = -1;
+
+        function abrirEditor(tipo, index) {
+            tipoEdicion = tipo;
+            indiceEdicion = index;
+            const campos = document.getElementById("editorCampos");
+            campos.innerHTML = "";
+
+            if (tipo === "comentario") {
+                const com = comentarios[index];
+                document.getElementById("editorTitulo").textContent = "Editar comentario";
+                campos.innerHTML = `
+                    <div class="form-group">
+                        <label for="editAutor">Nombre</label>
+                        <input id="editAutor" type="text" maxlength="80" value="${String(com.autor || "").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;")}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editTexto">Comentario</label>
+                        <textarea id="editTexto" maxlength="1000" required>${String(com.texto || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}</textarea>
+                    </div>`;
+            } else {
+                const prod = productos[index];
+                document.getElementById("editorTitulo").textContent = "Editar producto";
+                campos.innerHTML = `
+                    <div class="form-group">
+                        <label for="editNombre">Nombre del producto</label>
+                        <input id="editNombre" type="text" maxlength="120" value="${String(prod.nombre || "").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;")}" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="editPrecio">Precio (MXN)</label>
+                            <input id="editPrecio" type="number" min="0" step="0.01" value="${Number(prod.precio) || 0}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editCategoria">Categoría</label>
+                            <select id="editCategoria" required>
+                                ${["Bombas","Tubería","Herramientas","Accesorios","Otros"].map(c => `<option value="${c}" ${prod.categoria === c ? "selected" : ""}>${c}</option>`).join("")}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="editDescripcion">Descripción</label>
+                        <textarea id="editDescripcion" maxlength="1000" required>${String(prod.descripcion || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}</textarea>
+                    </div>`;
+            }
+
+            document.getElementById("modalEditor").style.display = "flex";
+        }
+
+        function editarComentario(index) { abrirEditor("comentario", index); }
+        function editarProducto(index) { abrirEditor("producto", index); }
+
+        function cerrarEditor() {
+            document.getElementById("modalEditor").style.display = "none";
+            document.getElementById("editorForm").reset();
+            tipoEdicion = "";
+            indiceEdicion = -1;
+        }
+
+        document.getElementById("editorForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            if (indiceEdicion < 0) return;
+
+            if (tipoEdicion === "comentario") {
+                const autor = document.getElementById("editAutor").value.trim();
+                const texto = document.getElementById("editTexto").value.trim();
+                if (!autor || !texto) return;
+                comentarios[indiceEdicion].autor = autor;
+                comentarios[indiceEdicion].texto = texto;
+                localStorage.setItem("comentariosPalacios", JSON.stringify(comentarios));
+                renderizarComentarios();
+                mostrarToast("Comentario actualizado correctamente.");
+            } else if (tipoEdicion === "producto") {
+                const nombre = document.getElementById("editNombre").value.trim();
+                const precio = Number(document.getElementById("editPrecio").value);
+                const categoria = document.getElementById("editCategoria").value;
+                const descripcion = document.getElementById("editDescripcion").value.trim();
+                if (!nombre || !Number.isFinite(precio) || precio < 0 || !categoria || !descripcion) return;
+                productos[indiceEdicion].nombre = nombre;
+                productos[indiceEdicion].precio = precio;
+                productos[indiceEdicion].categoria = categoria;
+                productos[indiceEdicion].descripcion = descripcion;
+                localStorage.setItem("productosPalacios", JSON.stringify(productos));
+                renderizarProductos();
+                mostrarToast("Producto actualizado correctamente.");
+            }
+
+            cerrarEditor();
+        });
+
         // 7. NOTIFICACIONES Y MODALES
         function mostrarToast(mensaje) {
             const toast = document.getElementById("toast");
             const toastMessage = document.getElementById("toast-message");
-            
+
             toastMessage.textContent = mensaje;
             toast.classList.add("show");
 
