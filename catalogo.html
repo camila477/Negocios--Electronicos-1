@@ -533,7 +533,7 @@
 
         .btn-add-cart {
             width: 100%;
-            background: #0ea5e9;
+            background: #075f87;
             color: white;
             border: none;
             padding: 14px;
@@ -852,7 +852,7 @@
             </div>
 
             <button id="btnAgregar" class="btn-add-cart" onclick="agregarAlCarritoDesdeModal()">
-                🛒 Agregar al carrito
+                 Agregar al carrito
             </button>
 
             <!-- SERVICIOS RELACIONADOS -->
@@ -1019,52 +1019,45 @@
         let servicioSeleccionado = null;
         let categoriaActual = 'todos';
 
+       
         function renderizarCatalogo(listaServicios) {
-            const grid = document.getElementById("catalogGrid");
-            
-            if (listaServicios.length === 0) {
-                grid.innerHTML = `<div class="no-results">No se encontraron servicios que coincidan con tu búsqueda.</div>`;
-                return;
-            }
+    const grid = document.getElementById("catalogGrid");
+    
+    if (listaServicios.length === 0) {
+        grid.innerHTML = `<div class="no-results">No se encontraron servicios que coincidan con tu búsqueda.</div>`;
+        return;
+    }
 
-            grid.innerHTML = listaServicios.map((s) => {
-                const indexReal = servicios.findIndex(item => item.id === s.id);
-                
-                // Generar etiqueta según corresponda
-                let badgeHTML = '';
-                if (s.nuevo) {
-                    badgeHTML = `<span class="product-badge badge-nuevo">Nuevo</span>`;
-                } else if (s.promocion) {
-                    badgeHTML = `<span class="product-badge badge-promo">En Promoción</span>`;
-                }
-
-                return `
-                    <div class="product-card">
-                        ${badgeHTML}
-                        <div class="product-image">
-                            <img src="${s.imagen}" alt="${s.nombre}" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\\'height:100%;display:flex;align-items:center;justify-content:center;font-size:70px;\\'>💧</div>';">
-                        </div>
-                        <div class="product-content">
-                            <h3>${s.nombre}</h3>
-                            <p>${s.descripcion}</p>
-                            <div class="price-box">
-                                <span class="price-label">Precio Estimado</span>
-                                <span class="price-amount">${s.precio}</span>
-                            </div>
-                            <div class="quantity-box">
-                                <label>Cantidad:</label>
-                                <div class="qty-controls">
-                                    <button class="qty-btn" onclick="cambiarQtyCard(${s.id}, -1)">-</button>
-                                    <input type="text" id="qty-card-${s.id}" class="qty-input" value="1" readonly>
-                                    <button class="qty-btn" onclick="cambiarQtyCard(${s.id}, 1)">+</button>
-                                </div>
-                            </div>
-                            <button class="product-button" onclick="abrirModal(${indexReal})">Ver detalles y fotos</button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
+    grid.innerHTML = listaServicios.map((s) => {
+        const indexReal = servicios.findIndex(item => item.id === s.id);
+        
+        // Generar etiqueta según corresponda
+        let badgeHTML = '';
+        if (s.nuevo) {
+            badgeHTML = `<span class="product-badge badge-nuevo">Nuevo</span>`;
+        } else if (s.promocion) {
+            badgeHTML = `<span class="product-badge badge-promo">En Promoción</span>`;
         }
+
+        return `
+            <div class="product-card">
+                ${badgeHTML}
+                <div class="product-image">
+                    <img src="${s.imagen}" alt="${s.nombre}" onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\\'height:100%;display:flex;align-items:center;justify-content:center;font-size:70px;\\'>💧</div>';">
+                </div>
+                <div class="product-content">
+                    <h3>${s.nombre}</h3>
+                    <p>${s.descripcion}</p>
+                    <div class="price-box">
+                        <span class="price-label">Precio Estimado</span>
+                        <span class="price-amount">${s.precio}</span>
+                    </div>
+                    <button class="product-button" onclick="abrirModal(${indexReal})">Ver detalles y fotos</button>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
 
         function cambiarQtyCard(id, cambio) {
             const input = document.getElementById(`qty-card-${id}`);

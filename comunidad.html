@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -31,7 +32,6 @@
             line-height: 1.6;
         }
 
-        /* ========== HEADER MEJORADO ========== */
         header {
             background: linear-gradient(180deg, #153447 0%, #183b4e 100%);
             color: white;
@@ -118,7 +118,6 @@
             box-shadow: inset 0 0 0 1px rgba(56, 189, 248, 0.25);
         }
 
-        /* ========== HERO ========== */
         .hero {
             background: linear-gradient(120deg, #183b4e, #24566d);
             color: white;
@@ -225,6 +224,28 @@
             transform: translateY(-1px);
         }
 
+        .mensaje-compra {
+            display: none;
+            margin-top: 12px;
+            padding: 10px 13px;
+            border-radius: 7px;
+            background: #dcfce7;
+            color: #166534;
+            font-size: 14px;
+        }
+
+        .enlace-carrito {
+            display: inline-block;
+            margin-top: 12px;
+            color: var(--azul);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .enlace-carrito:hover {
+            text-decoration: underline;
+        }
+
         .opiniones {
             margin-top: 55px;
         }
@@ -255,6 +276,13 @@
             font-size: 21px;
         }
 
+        .promedio-calificacion {
+            color: var(--azul);
+            font-size: 25px;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+
         .lista-comentarios {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -278,6 +306,13 @@
         .comentario p {
             margin-top: 10px;
             font-size: 14px;
+        }
+
+        .fecha-comentario {
+            display: block;
+            margin-top: 8px;
+            color: #718096;
+            font-size: 12px;
         }
 
         .formulario {
@@ -435,19 +470,22 @@
 <main class="contenedor">
 
     <section class="producto" id="producto">
+
         <div class="producto-imagen">
             <img
-                src="img/bomba-sumergible.jpg"
+                src="imagenes/boma1.jpg"
                 alt="Bomba sumergible de agua"
                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
             >
+
             <div class="sin-imagen" style="display:none;">
                 <p>Imagen del producto destacado</p>
-                <small>Agrega tu fotografía en img/bomba-sumergible.jpg</small>
+                <small>Agrega tu fotografía en imagenes/boma1.jpg</small>
             </div>
         </div>
 
         <div class="producto-info">
+
             <span class="etiqueta"
                 style="background:#e0f2fe;color:#183b4e;">
                 PRODUCTO DESTACADO
@@ -468,26 +506,36 @@
                 especificaciones con el establecimiento.
             </p>
 
-            <a href="contacto.html" class="boton">
-                Solicitar información
+            <button type="button" class="boton" id="btn-comprar">
+                Comprar producto
+            </button>
+
+            <p id="mensaje-compra" class="mensaje-compra" role="status"></p>
+
+            <a href="carrito.html" class="enlace-carrito">
+                Ver carrito
             </a>
+
         </div>
     </section>
 
     <section class="opiniones" id="opiniones">
+
         <div class="titulo-seccion">
-            <h2>Opiniones de nuestros clientes</h2>
-            <p>Tu experiencia nos ayuda a seguir mejorando.</p>
+            <h2>Reseñas y opiniones de nuestros clientes</h2>
+            <p>Conoce las experiencias de otros clientes y comparte la tuya.</p>
         </div>
 
         <div class="resumen">
-            <div class="estrellas">★★★★★</div>
+            <div class="estrellas" id="promedio-estrellas">★★★★★</div>
+            <p class="promedio-calificacion" id="promedio-numero">5.0 / 5</p>
             <p id="total-comentarios">3 opiniones de demostración</p>
         </div>
 
         <div class="lista-comentarios" id="lista-comentarios"></div>
 
         <form class="formulario" id="form-comentario">
+
             <h3>Comparte tu experiencia</h3>
 
             <div class="mensaje" id="mensaje"></div>
@@ -527,7 +575,9 @@
             <button type="submit" class="boton">
                 Publicar comentario
             </button>
+
         </form>
+
     </section>
 
 </main>
@@ -539,6 +589,7 @@
 </footer>
 
 <script>
+
     const comentariosIniciales = [
         {
             nombre: "Carlos M.",
@@ -564,6 +615,8 @@
     const total = document.getElementById("total-comentarios");
     const formulario = document.getElementById("form-comentario");
     const mensaje = document.getElementById("mensaje");
+    const botonComprar = document.getElementById("btn-comprar");
+    const mensajeCompra = document.getElementById("mensaje-compra");
 
     let comentarios = [];
 
@@ -579,9 +632,11 @@
     }
 
     function mostrarComentarios() {
+
         lista.replaceChildren();
 
         comentarios.forEach(function(c) {
+
             const tarjeta = document.createElement("article");
             tarjeta.className = "comentario";
 
@@ -590,6 +645,7 @@
 
             const estrellas = document.createElement("div");
             estrellas.className = "estrellas";
+
             estrellas.textContent =
                 "★".repeat(Number(c.calificacion)) +
                 "☆".repeat(5 - Number(c.calificacion));
@@ -599,19 +655,44 @@
 
             tarjeta.append(encabezado, estrellas, texto);
 
+            if (c.fecha) {
+                const fecha = document.createElement("small");
+                fecha.className = "fecha-comentario";
+                fecha.textContent = c.fecha;
+                tarjeta.appendChild(fecha);
+            }
+
             if (c.demostracion) {
                 const nota = document.createElement("small");
-                nota.textContent = "Comentario de ejemplo";
+                nota.textContent = "Reseña de ejemplo";
                 nota.style.color = "#64748b";
+                nota.style.display = "block";
+                nota.style.marginTop = "8px";
                 tarjeta.appendChild(nota);
             }
 
             lista.appendChild(tarjeta);
+
         });
 
         const cantidad = comentarios.length;
+
         total.textContent = cantidad +
-            (cantidad === 1 ? " comentario" : " comentarios");
+            (cantidad === 1 ? " reseña publicada" : " reseñas publicadas");
+
+        const promedio = cantidad
+            ? comentarios.reduce((suma, c) => suma + Number(c.calificacion), 0) / cantidad
+            : 0;
+
+        document.getElementById("promedio-numero").textContent =
+            promedio.toFixed(1) + " / 5";
+
+        const estrellasPromedio = Math.round(promedio);
+
+        document.getElementById("promedio-estrellas").textContent =
+            "★".repeat(estrellasPromedio) +
+            "☆".repeat(5 - estrellasPromedio);
+
     }
 
     function mostrarMensaje(texto) {
@@ -619,11 +700,16 @@
         mensaje.style.display = "block";
     }
 
+    // PUBLICAR COMENTARIOS Y RESEÑAS
+
     formulario.addEventListener("submit", function(evento) {
+
         evento.preventDefault();
 
         const nombre = document.getElementById("nombre").value.trim();
+
         const comentario = document.getElementById("comentario").value.trim();
+
         const calificacion = Number(
             document.getElementById("calificacion").value
         );
@@ -637,30 +723,98 @@
             nombre: nombre,
             comentario: comentario,
             calificacion: calificacion,
+            fecha: new Date().toLocaleDateString("es-MX"),
             demostracion: false
         };
 
         comentarios.unshift(nuevoComentario);
 
         try {
+
             localStorage.setItem(
                 "pp_comentarios_campana",
                 JSON.stringify(comentarios)
             );
+
         } catch (error) {
+
             mostrarMensaje(
-                "El comentario se mostrará, pero no se pudo guardar en este navegador."
+                "El comentario se muestra, pero no se pudo guardar en este navegador."
             );
-            mostrarComentarios();
-            return;
+
         }
 
         mostrarComentarios();
+
         formulario.reset();
-        mostrarMensaje("Tu comentario se agregó correctamente.");
+
+        mostrarMensaje(
+            "Tu reseña se publicó correctamente. ¡Gracias por compartir tu experiencia!"
+        );
+
+    });
+
+    // AGREGAR PRODUCTO AL CARRITO
+
+    botonComprar.addEventListener("click", function() {
+
+        const producto = {
+            id: "bomba-sumergible-1hp",
+            nombre: "Bomba Sumergible 1 HP",
+            precio: 4850,
+            cantidad: 1,
+            imagen: "imagenes/boma1.jpg"
+        };
+
+        let carrito = [];
+
+        try {
+
+            const carritoGuardado = localStorage.getItem("pp_carrito");
+
+            carrito = carritoGuardado ? JSON.parse(carritoGuardado) : [];
+
+            if (!Array.isArray(carrito)) {
+                carrito = [];
+            }
+
+            const existente = carrito.find(function(item) {
+                return item.id === producto.id;
+            });
+
+            if (existente) {
+
+                existente.cantidad = Number(existente.cantidad || 1) + 1;
+
+            } else {
+
+                carrito.push(producto);
+
+            }
+
+            localStorage.setItem(
+                "pp_carrito",
+                JSON.stringify(carrito)
+            );
+
+            mensajeCompra.textContent =
+                "¡Producto agregado al carrito! Ya puedes continuar con tu compra.";
+
+            mensajeCompra.style.display = "block";
+
+        } catch (error) {
+
+            mensajeCompra.textContent =
+                "No fue posible agregar el producto al carrito. Inténtalo de nuevo.";
+
+            mensajeCompra.style.display = "block";
+
+        }
+
     });
 
     mostrarComentarios();
+
 </script>
 
 </body>
