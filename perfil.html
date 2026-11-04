@@ -27,10 +27,6 @@
             flex-direction: column;
         }
 
-        /* =========================
-           ESTILOS PARA ÍCONOS SVG
-        ========================= */
-
         .icon-svg {
             width: 22px;
             height: 22px;
@@ -43,10 +39,6 @@
             vertical-align: middle;
             flex-shrink: 0;
         }
-
-        /* =========================
-           NAVBAR
-        ========================= */
 
         nav {
             position: fixed;
@@ -110,10 +102,6 @@
             background: #be123c;
         }
 
-        /* =========================
-           HEADER / HERO
-        ========================= */
-
         .header {
             padding: 140px 7% 50px;
             text-align: center;
@@ -140,10 +128,6 @@
             color: #dbeafe;
             font-size: 16px;
         }
-
-        /* =========================
-           CONTENEDOR PRINCIPAL
-        ========================= */
 
         .profile-container {
             padding: 50px 7% 80px;
@@ -185,10 +169,6 @@
             width: 24px;
             height: 24px;
         }
-
-        /* =========================
-           FORMULARIO DE PERFIL
-        ========================= */
 
         .form-group {
             margin-bottom: 18px;
@@ -265,8 +245,7 @@
             font-weight: bold;
             border: 1px solid #bbf7d0;
         }
-
-        /* =========================
+                /* =========================
            CARRITO / COTIZACIONES
         ========================= */
 
@@ -515,7 +494,7 @@
         }
 
         /* =========================
-           NUEVAS SECCIONES: COMENTARIOS Y PRODUCTOS
+           COMENTARIOS Y PRODUCTOS
         ========================= */
 
         .comment-item,
@@ -820,9 +799,7 @@
             </div>
 
         </section>
-
-
-        <!-- TARJETA 2: CARRITO DE COTIZACIONES / SERVICIOS GUARDADOS -->
+                <!-- TARJETA 2: CARRITO DE COTIZACIONES / SERVICIOS GUARDADOS -->
 
         <section class="card">
 
@@ -1062,8 +1039,7 @@
             localStorage.setItem("usuarioPalacios", JSON.stringify(usuario));
 
             saludoUsuario.innerHTML = `¡Hola, <span>${usuario.name.split(" ")[0]}</span>!`;
-
-            mostrarToast("✓ ¡Tus datos personales se han guardado con éxito!");
+                        mostrarToast("✓ ¡Tus datos personales se han guardado con éxito!");
         });
 
         // 3. LÓGICA DE CARRITO (SERVICIOS GUARDADOS)
@@ -1137,7 +1113,6 @@
             emptyOrdersMessage.style.display = "none";
             let html = "";
 
-            // Mostrar el más reciente primero
             pedidos.slice().reverse().forEach(ped => {
                 let itemsList = ped.items.map(i => `
                     <li>
@@ -1174,7 +1149,6 @@
             container.innerHTML = html;
         }
 
-        // CONFIRMAR Y CREAR PEDIDO
         function solicitarCotizacion() {
             if (carrito.length === 0) return;
 
@@ -1196,7 +1170,6 @@
             pedidos.push(nuevoPedido);
             localStorage.setItem("pedidosPalacios", JSON.stringify(pedidos));
 
-            // Vaciar carrito
             carrito = [];
             localStorage.setItem("carritoPalacios", JSON.stringify([]));
 
@@ -1208,10 +1181,30 @@
 
         // =========================
         // 5. LÓGICA DE COMENTARIOS
+        // Clave compartida con comunidad.html → comentariosPalacios
         // =========================
-        let comentarios = JSON.parse(localStorage.getItem("comentariosPalacios")) || [];
+        function cargarComentariosPerfil() {
+            try {
+                const raw = JSON.parse(localStorage.getItem("comentariosPalacios")) || [];
+                if (!Array.isArray(raw)) return [];
+                return raw.map(c => ({
+                    id: c.id || ("com-" + Date.now()),
+                    autor: c.autor || c.nombre || "Usuario",
+                    texto: c.texto || c.comentario || "",
+                    calificacion: Number(c.calificacion) || 5,
+                    fecha: c.fecha || "",
+                    origen: c.origen || "perfil"
+                }));
+            } catch (e) {
+                return [];
+            }
+        }
+
+        let comentarios = cargarComentariosPerfil();
 
         function renderizarComentarios() {
+            comentarios = cargarComentariosPerfil();
+
             const container = document.getElementById("commentsList");
             const emptyMessage = document.getElementById("emptyCommentsMessage");
 
@@ -1226,11 +1219,15 @@
 
             comentarios.slice().reverse().forEach((com, index) => {
                 const realIndex = comentarios.length - 1 - index;
+                const origenLabel = (com.origen === "comunidad" || com.origen === "campana")
+                    ? `<span style="font-size:11px;color:#0ea5e9;font-weight:600;"> · desde Comunidad</span>`
+                    : "";
+
                 html += `
                     <div class="comment-item">
                         <div class="comment-header">
                             <div>
-                                <div class="comment-author">${com.autor}</div>
+                                <div class="comment-author">${com.autor}${origenLabel}</div>
                                 <div class="comment-date">${com.fecha}</div>
                             </div>
                             <div class="item-actions">
@@ -1263,9 +1260,12 @@
             });
 
             const nuevoComentario = {
+                id: "perfil-" + Date.now(),
                 autor: usuario.name || "Usuario",
                 texto: texto,
-                fecha: fechaActual
+                calificacion: 5,
+                fecha: fechaActual,
+                origen: "perfil"
             };
 
             comentarios.push(nuevoComentario);
@@ -1287,9 +1287,31 @@
         // =========================
         // 6. LÓGICA DE PRODUCTOS
         // =========================
-        let productos = JSON.parse(localStorage.getItem("productosPalacios")) || [];
+        function cargarProductosPerfil() {
+            try {
+                const raw = JSON.parse(localStorage.getItem("productosPalacios")) || [];
+                if (!Array.isArray(raw)) return [];
+                return raw.map(p => ({
+                    id: p.id || "",
+                    nombre: p.nombre || "Producto",
+                    precio: Number(p.precio) || 0,
+                    categoria: p.categoria || "General",
+                    descripcion: p.descripcion || "",
+                    fecha: p.fecha || "",
+                    autor: p.autor || "Usuario",
+                    origen: p.origen || "perfil",
+                    imagen: p.imagen || ""
+                }));
+            } catch (e) {
+                return [];
+            }
+        }
+
+        let productos = cargarProductosPerfil();
 
         function renderizarProductos() {
+            productos = cargarProductosPerfil();
+
             const container = document.getElementById("productsList");
             const emptyMessage = document.getElementById("emptyProductsMessage");
 
@@ -1322,6 +1344,7 @@
                         <div class="product-meta">
                             <span>📂 ${prod.categoria}</span>
                             <span>📅 ${prod.fecha}</span>
+                            ${prod.origen === "comunidad" || (prod.id && String(prod.id).indexOf("admin") === -1 && prod.autor) ? `<span style="color:#7c3aed;font-weight:600;">🔨 desde Subasta/C2C</span>` : ""}
                         </div>
                     </div>
                 `;
@@ -1349,31 +1372,60 @@
                 day: 'numeric'
             });
 
+            const idNuevo = "perfil-" + Date.now();
             const nuevoProducto = {
+                id: idNuevo,
                 nombre: nombre,
                 precio: precio,
                 categoria: categoria,
                 descripcion: descripcion,
                 fecha: fechaActual,
-                autor: usuario.name || "Usuario"
+                autor: usuario.name || "Usuario",
+                origen: "perfil",
+                imagen: ""
             };
 
             productos.push(nuevoProducto);
             localStorage.setItem("productosPalacios", JSON.stringify(productos));
 
-            // Limpiar formulario
             document.getElementById("productForm").reset();
             renderizarProductos();
             mostrarToast("✓ ¡Producto subido correctamente!");
         });
 
+        function sincronizarBorradoEnSubasta(producto) {
+            if (!producto) return;
+            try {
+                const clave = "pp_subastas_v1";
+                let subastas = JSON.parse(localStorage.getItem(clave) || "[]");
+                if (!Array.isArray(subastas)) return;
+
+                const antes = subastas.length;
+                subastas = subastas.filter(s => {
+                    if (producto.id && s.id && String(s.id) === String(producto.id)) return false;
+                    if (s.nombre === producto.nombre && (s.vendedor === producto.autor || s.mia)) return false;
+                    return true;
+                });
+
+                if (subastas.length !== antes) {
+                    localStorage.setItem(clave, JSON.stringify(subastas));
+                }
+            } catch (e) {
+                console.error("No se pudo sincronizar borrado con subasta", e);
+            }
+        }
+
         function eliminarProducto(index) {
-            const eliminado = productos[index].nombre;
+            const producto = productos[index];
+            const eliminado = producto.nombre;
             if (!confirm(`¿Estás seguro de que deseas eliminar "${eliminado}"?`)) return;
+
+            sincronizarBorradoEnSubasta(producto);
+
             productos.splice(index, 1);
             localStorage.setItem("productosPalacios", JSON.stringify(productos));
             renderizarProductos();
-            mostrarToast(`Producto "${eliminado}" eliminado.`);
+            mostrarToast(`Producto "${eliminado}" eliminado (también se quitó de Subastas si estaba ahí).`);
         }
 
         // EDITAR COMENTARIOS Y PRODUCTOS DESDE EL PERFIL
@@ -1461,8 +1513,34 @@
                 productos[indiceEdicion].categoria = categoria;
                 productos[indiceEdicion].descripcion = descripcion;
                 localStorage.setItem("productosPalacios", JSON.stringify(productos));
+
+                try {
+                    const prod = productos[indiceEdicion];
+                    let subastas = JSON.parse(localStorage.getItem("pp_subastas_v1") || "[]");
+                    if (Array.isArray(subastas)) {
+                        let cambio = false;
+                        subastas = subastas.map(s => {
+                            if (prod.id && s.id && String(s.id) === String(prod.id)) {
+                                cambio = true;
+                                return {
+                                    ...s,
+                                    nombre: nombre,
+                                    precioActual: precio,
+                                    precioInicial: s.precioInicial || precio,
+                                    categoria: categoria,
+                                    descripcion: descripcion
+                                };
+                            }
+                            return s;
+                        });
+                        if (cambio) localStorage.setItem("pp_subastas_v1", JSON.stringify(subastas));
+                    }
+                } catch (e) {
+                    console.error("No se pudo sincronizar edición con subasta", e);
+                }
+
                 renderizarProductos();
-                mostrarToast("Producto actualizado correctamente.");
+                mostrarToast("Producto actualizado (también en Subastas si aplica).");
             }
 
             cerrarEditor();

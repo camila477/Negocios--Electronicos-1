@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -97,348 +96,276 @@
         }
 
         nav a {
-            color: #c5d8e4;
+            color: #c5d5e0;
             text-decoration: none;
-            font-size: 13.5px;
+            font-size: 13px;
             font-weight: 500;
-            padding: 9px 14px;
-            border-radius: 10px;
-            transition: background 0.2s ease, color 0.2s ease;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: 0.2s;
         }
 
         nav a:hover {
+            color: white;
             background: rgba(255, 255, 255, 0.08);
-            color: #ffffff;
         }
 
         nav a.activo {
-            background: rgba(56, 189, 248, 0.16);
-            color: #ffffff;
-            font-weight: 600;
-            box-shadow: inset 0 0 0 1px rgba(56, 189, 248, 0.25);
+            color: white;
+            background: rgba(56, 189, 248, 0.18);
         }
 
         .hero {
-            background: linear-gradient(120deg, #183b4e, #24566d);
+            background: linear-gradient(135deg, #153447 0%, #1a4a63 50%, #0e7490 100%);
             color: white;
-            padding: 55px 7%;
+            padding: 60px 5% 50px;
             text-align: center;
         }
 
-        .etiqueta {
+        .hero .etiqueta {
             display: inline-block;
-            background: rgba(56, 189, 248, .18);
-            color: #7dd3fc;
-            padding: 7px 15px;
+            background: rgba(56, 189, 248, 0.2);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            color: #bae6fd;
+            padding: 6px 14px;
             border-radius: 20px;
-            font-size: 13px;
-            font-weight: bold;
-            margin-bottom: 15px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
         }
 
         .hero h1 {
-            font-size: clamp(30px, 5vw, 44px);
-            margin-bottom: 12px;
+            font-size: clamp(28px, 4vw, 40px);
+            margin-bottom: 14px;
         }
 
         .hero p {
-            max-width: 650px;
-            margin: auto;
-            color: #e0f2fe;
+            max-width: 560px;
+            margin: 0 auto;
+            color: #c5d5e0;
+            font-size: 15px;
         }
 
         .contenedor {
-            width: 86%;
-            max-width: 1100px;
-            margin: 45px auto;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 5% 60px;
         }
 
-        .producto {
+        .producto-destacado {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 28px;
             background: white;
-            border-radius: 15px;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(24, 59, 78, .08);
+            border: 1px solid var(--borde);
+            margin-bottom: 40px;
+            box-shadow: 0 8px 24px rgba(24, 59, 78, 0.06);
         }
 
         .producto-imagen {
-            min-height: 340px;
-            background: #e7f2f7;
+            min-height: 260px;
+            background: #e8f4f8;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 25px;
         }
 
         .producto-imagen img {
             width: 100%;
-            max-height: 350px;
-            object-fit: contain;
-            border-radius: 10px;
+            height: 100%;
+            object-fit: cover;
         }
 
         .sin-imagen {
-            color: #456778;
             text-align: center;
-            padding: 30px;
+            color: var(--gris);
+            padding: 20px;
         }
 
         .producto-info {
-            padding: 35px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: center;
+            padding: 28px 28px 28px 0;
         }
 
-        .producto-info h2 {
-            color: var(--azul);
-            font-size: 29px;
+        .producto-info .etiqueta {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
             margin-bottom: 12px;
         }
 
-        .precio {
-            font-size: 30px;
+        .producto-info h2 {
+            font-size: 22px;
             color: var(--azul);
-            font-weight: bold;
-            margin: 15px 0;
+            margin-bottom: 10px;
         }
 
-        .boton {
-            display: inline-block;
-            background: var(--azul-claro);
-            color: var(--azul);
-            border: none;
-            border-radius: 7px;
-            padding: 12px 20px;
-            text-decoration: none;
-            font-weight: bold;
-            cursor: pointer;
-            transition: .2s;
-            font-size: 15px;
-        }
-
-        .boton:hover {
-            background: var(--azul-hover);
-            transform: translateY(-1px);
-        }
-
-        .mensaje-compra {
-            display: none;
-            margin-top: 12px;
-            padding: 10px 13px;
-            border-radius: 7px;
-            background: #dcfce7;
-            color: #166534;
+        .producto-info p {
+            color: var(--gris);
             font-size: 14px;
+            margin-bottom: 18px;
         }
 
-        .enlace-carrito {
+        .btn {
             display: inline-block;
-            margin-top: 12px;
-            color: var(--azul);
+            background: #155e75;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-size: 14px;
             font-weight: 600;
-            text-decoration: none;
+            cursor: pointer;
+            transition: 0.25s;
         }
 
-        .enlace-carrito:hover {
-            text-decoration: underline;
+        .btn:hover {
+            background: #0e7490;
         }
 
-        .opiniones {
-            margin-top: 55px;
+        .seccion-comentarios {
+            background: white;
+            border-radius: 16px;
+            border: 1px solid var(--borde);
+            padding: 28px;
+            box-shadow: 0 8px 24px rgba(24, 59, 78, 0.05);
         }
 
-        .titulo-seccion {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .titulo-seccion h2 {
+        .seccion-comentarios h2 {
+            font-size: 22px;
             color: var(--azul);
-            font-size: 30px;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .resumen {
-            background: white;
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin: 18px 0 24px;
+            padding: 16px;
+            background: #f0f9ff;
             border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            margin-bottom: 25px;
-            border: 1px solid #e0e8ed;
         }
 
-        .estrellas {
-            color: #e6a817;
-            letter-spacing: 2px;
-            font-size: 21px;
-        }
-
-        .promedio-calificacion {
+        .resumen strong {
             color: var(--azul);
-            font-size: 25px;
-            font-weight: bold;
-            margin: 5px 0;
+            font-size: 18px;
         }
 
         .lista-comentarios {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 28px;
         }
 
         .comentario {
-            background: white;
-            padding: 22px;
+            background: #f8fbfc;
+            border: 1px solid var(--borde);
             border-radius: 12px;
-            border: 1px solid #e0e8ed;
-            overflow-wrap: anywhere;
+            padding: 16px 18px;
         }
 
         .comentario h3 {
+            font-size: 15px;
             color: var(--azul);
-            font-size: 17px;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
+        }
+
+        .estrellas {
+            color: #f59e0b;
+            font-size: 14px;
+            margin-bottom: 8px;
         }
 
         .comentario p {
-            margin-top: 10px;
             font-size: 14px;
+            color: var(--texto);
         }
 
         .fecha-comentario {
             display: block;
             margin-top: 8px;
-            color: #718096;
             font-size: 12px;
+            color: var(--gris);
         }
 
         .formulario {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            margin-top: 30px;
-            border: 1px solid #e0e8ed;
+            border-top: 1px solid var(--borde);
+            padding-top: 24px;
         }
 
         .formulario h3 {
+            font-size: 17px;
             color: var(--azul);
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
-        .campo {
-            margin-bottom: 18px;
+        .form-group {
+            margin-bottom: 14px;
         }
 
-        .campo label {
+        .form-group label {
             display: block;
-            font-weight: bold;
-            margin-bottom: 7px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
             color: var(--azul);
         }
 
-        .campo input,
-        .campo textarea,
-        .campo select {
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 7px;
-            font: inherit;
+            padding: 11px 14px;
+            border: 1px solid var(--borde);
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
             background: white;
         }
 
-        .campo textarea {
+        .form-group textarea {
+            min-height: 100px;
             resize: vertical;
-            min-height: 110px;
         }
 
         .mensaje {
             display: none;
-            padding: 12px;
-            margin-bottom: 15px;
-            border-radius: 7px;
-            background: #e0f2fe;
-            color: var(--azul);
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: #ecfdf5;
+            color: #065f46;
+            border-radius: 8px;
+            font-size: 14px;
         }
 
         footer {
             background: var(--azul);
-            color: white;
+            color: #9cb8c8;
             text-align: center;
-            padding: 25px;
-            margin-top: 60px;
+            padding: 28px 5%;
+            font-size: 13px;
         }
 
         footer p {
-            font-size: 14px;
+            margin-bottom: 4px;
         }
 
-        @media (max-width: 800px) {
-            header {
-                flex-direction: column;
-                text-align: center;
-                padding: 16px 4%;
-                gap: 14px;
-            }
-
-            .logo {
-                justify-content: center;
-            }
-
-            .logo-text {
-                align-items: flex-start;
-                text-align: left;
-            }
-
-            nav {
-                justify-content: center;
-                width: 100%;
-                gap: 4px;
-            }
-
-            nav a {
-                padding: 8px 12px;
-                font-size: 12.5px;
-            }
-
-            .producto {
+        @media (max-width: 700px) {
+            .producto-destacado {
                 grid-template-columns: 1fr;
             }
-
-            .producto-imagen {
-                min-height: 250px;
-            }
-
-            .lista-comentarios {
-                grid-template-columns: 1fr;
-            }
-
-            .contenedor {
-                width: 92%;
-                margin: 30px auto;
-            }
-
             .producto-info {
-                padding: 25px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo-text span {
-                display: none;
-            }
-
-            nav a {
-                padding: 8px 10px;
-                font-size: 12px;
+                padding: 20px;
             }
         }
     </style>
 </head>
-
 <body>
 
 <header>
@@ -446,15 +373,17 @@
         <div class="logo-icon">PP</div>
         <div class="logo-text">
             <strong>Perforaciones Palacios</strong>
-            <span>Soluciones para el agua</span>
+            <span>Comunidad</span>
         </div>
     </a>
-
     <nav>
         <a href="inicio.html">Inicio</a>
-        <a href="catalogo.html">Productos</a>
-        <a href="campana.html" class="activo">Comunidad</a>
-        <a href="contacto.html">Contacto</a>
+        <a href="catalogo.html">Catálogo</a>
+        <a href="escaparate.html">Escaparate</a>
+        <a href="subasta.html">Subastas</a>
+        <a href="comunidad.html" class="activo">Comunidad</a>
+        <a href="perfil.html">Perfil</a>
+        <a href="carrito.html">Carrito</a>
     </nav>
 </header>
 
@@ -469,15 +398,13 @@
 
 <main class="contenedor">
 
-    <section class="producto" id="producto">
-
+    <div class="producto-destacado">
         <div class="producto-imagen">
             <img
                 src="imagenes/boma1.jpg"
                 alt="Bomba sumergible de agua"
                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
             >
-
             <div class="sin-imagen" style="display:none;">
                 <p>Imagen del producto destacado</p>
                 <small>Agrega tu fotografía en imagenes/boma1.jpg</small>
@@ -485,336 +412,304 @@
         </div>
 
         <div class="producto-info">
-
-            <span class="etiqueta"
-                style="background:#e0f2fe;color:#183b4e;">
+            <span class="etiqueta" style="background:#e0f2fe;color:#183b4e;">
                 PRODUCTO DESTACADO
             </span>
-
-            <h2>Bomba Sumergible 1 HP</h2>
-
+            <h2>Bomba sumergible residencial</h2>
             <p>
-                Una alternativa para la extracción de agua en pozos.
-                Antes de elegirla, verifica que sus características
-                sean adecuadas para tu instalación.
+                Ideal para pozos domésticos. Buen caudal, bajo consumo
+                y fácil instalación. Comparte tu opinión en la comunidad.
             </p>
-
-            <div class="precio">$4,850 MXN</div>
-
-            <p style="font-size:13px; margin-bottom:20px;">
-                Precio de referencia. Confirma disponibilidad y
-                especificaciones con el establecimiento.
-            </p>
-
-            <button type="button" class="boton" id="btn-comprar">
-                Comprar producto
-            </button>
-
-            <p id="mensaje-compra" class="mensaje-compra" role="status"></p>
-
-            <a href="carrito.html" class="enlace-carrito">
-                Ver carrito
-            </a>
-
+            <button class="btn" id="btn-comprar" type="button">Me interesa</button>
+            <p id="mensaje-compra" class="mensaje" style="display:none;"></p>
         </div>
-    </section>
+    </div>
 
-    <section class="opiniones" id="opiniones">
-
-        <div class="titulo-seccion">
-            <h2>Reseñas y opiniones de nuestros clientes</h2>
-            <p>Conoce las experiencias de otros clientes y comparte la tuya.</p>
-        </div>
+    <section class="seccion-comentarios">
+        <h2>Opiniones de la comunidad</h2>
+        <p id="total-comentarios">3 opiniones de demostración</p>
 
         <div class="resumen">
-            <div class="estrellas" id="promedio-estrellas">★★★★★</div>
-            <p class="promedio-calificacion" id="promedio-numero">5.0 / 5</p>
-            <p id="total-comentarios">3 opiniones de demostración</p>
+            <div>
+                <strong id="promedio-numero">4.7 / 5</strong>
+                <div id="promedio-estrellas">★★★★★</div>
+            </div>
         </div>
 
         <div class="lista-comentarios" id="lista-comentarios"></div>
 
         <form class="formulario" id="form-comentario">
+            <h3>Deja tu comentario</h3>
 
-            <h3>Comparte tu experiencia</h3>
-
-            <div class="mensaje" id="mensaje"></div>
-
-            <div class="campo">
+            <div class="form-group">
                 <label for="nombre">Tu nombre</label>
-                <input
-                    type="text"
-                    id="nombre"
-                    maxlength="60"
-                    placeholder="Escribe tu nombre"
-                    required
-                >
+                <input id="nombre" type="text" maxlength="50" required placeholder="Ej. Ana L.">
             </div>
 
-            <div class="campo">
+            <div class="form-group">
                 <label for="calificacion">Calificación</label>
                 <select id="calificacion" required>
-                    <option value="5">★★★★★ - Excelente</option>
-                    <option value="4">★★★★☆ - Muy bueno</option>
-                    <option value="3">★★★☆☆ - Bueno</option>
-                    <option value="2">★★☆☆☆ - Regular</option>
-                    <option value="1">★☆☆☆☆ - Malo</option>
+                    <option value="5">5 - Excelente</option>
+                    <option value="4">4 - Muy bueno</option>
+                    <option value="3">3 - Bueno</option>
+                    <option value="2">2 - Regular</option>
+                    <option value="1">1 - Malo</option>
                 </select>
             </div>
 
-            <div class="campo">
+            <div class="form-group">
                 <label for="comentario">Tu comentario</label>
                 <textarea
                     id="comentario"
                     maxlength="500"
-                    placeholder="Cuéntanos tu experiencia..."
                     required
+                    placeholder="Cuéntanos tu experiencia..."
                 ></textarea>
             </div>
 
-            <button type="submit" class="boton">
-                Publicar comentario
-            </button>
-
+            <button class="btn" type="submit">Publicar comentario</button>
+            <div class="mensaje" id="mensaje" role="status"></div>
         </form>
-
     </section>
 
 </main>
 
 <footer>
-    <p><strong>Perforaciones Palacios</strong></p>
     <p>Soluciones y servicios relacionados con el agua.</p>
     <p>&copy; 2026 Perforaciones Palacios. Todos los derechos reservados.</p>
 </footer>
 
 <script>
+/* =========================================================
+   COMUNIDAD – Comentarios conectados con PERFIL
+   Clave compartida: comentariosPalacios
+   ========================================================= */
 
-    const comentariosIniciales = [
-        {
-            nombre: "Carlos M.",
-            calificacion: 5,
-            comentario: "Me pareció muy útil la información para conocer el producto.",
-            demostracion: true
-        },
-        {
-            nombre: "María G.",
-            calificacion: 5,
-            comentario: "El diseño permite encontrar fácilmente la información.",
-            demostracion: true
-        },
-        {
-            nombre: "José R.",
-            calificacion: 4,
-            comentario: "Me gustaría conocer más detalles sobre las características de la bomba.",
-            demostracion: true
-        }
-    ];
+const CLAVE_COMENTARIOS = "comentariosPalacios";
 
-    const lista = document.getElementById("lista-comentarios");
-    const total = document.getElementById("total-comentarios");
-    const formulario = document.getElementById("form-comentario");
-    const mensaje = document.getElementById("mensaje");
-    const botonComprar = document.getElementById("btn-comprar");
-    const mensajeCompra = document.getElementById("mensaje-compra");
-
-    let comentarios = [];
-
-    try {
-        const guardados = localStorage.getItem("pp_comentarios_campana");
-        comentarios = guardados ? JSON.parse(guardados) : comentariosIniciales;
-
-        if (!Array.isArray(comentarios)) {
-            comentarios = comentariosIniciales;
-        }
-    } catch (error) {
-        comentarios = comentariosIniciales;
+const comentariosIniciales = [
+    {
+        nombre: "Carlos M.",
+        calificacion: 5,
+        comentario: "Me pareció muy útil la información para conocer el producto.",
+        demostracion: true
+    },
+    {
+        nombre: "María G.",
+        calificacion: 5,
+        comentario: "El diseño permite encontrar fácilmente la información.",
+        demostracion: true
+    },
+    {
+        nombre: "José R.",
+        calificacion: 4,
+        comentario: "Me gustaría conocer más detalles sobre las características de la bomba.",
+        demostracion: true
     }
+];
 
-    function mostrarComentarios() {
+const lista = document.getElementById("lista-comentarios");
+const total = document.getElementById("total-comentarios");
+const formulario = document.getElementById("form-comentario");
+const mensaje = document.getElementById("mensaje");
+const botonComprar = document.getElementById("btn-comprar");
+const mensajeCompra = document.getElementById("mensaje-compra");
 
-        lista.replaceChildren();
+let comentarios = [];
 
-        comentarios.forEach(function(c) {
+function cargarComentarios() {
+    try {
+        const guardados = JSON.parse(localStorage.getItem(CLAVE_COMENTARIOS) || "[]");
+        if (!Array.isArray(guardados)) return [];
 
-            const tarjeta = document.createElement("article");
-            tarjeta.className = "comentario";
+        return guardados.map(c => ({
+            id: c.id || ("com-" + Date.now() + Math.random()),
+            autor: c.autor || c.nombre || "Usuario",
+            texto: c.texto || c.comentario || "",
+            calificacion: Number(c.calificacion) || 5,
+            fecha: c.fecha || "",
+            origen: c.origen || "comunidad"
+        }));
+    } catch (e) {
+        return [];
+    }
+}
 
-            const encabezado = document.createElement("h3");
-            encabezado.textContent = c.nombre;
+function migrarComentariosAnteriores() {
+    try {
+        const anteriores = JSON.parse(localStorage.getItem("pp_comentarios_campana") || "[]");
+        let compartidos = JSON.parse(localStorage.getItem(CLAVE_COMENTARIOS) || "[]");
+        if (!Array.isArray(anteriores) || !Array.isArray(compartidos)) return;
 
-            const estrellas = document.createElement("div");
-            estrellas.className = "estrellas";
-
-            estrellas.textContent =
-                "★".repeat(Number(c.calificacion)) +
-                "☆".repeat(5 - Number(c.calificacion));
-
-            const texto = document.createElement("p");
-            texto.textContent = c.comentario;
-
-            tarjeta.append(encabezado, estrellas, texto);
-
-            if (c.fecha) {
-                const fecha = document.createElement("small");
-                fecha.className = "fecha-comentario";
-                fecha.textContent = c.fecha;
-                tarjeta.appendChild(fecha);
+        let cambio = false;
+        anteriores.forEach(c => {
+            if (c.demostracion) return;
+            const id = c.id || ("campana-" + Date.now() + Math.random());
+            const existe = compartidos.some(x => x.id && x.id === id);
+            if (!existe) {
+                compartidos.push({
+                    id: id,
+                    autor: c.autor || c.nombre || "Usuario",
+                    texto: c.texto || c.comentario || "",
+                    calificacion: Number(c.calificacion) || 5,
+                    fecha: c.fecha || "",
+                    origen: "campana"
+                });
+                cambio = true;
             }
-
-            if (c.demostracion) {
-                const nota = document.createElement("small");
-                nota.textContent = "Reseña de ejemplo";
-                nota.style.color = "#64748b";
-                nota.style.display = "block";
-                nota.style.marginTop = "8px";
-                tarjeta.appendChild(nota);
-            }
-
-            lista.appendChild(tarjeta);
-
         });
 
-        const cantidad = comentarios.length;
+        if (cambio) {
+            localStorage.setItem(CLAVE_COMENTARIOS, JSON.stringify(compartidos));
+        }
+    } catch (e) {
+        console.error("No se pudieron migrar comentarios antiguos", e);
+    }
+}
 
-        total.textContent = cantidad +
-            (cantidad === 1 ? " reseña publicada" : " reseñas publicadas");
+function guardarComentarios(listaComentarios) {
+    localStorage.setItem(CLAVE_COMENTARIOS, JSON.stringify(listaComentarios));
+}
 
-        const promedio = cantidad
-            ? comentarios.reduce((suma, c) => suma + Number(c.calificacion), 0) / cantidad
-            : 0;
+function mostrarMensaje(texto) {
+    if (!mensaje) return;
+    mensaje.textContent = texto;
+    mensaje.style.display = "block";
+    setTimeout(() => { mensaje.style.display = "none"; }, 4000);
+}
 
-        document.getElementById("promedio-numero").textContent =
-            promedio.toFixed(1) + " / 5";
+function mostrarComentarios() {
+    if (!lista) return;
+    lista.replaceChildren();
 
-        const estrellasPromedio = Math.round(promedio);
+    comentariosIniciales.forEach(c => {
+        const tarjeta = document.createElement("article");
+        tarjeta.className = "comentario";
 
-        document.getElementById("promedio-estrellas").textContent =
-            "★".repeat(estrellasPromedio) +
-            "☆".repeat(5 - estrellasPromedio);
+        const encabezado = document.createElement("h3");
+        encabezado.textContent = c.nombre;
 
+        const estrellas = document.createElement("div");
+        estrellas.className = "estrellas";
+        estrellas.textContent = "★".repeat(c.calificacion) + "☆".repeat(5 - c.calificacion);
+
+        const texto = document.createElement("p");
+        texto.textContent = c.comentario;
+
+        const nota = document.createElement("small");
+        nota.textContent = "Reseña de ejemplo";
+        nota.style.color = "#64748b";
+
+        tarjeta.append(encabezado, estrellas, texto, nota);
+        lista.appendChild(tarjeta);
+    });
+
+    comentarios.forEach(c => {
+        const tarjeta = document.createElement("article");
+        tarjeta.className = "comentario";
+
+        const encabezado = document.createElement("h3");
+        encabezado.textContent = c.autor;
+
+        const estrellas = document.createElement("div");
+        estrellas.className = "estrellas";
+        const cal = Number(c.calificacion) || 5;
+        estrellas.textContent = "★".repeat(cal) + "☆".repeat(5 - cal);
+
+        const texto = document.createElement("p");
+        texto.textContent = c.texto;
+
+        tarjeta.append(encabezado, estrellas, texto);
+
+        if (c.fecha) {
+            const fecha = document.createElement("small");
+            fecha.className = "fecha-comentario";
+            fecha.textContent = c.fecha;
+            tarjeta.appendChild(fecha);
+        }
+
+        lista.appendChild(tarjeta);
+    });
+
+    const cantidad = comentarios.length + comentariosIniciales.length;
+    if (total) {
+        total.textContent = cantidad + (cantidad === 1 ? " reseña publicada" : " reseñas publicadas");
     }
 
-    function mostrarMensaje(texto) {
-        mensaje.textContent = texto;
-        mensaje.style.display = "block";
+    const todasCalif = [
+        ...comentariosIniciales.map(c => c.calificacion),
+        ...comentarios.map(c => Number(c.calificacion) || 5)
+    ];
+    const promedio = todasCalif.reduce((s, n) => s + n, 0) / (todasCalif.length || 1);
+
+    const promedioNumero = document.getElementById("promedio-numero");
+    const promedioEstrellas = document.getElementById("promedio-estrellas");
+    if (promedioNumero) promedioNumero.textContent = promedio.toFixed(1) + " / 5";
+    if (promedioEstrellas) {
+        const e = Math.round(promedio);
+        promedioEstrellas.textContent = "★".repeat(e) + "☆".repeat(5 - e);
     }
+}
 
-    // PUBLICAR COMENTARIOS Y RESEÑAS
-
-    formulario.addEventListener("submit", function(evento) {
-
+if (formulario) {
+    formulario.addEventListener("submit", function (evento) {
         evento.preventDefault();
 
         const nombre = document.getElementById("nombre").value.trim();
+        const textoComentario = document.getElementById("comentario").value.trim();
+        const calificacion = Number(document.getElementById("calificacion").value) || 5;
 
-        const comentario = document.getElementById("comentario").value.trim();
-
-        const calificacion = Number(
-            document.getElementById("calificacion").value
-        );
-
-        if (!nombre || !comentario) {
+        if (!nombre || !textoComentario) {
             mostrarMensaje("Escribe tu nombre y tu comentario.");
             return;
         }
 
         const nuevoComentario = {
-            nombre: nombre,
-            comentario: comentario,
+            id: "comunidad-" + Date.now(),
+            autor: nombre,
+            texto: textoComentario,
             calificacion: calificacion,
-            fecha: new Date().toLocaleDateString("es-MX"),
-            demostracion: false
+            fecha: new Date().toLocaleDateString("es-MX", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit"
+            }),
+            origen: "comunidad"
         };
 
-        comentarios.unshift(nuevoComentario);
-
+        let todos = [];
         try {
-
-            localStorage.setItem(
-                "pp_comentarios_campana",
-                JSON.stringify(comentarios)
-            );
-
-        } catch (error) {
-
-            mostrarMensaje(
-                "El comentario se muestra, pero no se pudo guardar en este navegador."
-            );
-
+            todos = JSON.parse(localStorage.getItem(CLAVE_COMENTARIOS) || "[]");
+            if (!Array.isArray(todos)) todos = [];
+        } catch (e) {
+            todos = [];
         }
 
-        mostrarComentarios();
+        todos.push(nuevoComentario);
+        guardarComentarios(todos);
 
+        comentarios = cargarComentarios();
+        mostrarComentarios();
         formulario.reset();
 
-        mostrarMensaje(
-            "Tu reseña se publicó correctamente. ¡Gracias por compartir tu experiencia!"
-        );
-
+        mostrarMensaje("Tu reseña se publicó correctamente. También podrás verla y gestionarla en tu Perfil.");
     });
+}
 
-    // AGREGAR PRODUCTO AL CARRITO
-
-    botonComprar.addEventListener("click", function() {
-
-        const producto = {
-            id: "bomba-sumergible-1hp",
-            nombre: "Bomba Sumergible 1 HP",
-            precio: 4850,
-            cantidad: 1,
-            imagen: "imagenes/boma1.jpg"
-        };
-
-        let carrito = [];
-
-        try {
-
-            const carritoGuardado = localStorage.getItem("pp_carrito");
-
-            carrito = carritoGuardado ? JSON.parse(carritoGuardado) : [];
-
-            if (!Array.isArray(carrito)) {
-                carrito = [];
-            }
-
-            const existente = carrito.find(function(item) {
-                return item.id === producto.id;
-            });
-
-            if (existente) {
-
-                existente.cantidad = Number(existente.cantidad || 1) + 1;
-
-            } else {
-
-                carrito.push(producto);
-
-            }
-
-            localStorage.setItem(
-                "pp_carrito",
-                JSON.stringify(carrito)
-            );
-
-            mensajeCompra.textContent =
-                "¡Producto agregado al carrito! Ya puedes continuar con tu compra.";
-
+if (botonComprar) {
+    botonComprar.addEventListener("click", function () {
+        if (mensajeCompra) {
             mensajeCompra.style.display = "block";
-
-        } catch (error) {
-
-            mensajeCompra.textContent =
-                "No fue posible agregar el producto al carrito. Inténtalo de nuevo.";
-
-            mensajeCompra.style.display = "block";
-
+            mensajeCompra.textContent = "Acción demostrativa: producto agregado al flujo de compra.";
         }
-
     });
+}
 
-    mostrarComentarios();
-
+migrarComentariosAnteriores();
+comentarios = cargarComentarios();
+mostrarComentarios();
 </script>
 
 </body>
