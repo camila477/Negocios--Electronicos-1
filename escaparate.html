@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -578,7 +579,7 @@ footer strong { color:white; }
         <a href="catalogo.html">Catálogo</a>
         <a href="escaparate.html" class="active">Escaparate</a>
         <a href="promociones.html">Promociones</a>
-        <a href="subastas.html">Subastas</a>
+        <a href="subasta.html">Subastas</a>
         <a href="comunidad.html">Comunidad</a>
 
         <a href="carrito.html" class="cart-link" title="Carrito">
@@ -762,12 +763,11 @@ footer strong { color:white; }
                 <input id="nombre-resena"
                        type="text"
                        maxlength="50"
-                       placeholder="Escribe tu nombre"
-                       required>
+                       placeholder="Escribe tu nombre">
 
                 <label for="calificacion">Calificación</label>
 
-                <select id="calificacion" required>
+                <select id="calificacion">
                     <option value="5">★★★★★ - Excelente</option>
                     <option value="4">★★★★☆ - Muy bueno</option>
                     <option value="3">★★★☆☆ - Bueno</option>
@@ -779,8 +779,7 @@ footer strong { color:white; }
 
                 <textarea id="comentario-resena"
                           maxlength="400"
-                          placeholder="Escribe tu experiencia..."
-                          required></textarea>
+                          placeholder="Escribe tu experiencia..."></textarea>
 
                 <button type="submit" class="btn-publicar">
                     <i class="fa-solid fa-paper-plane"></i>
@@ -986,7 +985,7 @@ function mostrarResenas() {
 
         const nombre = document.createElement("span");
         nombre.className = "resena-nombre";
-        nombre.textContent = resena.nombre;
+        nombre.textContent = resena.nombre || "Usuario";
 
         const estrellas = document.createElement("span");
         estrellas.className = "estrellas";
@@ -1001,7 +1000,7 @@ function mostrarResenas() {
             "☆".repeat(5-calificacion);
 
         const comentario = document.createElement("p");
-        comentario.textContent = resena.comentario;
+        comentario.textContent = resena.comentario || "";
 
         encabezado.append(nombre,estrellas);
 
@@ -1011,7 +1010,7 @@ function mostrarResenas() {
     });
 }
 
-/* PUBLICAR RESEÑA */
+/* PUBLICAR RESEÑA SIN VALIDACIONES */
 
 document.getElementById("form-resena")
 .addEventListener("submit",evento => {
@@ -1024,20 +1023,16 @@ document.getElementById("form-resena")
 
     const calificacion = Number(
         document.getElementById("calificacion").value
-    );
+    ) || 5;
 
     const comentario = document
         .getElementById("comentario-resena")
         .value.trim();
 
-    if (!nombre || !comentario) {
-        return;
-    }
-
     const resenas = obtenerResenas();
 
     resenas.unshift({
-        nombre,
+        nombre: nombre || "Usuario",
         calificacion,
         comentario
     });

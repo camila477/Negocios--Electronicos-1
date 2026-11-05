@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="es">
 
@@ -47,9 +47,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(255, 255, 255, 0.96);
+            background: rgba(255,255,255,.96);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(24, 59, 78, 0.08);
+            border-bottom: 1px solid rgba(24,59,78,.08);
             z-index: 1000;
         }
 
@@ -73,7 +73,7 @@
             color: #183b4e;
             font-size: 14px;
             font-weight: 600;
-            transition: 0.3s;
+            transition: .3s;
         }
 
         .nav-links a:hover { color: #0ea5e9; }
@@ -98,13 +98,13 @@
             padding: 140px 7% 50px;
             text-align: center;
             background:
-                linear-gradient(rgba(9,48,62,0.85), rgba(9,48,62,0.85)),
+                linear-gradient(rgba(9,48,62,.85),rgba(9,48,62,.85)),
                 url("imagenes/imagenaforo.jpg") center/cover no-repeat;
             color: white;
         }
 
         .header h1 {
-            font-size: clamp(32px, 5vw, 48px);
+            font-size: clamp(32px,5vw,48px);
             margin-bottom: 10px;
         }
 
@@ -131,7 +131,7 @@
             border-radius: 14px;
             padding: 35px;
             border: 1px solid #e2edf1;
-            box-shadow: 0 8px 25px rgba(24,59,78,0.06);
+            box-shadow: 0 8px 25px rgba(24,59,78,.06);
             height: fit-content;
         }
 
@@ -175,7 +175,7 @@
             color: #183b4e;
             background: #fafcfd;
             outline: none;
-            transition: 0.3s;
+            transition: .3s;
             font-family: inherit;
         }
 
@@ -189,7 +189,7 @@
         .form-group select:focus {
             border-color: #0ea5e9;
             background: white;
-            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+            box-shadow: 0 0 0 3px rgba(14,165,233,.15);
         }
 
         .btn-primary {
@@ -202,7 +202,7 @@
             font-size: 15px;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.3s;
+            transition: .3s;
             margin-top: 10px;
             display: inline-flex;
             align-items: center;
@@ -228,7 +228,7 @@
             border: 1px solid #bbf7d0;
         }
 
-        /* CARRITO / COTIZACIONES */
+        /* CARRITO */
 
         .cart-list {
             display: flex;
@@ -275,11 +275,11 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            transition: 0.2s;
+            transition: .2s;
         }
 
         .btn-delete:hover {
-            background-color: #fee2e2;
+            background: #fee2e2;
             color: #991b1b;
         }
 
@@ -307,7 +307,7 @@
         .editor-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(9, 48, 62, .72);
+            background: rgba(9,48,62,.72);
             backdrop-filter: blur(4px);
             display: none;
             justify-content: center;
@@ -399,7 +399,7 @@
             border-radius: 8px;
             font-size: 14px;
             font-weight: bold;
-            transition: 0.3s;
+            transition: .3s;
         }
 
         .btn-secondary:hover { background: #bae6fd; }
@@ -417,12 +417,12 @@
             border: 1px solid #e2e8f0;
             border-radius: 10px;
             padding: 20px;
-            transition: 0.3s;
+            transition: .3s;
         }
 
         .order-card:hover {
             border-color: #cbd5e1;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 12px rgba(0,0,0,.03);
         }
 
         .order-header {
@@ -563,7 +563,7 @@
             gap: 15px;
         }
 
-        /* NUEVA SECCIÓN: MIS RESEÑAS */
+        /* RESEÑAS */
 
         .review-item {
             background: #f8fafc;
@@ -633,14 +633,14 @@
             border-radius: 10px;
             font-size: 15px;
             font-weight: bold;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 25px rgba(0,0,0,.2);
             display: flex;
             align-items: center;
             gap: 12px;
-            z-index: 3000;
+            z-index: 6000;
             opacity: 0;
             transform: translateY(20px);
-            transition: all 0.3s ease;
+            transition: all .3s ease;
             pointer-events: none;
         }
 
@@ -649,7 +649,7 @@
             transform: translateY(0);
         }
 
-        /* MODAL CERRAR SESIÓN */
+        /* MODALES */
 
         .modal-overlay {
             position: fixed;
@@ -657,7 +657,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(9, 48, 62, 0.7);
+            background: rgba(9,48,62,.7);
             backdrop-filter: blur(4px);
             display: none;
             justify-content: center;
@@ -672,7 +672,7 @@
             max-width: 400px;
             width: 90%;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,.2);
         }
 
         .modal-box h3 {
@@ -713,7 +713,7 @@
             cursor: pointer;
         }
 
-        /* FOOTER Y RESPONSIVE */
+        .btn-modal-confirm:hover { background: #be123c; }
 
         footer {
             background: #092c3a;
@@ -726,7 +726,6 @@
 
         @media (max-width: 900px) {
             .profile-container { grid-template-columns: 1fr; }
-
             .nav-links a:not(.btn-logout-nav) { display: none; }
 
             .toast-notification {
@@ -740,7 +739,6 @@
 
         @media (max-width: 600px) {
             .form-row { grid-template-columns: 1fr; }
-
             .card { padding: 22px; }
 
             .review-header,
@@ -791,7 +789,7 @@
 
     <main class="profile-container">
 
-        <!-- TARJETA 1: DATOS PERSONALES -->
+        <!-- DATOS PERSONALES -->
 
         <section class="card">
             <h2 class="card-title">
@@ -819,11 +817,6 @@
                 </div>
 
                 <button type="submit" class="btn-primary">
-                    <svg class="icon-svg" style="width:18px;height:18px;" viewBox="0 0 24 24">
-                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
-                        <polyline points="17 21 17 13 7 13 7 21"/>
-                        <polyline points="7 3 7 8 15 8"/>
-                    </svg>
                     Guardar cambios
                 </button>
             </form>
@@ -837,7 +830,7 @@
             </div>
         </section>
 
-        <!-- TARJETA 2: CARRITO -->
+        <!-- CARRITO -->
 
         <section class="card">
             <h2 class="card-title">
@@ -857,10 +850,6 @@
             </div>
 
             <button id="btnSolicitar" class="btn-primary" style="display:none;" onclick="solicitarCotizacion()">
-                <svg class="icon-svg" style="width:18px;height:18px;" viewBox="0 0 24 24">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                    <polyline points="22,6 12,13 2,6"/>
-                </svg>
                 Confirmar y solicitar cotización
             </button>
 
@@ -873,7 +862,7 @@
             </div>
         </section>
 
-        <!-- TARJETA 3: PEDIDOS -->
+        <!-- PEDIDOS -->
 
         <section class="card card-full">
             <h2 class="card-title">
@@ -882,7 +871,6 @@
                     <polyline points="14 2 14 8 20 8"/>
                     <line x1="16" y1="13" x2="8" y2="13"/>
                     <line x1="16" y1="17" x2="8" y2="17"/>
-                    <polyline points="10 9 9 9 8 9"/>
                 </svg>
                 Mis Pedidos y Solicitudes Confirmadas
             </h2>
@@ -894,7 +882,7 @@
             </div>
         </section>
 
-        <!-- TARJETA 4: MIS COMENTARIOS -->
+        <!-- MIS COMENTARIOS -->
 
         <section class="card">
             <h2 class="card-title">
@@ -904,17 +892,13 @@
                 Mis Comentarios
             </h2>
 
-            <form id="commentForm">
+            <form id="commentForm" novalidate>
                 <div class="form-group">
                     <label for="commentText">Escribe un comentario</label>
-                    <textarea id="commentText" placeholder="Comparte tu experiencia o deja un comentario..." required></textarea>
+                    <textarea id="commentText" placeholder="Comparte tu experiencia o deja un comentario..."></textarea>
                 </div>
 
                 <button type="submit" class="btn-primary">
-                    <svg class="icon-svg" style="width:18px;height:18px;" viewBox="0 0 24 24">
-                        <line x1="22" y1="2" x2="11" y2="13"/>
-                        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-                    </svg>
                     Publicar comentario
                 </button>
             </form>
@@ -932,7 +916,7 @@
             </div>
         </section>
 
-        <!-- TARJETA 5: MIS PUBLICACIONES -->
+        <!-- MIS PUBLICACIONES -->
 
         <section class="card">
             <h2 class="card-title">
@@ -944,21 +928,21 @@
                 Mis Publicaciones
             </h2>
 
-            <form id="productForm">
+            <form id="productForm" novalidate>
                 <div class="form-group">
                     <label for="productName">Nombre del producto</label>
-                    <input type="text" id="productName" placeholder="Ej: Bomba sumergible 1 HP" required>
+                    <input type="text" id="productName" placeholder="Ej: Bomba sumergible 1 HP">
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label for="productPrice">Precio (MXN)</label>
-                        <input type="number" id="productPrice" placeholder="0.00" min="0" step="0.01" required>
+                        <input type="number" id="productPrice" placeholder="0.00" step="0.01">
                     </div>
 
                     <div class="form-group">
                         <label for="productCategory">Categoría</label>
-                        <select id="productCategory" required>
+                        <select id="productCategory">
                             <option value="">Seleccionar...</option>
                             <option value="Bombas">Bombas</option>
                             <option value="Tubería">Tubería</option>
@@ -971,15 +955,10 @@
 
                 <div class="form-group">
                     <label for="productDesc">Descripción</label>
-                    <textarea id="productDesc" placeholder="Describe el producto, características, etc." required></textarea>
+                    <textarea id="productDesc" placeholder="Describe el producto, características, etc."></textarea>
                 </div>
 
                 <button type="submit" class="btn-primary">
-                    <svg class="icon-svg" style="width:18px;height:18px;" viewBox="0 0 24 24">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                        <polyline points="17 8 12 3 7 8"/>
-                        <line x1="12" y1="3" x2="12" y2="15"/>
-                    </svg>
                     Subir producto
                 </button>
             </form>
@@ -997,7 +976,7 @@
             </div>
         </section>
 
-        <!-- TARJETA 6: MIS RESEÑAS -->
+        <!-- MIS RESEÑAS -->
 
         <section class="card card-full">
             <h2 class="card-title">
@@ -1008,13 +987,50 @@
             </h2>
 
             <p style="font-size:14px;color:#64748b;margin-bottom:20px;line-height:1.5;">
-                Aquí puedes consultar y administrar las reseñas publicadas en el apartado Escaparate.
+                Comparte tu experiencia con Perforaciones Palacios. Puedes publicar una reseña,
+                seleccionar una calificación y administrar tus publicaciones desde aquí.
             </p>
 
-            <div id="reviewsList"></div>
+            <form id="reviewForm" novalidate>
 
-            <div id="emptyReviewsMessage" class="empty-state" style="display:none;">
-                Aún no hay reseñas publicadas en Escaparate.
+                <div class="form-group">
+                    <label for="reviewName">Nombre</label>
+                    <input type="text" id="reviewName" placeholder="Escribe tu nombre">
+                </div>
+
+                <div class="form-group">
+                    <label for="reviewRating">Calificación</label>
+                    <select id="reviewRating">
+                        <option value="">Selecciona una calificación</option>
+                        <option value="5">★★★★★ - Excelente</option>
+                        <option value="4">★★★★☆ - Muy bueno</option>
+                        <option value="3">★★★☆☆ - Bueno</option>
+                        <option value="2">★★☆☆☆ - Regular</option>
+                        <option value="1">★☆☆☆☆ - Malo</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="reviewComment">Tu reseña</label>
+                    <textarea id="reviewComment" placeholder="Escribe tu experiencia con nuestros productos o servicios..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary">
+                    Publicar reseña
+                </button>
+
+            </form>
+
+            <div style="margin-top:30px;border-top:1px solid #eef7fa;padding-top:20px;">
+                <h3 style="font-size:16px;color:#155e75;margin-bottom:15px;">
+                    Mis reseñas publicadas
+                </h3>
+
+                <div id="reviewsList"></div>
+
+                <div id="emptyReviewsMessage" class="empty-state" style="display:none;">
+                    Aún no has publicado ninguna reseña.
+                </div>
             </div>
         </section>
 
@@ -1026,7 +1042,7 @@
         <div class="editor-box">
             <h3 id="editorTitulo">Editar publicación</h3>
 
-            <form id="editorForm">
+            <form id="editorForm" novalidate>
                 <div id="editorCampos"></div>
 
                 <div class="editor-buttons">
@@ -1042,7 +1058,7 @@
         </div>
     </div>
 
-    <!-- NOTIFICACIÓN TOAST -->
+    <!-- TOAST -->
 
     <div id="toast" class="toast-notification">
         <span id="toast-message"></span>
@@ -1067,6 +1083,25 @@
         </div>
     </div>
 
+    <!-- MODAL CONFIRMAR ELIMINACIÓN -->
+
+    <div id="modalConfirmar" class="modal-overlay">
+        <div class="modal-box">
+            <h3 id="confirmarTitulo">Confirmar</h3>
+            <p id="confirmarTexto"></p>
+
+            <div class="modal-buttons">
+                <button class="btn-modal-cancel" type="button" onclick="cerrarConfirmacion()">
+                    Cancelar
+                </button>
+
+                <button class="btn-modal-confirm" type="button" id="btnConfirmarAccion">
+                    Sí, eliminar
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- FOOTER -->
 
     <footer>
@@ -1086,7 +1121,7 @@
                 .replace(/'/g, "&#039;");
         }
 
-        // 1. CARGAR DATOS DEL USUARIO
+        // 1. DATOS DEL USUARIO
 
         const inputName = document.getElementById("name");
         const inputEmail = document.getElementById("email");
@@ -1104,10 +1139,13 @@
             inputEmail.value = usuario.email || "";
             inputPhone.value = usuario.phone || "";
 
-            saludoUsuario.innerHTML = `¡Hola, <span>${escaparHTML((usuario.name || "Usuario").split(" ")[0])}</span>!`;
+            saludoUsuario.innerHTML =
+                `¡Hola, <span>${escaparHTML((usuario.name || "Usuario").split(" ")[0])}</span>!`;
+
+            document.getElementById("reviewName").value = usuario.name || "";
         }
 
-        // 2. GUARDAR CAMBIOS DE PERFIL
+        // 2. GUARDAR PERFIL
 
         document.getElementById("profileForm").addEventListener("submit", function(e) {
             e.preventDefault();
@@ -1122,7 +1160,7 @@
             mostrarToast("✓ ¡Tus datos personales se han guardado con éxito!");
         });
 
-        // 3. LÓGICA DEL CARRITO
+        // 3. CARRITO
 
         let carrito = JSON.parse(localStorage.getItem("carritoPalacios")) || [];
 
@@ -1188,7 +1226,7 @@
             mostrarToast(`Servicio "${eliminado}" eliminado.`);
         }
 
-        // 4. LÓGICA DE PEDIDOS
+        // 4. PEDIDOS
 
         let pedidos = JSON.parse(localStorage.getItem("pedidosPalacios")) || [];
 
@@ -1222,14 +1260,10 @@
                                 <div class="order-date">Solicitado el ${escaparHTML(ped.fecha)}</div>
                             </div>
 
-                            <span class="order-badge">
-                                ${escaparHTML(ped.estado)}
-                            </span>
+                            <span class="order-badge">${escaparHTML(ped.estado)}</span>
                         </div>
 
-                        <ul class="order-items-summary">
-                            ${itemsList}
-                        </ul>
+                        <ul class="order-items-summary">${itemsList}</ul>
 
                         <div class="order-footer">
                             <span>Total Cotizado:</span>
@@ -1275,7 +1309,7 @@
             mostrarToast("🎉 ¡Solicitud enviada! Se ha agregado a Mis Pedidos.");
         }
 
-        // 5. LÓGICA DE COMENTARIOS
+        // 5. COMENTARIOS SIN VALIDACIONES
 
         function cargarComentariosPerfil() {
             try {
@@ -1286,7 +1320,7 @@
                 return raw.map((c, index) => ({
                     id: c.id || ("com-" + index),
                     autor: c.autor || c.nombre || "Usuario",
-                    texto: c.texto || c.comentario || "",
+                    texto: c.texto ?? c.comentario ?? "",
                     calificacion: Number(c.calificacion) || 5,
                     fecha: c.fecha || "",
                     origen: c.origen || "perfil"
@@ -1314,9 +1348,7 @@
 
             let html = "";
 
-            comentarios.slice().reverse().forEach((com, index) => {
-                const realIndex = comentarios.length - 1 - index;
-
+            comentarios.forEach((com, realIndex) => {
                 const origenLabel = (com.origen === "comunidad" || com.origen === "campana")
                     ? `<span style="font-size:11px;color:#0ea5e9;font-weight:600;"> · desde Comunidad</span>`
                     : "";
@@ -1358,8 +1390,6 @@
 
             const texto = document.getElementById("commentText").value.trim();
 
-            if (!texto) return;
-
             const fechaActual = new Date().toLocaleDateString('es-MX', {
                 year: 'numeric',
                 month: 'long',
@@ -1398,7 +1428,7 @@
             mostrarToast("Comentario eliminado correctamente.");
         }
 
-        // 6. LÓGICA DE PRODUCTOS
+        // 6. PRODUCTOS SIN VALIDACIONES
 
         function cargarProductosPerfil() {
             try {
@@ -1408,10 +1438,10 @@
 
                 return raw.map(p => ({
                     id: p.id || "",
-                    nombre: p.nombre || "Producto",
+                    nombre: p.nombre ?? "Producto",
                     precio: Number(p.precio) || 0,
                     categoria: p.categoria || "General",
-                    descripcion: p.descripcion || "",
+                    descripcion: p.descripcion ?? "",
                     fecha: p.fecha || "",
                     autor: p.autor || "Usuario",
                     origen: p.origen || "perfil",
@@ -1472,6 +1502,7 @@
                         <div class="product-meta">
                             <span>📂 ${escaparHTML(prod.categoria)}</span>
                             <span>📅 ${escaparHTML(prod.fecha)}</span>
+
                             ${prod.origen === "comunidad" || (prod.id && String(prod.id).indexOf("admin") === -1 && prod.autor)
                                 ? `<span style="color:#7c3aed;font-weight:600;">🔨 desde Subasta/C2C</span>`
                                 : ""}
@@ -1487,14 +1518,9 @@
             e.preventDefault();
 
             const nombre = document.getElementById("productName").value.trim();
-            const precio = parseFloat(document.getElementById("productPrice").value);
+            const precio = Number(document.getElementById("productPrice").value) || 0;
             const categoria = document.getElementById("productCategory").value;
             const descripcion = document.getElementById("productDesc").value.trim();
-
-            if (!nombre || isNaN(precio) || !categoria || !descripcion) {
-                mostrarToast("Por favor completa todos los campos.");
-                return;
-            }
 
             const fechaActual = new Date().toLocaleDateString('es-MX', {
                 year: 'numeric',
@@ -1560,21 +1586,23 @@
 
             const eliminado = producto.nombre;
 
-            if (!confirm(`¿Estás seguro de que deseas eliminar "${eliminado}"?`)) return;
+            pedirConfirmacion(
+                "Eliminar producto",
+                `¿Seguro que deseas eliminar "${eliminado}"? Esta acción no se puede deshacer.`,
+                function() {
+                    sincronizarBorradoEnSubasta(producto);
 
-            sincronizarBorradoEnSubasta(producto);
+                    productos.splice(index, 1);
 
-            productos.splice(index, 1);
+                    localStorage.setItem("productosPalacios", JSON.stringify(productos));
 
-            localStorage.setItem("productosPalacios", JSON.stringify(productos));
-
-            renderizarProductos();
-            mostrarToast(`Producto "${eliminado}" eliminado (también se quitó de Subastas si estaba ahí).`);
+                    renderizarProductos();
+                    mostrarToast(`Producto "${eliminado}" eliminado (también se quitó de Subastas si estaba ahí).`);
+                }
+            );
         }
 
-        // 7. LÓGICA DE MIS RESEÑAS
-        // Clave compartida con escaparate.html:
-        // pp_resenas_escaparate
+        // 7. RESEÑAS SIN VALIDACIONES
 
         const CLAVE_RESENAS = "pp_resenas_escaparate";
 
@@ -1587,9 +1615,9 @@
                 return raw.map((r, index) => ({
                     ...r,
                     id: r.id || ("resena-" + index),
-                    nombre: r.nombre || r.autor || "Usuario",
-                    calificacion: Math.min(5, Math.max(1, Number(r.calificacion) || 5)),
-                    comentario: r.comentario || r.texto || "",
+                    nombre: r.nombre ?? r.autor ?? "Usuario",
+                    calificacion: Number(r.calificacion) || 0,
+                    comentario: r.comentario ?? r.texto ?? "",
                     fecha: r.fecha || ""
                 }));
             } catch (e) {
@@ -1602,6 +1630,45 @@
         function guardarResenasPerfil() {
             localStorage.setItem(CLAVE_RESENAS, JSON.stringify(resenas));
         }
+
+        // PUBLICAR RESEÑA SIN COMPROBAR CAMPOS
+
+        document.getElementById("reviewForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const nombre = document.getElementById("reviewName").value.trim();
+            const calificacion = Number(document.getElementById("reviewRating").value) || 0;
+            const comentario = document.getElementById("reviewComment").value.trim();
+
+            const fechaActual = new Date().toLocaleDateString("es-MX", {
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+            });
+
+            const nuevaResena = {
+                id: "resena-perfil-" + Date.now(),
+                nombre: nombre,
+                calificacion: calificacion,
+                comentario: comentario,
+                fecha: fechaActual,
+                origen: "perfil"
+            };
+
+            resenas.push(nuevaResena);
+
+            guardarResenasPerfil();
+
+            document.getElementById("reviewForm").reset();
+
+            document.getElementById("reviewName").value = usuario.name || "";
+
+            renderizarResenasPerfil();
+
+            mostrarToast("¡Tu reseña se publicó correctamente!");
+        });
+
+        // MOSTRAR RESEÑAS
 
         function renderizarResenasPerfil() {
             resenas = cargarResenasPerfil();
@@ -1624,6 +1691,10 @@
 
                 const estrellas = "★".repeat(resena.calificacion) +
                     "☆".repeat(5 - resena.calificacion);
+
+                const origenTexto = resena.origen === "perfil"
+                    ? "Publicada desde Mi Perfil"
+                    : "Publicada desde Escaparate";
 
                 html += `
                     <div class="review-item">
@@ -1663,7 +1734,7 @@
                         </div>
 
                         <span class="review-origin">
-                            Publicada desde Escaparate
+                            ${origenTexto}
                         </span>
                     </div>
                 `;
@@ -1674,7 +1745,6 @@
 
         function editarResena(index) {
             if (!resenas[index]) return;
-
             abrirEditor("resena", index);
         }
 
@@ -1683,16 +1753,18 @@
 
             const nombre = resenas[index].nombre;
 
-            if (!confirm(`¿Estás seguro de que deseas eliminar la reseña de "${nombre}"?`)) {
-                return;
-            }
+            pedirConfirmacion(
+                "Eliminar reseña",
+                `¿Seguro que deseas eliminar la reseña de "${nombre}"? Esta acción no se puede deshacer.`,
+                function() {
+                    resenas.splice(index, 1);
 
-            resenas.splice(index, 1);
+                    guardarResenasPerfil();
+                    renderizarResenasPerfil();
 
-            guardarResenasPerfil();
-            renderizarResenasPerfil();
-
-            mostrarToast("Reseña eliminada correctamente.");
+                    mostrarToast("Reseña eliminada correctamente.");
+                }
+            );
         }
 
         // 8. EDITAR COMENTARIOS, PRODUCTOS Y RESEÑAS
@@ -1709,7 +1781,6 @@
 
             if (tipo === "comentario") {
                 const com = comentarios[index];
-
                 if (!com) return;
 
                 document.getElementById("editorTitulo").textContent = "Editar comentario";
@@ -1717,19 +1788,18 @@
                 campos.innerHTML = `
                     <div class="form-group">
                         <label for="editAutor">Nombre</label>
-                        <input id="editAutor" type="text" maxlength="80"
-                            value="${escaparHTML(com.autor)}" required>
+                        <input id="editAutor" type="text"
+                            value="${escaparHTML(com.autor)}">
                     </div>
 
                     <div class="form-group">
                         <label for="editTexto">Comentario</label>
-                        <textarea id="editTexto" maxlength="1000" required>${escaparHTML(com.texto)}</textarea>
+                        <textarea id="editTexto">${escaparHTML(com.texto)}</textarea>
                     </div>
                 `;
 
             } else if (tipo === "resena") {
                 const resena = resenas[index];
-
                 if (!resena) return;
 
                 document.getElementById("editorTitulo").textContent = "Editar reseña";
@@ -1737,13 +1807,14 @@
                 campos.innerHTML = `
                     <div class="form-group">
                         <label for="editResenaNombre">Nombre</label>
-                        <input id="editResenaNombre" type="text" maxlength="80"
-                            value="${escaparHTML(resena.nombre)}" required>
+                        <input id="editResenaNombre" type="text"
+                            value="${escaparHTML(resena.nombre)}">
                     </div>
 
                     <div class="form-group">
                         <label for="editResenaCalificacion">Calificación</label>
-                        <select id="editResenaCalificacion" required>
+                        <select id="editResenaCalificacion">
+                            <option value="" ${resena.calificacion === 0 ? "selected" : ""}>Sin calificación</option>
                             <option value="5" ${resena.calificacion === 5 ? "selected" : ""}>5 estrellas</option>
                             <option value="4" ${resena.calificacion === 4 ? "selected" : ""}>4 estrellas</option>
                             <option value="3" ${resena.calificacion === 3 ? "selected" : ""}>3 estrellas</option>
@@ -1754,13 +1825,12 @@
 
                     <div class="form-group">
                         <label for="editResenaComentario">Reseña</label>
-                        <textarea id="editResenaComentario" maxlength="1000" required>${escaparHTML(resena.comentario)}</textarea>
+                        <textarea id="editResenaComentario">${escaparHTML(resena.comentario)}</textarea>
                     </div>
                 `;
 
             } else if (tipo === "producto") {
                 const prod = productos[index];
-
                 if (!prod) return;
 
                 document.getElementById("editorTitulo").textContent = "Editar producto";
@@ -1768,20 +1838,21 @@
                 campos.innerHTML = `
                     <div class="form-group">
                         <label for="editNombre">Nombre del producto</label>
-                        <input id="editNombre" type="text" maxlength="120"
-                            value="${escaparHTML(prod.nombre)}" required>
+                        <input id="editNombre" type="text"
+                            value="${escaparHTML(prod.nombre)}">
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label for="editPrecio">Precio (MXN)</label>
-                            <input id="editPrecio" type="number" min="0" step="0.01"
-                                value="${Number(prod.precio) || 0}" required>
+                            <input id="editPrecio" type="number" step="0.01"
+                                value="${Number(prod.precio) || 0}">
                         </div>
 
                         <div class="form-group">
                             <label for="editCategoria">Categoría</label>
-                            <select id="editCategoria" required>
+                            <select id="editCategoria">
+                                <option value="">Seleccionar...</option>
                                 ${["Bombas","Tubería","Herramientas","Accesorios","Otros"].map(c =>
                                     `<option value="${c}" ${prod.categoria === c ? "selected" : ""}>${c}</option>`
                                 ).join("")}
@@ -1791,7 +1862,7 @@
 
                     <div class="form-group">
                         <label for="editDescripcion">Descripción</label>
-                        <textarea id="editDescripcion" maxlength="1000" required>${escaparHTML(prod.descripcion)}</textarea>
+                        <textarea id="editDescripcion">${escaparHTML(prod.descripcion)}</textarea>
                     </div>
                 `;
             }
@@ -1815,18 +1886,18 @@
             indiceEdicion = -1;
         }
 
+        // GUARDAR EDICIONES SIN VALIDACIONES
+
         document.getElementById("editorForm").addEventListener("submit", function(e) {
             e.preventDefault();
 
             if (indiceEdicion < 0) return;
 
-            // GUARDAR COMENTARIO
+            // EDITAR COMENTARIO
 
             if (tipoEdicion === "comentario") {
                 const autor = document.getElementById("editAutor").value.trim();
                 const texto = document.getElementById("editTexto").value.trim();
-
-                if (!autor || !texto) return;
 
                 comentarios[indiceEdicion].autor = autor;
                 comentarios[indiceEdicion].texto = texto;
@@ -1838,17 +1909,12 @@
                 mostrarToast("Comentario actualizado correctamente.");
             }
 
-            // GUARDAR RESEÑA
+            // EDITAR RESEÑA
 
             else if (tipoEdicion === "resena") {
                 const nombre = document.getElementById("editResenaNombre").value.trim();
-                const calificacion = Number(document.getElementById("editResenaCalificacion").value);
+                const calificacion = Number(document.getElementById("editResenaCalificacion").value) || 0;
                 const comentario = document.getElementById("editResenaComentario").value.trim();
-
-                if (!nombre || !comentario || !Number.isInteger(calificacion) || calificacion < 1 || calificacion > 5) {
-                    mostrarToast("Completa correctamente los datos de la reseña.");
-                    return;
-                }
 
                 resenas[indiceEdicion].nombre = nombre;
                 resenas[indiceEdicion].calificacion = calificacion;
@@ -1860,15 +1926,13 @@
                 mostrarToast("Reseña actualizada correctamente.");
             }
 
-            // GUARDAR PRODUCTO
+            // EDITAR PRODUCTO
 
             else if (tipoEdicion === "producto") {
                 const nombre = document.getElementById("editNombre").value.trim();
-                const precio = Number(document.getElementById("editPrecio").value);
+                const precio = Number(document.getElementById("editPrecio").value) || 0;
                 const categoria = document.getElementById("editCategoria").value;
                 const descripcion = document.getElementById("editDescripcion").value.trim();
-
-                if (!nombre || !Number.isFinite(precio) || precio < 0 || !categoria || !descripcion) return;
 
                 productos[indiceEdicion].nombre = nombre;
                 productos[indiceEdicion].precio = precio;
@@ -1877,7 +1941,7 @@
 
                 localStorage.setItem("productosPalacios", JSON.stringify(productos));
 
-                // SINCRONIZAR CAMBIOS CON SUBASTAS
+                // SINCRONIZAR CON SUBASTAS
 
                 try {
                     const prod = productos[indiceEdicion];
@@ -1947,7 +2011,44 @@
             window.location.href = "inicio.html";
         }
 
-        // ACTUALIZAR RESEÑAS SI CAMBIAN EN OTRA PESTAÑA
+        // MODAL DE CONFIRMACIÓN
+
+        let accionPendiente = null;
+
+        function pedirConfirmacion(titulo, texto, accion) {
+            document.getElementById("confirmarTitulo").textContent = titulo;
+            document.getElementById("confirmarTexto").textContent = texto;
+
+            accionPendiente = accion;
+
+            document.getElementById("modalConfirmar").style.display = "flex";
+        }
+
+        function cerrarConfirmacion() {
+            document.getElementById("modalConfirmar").style.display = "none";
+            accionPendiente = null;
+        }
+
+        document.getElementById("btnConfirmarAccion").addEventListener("click", function() {
+            const accion = accionPendiente;
+
+            cerrarConfirmacion();
+
+            if (typeof accion === "function") accion();
+        });
+
+        document.getElementById("modalConfirmar").addEventListener("click", function(e) {
+            if (e.target === this) cerrarConfirmacion();
+        });
+
+        document.addEventListener("keydown", function(e) {
+            if (e.key === "Escape") {
+                cerrarConfirmacion();
+                cerrarEditor();
+            }
+        });
+
+        // ACTUALIZAR CUANDO CAMBIAN DATOS EN OTRA PESTAÑA
 
         window.addEventListener("storage", function(e) {
             if (e.key === CLAVE_RESENAS) {
@@ -1976,3 +2077,4 @@
 
 </body>
 </html>
+```

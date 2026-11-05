@@ -184,12 +184,6 @@
             font-size: 14px;
         }
 
-        .error {
-            background: #fee2e2;
-
-            color: #b91c1c;
-        }
-
         .success {
             background: #dcfce7;
 
@@ -308,34 +302,27 @@
 
 </head>
 
-
 <body>
 
-
     <div class="login-container">
-
 
         <div class="logo">
             Perforaciones <span>Palacios</span>
         </div>
 
-
         <div class="subtitle">
             Soluciones profesionales en perforación de pozos
         </div>
-
 
         <h1>
             Iniciar sesión
         </h1>
 
-
         <!-- =========================
              FORMULARIO LOGIN
         ========================= -->
 
-        <form id="loginForm">
-
+        <form id="loginForm" novalidate>
 
             <div class="form-group">
 
@@ -344,14 +331,12 @@
                 </label>
 
                 <input
-                    type="email"
+                    type="text"
                     id="email"
                     placeholder="ejemplo@correo.com"
-                    required
                 >
 
             </div>
-
 
             <div class="form-group">
 
@@ -363,11 +348,9 @@
                     type="password"
                     id="password"
                     placeholder="Ingresa tu contraseña"
-                    required
                 >
 
             </div>
-
 
             <button
                 type="submit"
@@ -376,16 +359,13 @@
                 Iniciar sesión
             </button>
 
-
         </form>
-
 
         <div
             id="message"
             class="message"
         >
         </div>
-
 
         <!-- =========================
              CREAR CUENTA
@@ -401,19 +381,16 @@
 
         </div>
 
-
         <!-- =========================
              ACCESO ADMINISTRADOR
-             SIN VERIFICACIÓN
         ========================= -->
 
         <a
             href="paneladmin.html"
             class="admin-access"
         >
-            ⚙️ Acceder al administrador
+             Acceder al administrador
         </a>
-
 
         <!-- =========================
              REGRESAR AL INICIO
@@ -423,16 +400,14 @@
             href="inicio.html"
             class="back"
         >
-            ← Regresar al inicio
+            Regresar al inicio
         </a>
-
 
     </div>
 
-
     <!-- =========================
          JAVASCRIPT
-         LOGIN SIMULADO
+         LOGIN SIMULADO SIN VALIDACIONES
     ========================= -->
 
     <script>
@@ -443,120 +418,43 @@
         const message =
             document.getElementById("message");
 
-
         form.addEventListener(
             "submit",
             function(event) {
 
                 event.preventDefault();
 
+                // Crear sesión sin comprobar los datos
+                localStorage.setItem(
+                    "sesionPalacios",
+                    "activa"
+                );
 
-                const email =
-                    document.getElementById("email").value;
+                // Mostrar mensaje
+                message.style.display = "block";
 
-                const password =
-                    document.getElementById("password").value;
+                message.className =
+                    "message success";
 
+                message.innerText =
+                    "Inicio de sesión correcto. Redirigiendo...";
 
-                /* =========================
-                   OBTENER USUARIO
-                   DEL LOCALSTORAGE
-                ========================= */
+                // Redirigir al perfil
+                setTimeout(
+                    function() {
 
-                const savedUser =
-                    localStorage.getItem(
-                        "usuarioPalacios"
-                    );
+                        window.location.href =
+                            "perfil.html";
 
-
-                /* =========================
-                   COMPROBAR SI EXISTE
-                ========================= */
-
-                if (!savedUser) {
-
-                    message.style.display =
-                        "block";
-
-                    message.className =
-                        "message error";
-
-                    message.innerText =
-                        "No existe un usuario registrado. Primero crea una cuenta.";
-
-                    return;
-                }
-
-
-                const user =
-                    JSON.parse(savedUser);
-
-
-                /* =========================
-                   VALIDAR DATOS
-                ========================= */
-
-                if (
-                    email === user.email &&
-                    password === user.password
-                ) {
-
-
-                    /* =========================
-                       CREAR SESIÓN SIMULADA
-                    ========================= */
-
-                    localStorage.setItem(
-                        "sesionPalacios",
-                        "activa"
-                    );
-
-
-                    message.style.display =
-                        "block";
-
-                    message.className =
-                        "message success";
-
-                    message.innerText =
-                        "Inicio de sesión correcto. Redirigiendo...";
-
-
-                    /* =========================
-                       IR AL PERFIL
-                    ========================= */
-
-                    setTimeout(
-                        function() {
-
-                            window.location.href =
-                                "perfil.html";
-
-                        },
-                        1200
-                    );
-
-
-                } else {
-
-                    message.style.display =
-                        "block";
-
-                    message.className =
-                        "message error";
-
-                    message.innerText =
-                        "Correo o contraseña incorrectos.";
-
-                }
+                    },
+                    1200
+                );
 
             }
         );
 
     </script>
 
-
 </body>
 
 </html>
-```

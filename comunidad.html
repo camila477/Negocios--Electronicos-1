@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -241,26 +242,11 @@
             margin-bottom: 6px;
         }
 
-        .resumen {
-            display: flex;
-            gap: 24px;
-            flex-wrap: wrap;
-            margin: 18px 0 24px;
-            padding: 16px;
-            background: #f0f9ff;
-            border-radius: 12px;
-        }
-
-        .resumen strong {
-            color: var(--azul);
-            font-size: 18px;
-        }
-
         .lista-comentarios {
             display: flex;
             flex-direction: column;
             gap: 14px;
-            margin-bottom: 28px;
+            margin: 24px 0 28px;
         }
 
         .comentario {
@@ -273,12 +259,6 @@
         .comentario h3 {
             font-size: 15px;
             color: var(--azul);
-            margin-bottom: 4px;
-        }
-
-        .estrellas {
-            color: #f59e0b;
-            font-size: 14px;
             margin-bottom: 8px;
         }
 
@@ -318,8 +298,7 @@
         }
 
         .form-group input,
-        .form-group textarea,
-        .form-group select {
+        .form-group textarea {
             width: 100%;
             padding: 11px 14px;
             border: 1px solid var(--borde);
@@ -360,6 +339,7 @@
             .producto-destacado {
                 grid-template-columns: 1fr;
             }
+
             .producto-info {
                 padding: 20px;
             }
@@ -376,6 +356,7 @@
             <span>Comunidad</span>
         </div>
     </a>
+
     <nav>
         <a href="inicio.html">Inicio</a>
         <a href="catalogo.html">Catálogo</a>
@@ -405,6 +386,7 @@
                 alt="Bomba sumergible de agua"
                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
             >
+
             <div class="sin-imagen" style="display:none;">
                 <p>Imagen del producto destacado</p>
                 <small>Agrega tu fotografía en imagenes/boma1.jpg</small>
@@ -415,26 +397,25 @@
             <span class="etiqueta" style="background:#e0f2fe;color:#183b4e;">
                 PRODUCTO DESTACADO
             </span>
+
             <h2>Bomba sumergible residencial</h2>
+
             <p>
                 Ideal para pozos domésticos. Buen caudal, bajo consumo
                 y fácil instalación. Comparte tu opinión en la comunidad.
             </p>
-            <button class="btn" id="btn-comprar" type="button">Me interesa</button>
+
+            <button class="btn" id="btn-comprar" type="button">
+                Me interesa
+            </button>
+
             <p id="mensaje-compra" class="mensaje" style="display:none;"></p>
         </div>
     </div>
 
     <section class="seccion-comentarios">
         <h2>Opiniones de la comunidad</h2>
-        <p id="total-comentarios">3 opiniones de demostración</p>
-
-        <div class="resumen">
-            <div>
-                <strong id="promedio-numero">4.7 / 5</strong>
-                <div id="promedio-estrellas">★★★★★</div>
-            </div>
-        </div>
+        <p id="total-comentarios">4 comentarios</p>
 
         <div class="lista-comentarios" id="lista-comentarios"></div>
 
@@ -443,31 +424,23 @@
 
             <div class="form-group">
                 <label for="nombre">Tu nombre</label>
-                <input id="nombre" type="text" maxlength="50" required placeholder="Ej. Ana L.">
-            </div>
-
-            <div class="form-group">
-                <label for="calificacion">Calificación</label>
-                <select id="calificacion" required>
-                    <option value="5">5 - Excelente</option>
-                    <option value="4">4 - Muy bueno</option>
-                    <option value="3">3 - Bueno</option>
-                    <option value="2">2 - Regular</option>
-                    <option value="1">1 - Malo</option>
-                </select>
+                <input
+                    id="nombre"
+                    type="text"
+                    placeholder="Ej. Ana L."
+                >
             </div>
 
             <div class="form-group">
                 <label for="comentario">Tu comentario</label>
                 <textarea
                     id="comentario"
-                    maxlength="500"
-                    required
-                    placeholder="Cuéntanos tu experiencia..."
+                    placeholder="Cuéntanos tu opinión..."
                 ></textarea>
             </div>
 
             <button class="btn" type="submit">Publicar comentario</button>
+
             <div class="mensaje" id="mensaje" role="status"></div>
         </form>
     </section>
@@ -489,22 +462,24 @@ const CLAVE_COMENTARIOS = "comentariosPalacios";
 
 const comentariosIniciales = [
     {
+        id: "demo-1",
         nombre: "Carlos M.",
-        calificacion: 5,
-        comentario: "Me pareció muy útil la información para conocer el producto.",
-        demostracion: true
+        comentario: "Me pareció muy útil la información para conocer el producto."
     },
     {
+        id: "demo-2",
         nombre: "María G.",
-        calificacion: 5,
-        comentario: "El diseño permite encontrar fácilmente la información.",
-        demostracion: true
+        comentario: "La página está muy bien organizada. Es fácil encontrar la información que necesito."
     },
     {
+        id: "demo-3",
         nombre: "José R.",
-        calificacion: 4,
-        comentario: "Me gustaría conocer más detalles sobre las características de la bomba.",
-        demostracion: true
+        comentario: "Me gustaría conocer más detalles sobre las características de la bomba."
+    },
+    {
+        id: "demo-4",
+        nombre: "Laura P.",
+        comentario: "Me parece una buena opción para quienes necesitan soluciones de agua en casa."
     }
 ];
 
@@ -519,14 +494,16 @@ let comentarios = [];
 
 function cargarComentarios() {
     try {
-        const guardados = JSON.parse(localStorage.getItem(CLAVE_COMENTARIOS) || "[]");
+        const guardados = JSON.parse(
+            localStorage.getItem(CLAVE_COMENTARIOS) || "[]"
+        );
+
         if (!Array.isArray(guardados)) return [];
 
         return guardados.map(c => ({
             id: c.id || ("com-" + Date.now() + Math.random()),
             autor: c.autor || c.nombre || "Usuario",
             texto: c.texto || c.comentario || "",
-            calificacion: Number(c.calificacion) || 5,
             fecha: c.fecha || "",
             origen: c.origen || "comunidad"
         }));
@@ -537,30 +514,42 @@ function cargarComentarios() {
 
 function migrarComentariosAnteriores() {
     try {
-        const anteriores = JSON.parse(localStorage.getItem("pp_comentarios_campana") || "[]");
-        let compartidos = JSON.parse(localStorage.getItem(CLAVE_COMENTARIOS) || "[]");
+        const anteriores = JSON.parse(
+            localStorage.getItem("pp_comentarios_campana") || "[]"
+        );
+
+        let compartidos = JSON.parse(
+            localStorage.getItem(CLAVE_COMENTARIOS) || "[]"
+        );
+
         if (!Array.isArray(anteriores) || !Array.isArray(compartidos)) return;
 
         let cambio = false;
+
         anteriores.forEach(c => {
             if (c.demostracion) return;
+
             const id = c.id || ("campana-" + Date.now() + Math.random());
             const existe = compartidos.some(x => x.id && x.id === id);
+
             if (!existe) {
                 compartidos.push({
                     id: id,
                     autor: c.autor || c.nombre || "Usuario",
                     texto: c.texto || c.comentario || "",
-                    calificacion: Number(c.calificacion) || 5,
                     fecha: c.fecha || "",
                     origen: "campana"
                 });
+
                 cambio = true;
             }
         });
 
         if (cambio) {
-            localStorage.setItem(CLAVE_COMENTARIOS, JSON.stringify(compartidos));
+            localStorage.setItem(
+                CLAVE_COMENTARIOS,
+                JSON.stringify(compartidos)
+            );
         }
     } catch (e) {
         console.error("No se pudieron migrar comentarios antiguos", e);
@@ -568,20 +557,29 @@ function migrarComentariosAnteriores() {
 }
 
 function guardarComentarios(listaComentarios) {
-    localStorage.setItem(CLAVE_COMENTARIOS, JSON.stringify(listaComentarios));
+    localStorage.setItem(
+        CLAVE_COMENTARIOS,
+        JSON.stringify(listaComentarios)
+    );
 }
 
 function mostrarMensaje(texto) {
     if (!mensaje) return;
+
     mensaje.textContent = texto;
     mensaje.style.display = "block";
-    setTimeout(() => { mensaje.style.display = "none"; }, 4000);
+
+    setTimeout(() => {
+        mensaje.style.display = "none";
+    }, 4000);
 }
 
 function mostrarComentarios() {
     if (!lista) return;
+
     lista.replaceChildren();
 
+    // Comentarios predeterminados de otros usuarios
     comentariosIniciales.forEach(c => {
         const tarjeta = document.createElement("article");
         tarjeta.className = "comentario";
@@ -589,21 +587,20 @@ function mostrarComentarios() {
         const encabezado = document.createElement("h3");
         encabezado.textContent = c.nombre;
 
-        const estrellas = document.createElement("div");
-        estrellas.className = "estrellas";
-        estrellas.textContent = "★".repeat(c.calificacion) + "☆".repeat(5 - c.calificacion);
-
         const texto = document.createElement("p");
         texto.textContent = c.comentario;
 
         const nota = document.createElement("small");
-        nota.textContent = "Reseña de ejemplo";
+        nota.textContent = "Comentario de la comunidad";
         nota.style.color = "#64748b";
+        nota.style.display = "block";
+        nota.style.marginTop = "8px";
 
-        tarjeta.append(encabezado, estrellas, texto, nota);
+        tarjeta.append(encabezado, texto, nota);
         lista.appendChild(tarjeta);
     });
 
+    // Comentarios publicados por los usuarios
     comentarios.forEach(c => {
         const tarjeta = document.createElement("article");
         tarjeta.className = "comentario";
@@ -611,15 +608,10 @@ function mostrarComentarios() {
         const encabezado = document.createElement("h3");
         encabezado.textContent = c.autor;
 
-        const estrellas = document.createElement("div");
-        estrellas.className = "estrellas";
-        const cal = Number(c.calificacion) || 5;
-        estrellas.textContent = "★".repeat(cal) + "☆".repeat(5 - cal);
-
         const texto = document.createElement("p");
         texto.textContent = c.texto;
 
-        tarjeta.append(encabezado, estrellas, texto);
+        tarjeta.append(encabezado, texto);
 
         if (c.fecha) {
             const fecha = document.createElement("small");
@@ -632,43 +624,25 @@ function mostrarComentarios() {
     });
 
     const cantidad = comentarios.length + comentariosIniciales.length;
+
     if (total) {
-        total.textContent = cantidad + (cantidad === 1 ? " reseña publicada" : " reseñas publicadas");
-    }
-
-    const todasCalif = [
-        ...comentariosIniciales.map(c => c.calificacion),
-        ...comentarios.map(c => Number(c.calificacion) || 5)
-    ];
-    const promedio = todasCalif.reduce((s, n) => s + n, 0) / (todasCalif.length || 1);
-
-    const promedioNumero = document.getElementById("promedio-numero");
-    const promedioEstrellas = document.getElementById("promedio-estrellas");
-    if (promedioNumero) promedioNumero.textContent = promedio.toFixed(1) + " / 5";
-    if (promedioEstrellas) {
-        const e = Math.round(promedio);
-        promedioEstrellas.textContent = "★".repeat(e) + "☆".repeat(5 - e);
+        total.textContent = cantidad +
+            (cantidad === 1 ? " comentario publicado" : " comentarios publicados");
     }
 }
 
+// Publicar comentarios sin validaciones
 if (formulario) {
     formulario.addEventListener("submit", function (evento) {
         evento.preventDefault();
 
         const nombre = document.getElementById("nombre").value.trim();
         const textoComentario = document.getElementById("comentario").value.trim();
-        const calificacion = Number(document.getElementById("calificacion").value) || 5;
-
-        if (!nombre || !textoComentario) {
-            mostrarMensaje("Escribe tu nombre y tu comentario.");
-            return;
-        }
 
         const nuevoComentario = {
             id: "comunidad-" + Date.now(),
-            autor: nombre,
+            autor: nombre || "Usuario",
             texto: textoComentario,
-            calificacion: calificacion,
             fecha: new Date().toLocaleDateString("es-MX", {
                 year: "numeric",
                 month: "long",
@@ -680,35 +654,48 @@ if (formulario) {
         };
 
         let todos = [];
+
         try {
-            todos = JSON.parse(localStorage.getItem(CLAVE_COMENTARIOS) || "[]");
+            todos = JSON.parse(
+                localStorage.getItem(CLAVE_COMENTARIOS) || "[]"
+            );
+
             if (!Array.isArray(todos)) todos = [];
         } catch (e) {
             todos = [];
         }
 
         todos.push(nuevoComentario);
+
         guardarComentarios(todos);
 
         comentarios = cargarComentarios();
         mostrarComentarios();
+
         formulario.reset();
 
-        mostrarMensaje("Tu reseña se publicó correctamente. También podrás verla y gestionarla en tu Perfil.");
+        mostrarMensaje(
+            "Tu comentario se publicó correctamente. También podrás verlo y gestionarlo en tu Perfil."
+        );
     });
 }
 
+// Botón de producto destacado
 if (botonComprar) {
     botonComprar.addEventListener("click", function () {
         if (mensajeCompra) {
             mensajeCompra.style.display = "block";
-            mensajeCompra.textContent = "Acción demostrativa: producto agregado al flujo de compra.";
+            mensajeCompra.textContent =
+                "Acción demostrativa: producto agregado al flujo de compra.";
         }
     });
 }
 
+// Inicialización
 migrarComentariosAnteriores();
+
 comentarios = cargarComentarios();
+
 mostrarComentarios();
 </script>
 
