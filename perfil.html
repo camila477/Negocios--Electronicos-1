@@ -1,10 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Mi Perfil | Perforaciones Palacios</title>
 
     <style>
@@ -15,9 +15,7 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             background: #f5f8fa;
@@ -62,9 +60,7 @@
             text-decoration: none;
         }
 
-        .logo span {
-            color: #0ea5e9;
-        }
+        .logo span { color: #0ea5e9; }
 
         .nav-links {
             display: flex;
@@ -80,9 +76,7 @@
             transition: 0.3s;
         }
 
-        .nav-links a:hover {
-            color: #0ea5e9;
-        }
+        .nav-links a:hover { color: #0ea5e9; }
 
         .nav-links a.active {
             color: #0ea5e9;
@@ -98,20 +92,14 @@
             cursor: pointer;
         }
 
-        .btn-logout-nav:hover {
-            background: #be123c;
-        }
+        .btn-logout-nav:hover { background: #be123c; }
 
         .header {
             padding: 140px 7% 50px;
             text-align: center;
             background:
-                linear-gradient(
-                    rgba(9,48,62,0.85),
-                    rgba(9,48,62,0.85)
-                ),
-                url("imagenes/imagenaforo.jpg")
-                center/cover no-repeat;
+                linear-gradient(rgba(9,48,62,0.85), rgba(9,48,62,0.85)),
+                url("imagenes/imagenaforo.jpg") center/cover no-repeat;
             color: white;
         }
 
@@ -120,9 +108,7 @@
             margin-bottom: 10px;
         }
 
-        .header h1 span {
-            color: #38bdf8;
-        }
+        .header h1 span { color: #38bdf8; }
 
         .header p {
             color: #dbeafe;
@@ -149,9 +135,7 @@
             height: fit-content;
         }
 
-        .card-full {
-            grid-column: 1 / -1;
-        }
+        .card-full { grid-column: 1 / -1; }
 
         .card-title {
             font-size: 20px;
@@ -170,9 +154,7 @@
             height: 24px;
         }
 
-        .form-group {
-            margin-bottom: 18px;
-        }
+        .form-group { margin-bottom: 18px; }
 
         .form-group label {
             display: block;
@@ -239,15 +221,14 @@
             padding: 12px;
             border-radius: 8px;
             background: #dcfce7;
-            color: #15803d;
+            color: #126284;
             font-size: 14px;
             text-align: center;
             font-weight: bold;
             border: 1px solid #bbf7d0;
         }
-                /* =========================
-           CARRITO / COTIZACIONES
-        ========================= */
+
+        /* CARRITO / COTIZACIONES */
 
         .cart-list {
             display: flex;
@@ -346,14 +327,36 @@
             box-shadow: 0 15px 40px rgba(0,0,0,.25);
         }
 
-        .editor-box h3 { color: #155e75; margin-bottom: 20px; }
-        .editor-buttons { display: flex; gap: 12px; margin-top: 18px; }
-        .editor-buttons button {
-            flex: 1; border: 0; border-radius: 8px; padding: 12px;
-            cursor: pointer; font-weight: bold;
+        .editor-box h3 {
+            color: #155e75;
+            margin-bottom: 20px;
         }
-        .btn-editor-cancel { background: #e2e8f0; color: #334155; }
-        .btn-editor-save { background: #155e75; color: white; }
+
+        .editor-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .editor-buttons button {
+            flex: 1;
+            border: 0;
+            border-radius: 8px;
+            padding: 12px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-editor-cancel {
+            background: #e2e8f0;
+            color: #334155;
+        }
+
+        .btn-editor-save {
+            background: #155e75;
+            color: white;
+        }
+
         .btn-editor-save:hover { background: #0ea5e9; }
 
         .btn-delete .icon-svg {
@@ -399,13 +402,9 @@
             transition: 0.3s;
         }
 
-        .btn-secondary:hover {
-            background: #bae6fd;
-        }
+        .btn-secondary:hover { background: #bae6fd; }
 
-        /* =========================
-           SECCIÓN DE PEDIDOS
-        ========================= */
+        /* PEDIDOS */
 
         .orders-list {
             display: flex;
@@ -489,13 +488,9 @@
             border-top: 1px dashed #cbd5e1;
         }
 
-        .order-total-amount {
-            color: #059669;
-        }
+        .order-total-amount { color: #059669; }
 
-        /* =========================
-           COMENTARIOS Y PRODUCTOS
-        ========================= */
+        /* COMENTARIOS Y PRODUCTOS */
 
         .comment-item,
         .product-item {
@@ -508,9 +503,7 @@
         }
 
         .comment-item:last-child,
-        .product-item:last-child {
-            margin-bottom: 0;
-        }
+        .product-item:last-child { margin-bottom: 0; }
 
         .comment-header,
         .product-header {
@@ -545,6 +538,7 @@
             font-size: 14px;
             color: #334155;
             line-height: 1.5;
+            white-space: pre-wrap;
         }
 
         .product-meta {
@@ -553,6 +547,7 @@
             margin-top: 8px;
             font-size: 13px;
             color: #64748b;
+            flex-wrap: wrap;
         }
 
         .empty-state {
@@ -568,15 +563,65 @@
             gap: 15px;
         }
 
-        @media (max-width: 600px) {
-            .form-row {
-                grid-template-columns: 1fr;
-            }
+        /* NUEVA SECCIÓN: MIS RESEÑAS */
+
+        .review-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 12px;
         }
 
-        /* =========================
-           TOAST NOTIFICATION
-        ========================= */
+        .review-item:last-child { margin-bottom: 0; }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .review-author {
+            font-size: 15px;
+            font-weight: bold;
+            color: #155e75;
+        }
+
+        .review-stars {
+            color: #f59e0b;
+            font-size: 17px;
+            letter-spacing: 2px;
+            margin-top: 4px;
+        }
+
+        .review-date {
+            color: #64748b;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .review-text {
+            font-size: 14px;
+            color: #334155;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            margin-top: 8px;
+        }
+
+        .review-origin {
+            display: inline-block;
+            margin-top: 10px;
+            color: #0284c7;
+            background: #e0f2fe;
+            padding: 5px 9px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        /* TOAST */
 
         .toast-notification {
             position: fixed;
@@ -604,9 +649,7 @@
             transform: translateY(0);
         }
 
-        /* =========================
-           MODAL CONFIRMAR SALIDA
-        ========================= */
+        /* MODAL CERRAR SESIÓN */
 
         .modal-overlay {
             position: fixed;
@@ -670,9 +713,7 @@
             cursor: pointer;
         }
 
-        /* =========================
-           FOOTER & RESPONSIVE
-        ========================= */
+        /* FOOTER Y RESPONSIVE */
 
         footer {
             background: #092c3a;
@@ -684,13 +725,9 @@
         }
 
         @media (max-width: 900px) {
-            .profile-container {
-                grid-template-columns: 1fr;
-            }
+            .profile-container { grid-template-columns: 1fr; }
 
-            .nav-links a:not(.btn-logout-nav) {
-                display: none;
-            }
+            .nav-links a:not(.btn-logout-nav) { display: none; }
 
             .toast-notification {
                 bottom: 20px;
@@ -700,44 +737,47 @@
                 justify-content: center;
             }
         }
+
+        @media (max-width: 600px) {
+            .form-row { grid-template-columns: 1fr; }
+
+            .card { padding: 22px; }
+
+            .review-header,
+            .comment-header,
+            .product-header {
+                flex-direction: column;
+            }
+
+            .item-actions { align-self: flex-end; }
+        }
     </style>
 </head>
 
 <body>
 
-    <!-- =========================
-         NAVBAR
-    ========================= -->
+    <!-- NAVBAR -->
 
     <nav>
-
         <a href="inicio.html" class="logo">
             Perforaciones <span>Palacios</span>
         </a>
 
         <div class="nav-links">
-
             <a href="inicio.html">Inicio</a>
             <a href="catalogo.html">Catálogo</a>
             <a href="inicio.html#nosotros">Nosotros</a>
             <a href="contacto.html">Contacto</a>
             <a href="perfil.html" class="active">Mi Perfil</a>
-
-            <a href="#" class="btn-logout-nav" onclick="abrirModalSalida()">
+            <a href="#" class="btn-logout-nav" onclick="abrirModalSalida(); return false;">
                 Cerrar sesión
             </a>
-
         </div>
-
     </nav>
 
-
-    <!-- =========================
-         HEADER
-    ========================= -->
+    <!-- HEADER -->
 
     <header class="header">
-
         <h1 id="saludoUsuario">
             ¡Hola, <span>Cargando...</span>!
         </h1>
@@ -745,27 +785,24 @@
         <p>
             Gestiona tu información personal, consulta tu carrito, revisa tus comentarios y sube productos.
         </p>
-
     </header>
 
-
-    <!-- =========================
-         CONTENIDO PRINCIPAL
-    ========================= -->
+    <!-- CONTENIDO PRINCIPAL -->
 
     <main class="profile-container">
 
-        <!-- TARJETA 1: EDICIÓN DE DATOS -->
+        <!-- TARJETA 1: DATOS PERSONALES -->
 
         <section class="card">
-
             <h2 class="card-title">
-                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                </svg>
                 Mis Datos Personales
             </h2>
 
             <form id="profileForm">
-
                 <div class="form-group">
                     <label for="name">Nombre completo</label>
                     <input type="text" id="name" placeholder="Tu nombre">
@@ -782,10 +819,13 @@
                 </div>
 
                 <button type="submit" class="btn-primary">
-                    <svg class="icon-svg" style="width:18px; height:18px;" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                    <svg class="icon-svg" style="width:18px;height:18px;" viewBox="0 0 24 24">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                        <polyline points="17 21 17 13 7 13 7 21"/>
+                        <polyline points="7 3 7 8 15 8"/>
+                    </svg>
                     Guardar cambios
                 </button>
-
             </form>
 
             <div id="alertaExito" class="mensaje-alerta">
@@ -793,116 +833,117 @@
             </div>
 
             <div class="actions-secondary">
-                <a href="inicio.html" class="btn-secondary">
-                    ← Ir al inicio
-                </a>
+                <a href="inicio.html" class="btn-secondary">← Ir al inicio</a>
             </div>
-
         </section>
-                <!-- TARJETA 2: CARRITO DE COTIZACIONES / SERVICIOS GUARDADOS -->
+
+        <!-- TARJETA 2: CARRITO -->
 
         <section class="card">
-
             <h2 class="card-title">
-                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <path d="M16 10a4 4 0 0 1-8 0"/>
+                </svg>
                 Servicios Guardados (Borrador)
             </h2>
 
-            <div id="cartList" class="cart-list">
-                <!-- Se llena dinámicamente con JS -->
-            </div>
+            <div id="cartList" class="cart-list"></div>
 
-            <div id="cartTotalContainer" class="cart-total" style="display: none;">
+            <div id="cartTotalContainer" class="cart-total" style="display:none;">
                 <span>Estimado total:</span>
                 <span id="cartTotal">$0.00 MXN</span>
             </div>
 
-            <button id="btnSolicitar" class="btn-primary" style="display: none;" onclick="solicitarCotizacion()">
-                <svg class="icon-svg" style="width:18px; height:18px;" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <button id="btnSolicitar" class="btn-primary" style="display:none;" onclick="solicitarCotizacion()">
+                <svg class="icon-svg" style="width:18px;height:18px;" viewBox="0 0 24 24">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                </svg>
                 Confirmar y solicitar cotización
             </button>
 
             <div id="emptyCartMessage" class="cart-empty">
                 No tienes elementos en tu carrito de cotizaciones.
                 <br><br>
-                <a href="catalogo.html" class="btn-secondary" style="display: inline-block;">
+                <a href="catalogo.html" class="btn-secondary" style="display:inline-block;">
                     Ver catálogo de servicios
                 </a>
             </div>
-
         </section>
 
-
-        <!-- TARJETA 3: MIS PEDIDOS / COTIZACIONES CONFIRMADAS -->
+        <!-- TARJETA 3: PEDIDOS -->
 
         <section class="card card-full">
-
             <h2 class="card-title">
-                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                    <line x1="16" y1="13" x2="8" y2="13"/>
+                    <line x1="16" y1="17" x2="8" y2="17"/>
+                    <polyline points="10 9 9 9 8 9"/>
+                </svg>
                 Mis Pedidos y Solicitudes Confirmadas
             </h2>
 
-            <div id="ordersList" class="orders-list">
-                <!-- Se llena dinámicamente mediante JS -->
-            </div>
+            <div id="ordersList" class="orders-list"></div>
 
-            <div id="emptyOrdersMessage" class="cart-empty" style="display: none;">
+            <div id="emptyOrdersMessage" class="cart-empty" style="display:none;">
                 Aún no has confirmado ninguna solicitud de cotización o pedido.
             </div>
-
         </section>
 
-
-        <!-- =========================
-             NUEVA TARJETA 4: MIS COMENTARIOS
-        ========================= -->
+        <!-- TARJETA 4: MIS COMENTARIOS -->
 
         <section class="card">
-
             <h2 class="card-title">
-                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
                 Mis Comentarios
             </h2>
 
-            <!-- Formulario para agregar comentario -->
             <form id="commentForm">
                 <div class="form-group">
                     <label for="commentText">Escribe un comentario</label>
                     <textarea id="commentText" placeholder="Comparte tu experiencia o deja un comentario..." required></textarea>
                 </div>
+
                 <button type="submit" class="btn-primary">
-                    <svg class="icon-svg" style="width:18px; height:18px;" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    <svg class="icon-svg" style="width:18px;height:18px;" viewBox="0 0 24 24">
+                        <line x1="22" y1="2" x2="11" y2="13"/>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                    </svg>
                     Publicar comentario
                 </button>
             </form>
 
-            <div style="margin-top: 25px; border-top: 1px solid #eef7fa; padding-top: 20px;">
-                <h3 style="font-size: 15px; color: #155e75; margin-bottom: 15px;">Comentarios publicados</h3>
+            <div style="margin-top:25px;border-top:1px solid #eef7fa;padding-top:20px;">
+                <h3 style="font-size:15px;color:#155e75;margin-bottom:15px;">
+                    Comentarios publicados
+                </h3>
 
-                <div id="commentsList">
-                    <!-- Se llena dinámicamente -->
-                </div>
+                <div id="commentsList"></div>
 
-                <div id="emptyCommentsMessage" class="empty-state" style="display: none;">
+                <div id="emptyCommentsMessage" class="empty-state" style="display:none;">
                     Aún no has publicado ningún comentario.
                 </div>
             </div>
-
         </section>
 
-
-        <!-- =========================
-             NUEVA TARJETA 5: SUBIR PRODUCTOS
-        ========================= -->
+        <!-- TARJETA 5: MIS PUBLICACIONES -->
 
         <section class="card">
-
             <h2 class="card-title">
-                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-                Subir Producto
+                <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4a2 2 0 0 0 1-1.73z"/>
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                    <line x1="12" y1="22.08" x2="12" y2="12"/>
+                </svg>
+                Mis Publicaciones
             </h2>
 
-            <!-- Formulario para subir producto -->
             <form id="productForm">
                 <div class="form-group">
                     <label for="productName">Nombre del producto</label>
@@ -914,6 +955,7 @@
                         <label for="productPrice">Precio (MXN)</label>
                         <input type="number" id="productPrice" placeholder="0.00" min="0" step="0.01" required>
                     </div>
+
                     <div class="form-group">
                         <label for="productCategory">Categoría</label>
                         <select id="productCategory" required>
@@ -933,83 +975,119 @@
                 </div>
 
                 <button type="submit" class="btn-primary">
-                    <svg class="icon-svg" style="width:18px; height:18px;" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    <svg class="icon-svg" style="width:18px;height:18px;" viewBox="0 0 24 24">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="17 8 12 3 7 8"/>
+                        <line x1="12" y1="3" x2="12" y2="15"/>
+                    </svg>
                     Subir producto
                 </button>
             </form>
 
-            <div style="margin-top: 25px; border-top: 1px solid #eef7fa; padding-top: 20px;">
-                <h3 style="font-size: 15px; color: #155e75; margin-bottom: 15px;">Mis productos subidos</h3>
+            <div style="margin-top:25px;border-top:1px solid #eef7fa;padding-top:20px;">
+                <h3 style="font-size:15px;color:#155e75;margin-bottom:15px;">
+                    Mis productos subidos
+                </h3>
 
-                <div id="productsList">
-                    <!-- Se llena dinámicamente -->
-                </div>
+                <div id="productsList"></div>
 
-                <div id="emptyProductsMessage" class="empty-state" style="display: none;">
+                <div id="emptyProductsMessage" class="empty-state" style="display:none;">
                     Aún no has subido ningún producto.
                 </div>
             </div>
+        </section>
 
+        <!-- TARJETA 6: MIS RESEÑAS -->
+
+        <section class="card card-full">
+            <h2 class="card-title">
+                <svg class="icon-svg" viewBox="0 0 24 24">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+                Mis Reseñas
+            </h2>
+
+            <p style="font-size:14px;color:#64748b;margin-bottom:20px;line-height:1.5;">
+                Aquí puedes consultar y administrar las reseñas publicadas en el apartado Escaparate.
+            </p>
+
+            <div id="reviewsList"></div>
+
+            <div id="emptyReviewsMessage" class="empty-state" style="display:none;">
+                Aún no hay reseñas publicadas en Escaparate.
+            </div>
         </section>
 
     </main>
 
+    <!-- MODAL PARA EDITAR -->
 
-    <!-- MODAL PARA EDITAR COMENTARIOS Y PRODUCTOS -->
     <div id="modalEditor" class="editor-overlay">
         <div class="editor-box">
             <h3 id="editorTitulo">Editar publicación</h3>
+
             <form id="editorForm">
                 <div id="editorCampos"></div>
+
                 <div class="editor-buttons">
-                    <button type="button" class="btn-editor-cancel" onclick="cerrarEditor()">Cancelar</button>
-                    <button type="submit" class="btn-editor-save">Guardar cambios</button>
+                    <button type="button" class="btn-editor-cancel" onclick="cerrarEditor()">
+                        Cancelar
+                    </button>
+
+                    <button type="submit" class="btn-editor-save">
+                        Guardar cambios
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- =========================
-         NOTIFICACIÓN TOAST
-    ========================= -->
+    <!-- NOTIFICACIÓN TOAST -->
 
     <div id="toast" class="toast-notification">
         <span id="toast-message"></span>
     </div>
 
-
-    <!-- =========================
-         MODAL CERRAR SESIÓN
-    ========================= -->
+    <!-- MODAL CERRAR SESIÓN -->
 
     <div id="modalSalida" class="modal-overlay">
         <div class="modal-box">
             <h3>Cerrar Sesión</h3>
             <p>¿Estás seguro de que deseas salir de tu cuenta?</p>
+
             <div class="modal-buttons">
-                <button class="btn-modal-cancel" onclick="cerrarModalSalida()">Cancelar</button>
-                <button class="btn-modal-confirm" onclick="cerrarSesion()">Sí, salir</button>
+                <button class="btn-modal-cancel" onclick="cerrarModalSalida()">
+                    Cancelar
+                </button>
+
+                <button class="btn-modal-confirm" onclick="cerrarSesion()">
+                    Sí, salir
+                </button>
             </div>
         </div>
     </div>
 
-
-    <!-- =========================
-         FOOTER
-    ========================= -->
+    <!-- FOOTER -->
 
     <footer>
         © 2026 Perforaciones Palacios | Todos los derechos reservados
     </footer>
 
-
-    <!-- =========================
-         JAVASCRIPT
-    ========================= -->
-
     <script>
 
+        // FUNCIONES GENERALES
+
+        function escaparHTML(texto) {
+            return String(texto ?? "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
         // 1. CARGAR DATOS DEL USUARIO
+
         const inputName = document.getElementById("name");
         const inputEmail = document.getElementById("email");
         const inputPhone = document.getElementById("phone");
@@ -1025,10 +1103,12 @@
             inputName.value = usuario.name || "";
             inputEmail.value = usuario.email || "";
             inputPhone.value = usuario.phone || "";
-            saludoUsuario.innerHTML = `¡Hola, <span>${(usuario.name || "Usuario").split(" ")[0]}</span>!`;
+
+            saludoUsuario.innerHTML = `¡Hola, <span>${escaparHTML((usuario.name || "Usuario").split(" ")[0])}</span>!`;
         }
 
         // 2. GUARDAR CAMBIOS DE PERFIL
+
         document.getElementById("profileForm").addEventListener("submit", function(e) {
             e.preventDefault();
 
@@ -1038,11 +1118,12 @@
 
             localStorage.setItem("usuarioPalacios", JSON.stringify(usuario));
 
-            saludoUsuario.innerHTML = `¡Hola, <span>${usuario.name.split(" ")[0]}</span>!`;
-                        mostrarToast("✓ ¡Tus datos personales se han guardado con éxito!");
+            cargarPerfil();
+            mostrarToast("✓ ¡Tus datos personales se han guardado con éxito!");
         });
 
-        // 3. LÓGICA DE CARRITO (SERVICIOS GUARDADOS)
+        // 3. LÓGICA DEL CARRITO
+
         let carrito = JSON.parse(localStorage.getItem("carritoPalacios")) || [];
 
         function renderizarCarrito() {
@@ -1068,17 +1149,25 @@
             let total = 0;
 
             carrito.forEach((item, index) => {
-                total += item.precio;
+                total += Number(item.precio) || 0;
+
                 html += `
                     <div class="cart-item">
                         <div class="cart-item-info">
-                            <h4>${item.servicio}</h4>
+                            <h4>${escaparHTML(item.servicio)}</h4>
                             <p>Servicio en cotización</p>
                         </div>
-                        <div style="display: flex; align-items: center;">
-                            <span class="cart-item-price">$${item.precio.toLocaleString('es-MX')} MXN</span>
+
+                        <div style="display:flex;align-items:center;">
+                            <span class="cart-item-price">
+                                $${(Number(item.precio) || 0).toLocaleString('es-MX')} MXN
+                            </span>
+
                             <button class="btn-delete" onclick="eliminarItem(${index})" title="Eliminar del borrador">
-                                <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                                <svg class="icon-svg" viewBox="0 0 24 24">
+                                    <polyline points="3 6 5 6 21 6"/>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                </svg>
                             </button>
                         </div>
                     </div>
@@ -1091,13 +1180,16 @@
 
         function eliminarItem(index) {
             const eliminado = carrito[index].servicio;
+
             carrito.splice(index, 1);
             localStorage.setItem("carritoPalacios", JSON.stringify(carrito));
+
             renderizarCarrito();
             mostrarToast(`Servicio "${eliminado}" eliminado.`);
         }
 
-        // 4. LÓGICA DE MIS PEDIDOS / HISTORIAL
+        // 4. LÓGICA DE PEDIDOS
+
         let pedidos = JSON.parse(localStorage.getItem("pedidosPalacios")) || [];
 
         function renderizarPedidos() {
@@ -1111,13 +1203,14 @@
             }
 
             emptyOrdersMessage.style.display = "none";
+
             let html = "";
 
             pedidos.slice().reverse().forEach(ped => {
-                let itemsList = ped.items.map(i => `
+                let itemsList = (ped.items || []).map(i => `
                     <li>
-                        <span>• ${i.servicio}</span>
-                        <span>$${i.precio.toLocaleString('es-MX')} MXN</span>
+                        <span>• ${escaparHTML(i.servicio)}</span>
+                        <span>$${(Number(i.precio) || 0).toLocaleString('es-MX')} MXN</span>
                     </li>
                 `).join("");
 
@@ -1125,12 +1218,12 @@
                     <div class="order-card">
                         <div class="order-header">
                             <div>
-                                <span class="order-id">Folio: #${ped.id}</span>
-                                <div class="order-date">Solicitado el ${ped.fecha}</div>
+                                <span class="order-id">Folio: #${escaparHTML(ped.id)}</span>
+                                <div class="order-date">Solicitado el ${escaparHTML(ped.fecha)}</div>
                             </div>
+
                             <span class="order-badge">
-                                <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                                ${ped.estado}
+                                ${escaparHTML(ped.estado)}
                             </span>
                         </div>
 
@@ -1140,7 +1233,9 @@
 
                         <div class="order-footer">
                             <span>Total Cotizado:</span>
-                            <span class="order-total-amount">$${ped.total.toLocaleString('es-MX')} MXN</span>
+                            <span class="order-total-amount">
+                                $${(Number(ped.total) || 0).toLocaleString('es-MX')} MXN
+                            </span>
                         </div>
                     </div>
                 `;
@@ -1152,7 +1247,8 @@
         function solicitarCotizacion() {
             if (carrito.length === 0) return;
 
-            let total = carrito.reduce((acc, curr) => acc + curr.precio, 0);
+            let total = carrito.reduce((acc, curr) => acc + (Number(curr.precio) || 0), 0);
+
             let fechaActual = new Date().toLocaleDateString('es-MX', {
                 year: 'numeric',
                 month: 'long',
@@ -1176,19 +1272,19 @@
             renderizarCarrito();
             renderizarPedidos();
 
-            mostrarToast("🎉 ¡Solicitud enviada! Se ha agregado a 'Mis Pedidos'.");
+            mostrarToast("🎉 ¡Solicitud enviada! Se ha agregado a Mis Pedidos.");
         }
 
-        // =========================
         // 5. LÓGICA DE COMENTARIOS
-        // Clave compartida con comunidad.html → comentariosPalacios
-        // =========================
+
         function cargarComentariosPerfil() {
             try {
                 const raw = JSON.parse(localStorage.getItem("comentariosPalacios")) || [];
+
                 if (!Array.isArray(raw)) return [];
-                return raw.map(c => ({
-                    id: c.id || ("com-" + Date.now()),
+
+                return raw.map((c, index) => ({
+                    id: c.id || ("com-" + index),
                     autor: c.autor || c.nombre || "Usuario",
                     texto: c.texto || c.comentario || "",
                     calificacion: Number(c.calificacion) || 5,
@@ -1215,10 +1311,12 @@
             }
 
             emptyMessage.style.display = "none";
+
             let html = "";
 
             comentarios.slice().reverse().forEach((com, index) => {
                 const realIndex = comentarios.length - 1 - index;
+
                 const origenLabel = (com.origen === "comunidad" || com.origen === "campana")
                     ? `<span style="font-size:11px;color:#0ea5e9;font-weight:600;"> · desde Comunidad</span>`
                     : "";
@@ -1227,17 +1325,27 @@
                     <div class="comment-item">
                         <div class="comment-header">
                             <div>
-                                <div class="comment-author">${com.autor}${origenLabel}</div>
-                                <div class="comment-date">${com.fecha}</div>
+                                <div class="comment-author">
+                                    ${escaparHTML(com.autor)}${origenLabel}
+                                </div>
+                                <div class="comment-date">${escaparHTML(com.fecha)}</div>
                             </div>
+
                             <div class="item-actions">
-                                <button class="btn-edit" onclick="editarComentario(${realIndex})" type="button">Editar</button>
+                                <button class="btn-edit" onclick="editarComentario(${realIndex})" type="button">
+                                    Editar
+                                </button>
+
                                 <button class="btn-delete" onclick="eliminarComentario(${realIndex})" title="Eliminar comentario" type="button">
-                                    <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                                    <svg class="icon-svg" viewBox="0 0 24 24">
+                                        <polyline points="3 6 5 6 21 6"/>
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                    </svg>
                                 </button>
                             </div>
                         </div>
-                        <div class="comment-text">${com.texto}</div>
+
+                        <div class="comment-text">${escaparHTML(com.texto)}</div>
                     </div>
                 `;
             });
@@ -1249,6 +1357,7 @@
             e.preventDefault();
 
             const texto = document.getElementById("commentText").value.trim();
+
             if (!texto) return;
 
             const fechaActual = new Date().toLocaleDateString('es-MX', {
@@ -1269,28 +1378,34 @@
             };
 
             comentarios.push(nuevoComentario);
+
             localStorage.setItem("comentariosPalacios", JSON.stringify(comentarios));
 
             document.getElementById("commentText").value = "";
+
             renderizarComentarios();
             mostrarToast("✓ ¡Comentario publicado correctamente!");
         });
 
         function eliminarComentario(index) {
-            if (!confirm("¿Estás seguro de que deseas eliminar este comentario?")) return;
+            if (index < 0 || index >= comentarios.length) return;
+
             comentarios.splice(index, 1);
+
             localStorage.setItem("comentariosPalacios", JSON.stringify(comentarios));
+
             renderizarComentarios();
-            mostrarToast("Comentario eliminado.");
+            mostrarToast("Comentario eliminado correctamente.");
         }
 
-        // =========================
         // 6. LÓGICA DE PRODUCTOS
-        // =========================
+
         function cargarProductosPerfil() {
             try {
                 const raw = JSON.parse(localStorage.getItem("productosPalacios")) || [];
+
                 if (!Array.isArray(raw)) return [];
+
                 return raw.map(p => ({
                     id: p.id || "",
                     nombre: p.nombre || "Producto",
@@ -1322,29 +1437,44 @@
             }
 
             emptyMessage.style.display = "none";
+
             let html = "";
 
             productos.slice().reverse().forEach((prod, index) => {
                 const realIndex = productos.length - 1 - index;
+
                 html += `
                     <div class="product-item">
                         <div class="product-header">
                             <div>
-                                <div class="product-name">${prod.nombre}</div>
-                                <div class="product-price">$${Number(prod.precio).toLocaleString('es-MX')} MXN</div>
+                                <div class="product-name">${escaparHTML(prod.nombre)}</div>
+                                <div class="product-price">
+                                    $${Number(prod.precio).toLocaleString('es-MX')} MXN
+                                </div>
                             </div>
+
                             <div class="item-actions">
-                                <button class="btn-edit" onclick="editarProducto(${realIndex})" type="button">Editar</button>
+                                <button class="btn-edit" onclick="editarProducto(${realIndex})" type="button">
+                                    Editar
+                                </button>
+
                                 <button class="btn-delete" onclick="eliminarProducto(${realIndex})" title="Eliminar producto" type="button">
-                                    <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                                    <svg class="icon-svg" viewBox="0 0 24 24">
+                                        <polyline points="3 6 5 6 21 6"/>
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                    </svg>
                                 </button>
                             </div>
                         </div>
-                        <div class="product-desc">${prod.descripcion}</div>
+
+                        <div class="product-desc">${escaparHTML(prod.descripcion)}</div>
+
                         <div class="product-meta">
-                            <span>📂 ${prod.categoria}</span>
-                            <span>📅 ${prod.fecha}</span>
-                            ${prod.origen === "comunidad" || (prod.id && String(prod.id).indexOf("admin") === -1 && prod.autor) ? `<span style="color:#7c3aed;font-weight:600;">🔨 desde Subasta/C2C</span>` : ""}
+                            <span>📂 ${escaparHTML(prod.categoria)}</span>
+                            <span>📅 ${escaparHTML(prod.fecha)}</span>
+                            ${prod.origen === "comunidad" || (prod.id && String(prod.id).indexOf("admin") === -1 && prod.autor)
+                                ? `<span style="color:#7c3aed;font-weight:600;">🔨 desde Subasta/C2C</span>`
+                                : ""}
                         </div>
                     </div>
                 `;
@@ -1373,6 +1503,7 @@
             });
 
             const idNuevo = "perfil-" + Date.now();
+
             const nuevoProducto = {
                 id: idNuevo,
                 nombre: nombre,
@@ -1386,24 +1517,31 @@
             };
 
             productos.push(nuevoProducto);
+
             localStorage.setItem("productosPalacios", JSON.stringify(productos));
 
             document.getElementById("productForm").reset();
+
             renderizarProductos();
             mostrarToast("✓ ¡Producto subido correctamente!");
         });
 
         function sincronizarBorradoEnSubasta(producto) {
             if (!producto) return;
+
             try {
                 const clave = "pp_subastas_v1";
                 let subastas = JSON.parse(localStorage.getItem(clave) || "[]");
+
                 if (!Array.isArray(subastas)) return;
 
                 const antes = subastas.length;
+
                 subastas = subastas.filter(s => {
                     if (producto.id && s.id && String(s.id) === String(producto.id)) return false;
+
                     if (s.nombre === producto.nombre && (s.vendedor === producto.autor || s.mia)) return false;
+
                     return true;
                 });
 
@@ -1417,111 +1555,342 @@
 
         function eliminarProducto(index) {
             const producto = productos[index];
+
+            if (!producto) return;
+
             const eliminado = producto.nombre;
+
             if (!confirm(`¿Estás seguro de que deseas eliminar "${eliminado}"?`)) return;
 
             sincronizarBorradoEnSubasta(producto);
 
             productos.splice(index, 1);
+
             localStorage.setItem("productosPalacios", JSON.stringify(productos));
+
             renderizarProductos();
             mostrarToast(`Producto "${eliminado}" eliminado (también se quitó de Subastas si estaba ahí).`);
         }
 
-        // EDITAR COMENTARIOS Y PRODUCTOS DESDE EL PERFIL
+        // 7. LÓGICA DE MIS RESEÑAS
+        // Clave compartida con escaparate.html:
+        // pp_resenas_escaparate
+
+        const CLAVE_RESENAS = "pp_resenas_escaparate";
+
+        function cargarResenasPerfil() {
+            try {
+                const raw = JSON.parse(localStorage.getItem(CLAVE_RESENAS)) || [];
+
+                if (!Array.isArray(raw)) return [];
+
+                return raw.map((r, index) => ({
+                    ...r,
+                    id: r.id || ("resena-" + index),
+                    nombre: r.nombre || r.autor || "Usuario",
+                    calificacion: Math.min(5, Math.max(1, Number(r.calificacion) || 5)),
+                    comentario: r.comentario || r.texto || "",
+                    fecha: r.fecha || ""
+                }));
+            } catch (e) {
+                return [];
+            }
+        }
+
+        let resenas = cargarResenasPerfil();
+
+        function guardarResenasPerfil() {
+            localStorage.setItem(CLAVE_RESENAS, JSON.stringify(resenas));
+        }
+
+        function renderizarResenasPerfil() {
+            resenas = cargarResenasPerfil();
+
+            const container = document.getElementById("reviewsList");
+            const emptyMessage = document.getElementById("emptyReviewsMessage");
+
+            if (resenas.length === 0) {
+                container.innerHTML = "";
+                emptyMessage.style.display = "block";
+                return;
+            }
+
+            emptyMessage.style.display = "none";
+
+            let html = "";
+
+            resenas.slice().reverse().forEach((resena, index) => {
+                const realIndex = resenas.length - 1 - index;
+
+                const estrellas = "★".repeat(resena.calificacion) +
+                    "☆".repeat(5 - resena.calificacion);
+
+                html += `
+                    <div class="review-item">
+                        <div class="review-header">
+                            <div>
+                                <div class="review-author">
+                                    ${escaparHTML(resena.nombre)}
+                                </div>
+
+                                <div class="review-stars">
+                                    ${estrellas}
+                                </div>
+
+                                <div class="review-date">
+                                    ${resena.fecha
+                                        ? escaparHTML(resena.fecha)
+                                        : "Fecha no disponible"}
+                                </div>
+                            </div>
+
+                            <div class="item-actions">
+                                <button class="btn-edit" type="button" onclick="editarResena(${realIndex})">
+                                    Editar
+                                </button>
+
+                                <button class="btn-delete" type="button" onclick="eliminarResena(${realIndex})" title="Eliminar reseña">
+                                    <svg class="icon-svg" viewBox="0 0 24 24">
+                                        <polyline points="3 6 5 6 21 6"/>
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="review-text">
+                            ${escaparHTML(resena.comentario)}
+                        </div>
+
+                        <span class="review-origin">
+                            Publicada desde Escaparate
+                        </span>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function editarResena(index) {
+            if (!resenas[index]) return;
+
+            abrirEditor("resena", index);
+        }
+
+        function eliminarResena(index) {
+            if (!resenas[index]) return;
+
+            const nombre = resenas[index].nombre;
+
+            if (!confirm(`¿Estás seguro de que deseas eliminar la reseña de "${nombre}"?`)) {
+                return;
+            }
+
+            resenas.splice(index, 1);
+
+            guardarResenasPerfil();
+            renderizarResenasPerfil();
+
+            mostrarToast("Reseña eliminada correctamente.");
+        }
+
+        // 8. EDITAR COMENTARIOS, PRODUCTOS Y RESEÑAS
+
         let tipoEdicion = "";
         let indiceEdicion = -1;
 
         function abrirEditor(tipo, index) {
             tipoEdicion = tipo;
             indiceEdicion = index;
+
             const campos = document.getElementById("editorCampos");
             campos.innerHTML = "";
 
             if (tipo === "comentario") {
                 const com = comentarios[index];
+
+                if (!com) return;
+
                 document.getElementById("editorTitulo").textContent = "Editar comentario";
+
                 campos.innerHTML = `
                     <div class="form-group">
                         <label for="editAutor">Nombre</label>
-                        <input id="editAutor" type="text" maxlength="80" value="${String(com.autor || "").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;")}" required>
+                        <input id="editAutor" type="text" maxlength="80"
+                            value="${escaparHTML(com.autor)}" required>
                     </div>
+
                     <div class="form-group">
                         <label for="editTexto">Comentario</label>
-                        <textarea id="editTexto" maxlength="1000" required>${String(com.texto || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}</textarea>
-                    </div>`;
-            } else {
+                        <textarea id="editTexto" maxlength="1000" required>${escaparHTML(com.texto)}</textarea>
+                    </div>
+                `;
+
+            } else if (tipo === "resena") {
+                const resena = resenas[index];
+
+                if (!resena) return;
+
+                document.getElementById("editorTitulo").textContent = "Editar reseña";
+
+                campos.innerHTML = `
+                    <div class="form-group">
+                        <label for="editResenaNombre">Nombre</label>
+                        <input id="editResenaNombre" type="text" maxlength="80"
+                            value="${escaparHTML(resena.nombre)}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editResenaCalificacion">Calificación</label>
+                        <select id="editResenaCalificacion" required>
+                            <option value="5" ${resena.calificacion === 5 ? "selected" : ""}>5 estrellas</option>
+                            <option value="4" ${resena.calificacion === 4 ? "selected" : ""}>4 estrellas</option>
+                            <option value="3" ${resena.calificacion === 3 ? "selected" : ""}>3 estrellas</option>
+                            <option value="2" ${resena.calificacion === 2 ? "selected" : ""}>2 estrellas</option>
+                            <option value="1" ${resena.calificacion === 1 ? "selected" : ""}>1 estrella</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editResenaComentario">Reseña</label>
+                        <textarea id="editResenaComentario" maxlength="1000" required>${escaparHTML(resena.comentario)}</textarea>
+                    </div>
+                `;
+
+            } else if (tipo === "producto") {
                 const prod = productos[index];
+
+                if (!prod) return;
+
                 document.getElementById("editorTitulo").textContent = "Editar producto";
+
                 campos.innerHTML = `
                     <div class="form-group">
                         <label for="editNombre">Nombre del producto</label>
-                        <input id="editNombre" type="text" maxlength="120" value="${String(prod.nombre || "").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;")}" required>
+                        <input id="editNombre" type="text" maxlength="120"
+                            value="${escaparHTML(prod.nombre)}" required>
                     </div>
+
                     <div class="form-row">
                         <div class="form-group">
                             <label for="editPrecio">Precio (MXN)</label>
-                            <input id="editPrecio" type="number" min="0" step="0.01" value="${Number(prod.precio) || 0}" required>
+                            <input id="editPrecio" type="number" min="0" step="0.01"
+                                value="${Number(prod.precio) || 0}" required>
                         </div>
+
                         <div class="form-group">
                             <label for="editCategoria">Categoría</label>
                             <select id="editCategoria" required>
-                                ${["Bombas","Tubería","Herramientas","Accesorios","Otros"].map(c => `<option value="${c}" ${prod.categoria === c ? "selected" : ""}>${c}</option>`).join("")}
+                                ${["Bombas","Tubería","Herramientas","Accesorios","Otros"].map(c =>
+                                    `<option value="${c}" ${prod.categoria === c ? "selected" : ""}>${c}</option>`
+                                ).join("")}
                             </select>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label for="editDescripcion">Descripción</label>
-                        <textarea id="editDescripcion" maxlength="1000" required>${String(prod.descripcion || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}</textarea>
-                    </div>`;
+                        <textarea id="editDescripcion" maxlength="1000" required>${escaparHTML(prod.descripcion)}</textarea>
+                    </div>
+                `;
             }
 
             document.getElementById("modalEditor").style.display = "flex";
         }
 
-        function editarComentario(index) { abrirEditor("comentario", index); }
-        function editarProducto(index) { abrirEditor("producto", index); }
+        function editarComentario(index) {
+            abrirEditor("comentario", index);
+        }
+
+        function editarProducto(index) {
+            abrirEditor("producto", index);
+        }
 
         function cerrarEditor() {
             document.getElementById("modalEditor").style.display = "none";
             document.getElementById("editorForm").reset();
+
             tipoEdicion = "";
             indiceEdicion = -1;
         }
 
         document.getElementById("editorForm").addEventListener("submit", function(e) {
             e.preventDefault();
+
             if (indiceEdicion < 0) return;
+
+            // GUARDAR COMENTARIO
 
             if (tipoEdicion === "comentario") {
                 const autor = document.getElementById("editAutor").value.trim();
                 const texto = document.getElementById("editTexto").value.trim();
+
                 if (!autor || !texto) return;
+
                 comentarios[indiceEdicion].autor = autor;
                 comentarios[indiceEdicion].texto = texto;
+
                 localStorage.setItem("comentariosPalacios", JSON.stringify(comentarios));
+
                 renderizarComentarios();
+
                 mostrarToast("Comentario actualizado correctamente.");
-            } else if (tipoEdicion === "producto") {
+            }
+
+            // GUARDAR RESEÑA
+
+            else if (tipoEdicion === "resena") {
+                const nombre = document.getElementById("editResenaNombre").value.trim();
+                const calificacion = Number(document.getElementById("editResenaCalificacion").value);
+                const comentario = document.getElementById("editResenaComentario").value.trim();
+
+                if (!nombre || !comentario || !Number.isInteger(calificacion) || calificacion < 1 || calificacion > 5) {
+                    mostrarToast("Completa correctamente los datos de la reseña.");
+                    return;
+                }
+
+                resenas[indiceEdicion].nombre = nombre;
+                resenas[indiceEdicion].calificacion = calificacion;
+                resenas[indiceEdicion].comentario = comentario;
+
+                guardarResenasPerfil();
+                renderizarResenasPerfil();
+
+                mostrarToast("Reseña actualizada correctamente.");
+            }
+
+            // GUARDAR PRODUCTO
+
+            else if (tipoEdicion === "producto") {
                 const nombre = document.getElementById("editNombre").value.trim();
                 const precio = Number(document.getElementById("editPrecio").value);
                 const categoria = document.getElementById("editCategoria").value;
                 const descripcion = document.getElementById("editDescripcion").value.trim();
+
                 if (!nombre || !Number.isFinite(precio) || precio < 0 || !categoria || !descripcion) return;
+
                 productos[indiceEdicion].nombre = nombre;
                 productos[indiceEdicion].precio = precio;
                 productos[indiceEdicion].categoria = categoria;
                 productos[indiceEdicion].descripcion = descripcion;
+
                 localStorage.setItem("productosPalacios", JSON.stringify(productos));
+
+                // SINCRONIZAR CAMBIOS CON SUBASTAS
 
                 try {
                     const prod = productos[indiceEdicion];
+
                     let subastas = JSON.parse(localStorage.getItem("pp_subastas_v1") || "[]");
+
                     if (Array.isArray(subastas)) {
                         let cambio = false;
+
                         subastas = subastas.map(s => {
                             if (prod.id && s.id && String(s.id) === String(prod.id)) {
                                 cambio = true;
+
                                 return {
                                     ...s,
                                     nombre: nombre,
@@ -1531,22 +1900,28 @@
                                     descripcion: descripcion
                                 };
                             }
+
                             return s;
                         });
-                        if (cambio) localStorage.setItem("pp_subastas_v1", JSON.stringify(subastas));
+
+                        if (cambio) {
+                            localStorage.setItem("pp_subastas_v1", JSON.stringify(subastas));
+                        }
                     }
                 } catch (e) {
                     console.error("No se pudo sincronizar edición con subasta", e);
                 }
 
                 renderizarProductos();
+
                 mostrarToast("Producto actualizado (también en Subastas si aplica).");
             }
 
             cerrarEditor();
         });
 
-        // 7. NOTIFICACIONES Y MODALES
+        // 9. NOTIFICACIONES Y MODALES
+
         function mostrarToast(mensaje) {
             const toast = document.getElementById("toast");
             const toastMessage = document.getElementById("toast-message");
@@ -1572,15 +1947,32 @@
             window.location.href = "inicio.html";
         }
 
+        // ACTUALIZAR RESEÑAS SI CAMBIAN EN OTRA PESTAÑA
+
+        window.addEventListener("storage", function(e) {
+            if (e.key === CLAVE_RESENAS) {
+                renderizarResenasPerfil();
+            }
+
+            if (e.key === "comentariosPalacios") {
+                renderizarComentarios();
+            }
+
+            if (e.key === "productosPalacios") {
+                renderizarProductos();
+            }
+        });
+
         // INICIALIZACIÓN
+
         cargarPerfil();
         renderizarCarrito();
         renderizarPedidos();
         renderizarComentarios();
         renderizarProductos();
+        renderizarResenasPerfil();
 
     </script>
 
 </body>
-
 </html>

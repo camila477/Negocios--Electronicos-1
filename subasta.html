@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -30,25 +29,30 @@ body {
     line-height:1.6;
 }
 
+/* MENÚ SUPERIOR */
+
 header {
-    background:var(--azul);
+    background:linear-gradient(135deg,#183b4e,#24566d);
     color:white;
     padding:20px 7%;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:18px;
+    gap:20px;
     flex-wrap:wrap;
+    box-shadow:0 3px 12px #183b4e25;
 }
 
 .logo {
-    font-size:20px;
+    font-size:21px;
     font-weight:bold;
+    letter-spacing:1px;
 }
 
 nav {
     display:flex;
-    gap:20px;
+    align-items:center;
+    gap:8px;
     flex-wrap:wrap;
 }
 
@@ -56,14 +60,25 @@ nav a {
     color:white;
     text-decoration:none;
     font-size:14px;
+    font-weight:bold;
+    padding:9px 13px;
+    border-radius:7px;
+    background:transparent;
+    transition:.25s;
 }
 
-nav a:hover,
+nav a:hover {
+    background:rgba(255,255,255,.12);
+    color:var(--hover);
+}
+
 nav a.activo {
-    color:var(--claro);
+    background:transparent;
+    color:white;
+    box-shadow:none;
 }
 
-/* PORTADA CON IMAGEN DE FONDO */
+/* PORTADA */
 
 .hero {
     min-height:350px;
@@ -71,11 +86,9 @@ nav a.activo {
     background:
         linear-gradient(rgba(24,59,78,.65),rgba(24,59,78,.65)),
         url("imagenes/imagenaforo.jpg");
-
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
-
     color:white;
     display:flex;
     flex-direction:column;
@@ -163,18 +176,29 @@ main {
 }
 
 .btn.comprar {
-    background:#7cc881;
+    background:#5dc0eb;
     color:white;
 }
 
 .btn.comprar:hover {
-    background:#15803d;
+    background:#1d76ba;
+}
+
+.btn.eliminar {
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.btn.eliminar:hover {
+    background:#fecaca;
 }
 
 .btn:disabled {
     opacity:.5;
     cursor:not-allowed;
 }
+
+/* ESTADÍSTICAS */
 
 .estadisticas {
     display:grid;
@@ -200,6 +224,8 @@ main {
     font-size:13px;
     color:#64748b;
 }
+
+/* FORMULARIO */
 
 .formulario {
     display:none;
@@ -283,6 +309,8 @@ main {
     color:#991b1b;
 }
 
+/* FILTROS */
+
 .filtros {
     display:flex;
     gap:10px;
@@ -294,6 +322,8 @@ main {
     width:auto;
     min-width:190px;
 }
+
+/* PRODUCTOS */
 
 .productos {
     display:grid;
@@ -376,6 +406,8 @@ main {
     color:var(--azul);
 }
 
+/* TEMPORIZADOR */
+
 .temporizador {
     background:#fef3c7;
     border:1px solid #fcd34d;
@@ -447,7 +479,8 @@ main {
     font-size:12px;
 }
 
-.seccion-admin-publica {
+.seccion-admin-publica,
+.seccion-ofertas {
     margin-top:50px;
     padding-top:30px;
     border-top:2px solid var(--borde);
@@ -458,6 +491,56 @@ main {
     font-size:13px;
     margin:5px 0 20px;
 }
+
+/* OFERTAS REALIZADAS */
+
+.lista-ofertas {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:15px;
+    margin-top:20px;
+}
+
+.tarjeta-oferta {
+    background:white;
+    border:1px solid var(--borde);
+    border-radius:12px;
+    padding:18px;
+    box-shadow:0 4px 15px #183b4e0a;
+}
+
+.tarjeta-oferta h3 {
+    color:var(--azul);
+    font-size:17px;
+    margin-bottom:8px;
+}
+
+.tarjeta-oferta p {
+    font-size:13px;
+    color:#64748b;
+    margin:5px 0;
+    overflow-wrap:anywhere;
+}
+
+.tarjeta-oferta .monto-oferta {
+    color:var(--azul);
+    font-size:23px;
+    font-weight:bold;
+    margin:10px 0;
+}
+
+.acciones-oferta {
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:14px;
+}
+
+.acciones-oferta .btn {
+    flex:1;
+}
+
+/* MODALES */
 
 .modal {
     display:none;
@@ -498,6 +581,39 @@ main {
     margin:15px 0;
 }
 
+/* NOTIFICACIÓN */
+
+.notificacion {
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    z-index:2000;
+    background:#166534;
+    color:white;
+    padding:16px 22px;
+    border-radius:10px;
+    box-shadow:0 5px 20px #00000025;
+    font-size:14px;
+    font-weight:bold;
+    max-width:calc(100% - 40px);
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(20px);
+    transition:opacity .3s,transform .3s,visibility .3s;
+}
+
+.notificacion.visible {
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+}
+
+.notificacion.error {
+    background:#991b1b;
+}
+
+/* PIE DE PÁGINA */
+
 footer {
     background:var(--azul);
     color:white;
@@ -505,6 +621,8 @@ footer {
     padding:25px;
     font-size:13px;
 }
+
+/* RESPONSIVE */
 
 @media(max-width:900px) {
     .productos {
@@ -516,15 +634,27 @@ footer {
     header {
         justify-content:center;
         text-align:center;
+        padding:18px 5%;
+    }
+
+    .logo {
+        width:100%;
     }
 
     nav {
         justify-content:center;
+        gap:5px;
+    }
+
+    nav a {
+        font-size:13px;
+        padding:8px 10px;
     }
 
     .productos,
     .estadisticas,
-    .form-grid {
+    .form-grid,
+    .lista-ofertas {
         grid-template-columns:1fr;
     }
 
@@ -557,6 +687,14 @@ footer {
     .hero p {
         font-size:16px;
     }
+
+    .notificacion {
+        right:15px;
+        bottom:15px;
+        left:15px;
+        text-align:center;
+        max-width:none;
+    }
 }
 </style>
 </head>
@@ -569,19 +707,17 @@ footer {
     <nav>
         <a href="inicio.html">Inicio</a>
         <a href="catalogo.html">Catálogo</a>
-        <a href="campana.html">Campaña</a>
+        <a href="comunidad.html">Comunidad</a>
         <a href="subastas.html" class="activo">Subastas</a>
         <a href="contacto.html">Contacto</a>
     </nav>
 </header>
 
-<!-- PORTADA -->
-
 <section class="hero">
 
     <span class="etiqueta">COMUNIDAD · COMPRA Y OFERTA</span>
 
-    <h1>Subastas de la comunidad</h1>
+    <h1>Subastas y Productos</h1>
 
     <p>
         Publica productos, descubre publicaciones de otros usuarios
@@ -718,13 +854,36 @@ footer {
 
     <section class="seccion-admin-publica">
 
-        <h2 class="seccion-titulo">Subastas destacadas del administrador</h2>
+        <h2 class="seccion-titulo">Subastas destacadas</h2>
 
         <p class="descripcion-seccion">
             Subastas oficiales con temporizador. Solo se muestran las que están activas.
         </p>
 
         <section class="productos" id="lista-subastas-admin"></section>
+
+    </section>
+
+    <!-- OFERTAS REALIZADAS -->
+
+    <section class="seccion-ofertas">
+
+        <h2 class="seccion-titulo">Ofertas realizadas</h2>
+
+        <p class="descripcion-seccion">
+            Aquí puedes consultar, editar o eliminar las ofertas que se han realizado en las subastas.
+        </p>
+
+        <div class="estadisticas">
+            <div class="estadistica">
+                <strong id="total-ofertas-registradas">0</strong>
+                <span>Ofertas registradas</span>
+            </div>
+        </div>
+
+        <section class="lista-ofertas" id="lista-ofertas">
+            <div class="vacio">Todavía no hay ofertas registradas.</div>
+        </section>
 
     </section>
 
@@ -816,6 +975,45 @@ footer {
     </div>
 </div>
 
+<!-- MODAL EDITAR OFERTA -->
+
+<div class="modal" id="modal-editar-oferta" role="dialog" aria-modal="true" aria-labelledby="titulo-editar-oferta">
+
+    <div class="modal-contenido">
+
+        <h2 id="titulo-editar-oferta">Editar oferta</h2>
+
+        <form id="form-editar-oferta">
+
+            <div class="campo">
+                <label for="editar-usuario-oferta">Nombre del usuario</label>
+                <input id="editar-usuario-oferta" maxlength="50" required>
+            </div>
+
+            <div class="campo">
+                <label for="editar-monto-oferta">Monto de la oferta (MXN)</label>
+                <input id="editar-monto-oferta" type="number" min="1" step="1" required>
+            </div>
+
+            <div class="acciones-formulario">
+                <button class="btn" type="submit">Guardar cambios</button>
+                <button class="btn secundario" type="button" data-cerrar="modal-editar-oferta">
+                    Cancelar
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- NOTIFICACIÓN -->
+
+<div class="notificacion" id="notificacion" role="status" aria-live="polite">
+    <span id="texto-notificacion"></span>
+</div>
+
 <footer>
     <strong>Perforaciones Palacios</strong>
     <p>Subastas de la comunidad</p>
@@ -827,6 +1025,18 @@ const CLAVE_SUBASTAS = "pp_subastas_v1";
 const CLAVE_PUJAS = "pp_subastas_pujas_v1";
 const CLAVE_ADMIN_PANEL = "pp_subastas";
 const CLAVE_PRODUCTOS_PERFIL = "productosPalacios";
+const CLAVE_OFERTAS = "pp_ofertas_subastas_v1";
+
+const $ = id => document.getElementById(id);
+
+let subastas = [];
+let contadorPujas = cargarPujas();
+let ofertasRealizadas = [];
+let idActual = null;
+let idOfertaEditando = null;
+let tiempoNotificacion;
+
+/* EJEMPLOS DE PRODUCTOS */
 
 const ejemplos = [
     {
@@ -921,11 +1131,22 @@ const ejemplos = [
     }
 ];
 
-const $ = id => document.getElementById(id);
+/* NOTIFICACIONES */
 
-let subastas = [];
-let contadorPujas = cargarPujas();
-let idActual = null;
+function mostrarNotificacion(texto, error = false) {
+    const notificacion = $("notificacion");
+
+    $("texto-notificacion").textContent = texto;
+
+    notificacion.classList.toggle("error", error);
+    notificacion.classList.add("visible");
+
+    clearTimeout(tiempoNotificacion);
+
+    tiempoNotificacion = setTimeout(() => {
+        notificacion.classList.remove("visible");
+    }, 3500);
+}
 
 /* CARGAR SUBASTAS DEL ADMINISTRADOR */
 
@@ -950,11 +1171,11 @@ function cargarSubastasDelPanelAdmin() {
                 precioInicial:Number(s.precioInicial) || 0,
                 precioActual:Number(s.precioActual) || Number(s.precioInicial) || 0,
                 imagen:"",
-                pujas:0,
+                pujas:Number(s.pujas) || 0,
                 mia:false,
                 ejemplo:false,
                 origen:"admin",
-                historial:[],
+                historial:Array.isArray(s.historial) ? s.historial : [],
                 fechaFin:s.fechaFin || "",
                 vieneDelPanel:true
             }));
@@ -1010,7 +1231,7 @@ function cargarSubastas() {
     return [...delPanel, ...sinDuplicados];
 }
 
-/* GUARDAR SUBASTAS */
+/* GUARDAR SUBASTAS DE LA COMUNIDAD */
 
 function guardarSubastas() {
     try {
@@ -1024,9 +1245,49 @@ function guardarSubastas() {
         return true;
 
     } catch (error) {
+        console.error("No se pudieron guardar las subastas.", error);
         return false;
     }
 }
+
+/* GUARDAR OFERTAS DE SUBASTAS DEL ADMINISTRADOR */
+
+function guardarOfertaAdmin(producto) {
+    try {
+        const datos = localStorage.getItem(CLAVE_ADMIN_PANEL);
+
+        if (!datos) return false;
+
+        const lista = JSON.parse(datos);
+
+        if (!Array.isArray(lista)) return false;
+
+        const idOriginal = String(producto.id).replace("admin-panel-", "");
+
+        const indice = lista.findIndex(
+            s => String(s.id) === idOriginal
+        );
+
+        if (indice === -1) return false;
+
+        lista[indice].precioActual = producto.precioActual;
+        lista[indice].pujas = producto.pujas;
+        lista[indice].historial = producto.historial;
+
+        localStorage.setItem(
+            CLAVE_ADMIN_PANEL,
+            JSON.stringify(lista)
+        );
+
+        return true;
+
+    } catch (error) {
+        console.error("No se pudo guardar la oferta del administrador.", error);
+        return false;
+    }
+}
+
+/* CONTADOR DE OFERTAS Y ACCIONES */
 
 function cargarPujas() {
     try {
@@ -1043,6 +1304,39 @@ function guardarPujas() {
         console.error("No se pudieron guardar las pujas.");
     }
 }
+
+/* CARGAR Y GUARDAR OFERTAS REALIZADAS */
+
+function cargarOfertasRealizadas() {
+    try {
+        const datos = JSON.parse(
+            localStorage.getItem(CLAVE_OFERTAS) || "[]"
+        );
+
+        return Array.isArray(datos) ? datos : [];
+
+    } catch (error) {
+        console.error("No se pudieron cargar las ofertas.", error);
+        return [];
+    }
+}
+
+function guardarOfertasRealizadas() {
+    try {
+        localStorage.setItem(
+            CLAVE_OFERTAS,
+            JSON.stringify(ofertasRealizadas)
+        );
+
+        return true;
+
+    } catch (error) {
+        console.error("No se pudieron guardar las ofertas.", error);
+        return false;
+    }
+}
+
+/* FUNCIONES GENERALES */
 
 function formatoPrecio(precio) {
     return new Intl.NumberFormat("es-MX", {
@@ -1092,6 +1386,8 @@ function abrirModal(id) {
 function cerrarModal(id) {
     $(id).classList.remove("visible");
 }
+
+/* CERRAR MODALES */
 
 document.querySelectorAll("[data-cerrar]").forEach(boton => {
     boton.addEventListener("click", () => {
@@ -1169,7 +1465,7 @@ function actualizarTemporizadores() {
     });
 }
 
-/* CREAR TARJETAS */
+/* CREAR TARJETAS DE PRODUCTOS */
 
 function crearTarjeta(producto) {
     const tarjeta = crearTexto("article", "producto", "");
@@ -1313,7 +1609,7 @@ function crearTarjeta(producto) {
     return tarjeta;
 }
 
-/* MOSTRAR LISTAS */
+/* MOSTRAR LISTAS DE PRODUCTOS */
 
 function mostrarSubastas() {
     const listaComunidad = $("lista-productos");
@@ -1458,7 +1754,7 @@ function mostrarDetalles(producto) {
     abrirModal("modal-detalles");
 }
 
-/* OFERTAR */
+/* ABRIR FORMULARIO DE OFERTA */
 
 function abrirPuja(id) {
     const producto = subastas.find(p => p.id === id);
@@ -1469,7 +1765,7 @@ function abrirPuja(id) {
         const resultado = calcularTiempoRestante(producto.fechaFin);
 
         if (resultado && resultado.finalizada) {
-            alert("Esta subasta ya ha finalizado.");
+            mostrarNotificacion("Esta subasta ya ha finalizado.", true);
             return;
         }
     }
@@ -1492,15 +1788,15 @@ function abrirPuja(id) {
     abrirModal("modal-puja");
 }
 
+/* REGISTRAR OFERTA */
+
 $("form-puja").addEventListener("submit", evento => {
     evento.preventDefault();
 
     const producto = subastas.find(p => p.id === idActual);
 
-    if (!producto || producto.vieneDelPanel) {
-        $("minimo-puja").textContent =
-            "Esta subasta se gestiona desde el Panel de Administrador.";
-
+    if (!producto) {
+        mostrarNotificacion("No se encontró la subasta.", true);
         return;
     }
 
@@ -1516,30 +1812,90 @@ $("form-puja").addEventListener("submit", evento => {
         return;
     }
 
+    const precioAnterior = producto.precioActual;
+    const pujasAnteriores = producto.pujas;
+    const historialAnterior = [...producto.historial];
+
+    const nuevaOfertaId = "oferta-" + Date.now() + "-" +
+        Math.random().toString(36).slice(2, 8);
+
+    const fechaOferta = new Date().toISOString();
+
     producto.precioActual = monto;
     producto.pujas++;
 
     producto.historial.push({
+        ofertaId:nuevaOfertaId,
         usuario,
         monto,
-        fecha:new Date().toISOString()
+        fecha:fechaOferta
     });
 
-    contadorPujas++;
+    let guardado = false;
 
-    if (!guardarSubastas()) {
-        contadorPujas--;
+    if (producto.vieneDelPanel) {
+        guardado = guardarOfertaAdmin(producto);
+    } else {
+        guardado = guardarSubastas();
+    }
 
-        $("minimo-puja").textContent =
-            "No se pudo guardar la oferta.";
+    if (!guardado) {
+        producto.precioActual = precioAnterior;
+        producto.pujas = pujasAnteriores;
+        producto.historial = historialAnterior;
+
+        mostrarNotificacion(
+            "No se pudo guardar la oferta. Inténtalo nuevamente.",
+            true
+        );
 
         return;
     }
 
+    /* REGISTRAR OFERTA EN EL APARTADO */
+
+    ofertasRealizadas.push({
+        id:nuevaOfertaId,
+        productoId:producto.id,
+        producto:producto.nombre,
+        usuario:usuario,
+        monto:monto,
+        fecha:new Date(fechaOferta).toLocaleString("es-MX")
+    });
+
+    if (!guardarOfertasRealizadas()) {
+
+        ofertasRealizadas = ofertasRealizadas.filter(
+            o => o.id !== nuevaOfertaId
+        );
+
+        producto.precioActual = precioAnterior;
+        producto.pujas = pujasAnteriores;
+        producto.historial = historialAnterior;
+
+        if (producto.vieneDelPanel) {
+            guardarOfertaAdmin(producto);
+        } else {
+            guardarSubastas();
+        }
+
+        mostrarNotificacion(
+            "No se pudo guardar el registro de la oferta.",
+            true
+        );
+
+        return;
+    }
+
+    contadorPujas++;
     guardarPujas();
 
     cerrarModal("modal-puja");
+
     mostrarSubastas();
+    mostrarOfertasRealizadas();
+
+    mostrarNotificacion("¡Tu oferta se realizó correctamente!");
 });
 
 /* COMPRAR */
@@ -1578,15 +1934,9 @@ $("form-compra").addEventListener("submit", evento => {
 
     cerrarModal("modal-compra");
 
-    alert(
-        "¡Gracias " + nombre +
-        "! Tu solicitud de compra de \"" +
-        producto.nombre +
-        "\" ha sido registrada.\n\n" +
-        "El vendedor se pondrá en contacto contigo al " +
-        telefono +
-        ".\n\n" +
-        "(Esta es una demostración, no se realiza ningún pago real)"
+    mostrarNotificacion(
+        "¡Gracias " + nombre + "! Tu solicitud de compra de " +
+        producto.nombre + " ha sido registrada."
     );
 
     mostrarSubastas();
@@ -1671,8 +2021,12 @@ $("form-subasta").addEventListener("submit", evento => {
 
     try {
         let productosPerfil = JSON.parse(
-            localStorage.getItem(CLAVE_PRODUCTOS_PERFIL)
-        ) || [];
+            localStorage.getItem(CLAVE_PRODUCTOS_PERFIL) || "[]"
+        );
+
+        if (!Array.isArray(productosPerfil)) {
+            productosPerfil = [];
+        }
 
         productosPerfil.unshift({
             id:idNuevo,
@@ -1709,6 +2063,271 @@ $("form-subasta").addEventListener("submit", evento => {
     });
 });
 
+/* MOSTRAR OFERTAS REALIZADAS */
+
+function mostrarOfertasRealizadas() {
+    const lista = $("lista-ofertas");
+
+    lista.replaceChildren();
+
+    $("total-ofertas-registradas").textContent =
+        ofertasRealizadas.length;
+
+    if (ofertasRealizadas.length === 0) {
+        lista.appendChild(
+            crearTexto(
+                "div",
+                "vacio",
+                "Todavía no hay ofertas registradas."
+            )
+        );
+
+        return;
+    }
+
+    ofertasRealizadas
+        .slice()
+        .reverse()
+        .forEach(oferta => {
+
+            const tarjeta = crearTexto("article", "tarjeta-oferta", "");
+
+            tarjeta.appendChild(
+                crearTexto("h3", "", oferta.producto)
+            );
+
+            tarjeta.append(
+                crearTexto("p", "", "Usuario: " + oferta.usuario),
+                crearTexto("p", "", "Fecha: " + oferta.fecha)
+            );
+
+            tarjeta.appendChild(
+                crearTexto(
+                    "div",
+                    "monto-oferta",
+                    formatoPrecio(oferta.monto)
+                )
+            );
+
+            const acciones = crearTexto("div", "acciones-oferta", "");
+
+            const editar = crearTexto("button", "btn secundario", "Editar");
+
+            editar.type = "button";
+
+            editar.addEventListener("click", () => {
+                abrirEdicionOferta(oferta.id);
+            });
+
+            const eliminar = crearTexto("button", "btn eliminar", "Eliminar");
+
+            eliminar.type = "button";
+
+            eliminar.addEventListener("click", () => {
+                eliminarOferta(oferta.id);
+            });
+
+            acciones.append(editar, eliminar);
+
+            tarjeta.appendChild(acciones);
+
+            lista.appendChild(tarjeta);
+        });
+}
+
+/* ABRIR EDICIÓN DE OFERTA */
+
+function abrirEdicionOferta(id) {
+    const oferta = ofertasRealizadas.find(o => o.id === id);
+
+    if (!oferta) {
+        mostrarNotificacion("No se encontró la oferta.", true);
+        return;
+    }
+
+    idOfertaEditando = id;
+
+    $("editar-usuario-oferta").value = oferta.usuario;
+    $("editar-monto-oferta").value = oferta.monto;
+
+    abrirModal("modal-editar-oferta");
+}
+
+/* ACTUALIZAR PRECIO DE LA SUBASTA */
+
+function actualizarSubastaDesdeOfertas(productoId) {
+    const producto = subastas.find(p => p.id === productoId);
+
+    if (!producto) return false;
+
+    const historial = producto.historial || [];
+
+    const mayorOferta = historial.reduce((mayor, oferta) => {
+        return Math.max(mayor, Number(oferta.monto) || 0);
+    }, Number(producto.precioInicial) || 0);
+
+    producto.precioActual = mayorOferta;
+    producto.pujas = historial.length;
+
+    if (producto.vieneDelPanel) {
+        return guardarOfertaAdmin(producto);
+    }
+
+    return guardarSubastas();
+}
+
+/* EDITAR OFERTA */
+
+$("form-editar-oferta").addEventListener("submit", evento => {
+    evento.preventDefault();
+
+    const oferta = ofertasRealizadas.find(
+        o => o.id === idOfertaEditando
+    );
+
+    if (!oferta) {
+        mostrarNotificacion("No se encontró la oferta.", true);
+        return;
+    }
+
+    const usuarioNuevo = $("editar-usuario-oferta").value.trim();
+    const montoNuevo = Number($("editar-monto-oferta").value);
+
+    if (
+        !usuarioNuevo ||
+        !Number.isFinite(montoNuevo) ||
+        montoNuevo <= 0
+    ) {
+        mostrarNotificacion("Verifica los datos de la oferta.", true);
+        return;
+    }
+
+    const producto = subastas.find(
+        p => p.id === oferta.productoId
+    );
+
+    if (!producto) {
+        mostrarNotificacion("No se encontró la subasta relacionada.", true);
+        return;
+    }
+
+    const historial = producto.historial || [];
+
+    const registro = historial.find(
+        h => h.ofertaId === oferta.id
+    );
+
+    if (!registro) {
+        mostrarNotificacion(
+            "No se encontró esta oferta dentro del historial.",
+            true
+        );
+        return;
+    }
+
+    const usuarioAnterior = oferta.usuario;
+    const montoAnterior = oferta.monto;
+    const usuarioHistorialAnterior = registro.usuario;
+    const montoHistorialAnterior = registro.monto;
+
+    oferta.usuario = usuarioNuevo;
+    oferta.monto = montoNuevo;
+
+    registro.usuario = usuarioNuevo;
+    registro.monto = montoNuevo;
+
+    if (!actualizarSubastaDesdeOfertas(producto.id)) {
+
+        oferta.usuario = usuarioAnterior;
+        oferta.monto = montoAnterior;
+
+        registro.usuario = usuarioHistorialAnterior;
+        registro.monto = montoHistorialAnterior;
+
+        mostrarNotificacion(
+            "No se pudieron guardar los cambios.",
+            true
+        );
+
+        return;
+    }
+
+    if (!guardarOfertasRealizadas()) {
+        mostrarNotificacion(
+            "La oferta se actualizó, pero no se pudo guardar el registro.",
+            true
+        );
+    } else {
+        mostrarNotificacion("La oferta se actualizó correctamente.");
+    }
+
+    cerrarModal("modal-editar-oferta");
+
+    mostrarOfertasRealizadas();
+    mostrarSubastas();
+});
+
+/* ELIMINAR OFERTA */
+
+function eliminarOferta(id) {
+    const indice = ofertasRealizadas.findIndex(
+        o => o.id === id
+    );
+
+    if (indice === -1) {
+        mostrarNotificacion("No se encontró la oferta.", true);
+        return;
+    }
+
+    const oferta = ofertasRealizadas[indice];
+
+    const producto = subastas.find(
+        p => p.id === oferta.productoId
+    );
+
+    if (!producto) {
+        mostrarNotificacion("No se encontró la subasta relacionada.", true);
+        return;
+    }
+
+    const historialAnterior = [...producto.historial];
+
+    producto.historial = producto.historial.filter(
+        h => h.ofertaId !== id
+    );
+
+    if (!actualizarSubastaDesdeOfertas(producto.id)) {
+        producto.historial = historialAnterior;
+
+        mostrarNotificacion(
+            "No se pudo eliminar la oferta.",
+            true
+        );
+
+        return;
+    }
+
+    ofertasRealizadas.splice(indice, 1);
+
+    if (!guardarOfertasRealizadas()) {
+        ofertasRealizadas.splice(indice, 0, oferta);
+        producto.historial = historialAnterior;
+        actualizarSubastaDesdeOfertas(producto.id);
+
+        mostrarNotificacion(
+            "No se pudo guardar la eliminación.",
+            true
+        );
+
+        return;
+    }
+
+    mostrarOfertasRealizadas();
+    mostrarSubastas();
+
+    mostrarNotificacion("La oferta se eliminó correctamente.");
+}
+
 /* FILTROS */
 
 $("buscar").addEventListener("input", mostrarSubastas);
@@ -1721,7 +2340,11 @@ $("filtro-publicaciones").addEventListener("change", mostrarSubastas);
 
 subastas = cargarSubastas();
 
+ofertasRealizadas = cargarOfertasRealizadas();
+
 mostrarSubastas();
+
+mostrarOfertasRealizadas();
 
 setInterval(actualizarTemporizadores, 1000);
 
