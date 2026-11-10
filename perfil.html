@@ -765,8 +765,14 @@
             <a href="inicio.html">Inicio</a>
             <a href="catalogo.html">Catálogo</a>
             <a href="inicio.html#nosotros">Nosotros</a>
+            <a href="comunidad.html">Comunidad</a>
+            <a href="subasta.html">Subasta</a>
+             <a href="escaparate.html">Escaparate</a>
+
+
             <a href="contacto.html">Contacto</a>
             <a href="perfil.html" class="active">Mi Perfil</a>
+
             <a href="#" class="btn-logout-nav" onclick="abrirModalSalida(); return false;">
                 Cerrar sesión
             </a>
@@ -1312,23 +1318,24 @@
         // 5. COMENTARIOS SIN VALIDACIONES
 
         function cargarComentariosPerfil() {
-            try {
-                const raw = JSON.parse(localStorage.getItem("comentariosPalacios")) || [];
+    try {
+        const raw = JSON.parse(localStorage.getItem("comentariosPalacios")) || [];
+        if (!Array.isArray(raw)) return [];
 
-                if (!Array.isArray(raw)) return [];
-
-                return raw.map((c, index) => ({
-                    id: c.id || ("com-" + index),
-                    autor: c.autor || c.nombre || "Usuario",
-                    texto: c.texto ?? c.comentario ?? "",
-                    calificacion: Number(c.calificacion) || 5,
-                    fecha: c.fecha || "",
-                    origen: c.origen || "perfil"
-                }));
-            } catch (e) {
-                return [];
-            }
-        }
+        return raw
+            .map((c, index) => ({
+                id: c.id || ("com-" + index),
+                autor: c.autor || c.nombre || "Usuario",
+                texto: c.texto ?? c.comentario ?? "",
+                calificacion: Number(c.calificacion) || 5,
+                fecha: c.fecha || "",
+                origen: c.origen || "perfil"
+            }))
+            .filter(c => c.origen === "perfil");   // ← solo los del perfil
+    } catch (e) {
+        return [];
+    }
+}
 
         let comentarios = cargarComentariosPerfil();
 
@@ -1513,44 +1520,71 @@
 
             container.innerHTML = html;
         }
+document.getElementById("productForm").addEventListener("submit", function(e) {
+    e.preventDefault();
 
-        document.getElementById("productForm").addEventListener("submit", function(e) {
-            e.preventDefault();
+    const nombre = document.getElementById("productName").value.trim();
+    const precio = Number(document.getElementById("productPrice").value) || 0;
+    const categoria = document.getElementById("productCategory").value;
+    const descripcion = document.getElementById("productDesc").value.trim();
 
-            const nombre = document.getElementById("productName").value.trim();
-            const precio = Number(document.getElementById("productPrice").value) || 0;
-            const categoria = document.getElementById("productCategory").value;
-            const descripcion = document.getElementById("productDesc").value.trim();
+    const fechaActual = new Date().toLocaleDateString('es-MX', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
 
-            const fechaActual = new Date().toLocaleDateString('es-MX', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
+    const idNuevo = "perfil-" + Date.now();
 
-            const idNuevo = "perfil-" + Date.now();
+    const nuevoProducto = {
+        id: idNuevo,
+        nombre: nombre,
+        precio: precio,
+        categoria: categoria,
+        descripcion: descripcion,
+        fecha: fechaActual,
+        autor: usuario.name || "Usuario",
+        origen: "perfil",
+        imagen: ""
+    };
 
-            const nuevoProducto = {
-                id: idNuevo,
-                nombre: nombre,
-                precio: precio,
-                categoria: categoria,
-                descripcion: descripcion,
-                fecha: fechaActual,
-                autor: usuario.name || "Usuario",
-                origen: "perfil",
-                imagen: ""
-            };
+    // 1. Guardar en el perfil
+    productos.push(nuevoProducto);
+    localStorage.setItem("productosPalacios", JSON.stringify(productos));
 
-            productos.push(nuevoProducto);
+    // 2. También guardar en Subastas
+    try {
+        let subastas = JSON.parse(localStorage.getItem("pp_subastas_v1") || "[]");
+        if (!Array.isArray(subastas)) subastas = [];
 
-            localStorage.setItem("productosPalacios", JSON.stringify(productos));
-
-            document.getElementById("productForm").reset();
-
-            renderizarProductos();
-            mostrarToast("✓ ¡Producto subido correctamente!");
+        subastas.unshift({
+            id: idNuevo,
+            nombre: nombre,
+            categoria: categoria || "Otros",
+            vendedor: usuario.name || "Usuario",
+            descripcion: descripcion,
+            precioInicial: precio,
+            precioActual: precio,
+            imagen: "",
+            pujas: 0,
+            mia: true,
+            ejemplo: false,
+            origen: "comunidad",
+            historial: [],
+            vieneDelPanel: false
         });
+
+        localStorage.setItem("pp_subastas_v1", JSON.stringify(subastas));
+    } catch (err) {
+        console.error("No se pudo sincronizar con Subastas", err);
+    }
+
+    document.getElementById("productForm").reset();
+    renderizarProductos();
+    mostrarToast("✓ ¡Producto subido correctamente!");
+});
+
+           
 
         function sincronizarBorradoEnSubasta(producto) {
             if (!producto) return;
@@ -1603,170 +1637,241 @@
         }
 
         // 7. RESEÑAS SIN VALIDACIONES
+// 7. RESEÑAS SIN VALIDACIONES
 
-        const CLAVE_RESENAS = "pp_resenas_escaparate";
+const CLAVE_RESENAS = "pp_resenas_escaparate";
 
-        function cargarResenasPerfil() {
-            try {
-                const raw = JSON.parse(localStorage.getItem(CLAVE_RESENAS)) || [];
+// CARGAR TODAS LAS RESEÑAS SIN PERDER SU ORIGEN
 
-                if (!Array.isArray(raw)) return [];
+function obtenerTodasResenas() {
+    try {
+        let todas = JSON.parse(localStorage.getItem(CLAVE_RESENAS) || "[]");
 
-                return raw.map((r, index) => ({
-                    ...r,
-                    id: r.id || ("resena-" + index),
-                    nombre: r.nombre ?? r.autor ?? "Usuario",
-                    calificacion: Number(r.calificacion) || 0,
-                    comentario: r.comentario ?? r.texto ?? "",
-                    fecha: r.fecha || ""
-                }));
-            } catch (e) {
-                return [];
-            }
-        }
+        if (!Array.isArray(todas)) todas = [];
 
-        let resenas = cargarResenasPerfil();
+        todas = todas.map((r, index) => {
+            const id = r.id || (
+                r.origen === "perfil" ||
+                String(r.id || "").startsWith("resena-perfil")
+                    ? "resena-perfil-" + index
+                    : "resena-escaparate-" + index
+            );
 
-        function guardarResenasPerfil() {
-            localStorage.setItem(CLAVE_RESENAS, JSON.stringify(resenas));
-        }
-
-        // PUBLICAR RESEÑA SIN COMPROBAR CAMPOS
-
-        document.getElementById("reviewForm").addEventListener("submit", function(e) {
-            e.preventDefault();
-
-            const nombre = document.getElementById("reviewName").value.trim();
-            const calificacion = Number(document.getElementById("reviewRating").value) || 0;
-            const comentario = document.getElementById("reviewComment").value.trim();
-
-            const fechaActual = new Date().toLocaleDateString("es-MX", {
-                year: "numeric",
-                month: "long",
-                day: "numeric"
-            });
-
-            const nuevaResena = {
-                id: "resena-perfil-" + Date.now(),
-                nombre: nombre,
-                calificacion: calificacion,
-                comentario: comentario,
-                fecha: fechaActual,
-                origen: "perfil"
+            return {
+                ...r,
+                id: id,
+                nombre: r.nombre ?? r.autor ?? "Usuario",
+                calificacion: Number(r.calificacion) || 0,
+                comentario: r.comentario ?? r.texto ?? "",
+                fecha: r.fecha || "",
+                origen: r.origen || (
+                    String(id).startsWith("resena-perfil")
+                        ? "perfil"
+                        : "escaparate"
+                )
             };
+        });
 
-            resenas.push(nuevaResena);
+        // Guardar los identificadores y orígenes normalizados
+        localStorage.setItem(CLAVE_RESENAS, JSON.stringify(todas));
 
+        return todas;
+
+    } catch (e) {
+        console.error("Error al cargar reseñas:", e);
+        return [];
+    }
+}
+
+// CARGAR SOLAMENTE LAS RESEÑAS DEL PERFIL
+
+function cargarResenasPerfil() {
+    return obtenerTodasResenas().filter(r => r.origen === "perfil");
+}
+
+let resenas = cargarResenasPerfil();
+
+// GUARDAR SIN BORRAR LAS RESEÑAS DE ESCAPARATE
+
+function guardarResenasPerfil() {
+
+    const todas = obtenerTodasResenas();
+
+    // Conservar todas las reseñas que no pertenecen al perfil
+    const otrasResenas = todas.filter(r => r.origen !== "perfil");
+
+    // Combinar las reseñas conservadas con las del perfil
+    const resultado = [
+        ...otrasResenas,
+        ...resenas
+    ];
+
+    localStorage.setItem(CLAVE_RESENAS, JSON.stringify(resultado));
+}
+
+// PUBLICAR RESEÑA
+
+document.getElementById("reviewForm").addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    const nombre = document.getElementById("reviewName").value.trim();
+    const calificacion = Number(document.getElementById("reviewRating").value) || 0;
+    const comentario = document.getElementById("reviewComment").value.trim();
+
+    const fechaActual = new Date().toLocaleDateString("es-MX", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    });
+
+    const nuevaResena = {
+        id: "resena-perfil-" + Date.now(),
+        nombre: nombre,
+        calificacion: calificacion,
+        comentario: comentario,
+        fecha: fechaActual,
+        origen: "perfil"
+    };
+
+    resenas = cargarResenasPerfil();
+    resenas.push(nuevaResena);
+
+    guardarResenasPerfil();
+
+    document.getElementById("reviewForm").reset();
+    document.getElementById("reviewName").value = usuario.name || "";
+
+    renderizarResenasPerfil();
+
+    mostrarToast("¡Tu reseña se publicó correctamente!");
+});
+
+// MOSTRAR RESEÑAS
+
+function renderizarResenasPerfil() {
+
+    resenas = cargarResenasPerfil();
+
+    const container = document.getElementById("reviewsList");
+    const emptyMessage = document.getElementById("emptyReviewsMessage");
+
+    if (resenas.length === 0) {
+        container.innerHTML = "";
+        emptyMessage.style.display = "block";
+        return;
+    }
+
+    emptyMessage.style.display = "none";
+
+    let html = "";
+
+    resenas.slice().reverse().forEach((resena, index) => {
+
+        const realIndex = resenas.length - 1 - index;
+
+        const estrellas = "★".repeat(resena.calificacion) +
+            "☆".repeat(5 - resena.calificacion);
+
+        const origenTexto = resena.origen === "perfil"
+            ? "Publicada desde Mi Perfil"
+            : "Publicada desde Escaparate";
+
+        html += `
+            <div class="review-item">
+
+                <div class="review-header">
+
+                    <div>
+                        <div class="review-author">
+                            ${escaparHTML(resena.nombre)}
+                        </div>
+
+                        <div class="review-stars">
+                            ${estrellas}
+                        </div>
+
+                        <div class="review-date">
+                            ${resena.fecha
+                                ? escaparHTML(resena.fecha)
+                                : "Fecha no disponible"}
+                        </div>
+                    </div>
+
+                    <div class="item-actions">
+
+                        <button class="btn-edit"
+                            type="button"
+                            onclick="editarResena(${realIndex})">
+                            Editar
+                        </button>
+
+                        <button class="btn-delete"
+                            type="button"
+                            onclick="eliminarResena(${realIndex})"
+                            title="Eliminar reseña">
+
+                            <svg class="icon-svg" viewBox="0 0 24 24">
+                                <polyline points="3 6 5 6 21 6"/>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                            </svg>
+
+                        </button>
+
+                    </div>
+                </div>
+
+                <div class="review-text">
+                    ${escaparHTML(resena.comentario)}
+                </div>
+
+                <span class="review-origin">
+                    ${origenTexto}
+                </span>
+
+            </div>
+        `;
+    });
+
+    container.innerHTML = html;
+}
+
+// EDITAR RESEÑA
+
+function editarResena(index) {
+
+    if (!resenas[index]) return;
+
+    abrirEditor("resena", index);
+}
+
+// ELIMINAR RESEÑA SIN AFECTAR LAS DEMÁS
+
+function eliminarResena(index) {
+
+    if (!resenas[index]) return;
+
+    const nombre = resenas[index].nombre;
+
+    pedirConfirmacion(
+        "Eliminar reseña",
+        `¿Seguro que deseas eliminar la reseña de "${nombre}"? Esta acción no se puede deshacer.`,
+
+        function() {
+
+            // Quitar solamente la reseña seleccionada
+            resenas.splice(index, 1);
+
+            // Guardar conservando las reseñas de Escaparate
             guardarResenasPerfil();
-
-            document.getElementById("reviewForm").reset();
-
-            document.getElementById("reviewName").value = usuario.name || "";
 
             renderizarResenasPerfil();
 
-            mostrarToast("¡Tu reseña se publicó correctamente!");
-        });
-
-        // MOSTRAR RESEÑAS
-
-        function renderizarResenasPerfil() {
-            resenas = cargarResenasPerfil();
-
-            const container = document.getElementById("reviewsList");
-            const emptyMessage = document.getElementById("emptyReviewsMessage");
-
-            if (resenas.length === 0) {
-                container.innerHTML = "";
-                emptyMessage.style.display = "block";
-                return;
-            }
-
-            emptyMessage.style.display = "none";
-
-            let html = "";
-
-            resenas.slice().reverse().forEach((resena, index) => {
-                const realIndex = resenas.length - 1 - index;
-
-                const estrellas = "★".repeat(resena.calificacion) +
-                    "☆".repeat(5 - resena.calificacion);
-
-                const origenTexto = resena.origen === "perfil"
-                    ? "Publicada desde Mi Perfil"
-                    : "Publicada desde Escaparate";
-
-                html += `
-                    <div class="review-item">
-                        <div class="review-header">
-                            <div>
-                                <div class="review-author">
-                                    ${escaparHTML(resena.nombre)}
-                                </div>
-
-                                <div class="review-stars">
-                                    ${estrellas}
-                                </div>
-
-                                <div class="review-date">
-                                    ${resena.fecha
-                                        ? escaparHTML(resena.fecha)
-                                        : "Fecha no disponible"}
-                                </div>
-                            </div>
-
-                            <div class="item-actions">
-                                <button class="btn-edit" type="button" onclick="editarResena(${realIndex})">
-                                    Editar
-                                </button>
-
-                                <button class="btn-delete" type="button" onclick="eliminarResena(${realIndex})" title="Eliminar reseña">
-                                    <svg class="icon-svg" viewBox="0 0 24 24">
-                                        <polyline points="3 6 5 6 21 6"/>
-                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="review-text">
-                            ${escaparHTML(resena.comentario)}
-                        </div>
-
-                        <span class="review-origin">
-                            ${origenTexto}
-                        </span>
-                    </div>
-                `;
-            });
-
-            container.innerHTML = html;
+            mostrarToast("Reseña eliminada correctamente.");
         }
-
-        function editarResena(index) {
-            if (!resenas[index]) return;
-            abrirEditor("resena", index);
-        }
-
-        function eliminarResena(index) {
-            if (!resenas[index]) return;
-
-            const nombre = resenas[index].nombre;
-
-            pedirConfirmacion(
-                "Eliminar reseña",
-                `¿Seguro que deseas eliminar la reseña de "${nombre}"? Esta acción no se puede deshacer.`,
-                function() {
-                    resenas.splice(index, 1);
-
-                    guardarResenasPerfil();
-                    renderizarResenasPerfil();
-
-                    mostrarToast("Reseña eliminada correctamente.");
-                }
-            );
-        }
-
+    );
+}
+       
         // 8. EDITAR COMENTARIOS, PRODUCTOS Y RESEÑAS
 
         let tipoEdicion = "";
@@ -1911,20 +2016,29 @@
 
             // EDITAR RESEÑA
 
-            else if (tipoEdicion === "resena") {
-                const nombre = document.getElementById("editResenaNombre").value.trim();
-                const calificacion = Number(document.getElementById("editResenaCalificacion").value) || 0;
-                const comentario = document.getElementById("editResenaComentario").value.trim();
+            // EDITAR RESEÑA
 
-                resenas[indiceEdicion].nombre = nombre;
-                resenas[indiceEdicion].calificacion = calificacion;
-                resenas[indiceEdicion].comentario = comentario;
+else if (tipoEdicion === "resena") {
 
-                guardarResenasPerfil();
-                renderizarResenasPerfil();
+    const nombre = document.getElementById("editResenaNombre").value.trim();
 
-                mostrarToast("Reseña actualizada correctamente.");
-            }
+    const calificacion = Number(
+        document.getElementById("editResenaCalificacion").value
+    ) || 0;
+
+    const comentario = document.getElementById("editResenaComentario").value.trim();
+
+    resenas[indiceEdicion].nombre = nombre;
+    resenas[indiceEdicion].calificacion = calificacion;
+    resenas[indiceEdicion].comentario = comentario;
+
+    // Guardar sin sobrescribir las reseñas de otros apartados
+    guardarResenasPerfil();
+
+    renderizarResenasPerfil();
+
+    mostrarToast("Reseña actualizada correctamente.");
+}
 
             // EDITAR PRODUCTO
 

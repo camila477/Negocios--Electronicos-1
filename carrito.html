@@ -403,17 +403,27 @@
             margin-bottom: 9px;
         }
 
-        .remove-btn {
-            border: none;
-            background: none;
-            color: #d45b5b;
-            font-size: 12px;
-        }
+       .remove-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 7px 13px;
+    border: 1px solid #fecaca;
+    background: #fff1f1;
+    color: #c24141;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 700;
+    transition: .2s;
+}
 
-        .remove-btn:hover {
-            color: #a52e2e;
-            text-decoration: underline;
-        }
+.remove-btn:hover {
+    background: #fee2e2;
+    border-color: #ef4444;
+    color: #991b1b;
+    transform: translateY(-1px);
+}
 
         .empty-cart {
             text-align: center;
@@ -632,14 +642,31 @@
         }
 
         .remove-coupon {
-            display: inline-block;
-            margin-top: 9px;
-            border: none;
-            background: none;
-            color: #b44444;
-            font-size: 11px;
-            text-decoration: underline;
-        }
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 12px;
+    padding: 9px 14px;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    background: #fff1f1;
+    color: #b44444;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: .2s;
+}
+
+.remove-coupon:hover {
+    background: #fee2e2;
+    border-color: #ef4444;
+    color: #991b1b;
+}
+
+.remove-coupon[hidden] {
+    display: none;
+}
 
         .discount-row strong {
             color: var(--verde) !important;
@@ -1656,15 +1683,323 @@
         document.getElementById("modal-politicas").classList.remove("show");
     }
 
-    function continuarConPedido() {
-        const carrito = obtenerCarrito();
+  
+function abrirFormularioCompra() {
+    const carrito = obtenerCarrito();
 
-        if (carrito.length === 0) {
-            cerrarPoliticas();
-            mostrarNotificacion("Tu carrito está vacío.");
-            renderizarCarrito();
-            return;
-        }
+    if (!carrito.length) {
+        mostrarNotificacion("Tu carrito está vacío.");
+        return;
+    }
+
+    let modal = document.getElementById("modal-checkout");
+
+    if (!modal) {
+        modal = document.createElement("div");
+        modal.id = "modal-checkout";
+        modal.className = "modal-overlay show";
+
+        modal.innerHTML = `
+            <div class="policy-modal">
+                <div class="modal-header">
+                    <button class="modal-close" type="button"
+                        onclick="cerrarFormularioCompra()">×</button>
+                    <h2>Finalizar compra</h2>
+                    <p>Completa tus datos para registrar tu pedido.</p>
+                </div>
+
+                <form id="form-checkout">
+                    <div class="policy-content">
+                        <h3 style="color:#183b4e;margin-bottom:15px">
+                            Datos de entrega
+                        </h3>
+
+                        <label>Nombre completo</label>
+                        <input name="nombre" id="checkout-nombre"
+                            type="text" placeholder="Tu nombre"
+                            style="width:100%;padding:12px;margin:7px 0 15px;border:1px solid #cbd5e1;border-radius:8px">
+
+                        <label>Teléfono</label>
+                        <input name="telefono" id="checkout-telefono"
+                            type="tel" placeholder="Tu teléfono"
+                            style="width:100%;padding:12px;margin:7px 0 15px;border:1px solid #cbd5e1;border-radius:8px">
+
+                        <label>Correo electrónico</label>
+                        <input name="correo" id="checkout-correo"
+                            type="email" placeholder="correo@ejemplo.com"
+                            style="width:100%;padding:12px;margin:7px 0 15px;border:1px solid #cbd5e1;border-radius:8px">
+
+                        <label>Dirección de entrega</label>
+                        <textarea name="direccion" id="checkout-direccion"
+                            placeholder="Calle, número, colonia, ciudad y código postal"
+                            style="width:100%;padding:12px;margin:7px 0 15px;border:1px solid #cbd5e1;border-radius:8px;min-height:80px"></textarea>
+
+                        <h3 style="color:#183b4e;margin:15px 0">
+                            Método de pago
+                        </h3>
+
+                        <select id="checkout-pago"
+                            style="width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+                            <option value="Tarjeta bancaria">Tarjeta bancaria (simulado)</option>
+                            <option value="Transferencia">Transferencia bancaria (simulado)</option>
+                            <option value="Cartera">Saldo de cartera (simulado)</option>
+                        </select>
+
+                        <div id="checkout-detalle-pago"
+                            style="background:#f0f8fb;padding:14px;border-radius:10px;margin-top:15px;font-size:13px;color:#526775">
+                            Este pago es una demostración. No se realizará ningún cargo.
+                        </div>
+
+                        <div style="margin-top:20px;padding:15px;background:#f0f8fb;border-radius:10px">
+                            <strong>Total a pagar:</strong>
+                            <strong id="checkout-total" style="float:right;color:#183b4e"></strong>
+                        </div>
+
+                        <p style="font-size:11px;color:#718096;margin-top:12px">
+                            Esta página realiza pagos únicamente de manera demostrativa.
+                            No ingreses datos bancarios reales.
+                        </p>
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="button" class="secondary-btn"
+                            onclick="cerrarFormularioCompra()">Cancelar</button>
+                        <button type="submit" class="continue-btn">
+                            Confirmar compra
+                        </button>
+                    </div>
+                </form>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+
+        document.getElementById("checkout-pago").addEventListener("change", actualizarDetallePago);
+
+        document.getElementById("form-checkout").addEventListener("submit", function(e) {
+            e.preventDefault();
+            confirmarCompraSimulada();
+        });
+    }
+
+    const subtotal = calcularSubtotal(carrito);
+    const envio = COSTO_ENVIO;
+    const descuento = calcularDescuento(subtotal);
+    const total = Math.max(0, subtotal - descuento + envio);
+
+    document.getElementById("checkout-total").textContent =
+        formatoPrecio(total);
+
+    document.getElementById("checkout-nombre").value = "";
+    document.getElementById("checkout-telefono").value = "";
+    document.getElementById("checkout-correo").value = "";
+    document.getElementById("checkout-direccion").value = "";
+
+    actualizarDetallePago();
+    modal.classList.add("show");
+}
+
+function actualizarDetallePago() {
+    const metodo = document.getElementById("checkout-pago").value;
+    const detalle = document.getElementById("checkout-detalle-pago");
+
+    const mensajes = {
+        "Tarjeta bancaria":
+            "Pago con tarjeta de demostración. No introduzcas números de tarjeta ni información bancaria real.",
+        "Transferencia":
+            "Transferencia simulada. No necesitas realizar ninguna transferencia real.",
+        "Cartera":
+            "Pago demostrativo con saldo de cartera. No se descontará dinero real."
+    };
+
+    detalle.textContent = mensajes[metodo];
+}
+
+function cerrarFormularioCompra() {
+    const modal = document.getElementById("modal-checkout");
+    if (modal) modal.classList.remove("show");
+}
+
+function confirmarCompraSimulada() {
+    const carrito = obtenerCarrito();
+
+    if (!carrito.length) {
+        mostrarNotificacion("Tu carrito está vacío.");
+        cerrarFormularioCompra();
+        return;
+    }
+
+    const nombre = document.getElementById("checkout-nombre").value.trim();
+    const telefono = document.getElementById("checkout-telefono").value.trim();
+    const correo = document.getElementById("checkout-correo").value.trim();
+    const direccion = document.getElementById("checkout-direccion").value.trim();
+    const metodo = document.getElementById("checkout-pago").value;
+
+    if (!nombre || !telefono || !correo || !direccion) {
+        mostrarNotificacion("Completa tus datos de entrega para continuar.");
+        return;
+    }
+
+    const subtotal = calcularSubtotal(carrito);
+    const envio = COSTO_ENVIO;
+    const descuento = calcularDescuento(subtotal);
+    const total = Math.max(0, subtotal - descuento + envio);
+
+    const folio = "PP-" + Date.now();
+
+    const compra = {
+        id: folio,
+        fecha: new Date().toLocaleString("es-MX"),
+        cliente: {
+            nombre,
+            telefono,
+            correo,
+            direccion
+        },
+        metodoPago: metodo,
+        productos: carrito.map(producto => ({
+            nombre: producto.nombre || "Producto",
+            cantidad: Number(producto.cantidad || 1),
+            precio: Number(producto.precio || 0)
+        })),
+        subtotal,
+        envio,
+        descuento,
+        total,
+        estado: "Compra registrada",
+        tipo: "compra"
+    };
+
+    let historial = [];
+
+    try {
+        historial = JSON.parse(
+            localStorage.getItem("pp_historial_compras") || "[]"
+        );
+
+        if (!Array.isArray(historial)) historial = [];
+    } catch (error) {
+        historial = [];
+    }
+
+    historial.unshift(compra);
+
+    localStorage.setItem(
+        "pp_historial_compras",
+        JSON.stringify(historial)
+    );
+
+    // También se conserva el registro en el sistema de pedidos existente.
+    const pedidos = obtenerPedidos();
+
+    pedidos.unshift({
+        id: folio,
+        fecha: compra.fecha,
+        productos: compra.productos,
+        subtotal,
+        envio,
+        descuento,
+        total,
+        estado: "Compra registrada",
+        tipo: "compra"
+    });
+
+    guardarPedidos(pedidos);
+
+    guardarCarrito([]);
+    cuponAplicado = null;
+
+    actualizarInterfazCupon();
+    cerrarFormularioCompra();
+    cerrarPoliticas();
+    renderizarCarrito();
+
+    mostrarNotificacion("¡Compra registrada correctamente!");
+
+    mostrarTicketCompra(compra);
+}
+
+function mostrarTicketCompra(compra) {
+    const productosHTML = compra.productos.map(producto => `
+        <tr>
+            <td>${escaparHTML(producto.nombre)}</td>
+            <td>${producto.cantidad}</td>
+            <td>${formatoPrecio(producto.precio)}</td>
+            <td>${formatoPrecio(producto.precio * producto.cantidad)}</td>
+        </tr>
+    `).join("");
+
+    const ventana = window.open("", "_blank");
+
+    if (!ventana) {
+        mostrarNotificacion("La compra se guardó. Permite las ventanas emergentes para imprimir el ticket.");
+        return;
+    }
+
+    ventana.document.write(`
+        <!DOCTYPE html>
+        <html lang="es">
+        <head>
+            <meta charset="UTF-8">
+            <title>Ticket ${compra.id}</title>
+            <style>
+                body{font-family:Arial,sans-serif;color:#183b4e;padding:30px}
+                h1{text-align:center}
+                .datos{background:#f0f8fb;padding:15px;border-radius:10px}
+                table{width:100%;border-collapse:collapse;margin-top:20px}
+                th,td{padding:10px;border-bottom:1px solid #ddd;text-align:left}
+                .total{text-align:right;font-size:20px;font-weight:bold;margin-top:20px}
+                .nota{text-align:center;color:#64748b;margin-top:30px;font-size:12px}
+                button{background:#183b4e;color:white;padding:12px 20px;border:0;border-radius:8px;cursor:pointer}
+                @media print{button{display:none}}
+            </style>
+        </head>
+        <body>
+            <h1>Perforaciones Palacios</h1>
+            <h2>Comprobante de compra</h2>
+
+            <div class="datos">
+                <p><strong>Folio:</strong> ${compra.id}</p>
+                <p><strong>Fecha:</strong> ${compra.fecha}</p>
+                <p><strong>Cliente:</strong> ${escaparHTML(compra.cliente.nombre)}</p>
+                <p><strong>Teléfono:</strong> ${escaparHTML(compra.cliente.telefono)}</p>
+                <p><strong>Correo:</strong> ${escaparHTML(compra.cliente.correo)}</p>
+                <p><strong>Dirección:</strong> ${escaparHTML(compra.cliente.direccion)}</p>
+                <p><strong>Método de pago:</strong> ${escaparHTML(compra.metodoPago)}</p>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Importe</th>
+                    </tr>
+                </thead>
+                <tbody>${productosHTML}</tbody>
+            </table>
+
+            <div class="total">
+                <p>Subtotal: ${formatoPrecio(compra.subtotal)}</p>
+                <p>Envío: ${formatoPrecio(compra.envio)}</p>
+                <p>Descuento: -${formatoPrecio(compra.descuento)}</p>
+                <p>Total: ${formatoPrecio(compra.total)}</p>
+            </div>
+
+            <p class="nota">
+                Pago simulado con fines demostrativos. Este documento no representa
+                un comprobante fiscal ni confirma un cobro bancario.
+            </p>
+
+            <center><button onclick="window.print()">Imprimir / Guardar como PDF</button></center>
+        </body>
+        </html>
+    `);
+
+    ventana.document.close();
+}
+
 
         const subtotal = calcularSubtotal(carrito);
         const envio = COSTO_ENVIO;

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -16,11 +17,7 @@
     --blanco:#fff;
 }
 
-* {
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+* { box-sizing:border-box; margin:0; padding:0; }
 
 body {
     font-family:Arial,Helvetica,sans-serif;
@@ -28,8 +25,6 @@ body {
     color:var(--texto);
     line-height:1.6;
 }
-
-/* MENÚ SUPERIOR */
 
 header {
     background:linear-gradient(135deg,#183b4e,#24566d);
@@ -43,18 +38,9 @@ header {
     box-shadow:0 3px 12px #183b4e25;
 }
 
-.logo {
-    font-size:21px;
-    font-weight:bold;
-    letter-spacing:1px;
-}
+.logo { font-size:21px; font-weight:bold; letter-spacing:1px; }
 
-nav {
-    display:flex;
-    align-items:center;
-    gap:8px;
-    flex-wrap:wrap;
-}
+nav { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
 
 nav a {
     color:white;
@@ -67,18 +53,8 @@ nav a {
     transition:.25s;
 }
 
-nav a:hover {
-    background:rgba(255,255,255,.12);
-    color:var(--hover);
-}
-
-nav a.activo {
-    background:transparent;
-    color:white;
-    box-shadow:none;
-}
-
-/* PORTADA */
+nav a:hover { background:rgba(255,255,255,.12); color:var(--hover); }
+nav a.activo { background:transparent; color:white; box-shadow:none; }
 
 .hero {
     min-height:350px;
@@ -97,17 +73,8 @@ nav a.activo {
     text-align:center;
 }
 
-.hero h1 {
-    font-size:clamp(35px,5vw,60px);
-    margin:12px 0;
-}
-
-.hero p {
-    max-width:850px;
-    color:#e0f2fe;
-    font-size:20px;
-    line-height:1.7;
-}
+.hero h1 { font-size:clamp(35px,5vw,60px); margin:12px 0; }
+.hero p { max-width:850px; color:#e0f2fe; font-size:20px; line-height:1.7; }
 
 .etiqueta {
     display:inline-block;
@@ -119,16 +86,9 @@ nav a.activo {
     font-weight:bold;
 }
 
-.hero .etiqueta {
-    background:#ffffff20;
-    color:#bdeaff;
-}
+.hero .etiqueta { background:#ffffff20; color:#bdeaff; }
 
-main {
-    max-width:1150px;
-    width:90%;
-    margin:30px auto 55px;
-}
+main { max-width:1150px; width:90%; margin:30px auto 55px; }
 
 .toolbar {
     display:flex;
@@ -139,9 +99,7 @@ main {
     margin-bottom:20px;
 }
 
-.toolbar h2,
-.formulario h2,
-.seccion-titulo {
+.toolbar h2,.formulario h2,.seccion-titulo {
     color:var(--azul);
     font-size:25px;
 }
@@ -162,43 +120,14 @@ main {
     font-size:14px;
 }
 
-.btn:hover {
-    background:var(--hover);
-}
-
-.btn.secundario {
-    background:#e5eef3;
-    color:var(--azul);
-}
-
-.btn.secundario:hover {
-    background:#d4e6ef;
-}
-
-.btn.comprar {
-    background:#5dc0eb;
-    color:white;
-}
-
-.btn.comprar:hover {
-    background:#1d76ba;
-}
-
-.btn.eliminar {
-    background:#fee2e2;
-    color:#991b1b;
-}
-
-.btn.eliminar:hover {
-    background:#fecaca;
-}
-
-.btn:disabled {
-    opacity:.5;
-    cursor:not-allowed;
-}
-
-/* ESTADÍSTICAS */
+.btn:hover { background:var(--hover); }
+.btn.secundario { background:#e5eef3; color:var(--azul); }
+.btn.secundario:hover { background:#d4e6ef; }
+.btn.comprar { background:#5dc0eb; color:white; }
+.btn.comprar:hover { background:#1d76ba; }
+.btn.eliminar { background:#fee2e2; color:#991b1b; }
+.btn.eliminar:hover { background:#fecaca; }
+.btn:disabled { opacity:.5; cursor:not-allowed; }
 
 .estadisticas {
     display:grid;
@@ -214,18 +143,8 @@ main {
     padding:17px;
 }
 
-.estadistica strong {
-    display:block;
-    color:var(--azul);
-    font-size:24px;
-}
-
-.estadistica span {
-    font-size:13px;
-    color:#64748b;
-}
-
-/* FORMULARIO */
+.estadistica strong { display:block; color:var(--azul); font-size:24px; }
+.estadistica span { font-size:13px; color:#64748b; }
 
 .formulario {
     display:none;
@@ -236,15 +155,8 @@ main {
     margin-bottom:30px;
 }
 
-.formulario.visible {
-    display:block;
-}
-
-.formulario>p {
-    font-size:13px;
-    color:#64748b;
-    margin:5px 0 20px;
-}
+.formulario.visible { display:block; }
+.formulario>p { font-size:13px; color:#64748b; margin:5px 0 20px; }
 
 .form-grid {
     display:grid;
@@ -260,11 +172,7 @@ main {
     margin-bottom:6px;
 }
 
-.campo input,
-.campo textarea,
-.campo select,
-.busqueda,
-.filtro {
+.campo input,.campo textarea,.campo select,.busqueda,.filtro {
     width:100%;
     border:1px solid #cbd5e1;
     border-radius:8px;
@@ -274,21 +182,10 @@ main {
     font:inherit;
 }
 
-.campo textarea {
-    min-height:100px;
-    resize:vertical;
-}
+.campo textarea { min-height:100px; resize:vertical; }
+.campo.completo { grid-column:1/-1; }
 
-.campo.completo {
-    grid-column:1/-1;
-}
-
-.acciones-formulario {
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    margin-top:18px;
-}
+.acciones-formulario { display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
 
 .mensaje {
     display:none;
@@ -300,30 +197,11 @@ main {
     font-size:13px;
 }
 
-.mensaje.visible {
-    display:block;
-}
+.mensaje.visible { display:block; }
+.mensaje.error { background:#fee2e2; color:#991b1b; }
 
-.mensaje.error {
-    background:#fee2e2;
-    color:#991b1b;
-}
-
-/* FILTROS */
-
-.filtros {
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-.busqueda,
-.filtro {
-    width:auto;
-    min-width:190px;
-}
-
-/* PRODUCTOS */
+.filtros { display:flex; gap:10px; flex-wrap:wrap; }
+.busqueda,.filtro { width:auto; min-width:190px; }
 
 .productos {
     display:grid;
@@ -339,7 +217,10 @@ main {
     display:flex;
     flex-direction:column;
     box-shadow:0 4px 15px #183b4e0a;
+    transition:transform .25s,box-shadow .25s;
 }
+
+.producto:hover { transform:translateY(-4px); box-shadow:0 8px 22px #183b4e18; }
 
 .imagen-producto {
     height:190px;
@@ -351,16 +232,8 @@ main {
     color:var(--azul);
 }
 
-.imagen-producto img {
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.icono-producto {
-    font-size:55px;
-    color:var(--azul);
-}
+.imagen-producto img { width:100%; height:100%; object-fit:cover; }
+.icono-producto { font-size:55px; color:var(--azul); }
 
 .contenido-producto {
     padding:17px;
@@ -378,35 +251,11 @@ main {
     flex-wrap:wrap;
 }
 
-.vendedor {
-    font-size:12px;
-    color:#64748b;
-}
-
-.producto h3 {
-    color:var(--azul);
-    font-size:18px;
-    line-height:1.35;
-}
-
-.descripcion {
-    color:#64748b;
-    font-size:13px;
-    overflow-wrap:anywhere;
-}
-
-.precio-label {
-    font-size:12px;
-    color:#64748b;
-}
-
-.precio {
-    font-size:25px;
-    font-weight:bold;
-    color:var(--azul);
-}
-
-/* TEMPORIZADOR */
+.vendedor { font-size:12px; color:#64748b; }
+.producto h3 { color:var(--azul); font-size:18px; line-height:1.35; }
+.descripcion { color:#64748b; font-size:13px; overflow-wrap:anywhere; }
+.precio-label { font-size:12px; color:#64748b; }
+.precio { font-size:25px; font-weight:bold; color:var(--azul); }
 
 .temporizador {
     background:#fef3c7;
@@ -432,26 +281,11 @@ main {
     font-variant-numeric:tabular-nums;
 }
 
-.temporizador.finalizada {
-    background:#fee2e2;
-    border-color:#fca5a5;
-}
+.temporizador.finalizada { background:#fee2e2; border-color:#fca5a5; }
+.temporizador.finalizada .label-temp,.temporizador.finalizada .cuenta { color:#991b1b; }
 
-.temporizador.finalizada .label-temp,
-.temporizador.finalizada .cuenta {
-    color:#991b1b;
-}
-
-.botones-producto {
-    display:flex;
-    gap:8px;
-    margin-top:auto;
-    flex-wrap:wrap;
-}
-
-.botones-producto .btn {
-    flex:1;
-}
+.botones-producto { display:flex; gap:8px; margin-top:auto; flex-wrap:wrap; }
+.botones-producto .btn { flex:1; }
 
 .pie-producto {
     border-top:1px solid #edf2f5;
@@ -473,26 +307,15 @@ main {
     color:#64748b;
 }
 
-.nota {
-    margin-top:20px;
-    color:#64748b;
-    font-size:12px;
-}
+.nota { margin-top:20px; color:#64748b; font-size:12px; }
 
-.seccion-admin-publica,
-.seccion-ofertas {
+.seccion-admin-publica,.seccion-ofertas {
     margin-top:50px;
     padding-top:30px;
     border-top:2px solid var(--borde);
 }
 
-.descripcion-seccion {
-    color:#64748b;
-    font-size:13px;
-    margin:5px 0 20px;
-}
-
-/* OFERTAS REALIZADAS */
+.descripcion-seccion { color:#64748b; font-size:13px; margin:5px 0 20px; }
 
 .lista-ofertas {
     display:grid;
@@ -509,38 +332,11 @@ main {
     box-shadow:0 4px 15px #183b4e0a;
 }
 
-.tarjeta-oferta h3 {
-    color:var(--azul);
-    font-size:17px;
-    margin-bottom:8px;
-}
-
-.tarjeta-oferta p {
-    font-size:13px;
-    color:#64748b;
-    margin:5px 0;
-    overflow-wrap:anywhere;
-}
-
-.tarjeta-oferta .monto-oferta {
-    color:var(--azul);
-    font-size:23px;
-    font-weight:bold;
-    margin:10px 0;
-}
-
-.acciones-oferta {
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    margin-top:14px;
-}
-
-.acciones-oferta .btn {
-    flex:1;
-}
-
-/* MODALES */
+.tarjeta-oferta h3 { color:var(--azul); font-size:17px; margin-bottom:8px; }
+.tarjeta-oferta p { font-size:13px; color:#64748b; margin:5px 0; overflow-wrap:anywhere; }
+.tarjeta-oferta .monto-oferta { color:var(--azul); font-size:23px; font-weight:bold; margin:10px 0; }
+.acciones-oferta { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
+.acciones-oferta .btn { flex:1; }
 
 .modal {
     display:none;
@@ -553,9 +349,7 @@ main {
     justify-content:center;
 }
 
-.modal.visible {
-    display:flex;
-}
+.modal.visible { display:flex; }
 
 .modal-contenido {
     background:white;
@@ -567,21 +361,9 @@ main {
     padding:25px;
 }
 
-.modal-contenido h2 {
-    color:var(--azul);
-    margin-bottom:15px;
-}
-
-.modal-contenido p {
-    margin:8px 0;
-    overflow-wrap:anywhere;
-}
-
-.modal-contenido .campo {
-    margin:15px 0;
-}
-
-/* NOTIFICACIÓN */
+.modal-contenido h2 { color:var(--azul); margin-bottom:15px; }
+.modal-contenido p { margin:8px 0; overflow-wrap:anywhere; }
+.modal-contenido .campo { margin:15px 0; }
 
 .notificacion {
     position:fixed;
@@ -602,17 +384,8 @@ main {
     transition:opacity .3s,transform .3s,visibility .3s;
 }
 
-.notificacion.visible {
-    opacity:1;
-    visibility:visible;
-    transform:translateY(0);
-}
-
-.notificacion.error {
-    background:#991b1b;
-}
-
-/* PIE DE PÁGINA */
+.notificacion.visible { opacity:1; visibility:visible; transform:translateY(0); }
+.notificacion.error { background:#991b1b; }
 
 footer {
     background:var(--azul);
@@ -622,79 +395,24 @@ footer {
     font-size:13px;
 }
 
-/* RESPONSIVE */
-
 @media(max-width:900px) {
-    .productos {
-        grid-template-columns:repeat(2,minmax(0,1fr));
-    }
+    .productos { grid-template-columns:repeat(2,minmax(0,1fr)); }
 }
 
 @media(max-width:620px) {
-    header {
-        justify-content:center;
-        text-align:center;
-        padding:18px 5%;
-    }
-
-    .logo {
-        width:100%;
-    }
-
-    nav {
-        justify-content:center;
-        gap:5px;
-    }
-
-    nav a {
-        font-size:13px;
-        padding:8px 10px;
-    }
-
-    .productos,
-    .estadisticas,
-    .form-grid,
-    .lista-ofertas {
-        grid-template-columns:1fr;
-    }
-
-    .campo.completo {
-        grid-column:auto;
-    }
-
-    main {
-        width:92%;
-    }
-
-    .busqueda,
-    .filtro {
-        width:100%;
-    }
-
-    .formulario {
-        padding:18px;
-    }
-
-    .hero {
-        min-height:300px;
-        padding:55px 6%;
-    }
-
-    .hero h1 {
-        font-size:36px;
-    }
-
-    .hero p {
-        font-size:16px;
-    }
-
-    .notificacion {
-        right:15px;
-        bottom:15px;
-        left:15px;
-        text-align:center;
-        max-width:none;
-    }
+    header { justify-content:center; text-align:center; padding:18px 5%; }
+    .logo { width:100%; }
+    nav { justify-content:center; gap:5px; }
+    nav a { font-size:13px; padding:8px 10px; }
+    .productos,.estadisticas,.form-grid,.lista-ofertas { grid-template-columns:1fr; }
+    .campo.completo { grid-column:auto; }
+    main { width:92%; }
+    .busqueda,.filtro { width:100%; }
+    .formulario { padding:18px; }
+    .hero { min-height:300px; padding:55px 6%; }
+    .hero h1 { font-size:36px; }
+    .hero p { font-size:16px; }
+    .notificacion { right:15px; bottom:15px; left:15px; text-align:center; max-width:none; }
 }
 </style>
 </head>
@@ -703,84 +421,69 @@ footer {
 
 <header>
     <div class="logo">PERFORACIONES PALACIOS</div>
-
     <nav>
         <a href="inicio.html">Inicio</a>
         <a href="catalogo.html">Catálogo</a>
         <a href="comunidad.html">Comunidad</a>
         <a href="subastas.html" class="activo">Subastas</a>
         <a href="contacto.html">Contacto</a>
+        <a href="perfil.html">Perfil</a>
+        <a href="carrito.html">Carrito</a>
     </nav>
 </header>
 
 <section class="hero">
-
     <span class="etiqueta">COMUNIDAD · COMPRA Y OFERTA</span>
-
     <h1>Subastas y Productos</h1>
-
     <p>
         Publica productos, descubre publicaciones de otros usuarios
         y realiza compras. También encontrarás subastas especiales
         creadas por el administrador con temporizador.
     </p>
-
 </section>
 
 <main>
 
     <section class="estadisticas">
-
         <div class="estadistica">
             <strong id="total-subastas">0</strong>
             <span>Publicaciones disponibles</span>
         </div>
-
         <div class="estadistica">
             <strong id="total-pujas">0</strong>
             <span>Acciones realizadas en este navegador</span>
         </div>
-
         <div class="estadistica">
             <strong id="total-mias">0</strong>
             <span>Mis publicaciones</span>
         </div>
-
     </section>
-
-    <!-- PRODUCTOS DE LA COMUNIDAD -->
 
     <div class="toolbar">
         <h2>Productos de la comunidad</h2>
-
-        <button class="btn" id="abrir-formulario" type="button">
-            + Publicar producto
-        </button>
+        <button class="btn" id="abrir-formulario" type="button">+ Publicar producto</button>
     </div>
 
     <section class="formulario" id="panel-formulario">
-
         <h2>Publica tu producto</h2>
-
         <p>
             Tu publicación aparecerá en el apartado de productos
-            de la comunidad y también en tu perfil.
+            de la comunidad. No se guardará en tu perfil.
         </p>
 
         <div class="mensaje" id="mensaje-publicacion" role="status"></div>
 
-        <form id="form-subasta">
-
+        <form id="form-subasta" novalidate>
             <div class="form-grid">
 
                 <div class="campo">
-                    <label for="nombre-producto">Nombre del producto *</label>
-                    <input id="nombre-producto" maxlength="80" required placeholder="Ej. Bomba de agua">
+                    <label for="nombre-producto">Nombre del producto</label>
+                    <input id="nombre-producto" placeholder="Ej. Bomba de agua">
                 </div>
 
                 <div class="campo">
-                    <label for="categoria">Categoría *</label>
-                    <select id="categoria" required>
+                    <label for="categoria">Categoría</label>
+                    <select id="categoria">
                         <option value="Equipos de agua">Equipos de agua</option>
                         <option value="Herramientas">Herramientas</option>
                         <option value="Accesorios">Accesorios</option>
@@ -789,13 +492,13 @@ footer {
                 </div>
 
                 <div class="campo">
-                    <label for="vendedor">Tu nombre de usuario *</label>
-                    <input id="vendedor" maxlength="50" required placeholder="Ej. Camila">
+                    <label for="vendedor">Tu nombre de usuario</label>
+                    <input id="vendedor" placeholder="Ej. Camila">
                 </div>
 
                 <div class="campo">
-                    <label for="precio-inicial">Precio (MXN) *</label>
-                    <input id="precio-inicial" type="number" min="1" step="1" required placeholder="Ej. 500">
+                    <label for="precio-inicial">Precio (MXN)</label>
+                    <input id="precio-inicial" type="number" placeholder="Ej. 500">
                 </div>
 
                 <div class="campo completo">
@@ -804,32 +507,21 @@ footer {
                 </div>
 
                 <div class="campo completo">
-                    <label for="descripcion">Descripción del producto *</label>
-                    <textarea id="descripcion" maxlength="500" required placeholder="Describe el estado y las características del producto."></textarea>
+                    <label for="descripcion">Descripción del producto</label>
+                    <textarea id="descripcion" placeholder="Describe el estado y las características del producto."></textarea>
                 </div>
-
             </div>
 
             <div class="acciones-formulario">
                 <button class="btn" type="submit">Publicar producto</button>
                 <button class="btn secundario" id="cancelar-publicacion" type="button">Cancelar</button>
             </div>
-
         </form>
-
     </section>
 
     <div class="toolbar">
-
         <div class="filtros">
-
-            <input
-                class="busqueda"
-                id="buscar"
-                type="search"
-                placeholder="Buscar producto..."
-                aria-label="Buscar producto"
-            >
+            <input class="busqueda" id="buscar" type="search" placeholder="Buscar producto..." aria-label="Buscar producto">
 
             <select class="filtro" id="filtro-categoria">
                 <option value="">Todas las categorías</option>
@@ -843,33 +535,21 @@ footer {
                 <option value="todas">Todos los productos</option>
                 <option value="mias">Mis publicaciones</option>
             </select>
-
         </div>
-
     </div>
 
     <section class="productos" id="lista-productos"></section>
 
-    <!-- SUBASTAS DEL ADMINISTRADOR -->
-
     <section class="seccion-admin-publica">
-
         <h2 class="seccion-titulo">Subastas destacadas</h2>
-
         <p class="descripcion-seccion">
             Subastas oficiales con temporizador. Solo se muestran las que están activas.
         </p>
-
         <section class="productos" id="lista-subastas-admin"></section>
-
     </section>
 
-    <!-- OFERTAS REALIZADAS -->
-
     <section class="seccion-ofertas">
-
         <h2 class="seccion-titulo">Ofertas realizadas</h2>
-
         <p class="descripcion-seccion">
             Aquí puedes consultar, editar o eliminar las ofertas que se han realizado en las subastas.
         </p>
@@ -884,7 +564,6 @@ footer {
         <section class="lista-ofertas" id="lista-ofertas">
             <div class="vacio">Todavía no hay ofertas registradas.</div>
         </section>
-
     </section>
 
     <p class="nota">
@@ -893,26 +572,20 @@ footer {
 
 </main>
 
-<!-- MODAL DE OFERTA -->
-
 <div class="modal" id="modal-puja" role="dialog" aria-modal="true" aria-labelledby="titulo-puja">
-
     <div class="modal-contenido">
-
         <h2 id="titulo-puja">Realizar una oferta</h2>
-
         <p id="info-puja"></p>
 
-        <form id="form-puja">
-
+        <form id="form-puja" novalidate>
             <div class="campo">
-                <label for="nombre-postor">Tu nombre *</label>
-                <input id="nombre-postor" maxlength="50" required placeholder="Escribe tu nombre">
+                <label for="nombre-postor">Tu nombre</label>
+                <input id="nombre-postor" placeholder="Escribe tu nombre">
             </div>
 
             <div class="campo">
-                <label for="cantidad-puja">Monto de tu oferta (MXN) *</label>
-                <input id="cantidad-puja" type="number" min="1" step="1" required>
+                <label for="cantidad-puja">Monto de tu oferta (MXN)</label>
+                <input id="cantidad-puja" type="number">
                 <small id="minimo-puja" style="color:#64748b;"></small>
             </div>
 
@@ -920,95 +593,66 @@ footer {
                 <button class="btn" type="submit">Confirmar oferta</button>
                 <button class="btn secundario" type="button" data-cerrar="modal-puja">Cancelar</button>
             </div>
-
         </form>
-
     </div>
 </div>
 
-<!-- MODAL DE COMPRA -->
-
 <div class="modal" id="modal-compra" role="dialog" aria-modal="true" aria-labelledby="titulo-compra">
-
     <div class="modal-contenido">
-
-        <h2 id="titulo-compra">Comprar producto</h2>
-
+        <h2 id="titulo-compra">Agregar al carrito</h2>
         <p id="info-compra"></p>
 
-        <form id="form-compra">
-
+        <form id="form-compra" novalidate>
             <div class="campo">
-                <label for="nombre-comprador">Tu nombre *</label>
-                <input id="nombre-comprador" maxlength="50" required placeholder="Escribe tu nombre">
+                <label for="nombre-comprador">Tu nombre</label>
+                <input id="nombre-comprador" placeholder="Escribe tu nombre">
             </div>
 
             <div class="campo">
-                <label for="telefono-comprador">Teléfono de contacto *</label>
-                <input id="telefono-comprador" type="tel" required placeholder="Ej. 555 123 4567">
+                <label for="telefono-comprador">Teléfono de contacto</label>
+                <input id="telefono-comprador" type="tel" placeholder="Ej. 555 123 4567">
             </div>
 
             <div class="acciones-formulario">
-                <button class="btn comprar" type="submit">Confirmar compra</button>
+                <button class="btn comprar" type="submit">Agregar al carrito</button>
                 <button class="btn secundario" type="button" data-cerrar="modal-compra">Cancelar</button>
             </div>
-
         </form>
-
     </div>
 </div>
 
-<!-- MODAL DE DETALLES -->
-
 <div class="modal" id="modal-detalles" role="dialog" aria-modal="true" aria-labelledby="titulo-detalles">
-
     <div class="modal-contenido">
-
         <h2 id="titulo-detalles">Detalles del producto</h2>
-
         <div id="contenido-detalles"></div>
-
         <div class="acciones-formulario">
             <button class="btn secundario" type="button" data-cerrar="modal-detalles">Cerrar</button>
         </div>
-
     </div>
 </div>
 
-<!-- MODAL EDITAR OFERTA -->
-
 <div class="modal" id="modal-editar-oferta" role="dialog" aria-modal="true" aria-labelledby="titulo-editar-oferta">
-
     <div class="modal-contenido">
-
         <h2 id="titulo-editar-oferta">Editar oferta</h2>
 
-        <form id="form-editar-oferta">
-
+        <form id="form-editar-oferta" novalidate>
             <div class="campo">
                 <label for="editar-usuario-oferta">Nombre del usuario</label>
-                <input id="editar-usuario-oferta" maxlength="50" required>
+                <input id="editar-usuario-oferta">
             </div>
 
             <div class="campo">
                 <label for="editar-monto-oferta">Monto de la oferta (MXN)</label>
-                <input id="editar-monto-oferta" type="number" min="1" step="1" required>
+                <input id="editar-monto-oferta" type="number">
             </div>
 
             <div class="acciones-formulario">
                 <button class="btn" type="submit">Guardar cambios</button>
-                <button class="btn secundario" type="button" data-cerrar="modal-editar-oferta">
-                    Cancelar
-                </button>
+                <button class="btn secundario" type="button" data-cerrar="modal-editar-oferta">Cancelar</button>
             </div>
-
         </form>
-
     </div>
-
 </div>
-
-<!-- NOTIFICACIÓN -->
 
 <div class="notificacion" id="notificacion" role="status" aria-live="polite">
     <span id="texto-notificacion"></span>
@@ -1024,8 +668,8 @@ footer {
 const CLAVE_SUBASTAS = "pp_subastas_v1";
 const CLAVE_PUJAS = "pp_subastas_pujas_v1";
 const CLAVE_ADMIN_PANEL = "pp_subastas";
-const CLAVE_PRODUCTOS_PERFIL = "productosPalacios";
 const CLAVE_OFERTAS = "pp_ofertas_subastas_v1";
+const CLAVE_CARRITO = "carrito";
 
 const $ = id => document.getElementById(id);
 
@@ -1036,8 +680,6 @@ let idActual = null;
 let idOfertaEditando = null;
 let tiempoNotificacion;
 
-/* EJEMPLOS DE PRODUCTOS */
-
 const ejemplos = [
     {
         id:"ejemplo-1",
@@ -1047,7 +689,7 @@ const ejemplos = [
         descripcion:"Bomba sumergible usada. Consulta las condiciones y compatibilidad antes de comprar.",
         precioInicial:900,
         precioActual:900,
-        imagen:"",
+        imagen:"https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=900",
         pujas:0,
         mia:false,
         origen:"comunidad",
@@ -1062,7 +704,7 @@ const ejemplos = [
         descripcion:"Juego de herramientas para trabajos generales. Se ofrece el conjunto completo.",
         precioInicial:450,
         precioActual:450,
-        imagen:"",
+        imagen:"https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=900",
         pujas:0,
         mia:false,
         origen:"comunidad",
@@ -1077,7 +719,7 @@ const ejemplos = [
         descripcion:"Tanque para almacenamiento de agua. Revisa sus medidas y condiciones con el vendedor.",
         precioInicial:1200,
         precioActual:1200,
-        imagen:"",
+        imagen:"https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=900",
         pujas:0,
         mia:false,
         origen:"comunidad",
@@ -1092,7 +734,7 @@ const ejemplos = [
         descripcion:"Lote de accesorios para instalaciones de tubería.",
         precioInicial:180,
         precioActual:180,
-        imagen:"",
+        imagen:"https://images.unsplash.com/photo-1504148455328-c376907d081c?w=900",
         pujas:0,
         mia:false,
         origen:"comunidad",
@@ -1107,7 +749,7 @@ const ejemplos = [
         descripcion:"Taladro eléctrico para trabajos domésticos. Consulta su estado antes de comprar.",
         precioInicial:600,
         precioActual:600,
-        imagen:"",
+        imagen:"https://images.unsplash.com/photo-1504148455328-c376907d081c?w=900",
         pujas:0,
         mia:false,
         origen:"comunidad",
@@ -1122,7 +764,7 @@ const ejemplos = [
         descripcion:"Kit de conexiones para instalaciones y proyectos relacionados con el agua.",
         precioInicial:250,
         precioActual:250,
-        imagen:"",
+        imagen:"https://images.unsplash.com/photo-1581147036324-c1c89c2c8b5c?w=900",
         pujas:0,
         mia:false,
         origen:"comunidad",
@@ -1135,9 +777,7 @@ const ejemplos = [
 
 function mostrarNotificacion(texto, error = false) {
     const notificacion = $("notificacion");
-
     $("texto-notificacion").textContent = texto;
-
     notificacion.classList.toggle("error", error);
     notificacion.classList.add("visible");
 
@@ -1153,11 +793,9 @@ function mostrarNotificacion(texto, error = false) {
 function cargarSubastasDelPanelAdmin() {
     try {
         const datos = localStorage.getItem(CLAVE_ADMIN_PANEL);
-
         if (!datos) return [];
 
         const lista = JSON.parse(datos);
-
         if (!Array.isArray(lista)) return [];
 
         return lista
@@ -1214,7 +852,6 @@ function cargarSubastas() {
                     vieneDelPanel:false
                 }));
             }
-
         } else {
             comunidad = ejemplos.map(p => ({...p}));
         }
@@ -1237,11 +874,7 @@ function guardarSubastas() {
     try {
         const paraGuardar = subastas.filter(s => !s.vieneDelPanel);
 
-        localStorage.setItem(
-            CLAVE_SUBASTAS,
-            JSON.stringify(paraGuardar)
-        );
-
+        localStorage.setItem(CLAVE_SUBASTAS, JSON.stringify(paraGuardar));
         return true;
 
     } catch (error) {
@@ -1255,18 +888,13 @@ function guardarSubastas() {
 function guardarOfertaAdmin(producto) {
     try {
         const datos = localStorage.getItem(CLAVE_ADMIN_PANEL);
-
         if (!datos) return false;
 
         const lista = JSON.parse(datos);
-
         if (!Array.isArray(lista)) return false;
 
         const idOriginal = String(producto.id).replace("admin-panel-", "");
-
-        const indice = lista.findIndex(
-            s => String(s.id) === idOriginal
-        );
+        const indice = lista.findIndex(s => String(s.id) === idOriginal);
 
         if (indice === -1) return false;
 
@@ -1274,11 +902,7 @@ function guardarOfertaAdmin(producto) {
         lista[indice].pujas = producto.pujas;
         lista[indice].historial = producto.historial;
 
-        localStorage.setItem(
-            CLAVE_ADMIN_PANEL,
-            JSON.stringify(lista)
-        );
-
+        localStorage.setItem(CLAVE_ADMIN_PANEL, JSON.stringify(lista));
         return true;
 
     } catch (error) {
@@ -1309,12 +933,8 @@ function guardarPujas() {
 
 function cargarOfertasRealizadas() {
     try {
-        const datos = JSON.parse(
-            localStorage.getItem(CLAVE_OFERTAS) || "[]"
-        );
-
+        const datos = JSON.parse(localStorage.getItem(CLAVE_OFERTAS) || "[]");
         return Array.isArray(datos) ? datos : [];
-
     } catch (error) {
         console.error("No se pudieron cargar las ofertas.", error);
         return [];
@@ -1323,15 +943,43 @@ function cargarOfertasRealizadas() {
 
 function guardarOfertasRealizadas() {
     try {
-        localStorage.setItem(
-            CLAVE_OFERTAS,
-            JSON.stringify(ofertasRealizadas)
-        );
+        localStorage.setItem(CLAVE_OFERTAS, JSON.stringify(ofertasRealizadas));
+        return true;
+    } catch (error) {
+        console.error("No se pudieron guardar las ofertas.", error);
+        return false;
+    }
+}
 
+/* AGREGAR PRODUCTOS AL CARRITO */
+
+function agregarAlCarrito(producto) {
+    try {
+        let carrito = JSON.parse(localStorage.getItem(CLAVE_CARRITO) || "[]");
+
+        if (!Array.isArray(carrito)) carrito = [];
+
+        const existente = carrito.find(item => String(item.id) === String(producto.id));
+
+        if (existente) {
+            existente.cantidad = (Number(existente.cantidad) || 1) + 1;
+        } else {
+            carrito.push({
+                id:producto.id,
+                nombre:producto.nombre,
+                descripcion:producto.descripcion || "",
+                precio:Number(producto.precioActual) || 0,
+                cantidad:1,
+                imagen:producto.imagen || "",
+                origen:"subastas"
+            });
+        }
+
+        localStorage.setItem(CLAVE_CARRITO, JSON.stringify(carrito));
         return true;
 
     } catch (error) {
-        console.error("No se pudieron guardar las ofertas.", error);
+        console.error("Error al agregar al carrito:", error);
         return false;
     }
 }
@@ -1348,11 +996,8 @@ function formatoPrecio(precio) {
 
 function crearTexto(etiqueta, clase, texto) {
     const elemento = document.createElement(etiqueta);
-
     if (clase) elemento.className = clase;
-
     elemento.textContent = String(texto ?? "");
-
     return elemento;
 }
 
@@ -1369,7 +1014,6 @@ function iconoCategoria(categoria) {
 
 function mostrarMensaje(id, texto, error = false) {
     const elemento = $(id);
-
     elemento.textContent = texto;
     elemento.classList.add("visible");
     elemento.classList.toggle("error", error);
@@ -1390,16 +1034,12 @@ function cerrarModal(id) {
 /* CERRAR MODALES */
 
 document.querySelectorAll("[data-cerrar]").forEach(boton => {
-    boton.addEventListener("click", () => {
-        cerrarModal(boton.dataset.cerrar);
-    });
+    boton.addEventListener("click", () => cerrarModal(boton.dataset.cerrar));
 });
 
 document.querySelectorAll(".modal").forEach(modal => {
     modal.addEventListener("click", evento => {
-        if (evento.target === modal) {
-            modal.classList.remove("visible");
-        }
+        if (evento.target === modal) modal.classList.remove("visible");
     });
 });
 
@@ -1412,39 +1052,20 @@ function calcularTiempoRestante(fechaFin) {
     const ahora = new Date();
     const diferencia = fin - ahora;
 
-    if (diferencia <= 0) {
-        return {
-            finalizada:true,
-            texto:"Finalizada"
-        };
-    }
+    if (diferencia <= 0) return {finalizada:true,texto:"Finalizada"};
 
     const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-
-    const horas = Math.floor(
-        (diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
-
-    const minutos = Math.floor(
-        (diferencia % (1000 * 60 * 60)) / (1000 * 60)
-    );
-
-    const segundos = Math.floor(
-        (diferencia % (1000 * 60)) / 1000
-    );
+    const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+    const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
 
     let texto = "";
-
     if (dias > 0) texto += dias + "d ";
-
     texto += String(horas).padStart(2, "0") + "h ";
     texto += String(minutos).padStart(2, "0") + "m ";
     texto += String(segundos).padStart(2, "0") + "s";
 
-    return {
-        finalizada:false,
-        texto:texto.trim()
-    };
+    return {finalizada:false,texto:texto.trim()};
 }
 
 function actualizarTemporizadores() {
@@ -1456,12 +1077,7 @@ function actualizarTemporizadores() {
         if (!cuenta || !resultado) return;
 
         cuenta.textContent = resultado.texto;
-
-        if (resultado.finalizada) {
-            el.classList.add("finalizada");
-        } else {
-            el.classList.remove("finalizada");
-        }
+        el.classList.toggle("finalizada", resultado.finalizada);
     });
 }
 
@@ -1473,7 +1089,6 @@ function crearTarjeta(producto) {
 
     if (producto.imagen) {
         const img = document.createElement("img");
-
         img.src = producto.imagen;
         img.alt = producto.nombre;
         img.loading = "lazy";
@@ -1485,7 +1100,6 @@ function crearTarjeta(producto) {
         };
 
         imagen.appendChild(img);
-
     } else {
         imagen.appendChild(
             crearTexto("span", "icono-producto", iconoCategoria(producto.categoria))
@@ -1497,11 +1111,7 @@ function crearTarjeta(producto) {
 
     encabezado.append(
         crearTexto("span", "etiqueta", producto.categoria),
-        crearTexto(
-            "span",
-            "vendedor",
-            producto.mia ? "Mi publicación" : "Por " + producto.vendedor
-        )
+        crearTexto("span", "vendedor", producto.mia ? "Mi publicación" : "Por " + producto.vendedor)
     );
 
     contenido.append(
@@ -1514,13 +1124,8 @@ function crearTarjeta(producto) {
         contenido.append(
             crearTexto("span", "precio-label", "Oferta actual"),
             crearTexto("div", "precio", formatoPrecio(producto.precioActual)),
-            crearTexto(
-                "span",
-                "precio-label",
-                "Precio inicial: " + formatoPrecio(producto.precioInicial)
-            )
+            crearTexto("span", "precio-label", "Precio inicial: " + formatoPrecio(producto.precioInicial))
         );
-
     } else {
         contenido.append(
             crearTexto("span", "precio-label", "Precio"),
@@ -1541,12 +1146,9 @@ function crearTarjeta(producto) {
         cuenta.className = "cuenta";
 
         const resultado = calcularTiempoRestante(producto.fechaFin);
-
         cuenta.textContent = resultado ? resultado.texto : "—";
 
-        if (resultado && resultado.finalizada) {
-            temp.classList.add("finalizada");
-        }
+        if (resultado && resultado.finalizada) temp.classList.add("finalizada");
 
         temp.append(label, cuenta);
         contenido.appendChild(temp);
@@ -1556,35 +1158,19 @@ function crearTarjeta(producto) {
 
     if (producto.origen === "admin") {
         const botonPujar = crearTexto("button", "btn", "+ Ofertar");
-
         botonPujar.type = "button";
-
-        botonPujar.addEventListener("click", () => {
-            abrirPuja(producto.id);
-        });
-
+        botonPujar.addEventListener("click", () => abrirPuja(producto.id));
         botones.appendChild(botonPujar);
-
     } else {
         const botonComprar = crearTexto("button", "btn comprar", "Comprar");
-
         botonComprar.type = "button";
-
-        botonComprar.addEventListener("click", () => {
-            abrirCompra(producto.id);
-        });
-
+        botonComprar.addEventListener("click", () => abrirCompra(producto.id));
         botones.appendChild(botonComprar);
     }
 
     const botonDetalles = crearTexto("button", "btn secundario", "Detalles");
-
     botonDetalles.type = "button";
-
-    botonDetalles.addEventListener("click", () => {
-        mostrarDetalles(producto);
-    });
-
+    botonDetalles.addEventListener("click", () => mostrarDetalles(producto));
     botones.appendChild(botonDetalles);
 
     contenido.appendChild(botones);
@@ -1596,7 +1182,6 @@ function crearTarjeta(producto) {
             crearTexto("span", "", "♧ " + producto.pujas + " puja(s)"),
             crearTexto("span", "", "Del administrador")
         );
-
     } else {
         pie.append(
             crearTexto("span", "", producto.ejemplo ? "Ejemplo" : "Comunidad"),
@@ -1605,7 +1190,6 @@ function crearTarjeta(producto) {
     }
 
     tarjeta.append(imagen, contenido, pie);
-
     return tarjeta;
 }
 
@@ -1640,11 +1224,8 @@ function mostrarSubastas() {
         listaComunidad.appendChild(
             crearTexto("div", "vacio", "No se encontraron productos de la comunidad.")
         );
-
     } else {
-        comunidad.forEach(p => {
-            listaComunidad.appendChild(crearTarjeta(p));
-        });
+        comunidad.forEach(p => listaComunidad.appendChild(crearTarjeta(p)));
     }
 
     const admin = subastas
@@ -1662,17 +1243,10 @@ function mostrarSubastas() {
 
     if (!admin.length) {
         listaAdmin.appendChild(
-            crearTexto(
-                "div",
-                "vacio",
-                "Todavía no hay subastas activas publicadas por el administrador."
-            )
+            crearTexto("div", "vacio", "Todavía no hay subastas activas publicadas por el administrador.")
         );
-
     } else {
-        admin.forEach(p => {
-            listaAdmin.appendChild(crearTarjeta(p));
-        });
+        admin.forEach(p => listaAdmin.appendChild(crearTarjeta(p)));
     }
 
     $("total-subastas").textContent = subastas.length;
@@ -1689,52 +1263,29 @@ function mostrarSubastas() {
 
 function mostrarDetalles(producto) {
     const contenido = $("contenido-detalles");
-
     contenido.replaceChildren();
 
     contenido.append(
         crearTexto("p", "", "Vendedor: " + producto.vendedor),
         crearTexto("p", "", "Categoría: " + producto.categoria),
-        crearTexto(
-            "p",
-            "",
-            (producto.origen === "admin" ? "Oferta actual: " : "Precio: ") +
-            formatoPrecio(producto.precioActual)
-        )
+        crearTexto("p", "", (producto.origen === "admin" ? "Oferta actual: " : "Precio: ") + formatoPrecio(producto.precioActual))
     );
 
     if (producto.origen === "admin") {
-        contenido.appendChild(
-            crearTexto("p", "", "Precio inicial: " + formatoPrecio(producto.precioInicial))
-        );
-
-        contenido.appendChild(
-            crearTexto("p", "", "Número de pujas: " + producto.pujas)
-        );
+        contenido.appendChild(crearTexto("p", "", "Precio inicial: " + formatoPrecio(producto.precioInicial)));
+        contenido.appendChild(crearTexto("p", "", "Número de pujas: " + producto.pujas));
     }
 
-    contenido.appendChild(
-        crearTexto("p", "", "Descripción: " + producto.descripcion)
-    );
+    contenido.appendChild(crearTexto("p", "", "Descripción: " + producto.descripcion));
 
     if (producto.fechaFin) {
         const resultado = calcularTiempoRestante(producto.fechaFin);
-
-        contenido.appendChild(
-            crearTexto("p", "", "Fecha de finalización: " + producto.fechaFin)
-        );
-
-        contenido.appendChild(
-            crearTexto("p", "", "Estado: " + (resultado ? resultado.texto : "—"))
-        );
+        contenido.appendChild(crearTexto("p", "", "Fecha de finalización: " + producto.fechaFin));
+        contenido.appendChild(crearTexto("p", "", "Estado: " + (resultado ? resultado.texto : "—")));
     }
 
     contenido.appendChild(
-        crearTexto(
-            "p",
-            "",
-            "Esta es una demostración local; no se realizan pagos reales."
-        )
+        crearTexto("p", "", "Esta es una demostración local; no se realizan pagos reales.")
     );
 
     if (producto.historial && producto.historial.length) {
@@ -1742,11 +1293,7 @@ function mostrarDetalles(producto) {
 
         producto.historial.slice().reverse().forEach(p => {
             contenido.appendChild(
-                crearTexto(
-                    "p",
-                    "",
-                    p.usuario + " ofreció " + formatoPrecio(p.monto)
-                )
+                crearTexto("p", "", p.usuario + " ofreció " + formatoPrecio(p.monto))
             );
         });
     }
@@ -1758,7 +1305,6 @@ function mostrarDetalles(producto) {
 
 function abrirPuja(id) {
     const producto = subastas.find(p => p.id === id);
-
     if (!producto || producto.origen !== "admin") return;
 
     if (producto.fechaFin) {
@@ -1771,12 +1317,10 @@ function abrirPuja(id) {
     }
 
     idActual = id;
-
     const minimo = Number(producto.precioActual) + 50;
 
     $("info-puja").textContent =
-        producto.nombre + " · Oferta actual: " +
-        formatoPrecio(producto.precioActual);
+        producto.nombre + " · Oferta actual: " + formatoPrecio(producto.precioActual);
 
     $("minimo-puja").textContent =
         "La oferta debe ser de al menos " + formatoPrecio(minimo) + ".";
@@ -1804,10 +1348,15 @@ $("form-puja").addEventListener("submit", evento => {
     const monto = Number($("cantidad-puja").value);
     const minimo = Number(producto.precioActual) + 50;
 
-    if (!usuario || !Number.isFinite(monto) || monto < minimo) {
+    // SE CONSERVA LA VALIDACIÓN DEL PRECIO DE LAS OFERTAS.
+    if (!Number.isFinite(monto) || monto < minimo || monto <= 0) {
+        mostrarNotificacion(
+            "Oferta no válida. Debes ofertar al menos " + formatoPrecio(minimo) + ".",
+            true
+        );
+
         $("minimo-puja").textContent =
-            "Escribe tu nombre y una oferta igual o superior a " +
-            formatoPrecio(minimo) + ".";
+            "El monto mínimo para ofertar es " + formatoPrecio(minimo) + ".";
 
         return;
     }
@@ -1826,7 +1375,7 @@ $("form-puja").addEventListener("submit", evento => {
 
     producto.historial.push({
         ofertaId:nuevaOfertaId,
-        usuario,
+        usuario:usuario || "Usuario",
         monto,
         fecha:fechaOferta
     });
@@ -1844,30 +1393,21 @@ $("form-puja").addEventListener("submit", evento => {
         producto.pujas = pujasAnteriores;
         producto.historial = historialAnterior;
 
-        mostrarNotificacion(
-            "No se pudo guardar la oferta. Inténtalo nuevamente.",
-            true
-        );
-
+        mostrarNotificacion("No se pudo guardar la oferta. Inténtalo nuevamente.", true);
         return;
     }
-
-    /* REGISTRAR OFERTA EN EL APARTADO */
 
     ofertasRealizadas.push({
         id:nuevaOfertaId,
         productoId:producto.id,
         producto:producto.nombre,
-        usuario:usuario,
+        usuario:usuario || "Usuario",
         monto:monto,
         fecha:new Date(fechaOferta).toLocaleString("es-MX")
     });
 
     if (!guardarOfertasRealizadas()) {
-
-        ofertasRealizadas = ofertasRealizadas.filter(
-            o => o.id !== nuevaOfertaId
-        );
+        ofertasRealizadas = ofertasRealizadas.filter(o => o.id !== nuevaOfertaId);
 
         producto.precioActual = precioAnterior;
         producto.pujas = pujasAnteriores;
@@ -1879,11 +1419,7 @@ $("form-puja").addEventListener("submit", evento => {
             guardarSubastas();
         }
 
-        mostrarNotificacion(
-            "No se pudo guardar el registro de la oferta.",
-            true
-        );
-
+        mostrarNotificacion("No se pudo guardar el registro de la oferta.", true);
         return;
     }
 
@@ -1891,25 +1427,21 @@ $("form-puja").addEventListener("submit", evento => {
     guardarPujas();
 
     cerrarModal("modal-puja");
-
     mostrarSubastas();
     mostrarOfertasRealizadas();
-
     mostrarNotificacion("¡Tu oferta se realizó correctamente!");
 });
 
-/* COMPRAR */
+/* COMPRAR Y AGREGAR AL CARRITO */
 
 function abrirCompra(id) {
     const producto = subastas.find(p => p.id === id);
-
     if (!producto || producto.origen === "admin") return;
 
     idActual = id;
 
     $("info-compra").textContent =
-        producto.nombre + " · Precio: " +
-        formatoPrecio(producto.precioActual);
+        producto.nombre + " · Precio: " + formatoPrecio(producto.precioActual);
 
     $("nombre-comprador").value = "";
     $("telefono-comprador").value = "";
@@ -1922,23 +1454,24 @@ $("form-compra").addEventListener("submit", evento => {
 
     const producto = subastas.find(p => p.id === idActual);
 
-    if (!producto) return;
+    if (!producto) {
+        mostrarNotificacion("No se encontró el producto.", true);
+        return;
+    }
 
-    const nombre = $("nombre-comprador").value.trim();
-    const telefono = $("telefono-comprador").value.trim();
+    const agregado = agregarAlCarrito(producto);
 
-    if (!nombre || !telefono) return;
+    if (!agregado) {
+        mostrarNotificacion("No se pudo agregar el producto al carrito.", true);
+        return;
+    }
 
     contadorPujas++;
     guardarPujas();
 
     cerrarModal("modal-compra");
 
-    mostrarNotificacion(
-        "¡Gracias " + nombre + "! Tu solicitud de compra de " +
-        producto.nombre + " ha sido registrada."
-    );
-
+    mostrarNotificacion("¡" + producto.nombre + " se agregó correctamente a tu carrito!");
     mostrarSubastas();
 });
 
@@ -1957,9 +1490,7 @@ $("abrir-formulario").addEventListener("click", () => {
 
 $("cancelar-publicacion").addEventListener("click", () => {
     $("form-subasta").reset();
-
     $("panel-formulario").classList.remove("visible");
-
     ocultarMensaje("mensaje-publicacion");
 });
 
@@ -1967,24 +1498,7 @@ $("form-subasta").addEventListener("submit", evento => {
     evento.preventDefault();
 
     const precio = Number($("precio-inicial").value);
-
-    if (!Number.isFinite(precio) || precio <= 0) {
-        mostrarMensaje(
-            "mensaje-publicacion",
-            "El precio debe ser mayor que cero.",
-            true
-        );
-
-        return;
-    }
-
     const idNuevo = "usuario-" + Date.now();
-
-    const fechaFormateada = new Date().toLocaleDateString("es-MX", {
-        year:"numeric",
-        month:"long",
-        day:"numeric"
-    });
 
     const nueva = {
         id:idNuevo,
@@ -2005,6 +1519,7 @@ $("form-subasta").addEventListener("submit", evento => {
 
     subastas.unshift(nueva);
 
+    // SOLO SE GUARDA EN SUBASTAS. NO SE ENVÍA AL PERFIL.
     if (!guardarSubastas()) {
         subastas.shift();
 
@@ -2017,44 +1532,13 @@ $("form-subasta").addEventListener("submit", evento => {
         return;
     }
 
-    /* GUARDAR TAMBIÉN EN EL PERFIL */
-
-    try {
-        let productosPerfil = JSON.parse(
-            localStorage.getItem(CLAVE_PRODUCTOS_PERFIL) || "[]"
-        );
-
-        if (!Array.isArray(productosPerfil)) {
-            productosPerfil = [];
-        }
-
-        productosPerfil.unshift({
-            id:idNuevo,
-            nombre:nueva.nombre,
-            precio:nueva.precioActual,
-            categoria:nueva.categoria,
-            descripcion:nueva.descripcion,
-            fecha:fechaFormateada,
-            autor:nueva.vendedor,
-            imagen:nueva.imagen || ""
-        });
-
-        localStorage.setItem(
-            CLAVE_PRODUCTOS_PERFIL,
-            JSON.stringify(productosPerfil)
-        );
-
-    } catch (e) {
-        console.error("No se pudo sincronizar con el perfil", e);
-    }
-
     mostrarSubastas();
 
     $("form-subasta").reset();
 
     mostrarMensaje(
         "mensaje-publicacion",
-        "¡Tu producto se publicó correctamente y ya aparece en tu perfil!"
+        "¡Tu producto se publicó correctamente y ya aparece en Subastas!"
     );
 
     $("lista-productos").scrollIntoView({
@@ -2067,72 +1551,45 @@ $("form-subasta").addEventListener("submit", evento => {
 
 function mostrarOfertasRealizadas() {
     const lista = $("lista-ofertas");
-
     lista.replaceChildren();
 
-    $("total-ofertas-registradas").textContent =
-        ofertasRealizadas.length;
+    $("total-ofertas-registradas").textContent = ofertasRealizadas.length;
 
     if (ofertasRealizadas.length === 0) {
         lista.appendChild(
-            crearTexto(
-                "div",
-                "vacio",
-                "Todavía no hay ofertas registradas."
-            )
+            crearTexto("div", "vacio", "Todavía no hay ofertas registradas.")
         );
-
         return;
     }
 
-    ofertasRealizadas
-        .slice()
-        .reverse()
-        .forEach(oferta => {
+    ofertasRealizadas.slice().reverse().forEach(oferta => {
+        const tarjeta = crearTexto("article", "tarjeta-oferta", "");
 
-            const tarjeta = crearTexto("article", "tarjeta-oferta", "");
+        tarjeta.appendChild(crearTexto("h3", "", oferta.producto));
 
-            tarjeta.appendChild(
-                crearTexto("h3", "", oferta.producto)
-            );
+        tarjeta.append(
+            crearTexto("p", "", "Usuario: " + oferta.usuario),
+            crearTexto("p", "", "Fecha: " + oferta.fecha)
+        );
 
-            tarjeta.append(
-                crearTexto("p", "", "Usuario: " + oferta.usuario),
-                crearTexto("p", "", "Fecha: " + oferta.fecha)
-            );
+        tarjeta.appendChild(
+            crearTexto("div", "monto-oferta", formatoPrecio(oferta.monto))
+        );
 
-            tarjeta.appendChild(
-                crearTexto(
-                    "div",
-                    "monto-oferta",
-                    formatoPrecio(oferta.monto)
-                )
-            );
+        const acciones = crearTexto("div", "acciones-oferta", "");
 
-            const acciones = crearTexto("div", "acciones-oferta", "");
+        const editar = crearTexto("button", "btn secundario", "Editar");
+        editar.type = "button";
+        editar.addEventListener("click", () => abrirEdicionOferta(oferta.id));
 
-            const editar = crearTexto("button", "btn secundario", "Editar");
+        const eliminar = crearTexto("button", "btn eliminar", "Eliminar");
+        eliminar.type = "button";
+        eliminar.addEventListener("click", () => eliminarOferta(oferta.id));
 
-            editar.type = "button";
-
-            editar.addEventListener("click", () => {
-                abrirEdicionOferta(oferta.id);
-            });
-
-            const eliminar = crearTexto("button", "btn eliminar", "Eliminar");
-
-            eliminar.type = "button";
-
-            eliminar.addEventListener("click", () => {
-                eliminarOferta(oferta.id);
-            });
-
-            acciones.append(editar, eliminar);
-
-            tarjeta.appendChild(acciones);
-
-            lista.appendChild(tarjeta);
-        });
+        acciones.append(editar, eliminar);
+        tarjeta.appendChild(acciones);
+        lista.appendChild(tarjeta);
+    });
 }
 
 /* ABRIR EDICIÓN DE OFERTA */
@@ -2157,7 +1614,6 @@ function abrirEdicionOferta(id) {
 
 function actualizarSubastaDesdeOfertas(productoId) {
     const producto = subastas.find(p => p.id === productoId);
-
     if (!producto) return false;
 
     const historial = producto.historial || [];
@@ -2181,9 +1637,7 @@ function actualizarSubastaDesdeOfertas(productoId) {
 $("form-editar-oferta").addEventListener("submit", evento => {
     evento.preventDefault();
 
-    const oferta = ofertasRealizadas.find(
-        o => o.id === idOfertaEditando
-    );
+    const oferta = ofertasRealizadas.find(o => o.id === idOfertaEditando);
 
     if (!oferta) {
         mostrarNotificacion("No se encontró la oferta.", true);
@@ -2193,18 +1647,7 @@ $("form-editar-oferta").addEventListener("submit", evento => {
     const usuarioNuevo = $("editar-usuario-oferta").value.trim();
     const montoNuevo = Number($("editar-monto-oferta").value);
 
-    if (
-        !usuarioNuevo ||
-        !Number.isFinite(montoNuevo) ||
-        montoNuevo <= 0
-    ) {
-        mostrarNotificacion("Verifica los datos de la oferta.", true);
-        return;
-    }
-
-    const producto = subastas.find(
-        p => p.id === oferta.productoId
-    );
+    const producto = subastas.find(p => p.id === oferta.productoId);
 
     if (!producto) {
         mostrarNotificacion("No se encontró la subasta relacionada.", true);
@@ -2212,16 +1655,10 @@ $("form-editar-oferta").addEventListener("submit", evento => {
     }
 
     const historial = producto.historial || [];
-
-    const registro = historial.find(
-        h => h.ofertaId === oferta.id
-    );
+    const registro = historial.find(h => h.ofertaId === oferta.id);
 
     if (!registro) {
-        mostrarNotificacion(
-            "No se encontró esta oferta dentro del historial.",
-            true
-        );
+        mostrarNotificacion("No se encontró esta oferta dentro del historial.", true);
         return;
     }
 
@@ -2230,39 +1667,29 @@ $("form-editar-oferta").addEventListener("submit", evento => {
     const usuarioHistorialAnterior = registro.usuario;
     const montoHistorialAnterior = registro.monto;
 
-    oferta.usuario = usuarioNuevo;
+    oferta.usuario = usuarioNuevo || "Usuario";
     oferta.monto = montoNuevo;
 
-    registro.usuario = usuarioNuevo;
+    registro.usuario = usuarioNuevo || "Usuario";
     registro.monto = montoNuevo;
 
     if (!actualizarSubastaDesdeOfertas(producto.id)) {
-
         oferta.usuario = usuarioAnterior;
         oferta.monto = montoAnterior;
-
         registro.usuario = usuarioHistorialAnterior;
         registro.monto = montoHistorialAnterior;
 
-        mostrarNotificacion(
-            "No se pudieron guardar los cambios.",
-            true
-        );
-
+        mostrarNotificacion("No se pudieron guardar los cambios.", true);
         return;
     }
 
     if (!guardarOfertasRealizadas()) {
-        mostrarNotificacion(
-            "La oferta se actualizó, pero no se pudo guardar el registro.",
-            true
-        );
+        mostrarNotificacion("La oferta se actualizó, pero no se pudo guardar el registro.", true);
     } else {
         mostrarNotificacion("La oferta se actualizó correctamente.");
     }
 
     cerrarModal("modal-editar-oferta");
-
     mostrarOfertasRealizadas();
     mostrarSubastas();
 });
@@ -2270,9 +1697,7 @@ $("form-editar-oferta").addEventListener("submit", evento => {
 /* ELIMINAR OFERTA */
 
 function eliminarOferta(id) {
-    const indice = ofertasRealizadas.findIndex(
-        o => o.id === id
-    );
+    const indice = ofertasRealizadas.findIndex(o => o.id === id);
 
     if (indice === -1) {
         mostrarNotificacion("No se encontró la oferta.", true);
@@ -2280,10 +1705,7 @@ function eliminarOferta(id) {
     }
 
     const oferta = ofertasRealizadas[indice];
-
-    const producto = subastas.find(
-        p => p.id === oferta.productoId
-    );
+    const producto = subastas.find(p => p.id === oferta.productoId);
 
     if (!producto) {
         mostrarNotificacion("No se encontró la subasta relacionada.", true);
@@ -2292,18 +1714,11 @@ function eliminarOferta(id) {
 
     const historialAnterior = [...producto.historial];
 
-    producto.historial = producto.historial.filter(
-        h => h.ofertaId !== id
-    );
+    producto.historial = producto.historial.filter(h => h.ofertaId !== id);
 
     if (!actualizarSubastaDesdeOfertas(producto.id)) {
         producto.historial = historialAnterior;
-
-        mostrarNotificacion(
-            "No se pudo eliminar la oferta.",
-            true
-        );
-
+        mostrarNotificacion("No se pudo eliminar la oferta.", true);
         return;
     }
 
@@ -2314,40 +1729,30 @@ function eliminarOferta(id) {
         producto.historial = historialAnterior;
         actualizarSubastaDesdeOfertas(producto.id);
 
-        mostrarNotificacion(
-            "No se pudo guardar la eliminación.",
-            true
-        );
-
+        mostrarNotificacion("No se pudo guardar la eliminación.", true);
         return;
     }
 
     mostrarOfertasRealizadas();
     mostrarSubastas();
-
     mostrarNotificacion("La oferta se eliminó correctamente.");
 }
 
 /* FILTROS */
 
 $("buscar").addEventListener("input", mostrarSubastas);
-
 $("filtro-categoria").addEventListener("change", mostrarSubastas);
-
 $("filtro-publicaciones").addEventListener("change", mostrarSubastas);
 
 /* INICIALIZACIÓN */
 
 subastas = cargarSubastas();
-
 ofertasRealizadas = cargarOfertasRealizadas();
 
 mostrarSubastas();
-
 mostrarOfertasRealizadas();
 
 setInterval(actualizarTemporizadores, 1000);
-
 </script>
 
 </body>
