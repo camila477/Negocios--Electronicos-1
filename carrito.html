@@ -1089,6 +1089,119 @@
                 padding: 11px;
             }
         }
+        /* ===== CHECKOUT MODAL ===== */
+        .checkout-modal {
+            background: #fff;
+            border-radius: 18px;
+            width: min(640px, 96vw);
+            max-height: 92vh;
+            overflow-y: auto;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.25);
+        }
+        .checkout-header {
+            padding: 22px 24px 10px;
+            position: relative;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .checkout-header h2 { font-size: 20px; color: #183b4e; }
+        .checkout-header p { font-size: 13px; color: #718096; margin-top: 4px; }
+        .checkout-steps {
+            display: flex;
+            gap: 8px;
+            padding: 14px 24px;
+            background: #f8fbfd;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .cstep {
+            flex: 1;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: #718096;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .cstep-num {
+            width: 24px; height: 24px; border-radius: 50%;
+            background: #e2e8f0; color: #718096;
+            display: grid; place-items: center; font-size: 12px;
+        }
+        .cstep.active { color: #183b4e; }
+        .cstep.active .cstep-num { background: #38bdf8; color: #0c2a3a; }
+        .cstep.done { color: #16805d; }
+        .cstep.done .cstep-num { background: #16805d; color: #fff; }
+        .checkout-body { padding: 20px 24px 24px; }
+        .c-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .c-field { display: flex; flex-direction: column; gap: 4px; }
+        .c-field.full { grid-column: 1 / -1; }
+        .c-field label { font-size: 12px; font-weight: 600; color: #183b4e; }
+        .c-field input, .c-field select {
+            padding: 10px 12px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+        }
+        .c-field input:focus, .c-field select:focus { border-color: #38bdf8; }
+        .c-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        .c-pay-list { display: flex; flex-direction: column; gap: 10px; }
+        .c-pay-opt {
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 14px;
+            display: flex;
+            gap: 12px;
+            cursor: pointer;
+            align-items: flex-start;
+        }
+        .c-pay-opt.selected { border-color: #38bdf8; background: rgba(56,189,248,0.05); }
+        .c-pay-opt strong { display: block; font-size: 14px; color: #183b4e; }
+        .c-pay-opt span { font-size: 12px; color: #718096; }
+        .c-pay-form { display: none; margin-top: 10px; }
+        .c-pay-opt.selected .c-pay-form { display: block; }
+        .c-pay-form input {
+            width: 100%;
+            padding: 9px 12px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+        .c-pay-row { display: flex; gap: 8px; }
+        .c-transfer, .c-ewallet {
+            background: #f0f9ff;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        .c-ewallet { background: #ecfdf5; }
+        .c-ticket {
+            border: 2px dashed #e2e8f0;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 8px;
+        }
+        .c-trow {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+        @media (max-width: 560px) {
+            .c-form-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 
@@ -1360,120 +1473,251 @@
 
 <div class="toast" id="notificacion"></div>
 
+<!-- CHECKOUT 3 PASOS -->
+<div class="modal-overlay" id="modal-checkout">
+    <section class="checkout-modal" role="dialog" aria-modal="true">
+        <div class="checkout-header">
+            <button type="button" class="modal-close" id="cerrar-checkout" aria-label="Cerrar">×</button>
+            <h2>Finalizar compra</h2>
+            <p>Completa los pasos para confirmar tu pedido</p>
+        </div>
+        <div class="checkout-steps">
+            <div class="cstep active" data-cstep="1"><span class="cstep-num">1</span> Dirección</div>
+            <div class="cstep" data-cstep="2"><span class="cstep-num">2</span> Pago</div>
+            <div class="cstep" data-cstep="3"><span class="cstep-num">3</span> Confirmación</div>
+        </div>
+        <div class="checkout-body">
+            <div id="c-paso-1">
+                <div class="c-form-grid">
+                    <div class="c-field">
+                        <label>Nombre completo</label>
+                        <input type="text" id="c-nombre" placeholder="Ej. Juan Pérez">
+                    </div>
+                    <div class="c-field">
+                        <label>Teléfono</label>
+                        <input type="tel" id="c-telefono" placeholder="5512345678">
+                    </div>
+                    <div class="c-field full">
+                        <label>Correo electrónico</label>
+                        <input type="email" id="c-email" placeholder="ejemplo@correo.com">
+                    </div>
+                    <div class="c-field full">
+                        <label>Calle y número</label>
+                        <input type="text" id="c-calle" placeholder="Calle, número">
+                    </div>
+                    <div class="c-field">
+                        <label>Colonia</label>
+                        <input type="text" id="c-colonia" placeholder="Colonia">
+                    </div>
+                    <div class="c-field">
+                        <label>C.P.</label>
+                        <input type="text" id="c-cp" placeholder="00000" maxlength="5">
+                    </div>
+                    <div class="c-field">
+                        <label>Ciudad</label>
+                        <input type="text" id="c-ciudad" placeholder="Ciudad">
+                    </div>
+                    <div class="c-field">
+                        <label>Estado</label>
+                        <select id="c-estado">
+                            <option value="">Selecciona...</option>
+                            <option>Aguascalientes</option><option>Baja California</option>
+                            <option>Baja California Sur</option><option>Campeche</option>
+                            <option>Chiapas</option><option>Chihuahua</option>
+                            <option>Ciudad de México</option><option>Coahuila</option>
+                            <option>Colima</option><option>Durango</option>
+                            <option>Estado de México</option><option>Guanajuato</option>
+                            <option>Guerrero</option><option>Hidalgo</option>
+                            <option>Jalisco</option><option>Michoacán</option>
+                            <option>Morelos</option><option>Nayarit</option>
+                            <option>Nuevo León</option><option>Oaxaca</option>
+                            <option>Puebla</option><option>Querétaro</option>
+                            <option>Quintana Roo</option><option>San Luis Potosí</option>
+                            <option>Sinaloa</option><option>Sonora</option>
+                            <option>Tabasco</option><option>Tamaulipas</option>
+                            <option>Tlaxcala</option><option>Veracruz</option>
+                            <option>Yucatán</option><option>Zacatecas</option>
+                        </select>
+                    </div>
+                    <div class="c-field full">
+                        <label>Referencias (opcional)</label>
+                        <input type="text" id="c-refs" placeholder="Entre calles, color de fachada...">
+                    </div>
+                </div>
+                <div class="c-actions">
+                    <button type="button" class="secondary-btn" id="c-cancelar-1">Cancelar</button>
+                    <button type="button" class="continue-btn" id="c-sig-1">Continuar al pago →</button>
+                </div>
+            </div>
+
+            <div id="c-paso-2" hidden>
+                <div class="c-pay-list">
+                    <label class="c-pay-opt selected">
+                        <input type="radio" name="c-metodo" value="tarjeta" checked>
+                        <div>
+                            <strong>💳 Tarjeta de crédito / débito</strong>
+                            <span>Visa, Mastercard, Amex (simulado)</span>
+                            <div class="c-pay-form">
+                                <input type="text" id="c-card-nombre" placeholder="Nombre en la tarjeta">
+                                <input type="text" id="c-card-numero" placeholder="ACCT-000003" maxlength="19">
+                                <div class="c-pay-row">
+                                    <input type="text" id="c-card-fecha" placeholder="MM/AA" maxlength="5">
+                                    <input type="text" id="c-card-cvv" placeholder="CVV" maxlength="4">
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                    <label class="c-pay-opt">
+                        <input type="radio" name="c-metodo" value="transferencia">
+                        <div>
+                            <strong>🏦 Transferencia bancaria</strong>
+                            <span>SPEI o depósito (simulado)</span>
+                            <div class="c-pay-form">
+                                <div class="c-transfer">
+                                    <div><b>Banco:</b> Banorte</div>
+                                    <div><b>CLABE:</b> 072 180 001234567890</div>
+                                    <div><b>Cuenta:</b> 1234567890</div>
+                                    <div><b>Beneficiario:</b> Perforaciones Palacios S.A. de C.V.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                    <label class="c-pay-opt">
+                        <input type="radio" name="c-metodo" value="ewallet">
+                        <div>
+                            <strong>📱 E-wallet / Saldo simulado</strong>
+                            <span>Saldo de demostración</span>
+                            <div class="c-pay-form">
+                                <div class="c-ewallet">
+                                    Saldo disponible: <b id="c-saldo">$15,000.00</b>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+                <div class="c-actions">
+                    <button type="button" class="secondary-btn" id="c-atras-2">← Atrás</button>
+                    <button type="button" class="continue-btn" id="c-sig-2">Revisar y pagar →</button>
+                </div>
+            </div>
+
+            <div id="c-paso-3" hidden>
+                <div id="c-vista-revision">
+                    <div id="c-resumen-texto" style="font-size:14px;line-height:1.7;margin-bottom:18px;"></div>
+                    <div class="c-actions">
+                        <button type="button" class="secondary-btn" id="c-atras-3">← Atrás</button>
+                        <button type="button" class="continue-btn" id="c-pagar">🔒 Pagar ahora</button>
+                    </div>
+                </div>
+                <div id="c-vista-exito" hidden>
+                    <div style="text-align:center;padding:10px 0 20px;">
+                        <div style="width:70px;height:70px;border-radius:50%;background:#ecfdf5;color:#16805d;display:grid;place-items:center;font-size:36px;margin:0 auto 14px;">✓</div>
+                        <h3 style="color:#16805d;font-size:22px;margin-bottom:6px;">¡Pago aprobado!</h3>
+                        <p style="color:#718096;font-size:14px;">Número de pedido: <strong id="c-num-pedido" style="color:#183b4e;"></strong></p>
+                    </div>
+                    <div class="c-ticket" id="c-ticket">
+                        <div style="text-align:center;border-bottom:1px solid #e2e8f0;padding-bottom:12px;margin-bottom:12px;">
+                            <strong style="font-size:16px;color:#183b4e;">Perforaciones Palacios</strong>
+                            <div style="font-size:12px;color:#718096;">COMPROBANTE DE COMPRA</div>
+                        </div>
+                        <div class="c-trow"><span>Folio:</span><strong id="ct-folio"></strong></div>
+                        <div class="c-trow"><span>Fecha:</span><span id="ct-fecha"></span></div>
+                        <div class="c-trow"><span>Cliente:</span><span id="ct-cliente"></span></div>
+                        <div class="c-trow"><span>Teléfono:</span><span id="ct-tel"></span></div>
+                        <div class="c-trow"><span>Dirección:</span><span id="ct-dir" style="text-align:right;max-width:58%;"></span></div>
+                        <div class="c-trow"><span>Método de pago:</span><span id="ct-pago"></span></div>
+                        <hr style="border:none;border-top:1px dashed #e2e8f0;margin:10px 0;">
+                        <div id="ct-productos" style="font-size:13px;"></div>
+                        <div class="c-trow"><span>Subtotal:</span><span id="ct-subtotal"></span></div>
+                        <div class="c-trow"><span>Envío:</span><span id="ct-envio"></span></div>
+                        <div class="c-trow" id="ct-desc-row" hidden><span>Descuento:</span><span id="ct-descuento"></span></div>
+                        <div class="c-trow" style="font-weight:700;font-size:16px;border-top:1px solid #e2e8f0;padding-top:8px;margin-top:8px;">
+                            <span>TOTAL:</span><span id="ct-total"></span>
+                        </div>
+                        <p style="text-align:center;font-size:11px;color:#718096;margin-top:12px;">Comprobante simulado · No es factura fiscal</p>
+                    </div>
+                    <div class="c-actions" style="justify-content:center;">
+                        <button type="button" class="secondary-btn" id="c-descargar">📄 Descargar PDF (simulado)</button>
+                        <button type="button" class="continue-btn" id="c-cerrar-exito">Listo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
 <script>
+(function () {
     const COSTO_ENVIO = 350;
     let indiceAEliminar = null;
     let cuponAplicado = null;
-
     const CUPONES = {
-        PERFO10: {
-            descuento: 10,
-            descripcion: "10% de descuento"
-        },
-        AGUA15: {
-            descuento: 15,
-            descripcion: "15% de descuento"
-        }
+        PERFO10: { descuento: 10, descripcion: "10% de descuento" },
+        AGUA15: { descuento: 15, descripcion: "15% de descuento" }
     };
 
     function obtenerCarrito() {
-        try {
-            return JSON.parse(localStorage.getItem("carrito")) || [];
-        } catch (error) {
-            return [];
-        }
+        try { return JSON.parse(localStorage.getItem("carrito")) || []; }
+        catch (e) { return []; }
     }
-
     function guardarCarrito(carrito) {
         localStorage.setItem("carrito", JSON.stringify(carrito));
     }
-
     function obtenerPedidos() {
-        try {
-            return JSON.parse(localStorage.getItem("pedidos")) || [];
-        } catch (error) {
-            return [];
-        }
+        try { return JSON.parse(localStorage.getItem("pedidos")) || []; }
+        catch (e) { return []; }
     }
-
     function guardarPedidos(pedidos) {
         localStorage.setItem("pedidos", JSON.stringify(pedidos));
     }
-
     function formatoPrecio(precio) {
-        return Number(precio || 0).toLocaleString("es-MX", {
-            style: "currency",
-            currency: "MXN"
-        });
+        return Number(precio || 0).toLocaleString("es-MX", { style: "currency", currency: "MXN" });
     }
-
     function escaparHTML(texto) {
-        return String(texto ?? "").replace(/[&<>"']/g, function(caracter) {
-            const equivalencias = {
-                "&": "&amp;",
-                "<": "&lt;",
-                ">": "&gt;",
-                '"': "&quot;",
-                "'": "&#039;"
-            };
-            return equivalencias[caracter];
+        return String(texto ?? "").replace(/[&<>"']/g, function (c) {
+            return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[c];
         });
     }
-
     function mostrarNotificacion(mensaje) {
         const toast = document.getElementById("notificacion");
         toast.textContent = mensaje;
         toast.classList.add("show");
-
         clearTimeout(window.temporizadorNotificacion);
-        window.temporizadorNotificacion = setTimeout(function() {
+        window.temporizadorNotificacion = setTimeout(function () {
             toast.classList.remove("show");
         }, 3000);
     }
-
     function calcularSubtotal(carrito) {
-        return carrito.reduce(function(total, producto) {
-            return total +
-                Number(producto.precio || 0) *
-                Number(producto.cantidad || 1);
+        return carrito.reduce(function (t, p) {
+            return t + Number(p.precio || 0) * Number(p.cantidad || 1);
         }, 0);
     }
-
     function calcularDescuento(subtotal) {
-        if (!cuponAplicado) {
-            return 0;
-        }
+        if (!cuponAplicado) return 0;
         return subtotal * (cuponAplicado.descuento / 100);
     }
-
     function actualizarResumen() {
         const carrito = obtenerCarrito();
         const subtotal = calcularSubtotal(carrito);
         const envio = carrito.length ? COSTO_ENVIO : 0;
         const descuento = calcularDescuento(subtotal);
         const total = Math.max(0, subtotal - descuento + envio);
-
         document.getElementById("subtotal").textContent = formatoPrecio(subtotal);
         document.getElementById("costo-envio").textContent = formatoPrecio(envio);
         document.getElementById("total").textContent = formatoPrecio(total);
-
-        const filaDescuento = document.getElementById("fila-descuento");
-
+        const fila = document.getElementById("fila-descuento");
         if (cuponAplicado && carrito.length > 0) {
-            filaDescuento.hidden = false;
+            fila.hidden = false;
             document.getElementById("etiqueta-cupon").textContent = cuponAplicado.codigo;
             document.getElementById("monto-descuento").textContent = "−" + formatoPrecio(descuento);
         } else {
-            filaDescuento.hidden = true;
-            document.getElementById("monto-descuento").textContent = "−" + formatoPrecio(0);
+            fila.hidden = true;
         }
     }
-
     function actualizarInterfazCupon() {
         const input = document.getElementById("codigo-cupon");
         const mensaje = document.getElementById("mensaje-cupon");
         const quitar = document.getElementById("quitar-cupon");
-
         if (cuponAplicado) {
             input.value = cuponAplicado.codigo;
             input.disabled = true;
@@ -1487,43 +1731,35 @@
             quitar.hidden = true;
         }
     }
-
     function canjearCupon() {
         const carrito = obtenerCarrito();
         const input = document.getElementById("codigo-cupon");
         const mensaje = document.getElementById("mensaje-cupon");
         const codigo = input.value.trim().toUpperCase();
-
         if (carrito.length === 0) {
             mensaje.textContent = "Agrega productos al carrito antes de canjear un cupón.";
             mensaje.className = "coupon-message error";
             return;
         }
-
         if (!codigo) {
             mensaje.textContent = "Escribe un código de cupón.";
             mensaje.className = "coupon-message error";
-            input.focus();
             return;
         }
-
         if (!CUPONES[codigo]) {
             mensaje.textContent = "El cupón no es válido. Prueba PERFO10 o AGUA15.";
             mensaje.className = "coupon-message error";
             return;
         }
-
         cuponAplicado = {
             codigo: codigo,
             descuento: CUPONES[codigo].descuento,
             descripcion: CUPONES[codigo].descripcion
         };
-
         actualizarInterfazCupon();
         actualizarResumen();
         mostrarNotificacion("Cupón " + codigo + " aplicado correctamente.");
     }
-
     function quitarCupon() {
         cuponAplicado = null;
         document.getElementById("codigo-cupon").value = "";
@@ -1531,543 +1767,393 @@
         actualizarResumen();
         mostrarNotificacion("Se quitó el cupón de descuento.");
     }
-
     function renderizarCarrito() {
         const carrito = obtenerCarrito();
         const lista = document.getElementById("lista-carrito");
-
-        const totalUnidades = carrito.reduce(function(total, producto) {
-            return total + Number(producto.cantidad || 1);
+        const totalUnidades = carrito.reduce(function (t, p) {
+            return t + Number(p.cantidad || 1);
         }, 0);
-
         document.getElementById("contador-productos").textContent =
             totalUnidades + (totalUnidades === 1 ? " producto" : " productos");
-
         if (carrito.length === 0) {
-            lista.innerHTML = `
-                <div class="empty-cart">
-                    <div class="empty-icon">🛒</div>
-                    <h3>Tu carrito está vacío</h3>
-                    <p>
-                        Todavía no has agregado productos.<br>
-                        Explora nuestro catálogo para encontrar lo que necesitas.
-                    </p>
-                    <a href="catalogo.html" class="primary-btn">
-                        Explorar productos →
-                    </a>
-                </div>
-            `;
-
+            lista.innerHTML =
+                '<div class="empty-cart">' +
+                '<div class="empty-icon">🛒</div>' +
+                "<h3>Tu carrito está vacío</h3>" +
+                "<p>Todavía no has agregado productos.<br>Explora nuestro catálogo para encontrar lo que necesitas.</p>" +
+                '<a href="catalogo.html" class="primary-btn">Explorar productos →</a>' +
+                "</div>";
             if (cuponAplicado) {
                 cuponAplicado = null;
                 actualizarInterfazCupon();
             }
-
             actualizarResumen();
             return;
         }
-
-        lista.innerHTML = carrito.map(function(producto, indice) {
-            const cantidad = Number(producto.cantidad || 1);
-            const precio = Number(producto.precio || 0);
-            const nombre = escaparHTML(producto.nombre || "Producto");
-            const imagen = producto.imagen || producto.img || "";
-
-            let imagenHTML = "📦";
-
-            if (imagen && /^https?:\/\//i.test(imagen)) {
-                imagenHTML = `<img src="${escaparHTML(imagen)}" alt="${nombre}">`;
-            } else if (imagen && /^[\w./-]+$/.test(imagen)) {
-                imagenHTML = `
-                    <img src="${escaparHTML(imagen)}" alt="${nombre}"
-                    onerror="this.parentElement.textContent='📦'">
-                `;
-            }
-
-            return `
-                <article class="cart-item">
-                    <div class="product-image">${imagenHTML}</div>
-                    <div class="product-info">
-                        <h3>${nombre}</h3>
-                        <p>${formatoPrecio(precio)} por unidad</p>
-                        <div class="quantity-controls">
-                            <button type="button"
-                                aria-label="Disminuir cantidad"
-                                onclick="cambiarCantidad(${indice}, -1)">−</button>
-                            <span class="quantity">${cantidad}</span>
-                            <button type="button"
-                                aria-label="Aumentar cantidad"
-                                onclick="cambiarCantidad(${indice}, 1)">+</button>
-                        </div>
-                    </div>
-                    <div class="product-price">
-                        <strong>${formatoPrecio(precio * cantidad)}</strong>
-                        <button class="remove-btn" type="button"
-                            onclick="pedirConfirmacion(${indice})">
-                            Quitar
-                        </button>
-                    </div>
-                </article>
-            `;
-        }).join("");
-
+        lista.innerHTML = carrito
+            .map(function (producto, indice) {
+                const cantidad = Number(producto.cantidad || 1);
+                const precio = Number(producto.precio || 0);
+                const nombre = escaparHTML(producto.nombre || "Producto");
+                const imagen = producto.imagen || producto.img || "";
+                let imagenHTML = "📦";
+                if (imagen && /^https?:\/\//i.test(imagen)) {
+                    imagenHTML = '<img src="' + escaparHTML(imagen) + '" alt="' + nombre + '">';
+                } else if (imagen && /^[\w./-]+$/.test(imagen)) {
+                    imagenHTML =
+                        '<img src="' +
+                        escaparHTML(imagen) +
+                        '" alt="' +
+                        nombre +
+                        "\" onerror=\"this.parentElement.textContent='📦'\">";
+                }
+                return (
+                    '<article class="cart-item">' +
+                    '<div class="product-image">' +
+                    imagenHTML +
+                    "</div>" +
+                    '<div class="product-info">' +
+                    "<h3>" +
+                    nombre +
+                    "</h3>" +
+                    "<p>" +
+                    formatoPrecio(precio) +
+                    " por unidad</p>" +
+                    '<div class="quantity-controls">' +
+                    '<button type="button" aria-label="Disminuir" onclick="cambiarCantidad(' +
+                    indice +
+                    ', -1)">−</button>' +
+                    '<span class="quantity">' +
+                    cantidad +
+                    "</span>" +
+                    '<button type="button" aria-label="Aumentar" onclick="cambiarCantidad(' +
+                    indice +
+                    ', 1)">+</button>' +
+                    "</div></div>" +
+                    '<div class="product-price">' +
+                    "<strong>" +
+                    formatoPrecio(precio * cantidad) +
+                    "</strong>" +
+                    '<button class="remove-btn" type="button" onclick="pedirConfirmacion(' +
+                    indice +
+                    ')">Quitar</button>' +
+                    "</div></article>"
+                );
+            })
+            .join("");
         actualizarResumen();
     }
-
-    function cambiarCantidad(indice, cambio) {
+    window.cambiarCantidad = function (indice, cambio) {
         const carrito = obtenerCarrito();
         if (!carrito[indice]) return;
-
-        const cantidadActual = Number(carrito[indice].cantidad || 1);
-        const nuevaCantidad = cantidadActual + cambio;
-
-        if (nuevaCantidad <= 0) {
+        const nueva = Number(carrito[indice].cantidad || 1) + cambio;
+        if (nueva <= 0) {
             pedirConfirmacion(indice);
             return;
         }
-
-        carrito[indice].cantidad = nuevaCantidad;
+        carrito[indice].cantidad = nueva;
         guardarCarrito(carrito);
         renderizarCarrito();
-    }
-
-    function pedirConfirmacion(indice) {
+    };
+    window.pedirConfirmacion = function (indice) {
         const carrito = obtenerCarrito();
         if (!carrito[indice]) return;
-
         indiceAEliminar = indice;
-        const nombre = carrito[indice].nombre || "este producto";
-
         document.getElementById("texto-confirmar").innerHTML =
-            '¿Estás seguro de que deseas quitar <strong>' +
-            escaparHTML(nombre) +
-            '</strong> del carrito?';
-
+            "¿Estás seguro de que deseas quitar <strong>" +
+            escaparHTML(carrito[indice].nombre || "este producto") +
+            "</strong> del carrito?";
         document.getElementById("modal-confirmar").classList.add("show");
-    }
-
+    };
     function cerrarConfirmacion() {
         document.getElementById("modal-confirmar").classList.remove("show");
         indiceAEliminar = null;
     }
-
     function confirmarEliminar() {
         if (indiceAEliminar === null) {
             cerrarConfirmacion();
             return;
         }
-
         const carrito = obtenerCarrito();
         if (!carrito[indiceAEliminar]) {
             cerrarConfirmacion();
             return;
         }
-
         carrito.splice(indiceAEliminar, 1);
         guardarCarrito(carrito);
         cerrarConfirmacion();
         renderizarCarrito();
         mostrarNotificacion("Producto eliminado del carrito.");
     }
-
     function abrirPoliticas() {
-        const carrito = obtenerCarrito();
-        if (carrito.length === 0) {
+        if (obtenerCarrito().length === 0) {
             mostrarNotificacion("Tu carrito está vacío.");
             return;
         }
         document.getElementById("modal-politicas").classList.add("show");
     }
-
     function cerrarPoliticas() {
         document.getElementById("modal-politicas").classList.remove("show");
     }
-
-  
-function abrirFormularioCompra() {
-    const carrito = obtenerCarrito();
-
-    if (!carrito.length) {
-        mostrarNotificacion("Tu carrito está vacío.");
-        return;
-    }
-
-    let modal = document.getElementById("modal-checkout");
-
-    if (!modal) {
-        modal = document.createElement("div");
-        modal.id = "modal-checkout";
-        modal.className = "modal-overlay show";
-
-        modal.innerHTML = `
-            <div class="policy-modal">
-                <div class="modal-header">
-                    <button class="modal-close" type="button"
-                        onclick="cerrarFormularioCompra()">×</button>
-                    <h2>Finalizar compra</h2>
-                    <p>Completa tus datos para registrar tu pedido.</p>
-                </div>
-
-                <form id="form-checkout">
-                    <div class="policy-content">
-                        <h3 style="color:#183b4e;margin-bottom:15px">
-                            Datos de entrega
-                        </h3>
-
-                        <label>Nombre completo</label>
-                        <input name="nombre" id="checkout-nombre"
-                            type="text" placeholder="Tu nombre"
-                            style="width:100%;padding:12px;margin:7px 0 15px;border:1px solid #cbd5e1;border-radius:8px">
-
-                        <label>Teléfono</label>
-                        <input name="telefono" id="checkout-telefono"
-                            type="tel" placeholder="Tu teléfono"
-                            style="width:100%;padding:12px;margin:7px 0 15px;border:1px solid #cbd5e1;border-radius:8px">
-
-                        <label>Correo electrónico</label>
-                        <input name="correo" id="checkout-correo"
-                            type="email" placeholder="correo@ejemplo.com"
-                            style="width:100%;padding:12px;margin:7px 0 15px;border:1px solid #cbd5e1;border-radius:8px">
-
-                        <label>Dirección de entrega</label>
-                        <textarea name="direccion" id="checkout-direccion"
-                            placeholder="Calle, número, colonia, ciudad y código postal"
-                            style="width:100%;padding:12px;margin:7px 0 15px;border:1px solid #cbd5e1;border-radius:8px;min-height:80px"></textarea>
-
-                        <h3 style="color:#183b4e;margin:15px 0">
-                            Método de pago
-                        </h3>
-
-                        <select id="checkout-pago"
-                            style="width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:8px">
-                            <option value="Tarjeta bancaria">Tarjeta bancaria (simulado)</option>
-                            <option value="Transferencia">Transferencia bancaria (simulado)</option>
-                            <option value="Cartera">Saldo de cartera (simulado)</option>
-                        </select>
-
-                        <div id="checkout-detalle-pago"
-                            style="background:#f0f8fb;padding:14px;border-radius:10px;margin-top:15px;font-size:13px;color:#526775">
-                            Este pago es una demostración. No se realizará ningún cargo.
-                        </div>
-
-                        <div style="margin-top:20px;padding:15px;background:#f0f8fb;border-radius:10px">
-                            <strong>Total a pagar:</strong>
-                            <strong id="checkout-total" style="float:right;color:#183b4e"></strong>
-                        </div>
-
-                        <p style="font-size:11px;color:#718096;margin-top:12px">
-                            Esta página realiza pagos únicamente de manera demostrativa.
-                            No ingreses datos bancarios reales.
-                        </p>
-                    </div>
-
-                    <div class="modal-actions">
-                        <button type="button" class="secondary-btn"
-                            onclick="cerrarFormularioCompra()">Cancelar</button>
-                        <button type="submit" class="continue-btn">
-                            Confirmar compra
-                        </button>
-                    </div>
-                </form>
-            </div>
-        `;
-
-        document.body.appendChild(modal);
-
-        document.getElementById("checkout-pago").addEventListener("change", actualizarDetallePago);
-
-        document.getElementById("form-checkout").addEventListener("submit", function(e) {
-            e.preventDefault();
-            confirmarCompraSimulada();
-        });
-    }
-
-    const subtotal = calcularSubtotal(carrito);
-    const envio = COSTO_ENVIO;
-    const descuento = calcularDescuento(subtotal);
-    const total = Math.max(0, subtotal - descuento + envio);
-
-    document.getElementById("checkout-total").textContent =
-        formatoPrecio(total);
-
-    document.getElementById("checkout-nombre").value = "";
-    document.getElementById("checkout-telefono").value = "";
-    document.getElementById("checkout-correo").value = "";
-    document.getElementById("checkout-direccion").value = "";
-
-    actualizarDetallePago();
-    modal.classList.add("show");
-}
-
-function actualizarDetallePago() {
-    const metodo = document.getElementById("checkout-pago").value;
-    const detalle = document.getElementById("checkout-detalle-pago");
-
-    const mensajes = {
-        "Tarjeta bancaria":
-            "Pago con tarjeta de demostración. No introduzcas números de tarjeta ni información bancaria real.",
-        "Transferencia":
-            "Transferencia simulada. No necesitas realizar ninguna transferencia real.",
-        "Cartera":
-            "Pago demostrativo con saldo de cartera. No se descontará dinero real."
-    };
-
-    detalle.textContent = mensajes[metodo];
-}
-
-function cerrarFormularioCompra() {
-    const modal = document.getElementById("modal-checkout");
-    if (modal) modal.classList.remove("show");
-}
-
-function confirmarCompraSimulada() {
-    const carrito = obtenerCarrito();
-
-    if (!carrito.length) {
-        mostrarNotificacion("Tu carrito está vacío.");
-        cerrarFormularioCompra();
-        return;
-    }
-
-    const nombre = document.getElementById("checkout-nombre").value.trim();
-    const telefono = document.getElementById("checkout-telefono").value.trim();
-    const correo = document.getElementById("checkout-correo").value.trim();
-    const direccion = document.getElementById("checkout-direccion").value.trim();
-    const metodo = document.getElementById("checkout-pago").value;
-
-    if (!nombre || !telefono || !correo || !direccion) {
-        mostrarNotificacion("Completa tus datos de entrega para continuar.");
-        return;
-    }
-
-    const subtotal = calcularSubtotal(carrito);
-    const envio = COSTO_ENVIO;
-    const descuento = calcularDescuento(subtotal);
-    const total = Math.max(0, subtotal - descuento + envio);
-
-    const folio = "PP-" + Date.now();
-
-    const compra = {
-        id: folio,
-        fecha: new Date().toLocaleString("es-MX"),
-        cliente: {
-            nombre,
-            telefono,
-            correo,
-            direccion
-        },
-        metodoPago: metodo,
-        productos: carrito.map(producto => ({
-            nombre: producto.nombre || "Producto",
-            cantidad: Number(producto.cantidad || 1),
-            precio: Number(producto.precio || 0)
-        })),
-        subtotal,
-        envio,
-        descuento,
-        total,
-        estado: "Compra registrada",
-        tipo: "compra"
-    };
-
-    let historial = [];
-
-    try {
-        historial = JSON.parse(
-            localStorage.getItem("pp_historial_compras") || "[]"
-        );
-
-        if (!Array.isArray(historial)) historial = [];
-    } catch (error) {
-        historial = [];
-    }
-
-    historial.unshift(compra);
-
-    localStorage.setItem(
-        "pp_historial_compras",
-        JSON.stringify(historial)
-    );
-
-    // También se conserva el registro en el sistema de pedidos existente.
-    const pedidos = obtenerPedidos();
-
-    pedidos.unshift({
-        id: folio,
-        fecha: compra.fecha,
-        productos: compra.productos,
-        subtotal,
-        envio,
-        descuento,
-        total,
-        estado: "Compra registrada",
-        tipo: "compra"
-    });
-
-    guardarPedidos(pedidos);
-
-    guardarCarrito([]);
-    cuponAplicado = null;
-
-    actualizarInterfazCupon();
-    cerrarFormularioCompra();
-    cerrarPoliticas();
-    renderizarCarrito();
-
-    mostrarNotificacion("¡Compra registrada correctamente!");
-
-    mostrarTicketCompra(compra);
-}
-
-function mostrarTicketCompra(compra) {
-    const productosHTML = compra.productos.map(producto => `
-        <tr>
-            <td>${escaparHTML(producto.nombre)}</td>
-            <td>${producto.cantidad}</td>
-            <td>${formatoPrecio(producto.precio)}</td>
-            <td>${formatoPrecio(producto.precio * producto.cantidad)}</td>
-        </tr>
-    `).join("");
-
-    const ventana = window.open("", "_blank");
-
-    if (!ventana) {
-        mostrarNotificacion("La compra se guardó. Permite las ventanas emergentes para imprimir el ticket.");
-        return;
-    }
-
-    ventana.document.write(`
-        <!DOCTYPE html>
-        <html lang="es">
-        <head>
-            <meta charset="UTF-8">
-            <title>Ticket ${compra.id}</title>
-            <style>
-                body{font-family:Arial,sans-serif;color:#183b4e;padding:30px}
-                h1{text-align:center}
-                .datos{background:#f0f8fb;padding:15px;border-radius:10px}
-                table{width:100%;border-collapse:collapse;margin-top:20px}
-                th,td{padding:10px;border-bottom:1px solid #ddd;text-align:left}
-                .total{text-align:right;font-size:20px;font-weight:bold;margin-top:20px}
-                .nota{text-align:center;color:#64748b;margin-top:30px;font-size:12px}
-                button{background:#183b4e;color:white;padding:12px 20px;border:0;border-radius:8px;cursor:pointer}
-                @media print{button{display:none}}
-            </style>
-        </head>
-        <body>
-            <h1>Perforaciones Palacios</h1>
-            <h2>Comprobante de compra</h2>
-
-            <div class="datos">
-                <p><strong>Folio:</strong> ${compra.id}</p>
-                <p><strong>Fecha:</strong> ${compra.fecha}</p>
-                <p><strong>Cliente:</strong> ${escaparHTML(compra.cliente.nombre)}</p>
-                <p><strong>Teléfono:</strong> ${escaparHTML(compra.cliente.telefono)}</p>
-                <p><strong>Correo:</strong> ${escaparHTML(compra.cliente.correo)}</p>
-                <p><strong>Dirección:</strong> ${escaparHTML(compra.cliente.direccion)}</p>
-                <p><strong>Método de pago:</strong> ${escaparHTML(compra.metodoPago)}</p>
-            </div>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Cantidad</th>
-                        <th>Precio</th>
-                        <th>Importe</th>
-                    </tr>
-                </thead>
-                <tbody>${productosHTML}</tbody>
-            </table>
-
-            <div class="total">
-                <p>Subtotal: ${formatoPrecio(compra.subtotal)}</p>
-                <p>Envío: ${formatoPrecio(compra.envio)}</p>
-                <p>Descuento: -${formatoPrecio(compra.descuento)}</p>
-                <p>Total: ${formatoPrecio(compra.total)}</p>
-            </div>
-
-            <p class="nota">
-                Pago simulado con fines demostrativos. Este documento no representa
-                un comprobante fiscal ni confirma un cobro bancario.
-            </p>
-
-            <center><button onclick="window.print()">Imprimir / Guardar como PDF</button></center>
-        </body>
-        </html>
-    `);
-
-    ventana.document.close();
-}
-
-
-        const subtotal = calcularSubtotal(carrito);
-        const envio = COSTO_ENVIO;
-        const descuento = calcularDescuento(subtotal);
-        const total = Math.max(0, subtotal - descuento + envio);
-        const pedidos = obtenerPedidos();
-
-        pedidos.unshift({
-            id: Date.now(),
-            fecha: new Date().toLocaleString("es-MX"),
-            productos: carrito.map(function(producto) {
-                return {
-                    nombre: producto.nombre,
-                    cantidad: Number(producto.cantidad || 1),
-                    precio: Number(producto.precio || 0)
-                };
-            }),
-            subtotal: subtotal,
-            envio: envio,
-            descuento: descuento,
-            cupon: cuponAplicado ? cuponAplicado.codigo : null,
-            porcentajeDescuento: cuponAplicado ? cuponAplicado.descuento : 0,
-            total: total,
-            estado: "En proceso"
-        });
-
-        guardarPedidos(pedidos);
-        guardarCarrito([]);
-        cuponAplicado = null;
-        actualizarInterfazCupon();
+    function continuarConPedido() {
+        if (obtenerCarrito().length === 0) {
+            cerrarPoliticas();
+            mostrarNotificacion("Tu carrito está vacío.");
+            renderizarCarrito();
+            return;
+        }
         cerrarPoliticas();
-        renderizarCarrito();
-        mostrarNotificacion("¡Pedido registrado! Puedes consultarlo en Mis pedidos.");
+        abrirCheckout();
+    }
+
+    let cCliente = {};
+    let cMetodo = "tarjeta";
+    const C_SALDO_INI = 15000;
+    function cGetSaldo() {
+        const s = localStorage.getItem("ewallet_saldo");
+        return s !== null ? Number(s) : C_SALDO_INI;
+    }
+    function cSetSaldo(n) {
+        localStorage.setItem("ewallet_saldo", String(n));
+    }
+    function abrirCheckout() {
+        document.getElementById("c-vista-revision").hidden = false;
+        document.getElementById("c-vista-exito").hidden = true;
+        document.getElementById("c-saldo").textContent = formatoPrecio(cGetSaldo());
+        irPasoCheckout(1);
+        document.getElementById("modal-checkout").classList.add("show");
+    }
+    function cerrarCheckout() {
+        document.getElementById("modal-checkout").classList.remove("show");
+    }
+    function irPasoCheckout(n) {
+        document.getElementById("c-paso-1").hidden = n !== 1;
+        document.getElementById("c-paso-2").hidden = n !== 2;
+        document.getElementById("c-paso-3").hidden = n !== 3;
+        document.querySelectorAll(".cstep").forEach(function (el) {
+            var sn = Number(el.getAttribute("data-cstep"));
+            el.classList.remove("active", "done");
+            if (sn === n) el.classList.add("active");
+            else if (sn < n) el.classList.add("done");
+        });
+    }
+    function guardarDatosCliente() {
+        cCliente = {
+            nombre: document.getElementById("c-nombre").value.trim() || "Cliente",
+            telefono: document.getElementById("c-telefono").value.trim() || "—",
+            email: document.getElementById("c-email").value.trim() || "—",
+            calle: document.getElementById("c-calle").value.trim() || "—",
+            colonia: document.getElementById("c-colonia").value.trim() || "—",
+            cp: document.getElementById("c-cp").value.trim() || "—",
+            ciudad: document.getElementById("c-ciudad").value.trim() || "—",
+            estado: document.getElementById("c-estado").value || "—",
+            referencias: document.getElementById("c-refs").value.trim()
+        };
+    }
+    function prepararRevision() {
+        var carrito = obtenerCarrito();
+        var sub = calcularSubtotal(carrito);
+        var des = calcularDescuento(sub);
+        var env = COSTO_ENVIO;
+        var tot = Math.max(0, sub - des + env);
+        var metodos = { tarjeta: "Tarjeta", transferencia: "Transferencia", ewallet: "E-wallet" };
+        var dir =
+            cCliente.calle +
+            ", " +
+            cCliente.colonia +
+            ", CP " +
+            cCliente.cp +
+            ", " +
+            cCliente.ciudad +
+            ", " +
+            cCliente.estado;
+        document.getElementById("c-resumen-texto").innerHTML =
+            "<strong>Cliente:</strong> " +
+            cCliente.nombre +
+            "<br><strong>Teléfono:</strong> " +
+            cCliente.telefono +
+            "<br><strong>Email:</strong> " +
+            cCliente.email +
+            "<br><strong>Dirección:</strong> " +
+            dir +
+            "<br><strong>Método de pago:</strong> " +
+            metodos[cMetodo] +
+            "<br><br><strong>Total a pagar:</strong> " +
+            formatoPrecio(tot);
+    }
+    function ejecutarPago() {
+        var btn = document.getElementById("c-pagar");
+        btn.disabled = true;
+        btn.textContent = "Procesando...";
+        setTimeout(function () {
+            var carrito = obtenerCarrito();
+            var sub = calcularSubtotal(carrito);
+            var des = calcularDescuento(sub);
+            var env = COSTO_ENVIO;
+            var tot = Math.max(0, sub - des + env);
+            var folio = "PP-" + Date.now().toString().slice(-8);
+            var fecha = new Date().toLocaleString("es-MX", {
+                dateStyle: "medium",
+                timeStyle: "short"
+            });
+            if (cMetodo === "ewallet") cSetSaldo(Math.max(0, cGetSaldo() - tot));
+            var pedido = {
+                id: Date.now(),
+                folio: folio,
+                fecha: fecha,
+                productos: carrito.map(function (p) {
+                    return {
+                        nombre: p.nombre,
+                        cantidad: Number(p.cantidad || 1),
+                        precio: Number(p.precio || 0)
+                    };
+                }),
+                items: carrito.map(function (p) {
+                    return {
+                        servicio: p.nombre + " × " + (p.cantidad || 1),
+                        precio: Number(p.precio || 0) * Number(p.cantidad || 1)
+                    };
+                }),
+                subtotal: sub,
+                envio: env,
+                descuento: des,
+                cupon: cuponAplicado ? cuponAplicado.codigo : null,
+                total: tot,
+                estado: "Pagado",
+                cliente: cCliente,
+                metodoPago: cMetodo
+            };
+            var pedidos = obtenerPedidos();
+            pedidos.unshift(pedido);
+            guardarPedidos(pedidos);
+            var pedidosPerfil = [];
+            try {
+                pedidosPerfil = JSON.parse(localStorage.getItem("pedidosPalacios")) || [];
+            } catch (e) {}
+            pedidosPerfil.unshift(pedido);
+            localStorage.setItem("pedidosPalacios", JSON.stringify(pedidosPerfil));
+            guardarCarrito([]);
+            cuponAplicado = null;
+            actualizarInterfazCupon();
+            renderizarCarrito();
+            document.getElementById("c-vista-revision").hidden = true;
+            document.getElementById("c-vista-exito").hidden = false;
+            document.querySelectorAll(".cstep").forEach(function (el) {
+                el.classList.remove("active");
+                el.classList.add("done");
+            });
+            document.getElementById("c-num-pedido").textContent = folio;
+            document.getElementById("ct-folio").textContent = folio;
+            document.getElementById("ct-fecha").textContent = fecha;
+            document.getElementById("ct-cliente").textContent = cCliente.nombre;
+            document.getElementById("ct-tel").textContent = cCliente.telefono;
+            document.getElementById("ct-dir").textContent =
+                cCliente.calle + ", " + cCliente.colonia + ", " + cCliente.ciudad;
+            var metodos = { tarjeta: "Tarjeta", transferencia: "Transferencia", ewallet: "E-wallet" };
+            document.getElementById("ct-pago").textContent = metodos[cMetodo];
+            document.getElementById("ct-productos").innerHTML = pedido.productos
+                .map(function (p) {
+                    return (
+                        "<div style='display:flex;justify-content:space-between;padding:3px 0;'><span>" +
+                        p.nombre +
+                        " × " +
+                        p.cantidad +
+                        "</span><span>" +
+                        formatoPrecio(p.precio * p.cantidad) +
+                        "</span></div>"
+                    );
+                })
+                .join("");
+            document.getElementById("ct-subtotal").textContent = formatoPrecio(sub);
+            document.getElementById("ct-envio").textContent = formatoPrecio(env);
+            if (des > 0) {
+                document.getElementById("ct-desc-row").hidden = false;
+                document.getElementById("ct-descuento").textContent = "−" + formatoPrecio(des);
+            } else {
+                document.getElementById("ct-desc-row").hidden = true;
+            }
+            document.getElementById("ct-total").textContent = formatoPrecio(tot);
+            btn.disabled = false;
+            btn.textContent = "🔒 Pagar ahora";
+            mostrarNotificacion("¡Pedido registrado! Puedes verlo en tu perfil.");
+        }, 1100);
     }
 
     document.getElementById("btn-pagar").addEventListener("click", abrirPoliticas);
     document.getElementById("continuar-pago").addEventListener("click", continuarConPedido);
     document.getElementById("volver-carrito").addEventListener("click", cerrarPoliticas);
     document.getElementById("cerrar-politicas").addEventListener("click", cerrarPoliticas);
-
-    document.getElementById("modal-politicas").addEventListener("click", function(evento) {
-        if (evento.target === this) cerrarPoliticas();
+    document.getElementById("modal-politicas").addEventListener("click", function (e) {
+        if (e.target === this) cerrarPoliticas();
     });
-
     document.getElementById("cancelar-eliminar").addEventListener("click", cerrarConfirmacion);
     document.getElementById("confirmar-eliminar").addEventListener("click", confirmarEliminar);
-
-    document.getElementById("modal-confirmar").addEventListener("click", function(evento) {
-        if (evento.target === this) cerrarConfirmacion();
+    document.getElementById("modal-confirmar").addEventListener("click", function (e) {
+        if (e.target === this) cerrarConfirmacion();
     });
-
     document.getElementById("btn-canjear").addEventListener("click", canjearCupon);
-
-    document.getElementById("codigo-cupon").addEventListener("keydown", function(evento) {
-        if (evento.key === "Enter") canjearCupon();
+    document.getElementById("codigo-cupon").addEventListener("keydown", function (e) {
+        if (e.key === "Enter") canjearCupon();
     });
-
     document.getElementById("quitar-cupon").addEventListener("click", quitarCupon);
 
-    document.addEventListener("keydown", function(evento) {
-        if (evento.key === "Escape") {
+    document.getElementById("cerrar-checkout").addEventListener("click", cerrarCheckout);
+    document.getElementById("c-cancelar-1").addEventListener("click", cerrarCheckout);
+    document.getElementById("c-cerrar-exito").addEventListener("click", cerrarCheckout);
+    document.getElementById("modal-checkout").addEventListener("click", function (e) {
+        if (e.target === this) cerrarCheckout();
+    });
+    document.getElementById("c-sig-1").addEventListener("click", function () {
+        guardarDatosCliente();
+        irPasoCheckout(2);
+    });
+    document.getElementById("c-atras-2").addEventListener("click", function () {
+        irPasoCheckout(1);
+    });
+    document.getElementById("c-sig-2").addEventListener("click", function () {
+        cMetodo = document.querySelector('input[name="c-metodo"]:checked').value;
+        prepararRevision();
+        irPasoCheckout(3);
+    });
+    document.getElementById("c-atras-3").addEventListener("click", function () {
+        irPasoCheckout(2);
+    });
+    document.getElementById("c-pagar").addEventListener("click", ejecutarPago);
+    document.getElementById("c-descargar").addEventListener("click", function () {
+        mostrarNotificacion("Descarga simulada: comprobante descargado");
+    });
+    document.querySelectorAll(".c-pay-opt").forEach(function (opt) {
+        opt.addEventListener("click", function () {
+            document.querySelectorAll(".c-pay-opt").forEach(function (o) {
+                o.classList.remove("selected");
+            });
+            opt.classList.add("selected");
+            opt.querySelector("input").checked = true;
+        });
+    });
+    document.getElementById("c-card-numero").addEventListener("input", function () {
+        var v = this.value.replace(/\D/g, "").slice(0, 16);
+        this.value = v.replace(/(.{4})/g, "$1 ").trim();
+    });
+    document.getElementById("c-card-fecha").addEventListener("input", function () {
+        var v = this.value.replace(/\D/g, "").slice(0, 4);
+        if (v.length >= 3) v = v.slice(0, 2) + "/" + v.slice(2);
+        this.value = v;
+    });
+    document.getElementById("c-card-cvv").addEventListener("input", function () {
+        this.value = this.value.replace(/\D/g, "").slice(0, 4);
+    });
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
             cerrarPoliticas();
             cerrarConfirmacion();
+            cerrarCheckout();
         }
     });
 
     actualizarInterfazCupon();
     renderizarCarrito();
+})();
 </script>
 </body>
 </html>
